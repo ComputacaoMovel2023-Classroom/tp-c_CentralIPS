@@ -8,7 +8,7 @@
 PRODUCT_NAME = centralips
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = pt.ips.cm.centralips
+PRODUCT_BUNDLE_IDENTIFIER = pt.ips.cm.centralips.centralips
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 pt.ips.cm. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 pt.ips.cm.centralips. All rights reserved.

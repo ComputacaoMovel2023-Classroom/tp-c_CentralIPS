@@ -1,4 +1,4 @@
-package pt.ips.cm.centralips
+package pt.ips.cm.centralips.centralips
 
 import io.flutter.embedding.android.FlutterActivity
 

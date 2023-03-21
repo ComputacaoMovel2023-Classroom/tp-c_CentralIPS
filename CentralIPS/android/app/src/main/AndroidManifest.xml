@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pt.ips.cm.centralips">
+    package="pt.ips.cm.centralips.centralips">
    <application
         android:label="centralips"
         android:name="${applicationName}"
