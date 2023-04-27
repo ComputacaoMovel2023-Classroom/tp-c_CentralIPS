@@ -20,13 +20,13 @@ class HpCentro extends StatelessWidget {
             Text(
               "O que tem acontecido no IPS?",
               style: TextStyle(fontSize: 15),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
             ),
           ]))
     ]);
 
     return Stack(
-      alignment: Alignment.topRight,
+      alignment: Alignment.topLeft,
       children: [text],
     );
   }

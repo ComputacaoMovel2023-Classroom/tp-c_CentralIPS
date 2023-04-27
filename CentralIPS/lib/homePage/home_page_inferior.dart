@@ -6,7 +6,7 @@ class HpInferior extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Image img = Image.asset(
-      'assets/images/noticia2.png',
+      'assets/images/aaa.png',
       width: double.infinity,
       height: double.infinity,
       fit: BoxFit.cover,
@@ -38,7 +38,7 @@ class HpInferior extends StatelessWidget {
     return Column(children: [
       SizedBox(height: 150, child: text),
       const Padding(padding: EdgeInsets.only(top: 50)),
-      SizedBox(height: 100, child: img)
+      SizedBox(height: 260, child: img)
     ]);
   }
 }

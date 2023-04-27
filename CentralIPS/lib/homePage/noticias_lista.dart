@@ -12,18 +12,23 @@ class NoticiasLista extends StatelessWidget {
       children: const [
         NoticiasListaItem(
           assetName: "assets/images/noticia1.png",
+          titletext: "Noticia 1\nExemplo de texto",
         ),
         NoticiasListaItem(
           assetName: "assets/images/noticia2.png",
+          titletext: "Noticia 2\nExemplo de texto",
         ),
         NoticiasListaItem(
           assetName: "assets/images/noticia3.png",
+          titletext: "Noticia 3\nExemplo de texto",
         ),
         NoticiasListaItem(
           assetName: "assets/images/noticia1.png",
+          titletext: "Noticia 4\nExemplo de texto",
         ),
         NoticiasListaItem(
           assetName: "assets/images/noticia2.png",
+          titletext: "Noticia 5\nExemplo de texto",
         ),
       ],
     );

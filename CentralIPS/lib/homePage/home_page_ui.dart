@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../footer_menu/footer_menu.dart';
 import 'home_page_centro.dart';
 import 'home_page_inferior.dart';
 import 'home_page_superior.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: const BottomNavigationExample(),
         appBar: AppBar(
           leading: const Icon(Icons.menu),
           title: const Text('Central IPS'),
@@ -29,10 +31,9 @@ class HomePage extends StatelessWidget {
             Column(children: const [
               SizedBox(height: 300, child: HpSuperior()),
               Padding(padding: EdgeInsets.only(top: 100), child: HpCentro()),
-              SizedBox(height: 150, child: NoticiasLista()),
+              SizedBox(height: 300, child: NoticiasLista()),
               Padding(
-                  padding: EdgeInsets.only(top: 100, bottom: 300),
-                  child: HpInferior()),
+                  padding: EdgeInsets.only(bottom: 100), child: HpInferior()),
             ])
           ]),
         ));
