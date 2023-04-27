@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'homePageCentro.dart';
-import 'homePageSuperior.dart';
+
+import 'home_page_centro.dart';
+import 'home_page_inferior.dart';
+import 'home_page_superior.dart';
+import 'noticias_lista.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,18 +23,17 @@ class HomePage extends StatelessWidget {
           ],
           backgroundColor: Colors.black,
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Column(children: const [
-            Expanded(
-              flex: 1,
-              child: hpSuperior(),
-            ),
-            Expanded(
-              flex: 1,
-              child:
-                  Padding(padding: EdgeInsets.only(top: 30), child: hpCentro()),
-            ),
+        body: SizedBox(
+          height: 2000,
+          child: ListView(children: [
+            Column(children: const [
+              SizedBox(height: 300, child: HpSuperior()),
+              Padding(padding: EdgeInsets.only(top: 100), child: HpCentro()),
+              SizedBox(height: 150, child: NoticiasLista()),
+              Padding(
+                  padding: EdgeInsets.only(top: 100, bottom: 300),
+                  child: HpInferior()),
+            ])
           ]),
         ));
   }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class hpSuperior extends StatelessWidget {
-  const hpSuperior({Key? key}) : super(key: key);
+class HpSuperior extends StatelessWidget {
+  const HpSuperior({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Image img = Image.asset(
       'assets/images/ips.png',
       width: double.infinity,
-      height: double.infinity,
+      height: double.maxFinite,
       fit: BoxFit.cover,
     );
 

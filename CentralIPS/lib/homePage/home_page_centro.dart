@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class hpCentro extends StatelessWidget {
-  const hpCentro({Key? key}) : super(key: key);
+class HpCentro extends StatelessWidget {
+  const HpCentro({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
