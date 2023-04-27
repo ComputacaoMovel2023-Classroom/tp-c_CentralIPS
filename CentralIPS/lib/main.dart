@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'homePage/homePageUI.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(const MyAppDemo());
+}
+
+class MyAppDemo extends StatelessWidget {
+  const MyAppDemo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
