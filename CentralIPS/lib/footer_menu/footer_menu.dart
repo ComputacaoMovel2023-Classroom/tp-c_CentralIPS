@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+=======
+import 'package:centralips/Ementas/ementasUI.dart';
+>>>>>>> 77d55f033df77364b8b4f6499b574cfa983c2d79
 =======
 import 'package:centralips/Ementas/ementasUI.dart';
 >>>>>>> 77d55f033df77364b8b4f6499b574cfa983c2d79
