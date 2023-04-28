@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../CampusQR/Scanner.dart';
+
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
@@ -61,7 +63,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.qr_code_scanner),
             title: const Text('Campus QR'),
-            onTap: () => null,
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const Scanner())),
           ),
           ListTile(
             title: const Text('Mapa'),

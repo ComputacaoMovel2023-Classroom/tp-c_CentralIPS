@@ -119,17 +119,15 @@ class _BottomNavigationExampleState extends State {
       backgroundColor: Colors.white70,
       items: [
         TabItem(
-            icon: Image.asset("assets/images/refeitorio.png"), title: 'Home'),
+            icon: Image.asset("assets/images/refeitorio.png"),
+            title: 'Ementas'),
         TabItem(
-            icon: Image.asset("assets/images/noticias.png"),
-            title: 'Discovery'),
-        TabItem(
-            icon: Image.asset("assets/images/homebutton.png"), title: 'Add'),
+            icon: Image.asset("assets/images/noticias.png"), title: 'Notícias'),
+        TabItem(icon: Image.asset("assets/images/homebutton.png"), title: ''),
         TabItem(
             icon: Image.asset("assets/images/biblioteca.png"),
-            title: 'Message'),
-        TabItem(
-            icon: Image.asset("assets/images/perfil.png"), title: 'Profile'),
+            title: 'Biblioteca'),
+        TabItem(icon: Image.asset("assets/images/perfil.png"), title: 'Perfil'),
       ],
       onTap: (int i) => print('click index=$i'),
     );
