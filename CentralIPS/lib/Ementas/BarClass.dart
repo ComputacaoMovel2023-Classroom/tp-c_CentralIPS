@@ -6,7 +6,7 @@ class BarClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+        /* padding: const EdgeInsets.all(10),
       child: Column(
         children: const [
           Text(
@@ -19,7 +19,7 @@ class BarClass extends StatelessWidget {
             style: TextStyle(fontSize: 16),
           ),
         ],
-      ),
-    );
+      ),*/
+        );
   }
 }

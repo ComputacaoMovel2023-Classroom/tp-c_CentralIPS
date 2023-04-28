@@ -43,6 +43,12 @@ class _BottomNavigationExampleState extends State {
         MaterialPageRoute(builder: (context) => const EmentasUI()),
       );
     }
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const EmentasUI()),
+      );
+    }
   }
 
 /*
@@ -123,13 +129,14 @@ class _BottomNavigationExampleState extends State {
             title: 'Ementas'),
         TabItem(
             icon: Image.asset("assets/images/noticias.png"), title: 'Notícias'),
-        TabItem(icon: Image.asset("assets/images/homebutton.png"), title: ''),
+        TabItem(
+            icon: Image.asset("assets/images/homebutton.png"), title: 'Home'),
         TabItem(
             icon: Image.asset("assets/images/biblioteca.png"),
             title: 'Biblioteca'),
         TabItem(icon: Image.asset("assets/images/perfil.png"), title: 'Perfil'),
       ],
-      onTap: (int i) => print('click index=$i'),
+      onTap: (index) => _changeTab(index),
     );
   }
 }
