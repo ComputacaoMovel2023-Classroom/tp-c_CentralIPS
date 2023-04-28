@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
 import 'home_page_centro.dart';
 import 'home_page_inferior.dart';
@@ -24,9 +25,15 @@ class HomePage extends StatelessWidget {
           ),
         ),*/
         resizeToAvoidBottomInset: false,
+        drawer: const NavBar(),
         bottomNavigationBar: const BottomNavigationExample(),
         appBar: AppBar(
-          leading: const Icon(Icons.menu, color: Colors.white),
+          leading: Builder(builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu, color: Colors.white),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          }),
           title: const Text('Central IPS',
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 251))),
           actions: const [
