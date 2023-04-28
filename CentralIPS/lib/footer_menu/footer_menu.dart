@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+=======
+import 'package:centralips/Ementas/ementasUI.dart';
+>>>>>>> 77d55f033df77364b8b4f6499b574cfa983c2d79
 
 class BottomNavigationExample extends StatefulWidget {
   const BottomNavigationExample({Key? key}) : super(key: key);
@@ -33,24 +38,101 @@ class _BottomNavigationExampleState extends State {
     setState(() {
       _selectedTab = index;
     });
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const EmentasUI()),
+      );
+    }
   }
 
+/*
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: _selectedTab,
       onTap: (index) => _changeTab(index),
       showUnselectedLabels: true,
-      selectedItemColor: Colors.red,
+      selectedItemColor: const Color.fromRGBO(169, 188, 212, 1),
       unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Ementas"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Notícias"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_3x3_outlined), label: ""),
+      items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.contact_mail), label: "Biblioteca"),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Perfil"),
+            icon: Image.asset("assets/images/refeitorio.png"),
+            label: "Ementas"),
+        BottomNavigationBarItem(
+            icon: Image.asset("assets/images/noticias.png"), label: "Notícias"),
+        BottomNavigationBarItem(
+          icon: Container(),
+          label: "",
+        ),
+        BottomNavigationBarItem(
+            icon: Image.asset("assets/images/biblioteca.png"),
+            label: "Biblioteca"),
+        BottomNavigationBarItem(
+            icon: Image.asset("assets/images/perfil.png"), label: "Perfil"),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Column(children: [
+                Image.asset("assets/images/refeitorio.png"),
+                const Expanded(child: Text("Ementas"))
+              ]),
+              //label: "Ementas",
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Image.asset("assets/images/noticias.png"), onPressed: () {},
+              //label: "Notícias"
+            ),
+            IconButton(
+              icon: Container(),
+              //label: "",
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Image.asset("assets/images/biblioteca.png"),
+              //label: "Biblioteca"
+              onPressed: () => {},
+            ),
+            IconButton(
+                icon: Image.asset("assets/images/perfil.png"),
+                // label: "Perfil"
+                onPressed: () => {}),
+          ],
+        ));
+  }*/
+  @override
+  Widget build(BuildContext context) {
+    return ConvexAppBar(
+      height: 70,
+      style: TabStyle.fixedCircle,
+      activeColor: const Color.fromARGB(255, 85, 152, 233),
+      color: const Color.fromRGBO(169, 188, 212, 1),
+      backgroundColor: Colors.white70,
+      items: [
+        TabItem(
+            icon: Image.asset("assets/images/refeitorio.png"), title: 'Home'),
+        TabItem(
+            icon: Image.asset("assets/images/noticias.png"),
+            title: 'Discovery'),
+        TabItem(
+            icon: Image.asset("assets/images/homebutton.png"), title: 'Add'),
+        TabItem(
+            icon: Image.asset("assets/images/biblioteca.png"),
+            title: 'Message'),
+        TabItem(
+            icon: Image.asset("assets/images/perfil.png"), title: 'Profile'),
+      ],
+      onTap: (int i) => print('click index=$i'),
     );
   }
 }

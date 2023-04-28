@@ -13,6 +13,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        /*floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          onPressed: () {},
+          tooltip: "Home",
+          child: Image.asset(
+            "assets/images/homebutton.png",
+            color: Colors.white,
+          ),
+        ),*/
         bottomNavigationBar: const BottomNavigationExample(),
         appBar: AppBar(
           leading: const Icon(Icons.menu),
