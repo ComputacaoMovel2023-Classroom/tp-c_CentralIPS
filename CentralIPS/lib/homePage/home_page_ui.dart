@@ -23,10 +23,12 @@ class HomePage extends StatelessWidget {
             color: Colors.white,
           ),
         ),*/
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: const BottomNavigationExample(),
         appBar: AppBar(
-          leading: const Icon(Icons.menu),
-          title: const Text('Central IPS'),
+          leading: const Icon(Icons.menu, color: Colors.white),
+          title: const Text('Central IPS',
+              style: TextStyle(color: Color.fromARGB(255, 255, 255, 251))),
           actions: const [
             Padding(
               padding: EdgeInsets.only(right: 20.0),
