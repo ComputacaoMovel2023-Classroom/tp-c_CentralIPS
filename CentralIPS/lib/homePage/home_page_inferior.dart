@@ -36,7 +36,7 @@ class HpInferior extends StatelessWidget {
     ]);
 
     return Column(children: [
-      SizedBox(height: 150, child: text),
+      SizedBox(height: 162, child: text),
       const Padding(padding: EdgeInsets.only(top: 50)),
       SizedBox(height: 260, child: img)
     ]);

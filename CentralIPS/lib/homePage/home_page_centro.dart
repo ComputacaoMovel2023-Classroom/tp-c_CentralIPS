@@ -9,14 +9,17 @@ class HpCentro extends StatelessWidget {
       Align(
           alignment: Alignment.topLeft,
           child: Column(children: const [
-            Text(
-              "Novidades No Ips",
-              selectionColor: Colors.black,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Novidades No Ips",
+                  selectionColor: Colors.black,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.left,
+                )),
             Text(
               "O que tem acontecido no IPS?",
               style: TextStyle(fontSize: 15),
