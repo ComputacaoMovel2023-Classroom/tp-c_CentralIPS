@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:centralips/Ementas/ementasUI.dart';
 
 class BottomNavigationExample extends StatefulWidget {
   const BottomNavigationExample({Key? key}) : super(key: key);
@@ -33,6 +34,12 @@ class _BottomNavigationExampleState extends State {
     setState(() {
       _selectedTab = index;
     });
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const EmentasUI()),
+      );
+    }
   }
 
   @override
