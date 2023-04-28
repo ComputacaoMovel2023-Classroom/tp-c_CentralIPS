@@ -64,7 +64,7 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.qr_code_scanner),
             title: const Text('Campus QR'),
             onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => const Scanner())),
+                .push(MaterialPageRoute(builder: (context) => Scanner())),
           ),
           ListTile(
             title: const Text('Mapa'),
