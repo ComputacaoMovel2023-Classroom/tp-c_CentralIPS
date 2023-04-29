@@ -1,3 +1,5 @@
+import 'package:centralips/Ementas/ementasUI.dart';
+import 'package:centralips/Ementas/ementas_list.dart';
 import 'package:flutter/material.dart';
 
 class BarClass extends StatelessWidget {
@@ -5,7 +7,7 @@ class BarClass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
         /* padding: const EdgeInsets.all(10),
       child: Column(
         children: const [
@@ -20,6 +22,6 @@ class BarClass extends StatelessWidget {
           ),
         ],
       ),*/
-        );
+        EmentasList();
   }
 }

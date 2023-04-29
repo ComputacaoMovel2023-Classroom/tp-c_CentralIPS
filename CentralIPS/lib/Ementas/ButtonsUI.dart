@@ -1,4 +1,5 @@
 import 'package:centralips/Ementas/BarClass.dart';
+import 'package:centralips/Ementas/RefeitorioClass.dart';
 
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class ButtonsUIState extends State<ButtonUI> {
             },
           ),
           if (_selectedIndex == 0) const BarClass(), //BAR
-          if (_selectedIndex == 1) const BarClass(), //RESTAURANTE
+          if (_selectedIndex == 1) const RefeitorioClass(), //RESTAURANTE
         ],
       ),
     );

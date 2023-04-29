@@ -16,7 +16,7 @@ class EmentasList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Container(
+      child: SizedBox(
         height: 500, // provide a fixed height
         child: ListView.separated(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -39,7 +39,7 @@ class EmentasList extends StatelessWidget {
             return EmentasListItem(
               icon: Icons.restaurant,
               name: weekdays[index],
-              id: index.toString(),
+              date: '12/3',
             );
           },
         ),
