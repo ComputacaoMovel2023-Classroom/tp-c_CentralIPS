@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
+import '../Ementas/ementasUI.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -53,6 +54,12 @@ class NavBar extends StatelessWidget {
           const ListTile(
             leading: Icon(Icons.domain),
             title: Text('Departamentos'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.restaurant),
+            title: const Text('Ementas'),
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const EmentasUI())),
           ),
           ListTile(
             leading: const Icon(Icons.auto_stories),
