@@ -12,7 +12,7 @@ class HpCentro extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  "Novidades No Ips",
+                  "Novidades no IPS",
                   selectionColor: Colors.black,
                   style: TextStyle(
                     fontSize: 30,

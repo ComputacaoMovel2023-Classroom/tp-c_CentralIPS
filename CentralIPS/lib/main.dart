@@ -1,6 +1,6 @@
+import 'package:centralips/SplashScreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'Sidebar/NavBar.dart';
-import 'homePage/home_page_ui.dart';
 
 void main() {
   runApp(const MyAppDemo());
@@ -17,7 +17,7 @@ class MyAppDemo extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }
