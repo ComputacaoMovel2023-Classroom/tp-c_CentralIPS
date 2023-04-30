@@ -1,8 +1,8 @@
 import 'package:centralips/Ementas/ementas_list.dart';
 import 'package:flutter/material.dart';
 
-class BarClass extends StatelessWidget {
-  BarClass({Key? key}) : super(key: key);
+class RefeitorioClass extends StatelessWidget {
+  RefeitorioClass({super.key});
 
   final List<String> sopas = [
     'Sopa de legumes',
@@ -34,25 +34,10 @@ class BarClass extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return
-        /* padding: const EdgeInsets.all(10),
-      child: Column(
-        children: const [
-          Text(
-            "Bar Class",
-            style: TextStyle(fontSize: 24),
-          ),
-          SizedBox(height: 10),
-          Text(
-            "This is the content of the Bar Class",
-            style: TextStyle(fontSize: 16),
-          ),
-        ],
-      ),*/
-        EmentasList(
-            sopas: sopas,
-            peixes: peixes,
-            carnes: carnes,
-            vegetarianos: vegetarianos);
+    return EmentasList(
+        sopas: sopas,
+        peixes: peixes,
+        carnes: carnes,
+        vegetarianos: vegetarianos);
   }
 }
