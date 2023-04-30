@@ -1,3 +1,4 @@
+import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
@@ -82,7 +83,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             title: const Text('IPS Health'),
             leading: const Icon(Icons.health_and_safety),
-            onTap: () => null,
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const Pedometro())),
           )
         ],
       ),

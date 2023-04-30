@@ -58,7 +58,6 @@ class Scanner extends StatelessWidget {
           for (final barcode in barcodes) {
             debugPrint('Barcode found! ${barcode.rawValue}');
             if (barcode.rawValue == 'Redireciona para a home page') {
-              debugPrint('OLA');
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const HomePage()),
