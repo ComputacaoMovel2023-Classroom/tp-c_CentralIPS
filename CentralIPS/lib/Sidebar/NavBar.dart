@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
 import '../Ementas/ementasUI.dart';
+import '../homePage/home_page_ui.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -38,7 +39,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),
-            onTap: () => null,
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const HomePage())),
           ),
           const Divider(),
           ListTile(

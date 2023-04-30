@@ -32,7 +32,7 @@ class Scanner extends StatelessWidget {
             onPressed: () => cameraController.toggleTorch(),
           ),
           IconButton(
-            color: Colors.white,
+            color: Colors.grey,
             icon: ValueListenableBuilder(
               valueListenable: cameraController.cameraFacingState,
               builder: (context, state, child) {
