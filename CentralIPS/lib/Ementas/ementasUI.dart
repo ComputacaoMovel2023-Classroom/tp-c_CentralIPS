@@ -30,7 +30,7 @@ class EmentasUI extends StatelessWidget {
             margin: EdgeInsets.only(top: 100),
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: ListView(
+              child: Column(
                 children: const [
                   Text(
                     "Ementas",

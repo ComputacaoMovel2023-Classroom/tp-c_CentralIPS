@@ -39,8 +39,8 @@ class ButtonsUIState extends State<ButtonUI> {
               });
             },
           ),
-          if (_selectedIndex == 0) const BarClass(), //BAR
-          if (_selectedIndex == 1) const RefeitorioClass(), //RESTAURANTE
+          if (_selectedIndex == 0) BarClass(), //BAR
+          if (_selectedIndex == 1) RefeitorioClass(), //RESTAURANTE
         ],
       ),
     );

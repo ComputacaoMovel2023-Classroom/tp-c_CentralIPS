@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 class EmentasListItem extends StatefulWidget {
   final IconData icon;
   final String name;
-
   final String date;
+  final String sopa;
+  final String peixe;
+  final String carne;
+  final String vegetariano;
 
   const EmentasListItem({
     Key? key,
     required this.icon,
     required this.name,
     required this.date,
+    required this.sopa,
+    required this.peixe,
+    required this.carne,
+    required this.vegetariano,
   }) : super(key: key);
 
   @override
@@ -66,18 +73,60 @@ class _EmentasListItemState extends State<EmentasListItem> {
                   width: 500,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
-                    children: const [
+                    children: [
                       SizedBox(height: 10),
-                      Text(
-                        'Sopa: ',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.left,
+                      Row(
+                        children: [
+                          Icon(Icons.soup_kitchen_outlined),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Sopa: ${widget.sopa}',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Icon(Icons.rice_bowl_outlined),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Peixe: ${widget.peixe}',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Icon(Icons.dining_outlined),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Prato Carne: ${widget.carne}',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Icon(Icons.energy_savings_leaf_outlined),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Vegan: ${widget.vegetariano}',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        'Prato Principal: ',
-                        style: TextStyle(fontSize: 16),
-                      ),
                     ],
                   ),
                 ),
