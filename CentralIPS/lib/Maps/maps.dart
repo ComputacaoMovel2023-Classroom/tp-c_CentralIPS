@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
@@ -29,6 +30,8 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
+    Permission.location.request();
+
     return Scaffold(
       body: Stack(
         children: [

@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
    <application
         android:label="centralips"
         android:name="${applicationName}"
@@ -37,5 +38,6 @@
         <!--Google maps Settings-->
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyCtRbZlAZm36439TyaePrR0yL2V1RZ4Ttc"/>
+        
     </application>
 </manifest>
