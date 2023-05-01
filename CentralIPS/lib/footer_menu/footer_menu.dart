@@ -1,3 +1,5 @@
+
+import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +57,12 @@ class _BottomNavigationExampleState extends State {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BibliographicResearchUI()),
         );
         break;
       default:
