@@ -1,15 +1,23 @@
-import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
-import 'package:centralips/Bibliographic%20Research/searchBar.dart';
-import 'package:centralips/Sidebar/NavBar.dart';
-import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 
-class BibliographicResearchUI extends StatelessWidget {
-  const BibliographicResearchUI({super.key});
+import '../Sidebar/NavBar.dart';
+import '../footer_menu/footer_menu.dart';
+
+/// stateful widget that the main application instantiates
+class FilterResearch extends StatefulWidget {
+  const FilterResearch({Key? key}) : super(key: key);
 
   @override
+  State<FilterResearch> createState() => FilterResearchState();
+}
+
+/// private State class that goes with MyStatefulWidget
+class FilterResearchState extends State<FilterResearch> {
+  @override
   Widget build(BuildContext context) {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+
     return Scaffold(
       body: Stack(
         children: [
@@ -33,24 +41,17 @@ class BibliographicResearchUI extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children: [
+                children:[
                   Text(
-                    "Biblioteca",
+                    "Filtros",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   SizedBox(height: 10, width: 400),
-                  SearchBar(),
                   ElevatedButton(
-                      onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const FilterResearch()),
-                            )
-                          },
+                      onPressed: () => {FilterResearch()},
                       child: Text("Filtros")),
                 ],
               ),
@@ -67,7 +68,7 @@ class BibliographicResearchUI extends StatelessWidget {
               elevation: 0,
               leading: Builder(builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 );
               }),
