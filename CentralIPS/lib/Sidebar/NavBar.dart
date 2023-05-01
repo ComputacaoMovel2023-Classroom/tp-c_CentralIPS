@@ -2,6 +2,7 @@ import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
+import '../Departamentos/departamentsUI.dart';
 import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
 import '../homePage/home_page_ui.dart';
@@ -55,9 +56,11 @@ class NavBar extends StatelessWidget {
             onTap: () => null,
           ),
           const Divider(),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.domain),
             title: Text('Departamentos'),
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const DepartamentosUI())),
           ),
           ListTile(
             leading: const Icon(Icons.restaurant),
