@@ -1,3 +1,4 @@
+import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -37,17 +38,26 @@ class _BottomNavigationExampleState extends State {
     setState(() {
       _selectedTab = index;
     });
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const EmentasUI()),
-      );
-    }
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const EmentasUI()),
-      );
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const EmentasUI()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const EmentasUI()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      default:
     }
   }
 
