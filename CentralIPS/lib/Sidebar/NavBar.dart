@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
 import '../Ementas/ementasUI.dart';
+import '../Maps/maps.dart';
 import '../homePage/home_page_ui.dart';
 
 class NavBar extends StatelessWidget {
@@ -79,7 +80,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             title: const Text('Mapa'),
             leading: const Icon(Icons.map),
-            onTap: () => null,
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MapSample())),
           ),
           const Divider(),
           ListTile(
