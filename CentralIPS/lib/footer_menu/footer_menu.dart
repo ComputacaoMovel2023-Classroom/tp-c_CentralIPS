@@ -62,7 +62,7 @@ class _BottomNavigationExampleState extends State {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BibliographicResearchUI()),
+          MaterialPageRoute(builder: (context) => const BibliographicResearch()),
         );
         break;
       default:

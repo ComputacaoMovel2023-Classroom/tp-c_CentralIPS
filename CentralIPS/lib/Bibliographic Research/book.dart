@@ -1,22 +1,42 @@
-import 'package:centralips/Bibliographic%20Research/book.dart';
-import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
-import 'package:centralips/Bibliographic%20Research/searchBar.dart';
 import 'package:centralips/Departamentos/school.dart';
-import 'package:centralips/Sidebar/NavBar.dart';
-import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 
-import 'package:searchable_listview/searchable_listview.dart';
+import '../Sidebar/NavBar.dart';
+import '../footer_menu/footer_menu.dart';
 
+enum Category { accao, aventura, biografias, conto, drama, romances, terror }
 
-class BibliographicResearch extends StatefulWidget {
-  const BibliographicResearch({Key? key}) : super(key: key);
+class Book {
+  final String name;
+  final String image;
+  final String authors;
+  final School school;
+  final String edition;
+  final String isbn;
+  final Category category;
 
-  @override
-  State<BibliographicResearch> createState() => BibliographicResearchUI();
+  Book(this.name, this.image, this.authors, this.school, this.edition,
+      this.isbn, this.category);
 }
 
-class BibliographicResearchUI extends State<BibliographicResearch> {
+var allBooks = [
+  Book("name", "image", "authors", School.esce, "edition", "isbn",
+      Category.accao),
+  Book("name2", "image", "authors", School.esce, "edition", "isbn",
+      Category.accao),
+  Book("name3", "image", "authors", School.esce, "edition", "isbn",
+      Category.accao),
+  Book("name4", "image", "authors", School.esce, "edition", "isbn",
+      Category.accao),
+];
+
+class BookPage extends StatelessWidget {
+  final Book book;
+
+  const BookPage({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +47,7 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/header.jpg'),
+                image: AssetImage('assets/images/chairsips.png'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -39,30 +59,30 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
                 top: Radius.circular(30),
               ),
             ),
-            margin: const EdgeInsets.only(top: 100),
+            margin: EdgeInsets.only(top: 100),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children: [
-                  const Text(
-                    "Biblioteca",
+                children:  [
+                  const SizedBox(height: 10, width: 400),
+                  Text(
+                    book.name ?? 'Sem título',
                     style: TextStyle(
                       fontSize: 35,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10, width: 400),
-                  ElevatedButton(
-                      onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const FilterResearch()),
-                            )
-                          },
-                      child: Text("Filtros")),
-                  SearchBar(),
-                  
+                  SizedBox(height: 10),
+                  Text(
+                    "Horário de Funcionamento",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    "12h-15h",
+                    style: TextStyle(fontSize: 16),
+                  ),
+
+                  //EmentasList(),
                 ],
               ),
             ),

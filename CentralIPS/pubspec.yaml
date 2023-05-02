@@ -49,6 +49,7 @@ dependencies:
   dropdown_button2: ^2.1.0
   
   easy_search_bar: ^2.5.0
+  searchable_listview: ^2.4.0
 
 dev_dependencies:
   flutter_test:
