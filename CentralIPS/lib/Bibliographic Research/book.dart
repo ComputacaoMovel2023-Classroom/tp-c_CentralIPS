@@ -7,7 +7,7 @@ import '../footer_menu/footer_menu.dart';
 enum Category { accao, aventura, biografias, conto, drama, romances, terror }
 
 class Book {
-  final String name;
+  String name = 'Sem título';
   final String image;
   final String authors;
   final School school;
@@ -15,19 +15,26 @@ class Book {
   final String isbn;
   final Category category;
 
-  Book(this.name, this.image, this.authors, this.school, this.edition,
-      this.isbn, this.category);
+  Book({
+    required this.name,
+    required this.image,
+    required this.authors,
+    required this.school,
+    required this.edition,
+    required this.isbn,
+    required this.category
+  });
 }
 
 var allBooks = [
-  Book("name", "image", "authors", School.esce, "edition", "isbn",
-      Category.accao),
-  Book("name2", "image", "authors", School.esce, "edition", "isbn",
-      Category.accao),
-  Book("name3", "image", "authors", School.esce, "edition", "isbn",
-      Category.accao),
-  Book("name4", "image", "authors", School.esce, "edition", "isbn",
-      Category.accao),
+  Book(name: "name", image: "image",authors: "authors",school:  School.esce,edition: "edition",isbn: "isbn",
+      category: Category.accao),
+  Book(name: "name2",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+      category: Category.accao),
+  Book(name: "name3",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+      category: Category.accao),
+  Book(name: "name4",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+      category: Category.accao),
 ];
 
 class BookPage extends StatelessWidget {
@@ -66,7 +73,7 @@ class BookPage extends StatelessWidget {
                 children:  [
                   const SizedBox(height: 10, width: 400),
                   Text(
-                    book.name ?? 'Sem título',
+                    book.name,
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,

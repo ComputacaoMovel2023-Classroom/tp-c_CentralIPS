@@ -16,6 +16,22 @@ class DepartmentStaticExample{
 
   }
 
+  List<Department> getDepartments(){
+    return departments;
+  }
+
+  int openDepartments(){
+    int number = 0;
+
+    for (var d in departments) {
+      if(d.open) {
+        number++;
+      }
+     }
+
+     return number;
+  }
+
   List<Department> essDepartments(){
     List<Department> essDepartments = [
       Department(name: "Departamento de Ciências Biomédicas", acronym: "DCB", open: true, favorite: false, school: School.ess),

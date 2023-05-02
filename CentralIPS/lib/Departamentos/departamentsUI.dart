@@ -1,3 +1,7 @@
+import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
+import 'package:centralips/Departamentos/departmentFilter.dart';
+import 'package:centralips/Departamentos/departmentListView.dart';
+import 'package:centralips/Departamentos/departmentStatic.dart';
 import 'package:centralips/Ementas/ButtonsUI.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
@@ -27,30 +31,28 @@ class DepartamentosUI extends StatelessWidget {
                 top: Radius.circular(30),
               ),
             ),
-            margin: EdgeInsets.only(top: 100),
+            margin: const EdgeInsets.only(top: 100),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children: const [
-                  Text(
+                children:[
+                  const Text(
                     "Departamentos",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "Horário de Funcionamento",
-                    style: TextStyle(fontSize: 16),
+                    '${DepartmentStaticExample().openDepartments()} Departamentos Disponíveis',
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  Text(
-                    "12h-15h",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(width: 400,)
+                  DepartmentExpandedList(icon: Icons.filter_alt_outlined, departmentFilter: DepartmentFilter.open),
+                  DepartmentsListView(),
+                  const SizedBox(width: 400,)
 
-                  //EmentasList(),
+
                 ],
               ),
             ),
