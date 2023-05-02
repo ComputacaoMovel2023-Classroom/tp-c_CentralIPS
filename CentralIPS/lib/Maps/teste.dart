@@ -1,49 +1,24 @@
-import 'dart:async';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import '../Sidebar/NavBar.dart';
-import 'markers_list.dart';
-
-class MapSample extends StatefulWidget {
-  const MapSample({Key? key}) : super(key: key);
+class teste extends StatefulWidget {
+  const teste({super.key});
 
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<teste> createState() => testeMp();
 }
 
-class MapSampleState extends State<MapSample> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  static const CameraPosition _IPS = CameraPosition(
-    target: LatLng(38.52219794706464, -8.83879091164573),
-    zoom: 16.4746,
-  );
-
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
-  //list to save selected items
+class testeMp extends State<teste> {
+  final List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
   List<String> selectedItems = [];
 
   @override
   Widget build(BuildContext context) {
-    Permission.location.request();
-
-    final List<String> items = [
-      'Biblioteca',
-      'Bares',
-      "Cantina",
-      'Serviços',
-      'Presidência',
-    ];
-
     return Scaffold(
       floatingActionButton: Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -72,6 +47,9 @@ class MapSampleState extends State<MapSample> {
                       final isSelected = selectedItems.contains(item);
                       return InkWell(
                         onTap: () {
+                          if (selectedItems.isNotEmpty) {
+                            debugPrint("sdfsd${selectedItems[0]}");
+                          }
                           isSelected
                               ? selectedItems.remove(item)
                               : selectedItems.add(item);
@@ -145,83 +123,7 @@ class MapSampleState extends State<MapSample> {
               ),
             ),
           )),
-
-      /*FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
-      )*/
-
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Stack(
-        children: [
-          /*   Container(
-            height: 200,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/header.jpg'),
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),*/
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            margin: const EdgeInsets.only(top: 0),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    child: Column(children: [
-                      SizedBox(
-                          //make the edges round
-                          height: MediaQuery.of(context).size.height,
-                          child: GoogleMap(
-                            myLocationButtonEnabled: true,
-                            padding: const EdgeInsets.only(
-                              top: 80.0,
-                            ),
-                            myLocationEnabled: true,
-                            mapType: MapType.hybrid,
-                            initialCameraPosition: _IPS,
-                            markers: MarkersList.markersToShow(selectedItems),
-                            onMapCreated: (GoogleMapController controller) {
-                              _controller.complete(controller);
-                            },
-                          ))
-                    ]),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: Builder(builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                );
-              }),
-            ),
-          ),
-        ],
-      ),
-      resizeToAvoidBottomInset: false,
-      drawer: const NavBar(),
-      backgroundColor: Colors.transparent,
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
