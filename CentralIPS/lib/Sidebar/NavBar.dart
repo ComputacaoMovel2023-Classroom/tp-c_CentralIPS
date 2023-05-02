@@ -5,6 +5,7 @@ import '../CampusQR/Scanner.dart';
 import '../Departamentos/departamentsUI.dart';
 import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
+import '../Maps/teste.dart';
 import '../homePage/home_page_ui.dart';
 
 class NavBar extends StatelessWidget {
@@ -53,14 +54,15 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.credit_card),
             title: const Text('Cartão Digital'),
-            onTap: () => null,
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => teste())),
           ),
           const Divider(),
           ListTile(
-            leading: Icon(Icons.domain),
-            title: Text('Departamentos'),
-            onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const DepartamentosUI())),
+            leading: const Icon(Icons.domain),
+            title: const Text('Departamentos'),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const DepartamentosUI())),
           ),
           ListTile(
             leading: const Icon(Icons.restaurant),

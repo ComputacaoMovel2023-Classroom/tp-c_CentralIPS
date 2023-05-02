@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Sidebar/NavBar.dart';
-import '../footer_menu/footer_menu.dart';
 import 'markers_list.dart';
 
 class MapSample extends StatefulWidget {
@@ -43,104 +42,109 @@ class MapSampleState extends State<MapSample> {
     List<String> selectedItems = [];
 
     return Scaffold(
-      floatingActionButton: DropdownButtonHideUnderline(
-        child: DropdownButton2(
-          isExpanded: true,
-          barrierColor: Colors.black.withOpacity(0.1),
+      floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              isExpanded: true,
+              barrierColor: Colors.black.withOpacity(0.1),
 
-          hint: Align(
-            alignment: AlignmentDirectional.center,
-            child: Text(
-              'Filtros',
-              style: TextStyle(
-                fontSize: 14,
-                color: Theme.of(context).hintColor,
-              ),
-            ),
-          ),
-          items: items.map((item) {
-            return DropdownMenuItem<String>(
-              value: item,
-              //disable default onTap to avoid closing menu when selecting an item
-              enabled: false,
-              child: StatefulBuilder(
-                builder: (context, menuSetState) {
-                  final isSelected = selectedItems.contains(item);
-                  return InkWell(
-                    onTap: () {
-                      isSelected
-                          ? selectedItems.remove(item)
-                          : selectedItems.add(item);
-                      //This rebuilds the StatefulWidget to update the button's text
-                      setState(() {});
-                      //This rebuilds the dropdownMenu Widget to update the check mark
-                      menuSetState(() {});
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        children: [
-                          isSelected
-                              ? const Icon(Icons.check_box_outlined)
-                              : const Icon(Icons.check_box_outline_blank),
-                          const SizedBox(width: 8),
-                          Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          }).toList(),
-          //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
-          value: selectedItems.isEmpty ? null : selectedItems.last,
-          onChanged: (value) {},
-          selectedItemBuilder: (context) {
-            return items.map(
-              (item) {
-                return Container(
-                  alignment: AlignmentDirectional.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    selectedItems.join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    maxLines: 1,
+              hint: Align(
+                alignment: AlignmentDirectional.center,
+                child: Text(
+                  'Filtros',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).hintColor,
                   ),
-                );
-              },
-            ).toList();
-          },
-          buttonStyleData: const ButtonStyleData(
-            height: 40,
-            width: 140,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.fromBorderSide(
-                BorderSide(
-                  color: Color(0xFFE0E0E0),
                 ),
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(4),
+              items: items.map((item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  //disable default onTap to avoid closing menu when selecting an item
+                  enabled: false,
+                  child: StatefulBuilder(
+                    builder: (context, menuSetState) {
+                      final isSelected = selectedItems.contains(item);
+                      return InkWell(
+                        onTap: () {
+                          if (selectedItems.isNotEmpty) {
+                            debugPrint("sdfsd${selectedItems[0]}");
+                          }
+                          isSelected
+                              ? selectedItems.remove(item)
+                              : selectedItems.add(item);
+                          //This rebuilds the StatefulWidget to update the button's text
+                          setState(() {});
+                          //This rebuilds the dropdownMenu Widget to update the check mark
+                          menuSetState(() {});
+                        },
+                        child: Container(
+                          height: double.infinity,
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              isSelected
+                                  ? const Icon(Icons.check_box_outlined)
+                                  : const Icon(Icons.check_box_outline_blank),
+                              const SizedBox(width: 8),
+                              Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }).toList(),
+              //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+              value: selectedItems.isEmpty ? null : selectedItems.last,
+              onChanged: (value) {},
+              selectedItemBuilder: (context) {
+                return items.map(
+                  (item) {
+                    return Container(
+                      alignment: AlignmentDirectional.center,
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        selectedItems.join(', '),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
+                      ),
+                    );
+                  },
+                ).toList();
+              },
+              buttonStyleData: const ButtonStyleData(
+                height: 40,
+                width: 140,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.fromBorderSide(
+                    BorderSide(
+                      color: Color(0xFFE0E0E0),
+                    ),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4),
+                  ),
+                ),
+              ),
+              menuItemStyleData: const MenuItemStyleData(
+                height: 40,
+                padding: EdgeInsets.zero,
               ),
             ),
-          ),
-          menuItemStyleData: const MenuItemStyleData(
-            height: 40,
-            padding: EdgeInsets.zero,
-          ),
-        ),
-      ),
+          )),
 
       /*FloatingActionButton.extended(
         onPressed: _goToTheLake,
@@ -151,7 +155,7 @@ class MapSampleState extends State<MapSample> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Stack(
         children: [
-          Container(
+          /*   Container(
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -159,25 +163,26 @@ class MapSampleState extends State<MapSample> {
                 fit: BoxFit.fitWidth,
               ),
             ),
-          ),
+          ),*/
           Container(
             decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(30),
-              ),
             ),
-            margin: const EdgeInsets.only(top: 100),
+            margin: const EdgeInsets.only(top: 0),
             child: Padding(
-              padding: const EdgeInsets.only(top: 50, bottom: 20),
+              padding: const EdgeInsets.only(top: 0),
               child: Column(
                 children: [
                   SizedBox(
                     child: Column(children: [
                       SizedBox(
-                          height: 635,
-                          child: (GoogleMap(
+                          //make the edges round
+                          height: MediaQuery.of(context).size.height,
+                          child: GoogleMap(
                             myLocationButtonEnabled: true,
+                            padding: const EdgeInsets.only(
+                              top: 80.0,
+                            ),
                             myLocationEnabled: true,
                             mapType: MapType.hybrid,
                             initialCameraPosition: _IPS,
@@ -185,15 +190,13 @@ class MapSampleState extends State<MapSample> {
                             onMapCreated: (GoogleMapController controller) {
                               _controller.complete(controller);
                             },
-                          )))
+                          ))
                     ]),
                   )
                 ],
               ),
             ),
           ),
-          const Positioned(
-              left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,
             right: 0,
