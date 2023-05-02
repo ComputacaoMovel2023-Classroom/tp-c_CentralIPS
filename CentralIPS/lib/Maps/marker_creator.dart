@@ -24,6 +24,8 @@ class MarkerCreator {
       position: LatLng(lat, lng),
       infoWindow: InfoWindow(title: name),
       anchor: const Offset(0.5, 0.5),
+      //make the mark blue
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
     );
   }
 }
