@@ -27,7 +27,11 @@ class DepartmentState extends State<Department>{
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      height: 50,
+      color: Colors.amber[600],
+      child: Center(child: Text(widget.name)),
+    );
   }
 
 }
