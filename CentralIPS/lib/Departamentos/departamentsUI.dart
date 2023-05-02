@@ -46,7 +46,7 @@ class DepartamentosUI extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     '${DepartmentStaticExample().openDepartments()} Departamentos Disponíveis',
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 10),
                   ),
                   DepartmentExpandedList(icon: Icons.filter_alt_outlined, departmentFilter: DepartmentFilter.open),
                   DepartmentsListView(),

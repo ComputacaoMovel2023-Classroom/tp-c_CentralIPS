@@ -38,55 +38,83 @@ class DepartmentExpandedListState extends State<DepartmentExpandedList> {
             },
             children: [
               ExpansionPanel(
+                
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return ListTile(
-                    leading: Icon(widget.icon),
-                    title: Text(DepartmentFilter.getStringFromFilter(widget.departmentFilter)),
+                    leading: Icon(widget.icon, size: 20),
+                    title: Text(DepartmentFilter.getStringFromFilter(widget.departmentFilter), style: TextStyle(fontSize: 12),),
                   );
                 },
                 body: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.zero,
-                    color: Color.fromARGB(255, 211, 211, 211),
                   ),
-                  width: 500,
+                  height: 150,
+                  width: 150,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 10),
                       Row(
+
                         children: [
                           Expanded(
-                            child: Text(
-                              DepartmentFilter.getStringFromFilter(DepartmentFilter.closed),
-                              style: const TextStyle(fontSize: 16),
+                            child: TextButton(
+                              onPressed: () { 
+                                widget.departmentFilter = DepartmentFilter.closed;
+                                setState(() {
+                                  _isExpanded = !_isExpanded;
+                                });
+                               },
+                              child: Text(DepartmentFilter.getStringFromFilter(DepartmentFilter.closed), style: TextStyle(fontSize: 10),),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
                       Row(
                         children: [
                           Expanded(
-                            child: Text(
-                              DepartmentFilter.getStringFromFilter(DepartmentFilter.open),
-                              style: const TextStyle(fontSize: 16),
+                            child: TextButton(
+                              onPressed: () { 
+                                widget.departmentFilter = DepartmentFilter.open;
+                                setState(() {
+                                  _isExpanded = !_isExpanded;
+                                });
+                               },
+                              child: Text(DepartmentFilter.getStringFromFilter(DepartmentFilter.open), style: TextStyle(fontSize: 10),),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
                       Row(
                         children: [
                           Expanded(
-                            child: Text(
-                              DepartmentFilter.getStringFromFilter(DepartmentFilter.favorite),
-                              style: const TextStyle(fontSize: 16),
+                            child: TextButton(
+                              onPressed: () { 
+                                widget.departmentFilter = DepartmentFilter.favorite;
+                                setState(() {
+                                  _isExpanded = !_isExpanded;
+                                });
+                               },
+                              child: Text(DepartmentFilter.getStringFromFilter(DepartmentFilter.favorite), style: TextStyle(fontSize: 10),),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () { 
+                                widget.departmentFilter = DepartmentFilter.none;
+                                setState(() {
+                                  _isExpanded = !_isExpanded;
+                                });
+                               },
+                              child: Text(DepartmentFilter.getStringFromFilter(DepartmentFilter.none), style: TextStyle(fontSize: 10),),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

@@ -1,9 +1,10 @@
 
 import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 
 enum DepartmentFilter{
-  open, closed, favorite;
+  open, closed, favorite, none;
 
 
   static DepartmentFilter getDepartmentFilter(int index){
@@ -13,7 +14,10 @@ enum DepartmentFilter{
     if(index == 1) {
       return closed;
     }
-    return favorite;
+    if(index == 2){
+      return favorite;
+    }
+    return none;
   }
 
   static String getStringFromFilter(DepartmentFilter departmentFilter){
@@ -23,7 +27,10 @@ enum DepartmentFilter{
     if(departmentFilter == closed){
       return 'Indísponivel';
     }
-    return 'Favorito';
+    if(departmentFilter == favorite){
+      return 'Favorito';
+    }
+    return 'Nenhum';
   }
 
   static List<String> getDifferentFilter(DepartmentFilter departmentFilter){
