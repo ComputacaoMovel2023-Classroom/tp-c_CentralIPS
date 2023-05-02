@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
           child: ListView(children: [
             Column(children: const [
               SizedBox(height: 300, child: HpSuperior()),
-              Padding(padding: EdgeInsets.only(top: 100), child: HpCentro()),
+              Padding(padding: EdgeInsets.only(top: 50), child: HpCentro()),
               SizedBox(height: 300, child: NoticiasLista()),
               Padding(
                   padding: EdgeInsets.only(bottom: 100), child: HpInferior()),
