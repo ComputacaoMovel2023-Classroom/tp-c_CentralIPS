@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import '../Sidebar/NavBar.dart';
 import 'markers_list.dart';
 
@@ -19,7 +20,7 @@ class MapSampleState extends State<MapSample> {
 
   static const CameraPosition _IPS = CameraPosition(
     target: LatLng(38.52219794706464, -8.83879091164573),
-    zoom: 17,
+    zoom: 16.4746,
   );
 
   static const CameraPosition _kLake = CameraPosition(
@@ -28,6 +29,9 @@ class MapSampleState extends State<MapSample> {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  //list to save selected items
+  List<String> selectedItems = [];
+
   @override
   Widget build(BuildContext context) {
     Permission.location.request();
@@ -35,11 +39,10 @@ class MapSampleState extends State<MapSample> {
     final List<String> items = [
       'Biblioteca',
       'Bares',
-      "Refeitório",
+      "Cantina",
       'Serviços',
       'Presidência',
     ];
-    List<String> selectedItems = [];
 
     return Scaffold(
       floatingActionButton: Padding(
@@ -69,9 +72,6 @@ class MapSampleState extends State<MapSample> {
                       final isSelected = selectedItems.contains(item);
                       return InkWell(
                         onTap: () {
-                          if (selectedItems.isNotEmpty) {
-                            debugPrint("sdfsd${selectedItems[0]}");
-                          }
                           isSelected
                               ? selectedItems.remove(item)
                               : selectedItems.add(item);
@@ -186,7 +186,7 @@ class MapSampleState extends State<MapSample> {
                             myLocationEnabled: true,
                             mapType: MapType.hybrid,
                             initialCameraPosition: _IPS,
-                            markers: MarkersList.createMarkersList(),
+                            markers: MarkersList.markersToShow(selectedItems),
                             onMapCreated: (GoogleMapController controller) {
                               _controller.complete(controller);
                             },
