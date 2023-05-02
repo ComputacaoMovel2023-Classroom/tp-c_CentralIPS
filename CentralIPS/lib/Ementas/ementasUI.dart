@@ -21,6 +21,7 @@ class EmentasUI extends StatelessWidget {
             ),
           ),
           Container(
+            width: 500,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.vertical(
