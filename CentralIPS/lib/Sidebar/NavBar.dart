@@ -7,6 +7,7 @@ import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
 import '../Maps/teste.dart';
 import '../homePage/home_page_ui.dart';
+import '../Bibliographic Research/bibliographicResearch.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -73,7 +74,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.auto_stories),
             title: const Text('Biblioteca'),
-            onTap: () => null,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const BibliographicResearch())),
           ),
           const Divider(),
           ListTile(
