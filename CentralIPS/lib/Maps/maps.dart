@@ -30,7 +30,13 @@ class MapSampleState extends State<MapSample> {
       zoom: 19.151926040649414);
 
   //list to save selected items
-  List<String> selectedItems = [];
+  List<String> selectedItems = [
+    'Biblioteca',
+    'Bares',
+    "Cantina",
+    'Serviços',
+    'Presidência',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +92,7 @@ class MapSampleState extends State<MapSample> {
                           child: Row(
                             children: [
                               isSelected
-                                  ? const Icon(Icons.check_box_outlined)
+                                  ? MarkersList.iconColors(item)
                                   : const Icon(Icons.check_box_outline_blank),
                               const SizedBox(width: 8),
                               Text(
