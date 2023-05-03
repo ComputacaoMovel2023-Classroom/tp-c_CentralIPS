@@ -1,12 +1,22 @@
+import 'package:centralips/Bibliographic%20Research/book.dart';
 import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
 import 'package:centralips/Bibliographic%20Research/searchBar.dart';
+import 'package:centralips/Departamentos/school.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 
-class BibliographicResearchUI extends StatelessWidget {
-  const BibliographicResearchUI({super.key});
+import 'package:searchable_listview/searchable_listview.dart';
+
+
+class BibliographicResearch extends StatefulWidget {
+  const BibliographicResearch({Key? key}) : super(key: key);
+
+  @override
+  State<BibliographicResearch> createState() => BibliographicResearchUI();
+}
+
+class BibliographicResearchUI extends State<BibliographicResearch> {
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +44,14 @@ class BibliographicResearchUI extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     "Biblioteca",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                  SizedBox(height: 10, width: 400),
-                  SearchBar(),
+                  const SizedBox(height: 10, width: 400),
                   ElevatedButton(
                       onPressed: () => {
                             Navigator.push(
@@ -52,6 +61,8 @@ class BibliographicResearchUI extends StatelessWidget {
                             )
                           },
                       child: Text("Filtros")),
+                  Divider(color: Colors.black,),
+                  const SearchBar(),
                 ],
               ),
             ),

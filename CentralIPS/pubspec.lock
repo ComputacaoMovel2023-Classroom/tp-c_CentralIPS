@@ -448,6 +448,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+<<<<<<< HEAD
   rflutter_alert:
     dependency: "direct main"
     description:
@@ -472,6 +473,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+=======
+  searchable_listview:
+    dependency: "direct main"
+    description:
+      name: searchable_listview
+      sha256: "0a158665571e03890408e2d5569f0673a36f79fac5a671a54495b52f67b93b63"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
+>>>>>>> 1d79086da5d032bd39dc3238a000a317d47e8b67
   sky_engine:
     dependency: transitive
     description: flutter
