@@ -1,11 +1,47 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../register_page/register_page.dart';
+import '../loginPage/login_page.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+Widget buildName() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        'Nome Completo',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: TextField(
+          keyboardType: TextInputType.name,
+          style: TextStyle(color: Colors.black87),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 6, left: 10),
+              hintText: 'Introduza o seu nome',
+              hintStyle: TextStyle(color: Colors.black38)),
+        ),
+      )
+    ],
+  );
 }
 
 Widget buildEmail() {
@@ -35,6 +71,40 @@ Widget buildEmail() {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu email',
+              hintStyle: TextStyle(color: Colors.black38)),
+        ),
+      )
+    ],
+  );
+}
+
+Widget buildNumber() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        'Número de Estudante',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: TextField(
+          keyboardType: TextInputType.number,
+          style: TextStyle(color: Colors.black87),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 6, left: 10),
+              hintText: 'Introduza o seu número',
               hintStyle: TextStyle(color: Colors.black38)),
         ),
       )
@@ -76,12 +146,12 @@ Widget buildPassword() {
   );
 }
 
-Widget buildLoginBtn() {
+Widget buildRegisterBtn() {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print('Sessão Iniciada'),
+      onPressed: () => print('Conta Registada!'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         minimumSize: MaterialStateProperty.all<Size>(
@@ -89,7 +159,7 @@ Widget buildLoginBtn() {
         ),
       ),
       child: const Text(
-        'Iniciar Sessão',
+        'Registar',
         style: TextStyle(
           color: Colors.white,
           fontSize: 18,
@@ -100,24 +170,24 @@ Widget buildLoginBtn() {
   );
 }
 
-Widget buildRegisterBtn(BuildContext context) {
+Widget buildLoginBtn(BuildContext context) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RegisterPage()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     },
     child: RichText(
       text: TextSpan(children: [
         TextSpan(
-            text: 'Novo por aqui? ',
+            text: 'Já tem uma conta? ',
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.w500)),
         TextSpan(
-            text: 'Registar',
+            text: 'Iniciar Sessão',
             style: TextStyle(
                 color: Colors.blue.shade300,
                 fontSize: 18,
@@ -127,7 +197,7 @@ Widget buildRegisterBtn(BuildContext context) {
   );
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         SizedBox(height: 5),
                         Text(
-                          'Iniciar Sessão',
+                          'Registar',
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 30,
@@ -157,20 +227,24 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 25),
                         Text(
-                          'Entre na maior comunidade do IPS',
+                          'Registe-se na nossa aplicação',
                           style: TextStyle(
                               color: Colors.black87,
                               fontSize: 17,
                               fontWeight: FontWeight.normal),
                         ),
-                        SizedBox(height: 100),
+                        SizedBox(height: 60),
+                        buildName(),
+                        SizedBox(height: 15),
                         buildEmail(),
+                        SizedBox(height: 15),
+                        buildNumber(),
                         SizedBox(height: 15),
                         buildPassword(),
                         SizedBox(height: 15),
-                        buildLoginBtn(),
+                        buildRegisterBtn(),
                         SizedBox(height: 5),
-                        buildRegisterBtn(context),
+                        buildLoginBtn(context),
                       ],
                     ),
                   ),
