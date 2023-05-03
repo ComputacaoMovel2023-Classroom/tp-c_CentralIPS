@@ -5,11 +5,7 @@ import '../CampusQR/Scanner.dart';
 import '../Departamentos/departamentsUI.dart';
 import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
-<<<<<<< HEAD
-import '../NFC/main.dart';
-=======
 import '../Maps/teste.dart';
->>>>>>> 1d79086da5d032bd39dc3238a000a317d47e8b67
 import '../homePage/home_page_ui.dart';
 import '../Bibliographic Research/bibliographicResearch.dart';
 
@@ -60,11 +56,7 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.credit_card),
             title: const Text('Cartão Digital'),
             onTap: () => Navigator.of(context)
-<<<<<<< HEAD
-                .push(MaterialPageRoute(builder: (context) => MyApp())),
-=======
                 .push(MaterialPageRoute(builder: (context) => teste())),
->>>>>>> 1d79086da5d032bd39dc3238a000a317d47e8b67
           ),
           const Divider(),
           ListTile(
