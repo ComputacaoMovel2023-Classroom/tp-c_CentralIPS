@@ -11,6 +11,7 @@ class SearchBar extends StatefulWidget {
 
 class SearchBarState extends State<SearchBar> {
   List<Book> books = allBooks;
+  String result = "";
   @override
   Widget build(BuildContext context) {
     // This controller will store the value of the search bar
@@ -22,11 +23,12 @@ class SearchBarState extends State<SearchBar> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
-                color: Color.fromARGB(255, 217, 217, 217),
+                color: const Color.fromARGB(255, 217, 217, 217),
               ),
               // Use a Material design search bar
               child: TextField(
                 controller: searchController,
+                onSubmitted: (value) => searchBook(value),
                 decoration: InputDecoration(
                   hintStyle: const TextStyle(
                     fontWeight: FontWeight.w900,
@@ -39,12 +41,17 @@ class SearchBarState extends State<SearchBar> {
                     onPressed: () => searchController.clear(),
                   ),
                   // Add a search icon or button to the search bar
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      searchBook(searchController.text);
+                      // TODO manter a pesquisa na caixa de pesquisa
+                    },
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                onChanged: searchBook,
               ),
             ),
             Container(
@@ -57,7 +64,46 @@ class SearchBarState extends State<SearchBar> {
                 itemBuilder: (context, index) {
                   final book = books[index];
                   return ListTile(
-                      title: Text(book.name),
+                      //bloco de info de um livro
+                      leading: Image.network(
+                        book.urlImage,
+                        fit: BoxFit.cover,
+                        width: 80,
+                        height: 120,
+                      ),
+                      title: Text(
+                        book.name,
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      subtitle: Container(
+                        height: 50,
+                        width: 500,
+                        child: Column(children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.account_circle_rounded,
+                                size: 18,
+                              ),
+                              const Padding(padding: EdgeInsets.only(left: 5)),
+                              Text("${book.authors.elementAt(0)}"),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                size: 18,
+                              ),
+                              const Padding(padding: EdgeInsets.only(left: 5)),
+                              Text(book.school.toString()),
+                            ],
+                          ),
+                        ]),
+                      ),
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(

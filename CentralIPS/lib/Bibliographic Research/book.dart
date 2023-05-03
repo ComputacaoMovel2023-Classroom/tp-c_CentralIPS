@@ -8,32 +8,63 @@ enum Category { accao, aventura, biografias, conto, drama, romances, terror }
 
 class Book {
   String name = 'Sem título';
-  final String image;
-  final String authors;
+  final String urlImage;
+  final List authors;
   final School school;
   final String edition;
   final String isbn;
   final Category category;
 
-  Book({
-    required this.name,
-    required this.image,
-    required this.authors,
-    required this.school,
-    required this.edition,
-    required this.isbn,
-    required this.category
-  });
+  Book(
+      {required this.name,
+      required this.urlImage,
+      required this.authors,
+      required this.school,
+      required this.edition,
+      required this.isbn,
+      required this.category});
 }
 
+
+
 var allBooks = [
-  Book(name: "name", image: "image",authors: "authors",school:  School.esce,edition: "edition",isbn: "isbn",
+  
+
+  Book(
+      name: "name",
+      urlImage:
+          "https://img.freepik.com/vetores-gratis/pilha-de-livros-de-design-plano-desenhado-a-mao_23-2149334862.jpg?w=1380&t=st=1683106455~exp=1683107055~hmac=dba422f51e05fee07a8aaa569c32097b741dbc4688aa9ac956c00fceb1acd709",
+      authors: ["Luis Damas","Paulino"],
+      school: School.esce,
+      edition: "edition",
+      isbn: "isbn",
       category: Category.accao),
-  Book(name: "name2",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+  Book(
+      name: "name2",
+      urlImage:
+          "https://img.freepik.com/vetores-gratis/pilha-de-livros-de-design-plano-desenhado-a-mao_23-2149334862.jpg?w=1380&t=st=1683106455~exp=1683107055~hmac=dba422f51e05fee07a8aaa569c32097b741dbc4688aa9ac956c00fceb1acd709",
+      authors: ["Luis Damas","Paulino"],
+      school: School.esce,
+      edition: "edition",
+      isbn: "isbn",
       category: Category.accao),
-  Book(name: "name3",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+  Book(
+      name: "name3",
+      urlImage:
+          "https://img.freepik.com/vetores-gratis/pilha-de-livros-de-design-plano-desenhado-a-mao_23-2149334862.jpg?w=1380&t=st=1683106455~exp=1683107055~hmac=dba422f51e05fee07a8aaa569c32097b741dbc4688aa9ac956c00fceb1acd709",
+      authors: ["Luis Damas","Paulino"],
+      school: School.esce,
+      edition: "edition",
+      isbn: "isbn",
       category: Category.accao),
-  Book(name: "name4",image: "image",authors: "authors",school: School.esce,edition: "edition",isbn: "isbn",
+  Book(
+      name: "name4",
+      urlImage:
+          "https://img.freepik.com/vetores-gratis/pilha-de-livros-de-design-plano-desenhado-a-mao_23-2149334862.jpg?w=1380&t=st=1683106455~exp=1683107055~hmac=dba422f51e05fee07a8aaa569c32097b741dbc4688aa9ac956c00fceb1acd709",
+      authors: ["Luis Damas","Paulino"],
+      school: School.esce,
+      edition: "edition",
+      isbn: "isbn",
       category: Category.accao),
 ];
 
@@ -70,7 +101,7 @@ class BookPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children:  [
+                children: [
                   const SizedBox(height: 10, width: 400),
                   Text(
                     book.name,
@@ -79,6 +110,7 @@ class BookPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  Image.network(book.urlImage, fit: BoxFit.cover, width: double.infinity, height: 300,),
                   SizedBox(height: 10),
                   Text(
                     "Horário de Funcionamento",

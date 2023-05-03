@@ -61,8 +61,8 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
                             )
                           },
                       child: Text("Filtros")),
-                  SearchBar(),
-                  
+                  Divider(color: Colors.black,),
+                  const SearchBar(),
                 ],
               ),
             ),
