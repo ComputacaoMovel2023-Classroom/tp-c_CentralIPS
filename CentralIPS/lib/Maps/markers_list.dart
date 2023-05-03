@@ -1,5 +1,6 @@
 //class to create a list of markers
 
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'marker_creator.dart';
@@ -9,8 +10,7 @@ class MarkersList {
 
   static Set<Marker> createMarkersList() {
     Set<Marker> markersList = {};
-    markersList.addAll(MarkersList.createMarkersLibrary());
-    markersList.addAll(MarkersList.createMarkersPresidential());
+
     return markersList;
   }
 
@@ -18,11 +18,12 @@ class MarkersList {
   static Set<Marker> createMarkersLibrary() {
     return {
       MarkerCreator.createMarker(
-          //create a marker
-          '1',
-          'Biblioteca Esce',
-          38.52268004886502,
-          -8.841180580191452),
+        //create a marker
+        '1',
+        'Biblioteca Esce',
+        38.52268004886502,
+        -8.841180580191452,
+      ),
       MarkerCreator.createMarker(
           //create a marker
           '2',
@@ -60,6 +61,29 @@ class MarkersList {
     };
   }
 
+  static Set<Marker> createMarkersBars() {
+    return {
+      MarkerCreator.createMarker(
+          //create a marker
+          '6',
+          'Bar Est',
+          38.52243698802391,
+          -8.839528892221596),
+      MarkerCreator.createMarker(
+          //create a marker
+          '7',
+          'Bar Esce',
+          38.52267377225447,
+          -8.841125689784475),
+      MarkerCreator.createMarker(
+          //create a marker
+          '9',
+          'Bar ESE',
+          38.51977531618097,
+          -8.838223430324678)
+    };
+  }
+
   static Set<Marker> createMarkersServices() {
     return {
       MarkerCreator.createMarker(
@@ -94,9 +118,32 @@ class MarkersList {
         if (item == "Serviços") {
           markersList.addAll(createMarkersServices());
         }
+        if (item == "Bares") {
+          markersList.addAll(createMarkersBars());
+        }
       }
 
       return markersList;
+    }
+  }
+
+  static Icon iconColors(String item) {
+    switch (item) {
+      case "Biblioteca":
+        return const Icon(
+          Icons.check_box_outlined,
+          color: Colors.red,
+        );
+      case "Bares":
+        return const Icon(Icons.check_box_outlined, color: Colors.blue);
+      case "Cantina":
+        return const Icon(Icons.check_box_outlined, color: Colors.green);
+      case "Serviços":
+        return const Icon(Icons.check_box_outlined, color: Colors.yellow);
+      case "Presidência":
+        return const Icon(Icons.check_box_outlined, color: Colors.purple);
+      default:
+        return const Icon(Icons.check_box_outlined);
     }
   }
 }
