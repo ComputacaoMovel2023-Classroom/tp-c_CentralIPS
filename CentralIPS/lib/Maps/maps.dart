@@ -192,7 +192,8 @@ class MapSampleState extends State<MapSample> {
                             myLocationEnabled: true,
                             mapType: MapType.hybrid,
                             initialCameraPosition: _IPS,
-                            markers: MarkersList.markersToShow(selectedItems),
+                            markers: MarkersList.markersToShow(
+                                selectedItems, context),
                             onMapCreated: (GoogleMapController controller) {
                               _controller.complete(controller);
                             },

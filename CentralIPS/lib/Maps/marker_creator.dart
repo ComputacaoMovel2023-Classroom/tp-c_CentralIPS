@@ -1,7 +1,7 @@
 //class to create a marker
 
-import 'dart:ui';
-
+import 'package:centralips/homePage/home_page_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerCreator {
@@ -29,6 +29,21 @@ class MarkerCreator {
     );
   }
 
+  static Marker createMarkerRedirectService(String id, String name, double lat,
+      double lng, String service, BuildContext context) {
+    return Marker(
+      markerId: MarkerId(id),
+      position: LatLng(lat, lng),
+      infoWindow: InfoWindow(
+        title: name,
+        onTap: () => redirectPage(service, context),
+      ),
+      anchor: const Offset(0.5, 0.5),
+      //make the mark blue
+      icon: getMarkerIcon(name),
+    );
+  }
+
   static BitmapDescriptor getMarkerIcon(String color) {
     if (color.contains("Biblioteca")) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
@@ -42,6 +57,17 @@ class MarkerCreator {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta);
     } else {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange);
+    }
+  }
+
+  //function to redirect to a page of the app
+  static void redirectPage(String service, BuildContext context) {
+    //in hear will be a switch case to redirect to the correct page
+    if (service.contains("Admin")) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
     }
   }
 }

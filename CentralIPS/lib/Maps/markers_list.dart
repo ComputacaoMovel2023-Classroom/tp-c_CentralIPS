@@ -84,14 +84,15 @@ class MarkersList {
     };
   }
 
-  static Set<Marker> createMarkersServices() {
+  static Set<Marker> createMarkersServices(BuildContext context) {
     return {
-      MarkerCreator.createMarker(
-          "8", "Admin", 38.52175457085821, -8.839865325375564)
+      MarkerCreator.createMarkerRedirectService("8", "Admin", 38.52175457085821,
+          -8.839865325375564, "Administração", context),
     };
   }
 
-  static Set<Marker> markersToShow(List<String> selectedItems) {
+  static Set<Marker> markersToShow(
+      List<String> selectedItems, BuildContext context) {
     //set of markers to return
     Set<Marker> markersList = {};
 
@@ -116,7 +117,7 @@ class MarkersList {
           markersList.addAll(createMarkersCantina());
         }
         if (item == "Serviços") {
-          markersList.addAll(createMarkersServices());
+          markersList.addAll(createMarkersServices(context));
         }
         if (item == "Bares") {
           markersList.addAll(createMarkersBars());
