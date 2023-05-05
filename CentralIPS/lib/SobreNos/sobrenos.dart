@@ -14,12 +14,240 @@ class SobreNos extends StatelessWidget {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/ips.png'),
                 fit: BoxFit.fitWidth,
               ),
             ),
           ),
-          Container(),
+          Container(
+            width: 500,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30),
+              ),
+            ),
+            margin: const EdgeInsets.only(top: 100),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(children: <Widget>[
+                const Text(
+                  "Sobre Nós",
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const Image(
+                  image: AssetImage('assets/images/512x512.png'),
+                  height: 100,
+                ),
+                const Text(
+                  "A CentralIPS é uma plataforma que permite à comunidade académica do Instituto Politécnico de Setúbal aceder a serviços de forma rápida e eficiente.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                const Text(
+                  "A Nossa Equipa",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 4000,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GridView(
+                        padding: const EdgeInsets.only(bottom: 90),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10),
+                        children: [
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/mourabg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Pedro Moura",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/carlosbg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Carlos Luz",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/ruibg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Rui Jesus",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/andrebg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("André Caetano",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/carlosbg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Tomás Ramos",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/carlosbg.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("David Ganhão",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        shadows: [
+                                          Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(15, 15),
+                                              blurRadius: 15),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ),
           const Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
