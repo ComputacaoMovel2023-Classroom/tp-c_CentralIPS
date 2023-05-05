@@ -10,9 +10,9 @@ class NoticiasUI extends StatelessWidget {
   List<String> title = ["To Kill a Mockingbird", "1984", "The Great Gatsby"];
 
   List<String> txt = [
-    "A novel by Harper Lee",
-    "A dystopian novel by George Orwell",
-    "A novel by F. Scott Fitzgerald"
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor orci risus, at pharetra nibh ultrices sit amet. Maecenas eu tincidunt orci. Aliquam id dui eget urna lobortis commodo at eget quam. Integer posuere enim nisl, a faucibus erat maximus eu. Praesent et mi lectus. Suspendisse potenti. Quisque vel lorem sed nunc pharetra facilisis. Sed varius urna nec velit consequat, ac tincidunt ipsum consequat. In hac habitasse platea dictumst. Fusce ac ipsum vel justo congue convallis. Aenean eu enim velit. Donec eget ultricies nibh, in interdum turpis. Vivamus malesuada pharetra metus, non bibendum nulla tristique vel. Sed eu sapien vestibulum, imperdiet nulla ac, dapibus lorem.',
+    'Vivamus vitae eros quis arcu pharetra maximus. Donec mollis nisl sed dolor suscipit, eu sollicitudin tellus aliquet. Integer venenatis libero sit amet lectus volutpat, at suscipit nisi dictum. Quisque pellentesque felis sit amet augue commodo elementum. Etiam eget augue a nibh ultrices faucibus vel in sapien. Curabitur lacinia ante quis massa dictum, eu tristique neque tristique. Duis vel bibendum arcu. Proin iaculis ex mauris, vel convallis eros congue vitae. Donec ultricies nulla sed augue consequat aliquam. Fusce eget luctus eros, sit amet pulvinar urna. Aliquam erat volutpat. Suspendisse maximus sed enim sit amet posuere. Nam euismod ipsum vel ante pulvinar, et lobortis quam dignissim.',
+    'Pellentesque eget fringilla nulla, in consequat velit. Suspendisse rutrum lectus a nibh sollicitudin, id hendrerit nulla dictum. Sed pharetra a mi in bibendum. Vestibulum quis neque id odio aliquet blandit. Integer vitae nulla eget magna pretium vehicula. Pellentesque in enim eget nisi malesuada varius sit amet euismod nibh. Sed rhoncus imperdiet ipsum, vel pulvinar eros hendrerit nec. Suspendisse at dolor sagittis, finibus nisi et, faucibus dolor. Suspendisse convallis nec dolor eget commodo. Maecenas euismod neque sed lacus posuere, vel varius quam semper. Vivamus eget mauris congue, luctus ex non, maximus ante. Suspendisse vitae quam fermentum, gravida massa sed, fringilla arcu.'
   ];
 
   @override
