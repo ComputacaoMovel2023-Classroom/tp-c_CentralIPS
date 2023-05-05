@@ -1,5 +1,5 @@
-
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
+import 'package:centralips/Noticias/noticiasUI.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +50,7 @@ class _BottomNavigationExampleState extends State {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const EmentasUI()),
+          MaterialPageRoute(builder: (context) => NoticiasUI()),
         );
         break;
       case 2:
@@ -62,7 +62,8 @@ class _BottomNavigationExampleState extends State {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BibliographicResearch()),
+          MaterialPageRoute(
+              builder: (context) => const BibliographicResearch()),
         );
         break;
       default:
