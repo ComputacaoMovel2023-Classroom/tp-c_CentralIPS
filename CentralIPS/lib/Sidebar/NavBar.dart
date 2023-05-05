@@ -1,4 +1,5 @@
 import 'package:centralips/Pedometro/pedometroui.dart';
+import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:flutter/material.dart';
 
 import '../CampusQR/Scanner.dart';
@@ -56,7 +57,7 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.credit_card),
             title: const Text('Cartão Digital'),
             onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => teste())),
+                .push(MaterialPageRoute(builder: (context) => const teste())),
           ),
           const Divider(),
           ListTile(
@@ -96,6 +97,13 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.health_and_safety),
             onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const Pedometro())),
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text('Sobre Nós'),
+            leading: const Icon(Icons.people),
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SobreNos())),
           )
         ],
       ),
