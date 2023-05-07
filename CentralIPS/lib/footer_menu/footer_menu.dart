@@ -1,5 +1,5 @@
-import 'package:centralips/Administra%C3%A7%C3%A3o/noticias_admin.dart';
-import 'package:centralips/Administra%C3%A7%C3%A3o/noticias_admin_add.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
 import 'package:centralips/Noticias/noticia_list_empty.dart';
 import 'package:centralips/Noticias/noticiasUI.dart';
