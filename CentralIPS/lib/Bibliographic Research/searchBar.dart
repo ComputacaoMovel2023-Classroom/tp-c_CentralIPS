@@ -110,7 +110,7 @@ class SearchBarState extends State<SearchBar> {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Bookage(book: book)),
+                                builder: (context) => BookPage(book: book)),
                           ));
                 },
               )),
