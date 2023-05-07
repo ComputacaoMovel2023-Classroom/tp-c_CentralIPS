@@ -2,6 +2,9 @@ import 'package:centralips/Bibliographic%20Research/book.dart';
 import 'package:centralips/Ementas/ementasUI.dart';
 import 'package:flutter/material.dart';
 
+import 'bookPage.dart';
+import 'library.dart';
+
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
 
@@ -10,7 +13,7 @@ class SearchBar extends StatefulWidget {
 }
 
 class SearchBarState extends State<SearchBar> {
-  List<Book> books = allBooks;
+  Library library = Library();
   String result = "";
   @override
   Widget build(BuildContext context) {
@@ -60,9 +63,9 @@ class SearchBarState extends State<SearchBar> {
               child: Expanded(
                   child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: books.length,
+                itemCount: library.size(),
                 itemBuilder: (context, index) {
-                  final book = books[index];
+                  final book = library.getBook(index);
                   return ListTile(
                       //bloco de info de um livro
                       leading: Image.network(
@@ -107,7 +110,7 @@ class SearchBarState extends State<SearchBar> {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BookPage(book: book)),
+                                builder: (context) => Bookage(book: book)),
                           ));
                 },
               )),
@@ -117,14 +120,14 @@ class SearchBarState extends State<SearchBar> {
   }
 
   void searchBook(String query) {
-    final suggestions = allBooks.where((book) {
+    final suggestions = allBooksTest.where((book) {
       final bookName = book.name.toLowerCase();
       final input = query.toLowerCase();
       return bookName.contains(input);
     }).toList();
 
     setState(() {
-      books = suggestions;
+      library.books = suggestions;
     });
   }
 }
