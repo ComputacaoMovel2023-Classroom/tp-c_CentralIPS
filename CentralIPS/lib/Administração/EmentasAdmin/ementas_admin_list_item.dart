@@ -21,10 +21,10 @@ class AdminEmentasListItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _EmentasListItemState createState() => _EmentasListItemState();
+  _AdminEmentasListItemState createState() => _AdminEmentasListItemState();
 }
 
-class _EmentasListItemState extends State<AdminEmentasListItem> {
+class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
   bool _isExpanded = false;
   TextEditingController _sopaController = TextEditingController();
   TextEditingController _peixeController = TextEditingController();

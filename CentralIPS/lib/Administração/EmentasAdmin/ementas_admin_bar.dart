@@ -1,9 +1,10 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_list.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_list_item.dart';
 import 'package:centralips/Ementas/ementas_list.dart';
 import 'package:flutter/material.dart';
 
-class RefeitorioClass extends StatelessWidget {
-  RefeitorioClass({super.key});
+class AdminBarClass extends StatelessWidget {
+  AdminBarClass({super.key});
 
   final List<String> sopas = [
     'Sopa de legumes',
@@ -35,7 +36,7 @@ class RefeitorioClass extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return EmentasList(
+    return AdminEmentasList(
         sopas: sopas,
         peixes: peixes,
         carnes: carnes,
