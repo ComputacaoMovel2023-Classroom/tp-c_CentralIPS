@@ -1,4 +1,8 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/admin_ementasUI.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
+import 'package:centralips/Noticias/noticia_list_empty.dart';
 import 'package:centralips/Noticias/noticiasUI.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';

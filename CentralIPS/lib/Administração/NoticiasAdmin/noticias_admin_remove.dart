@@ -1,8 +1,8 @@
 import 'package:centralips/Noticias/noticias_list_details.dart';
 import 'package:flutter/material.dart';
 
-class NoticiaListItem extends StatefulWidget {
-  const NoticiaListItem({
+class AdminNoticiaListItem extends StatefulWidget {
+  const AdminNoticiaListItem({
     Key? key,
     required this.titulo,
     required this.subtitulo,
@@ -16,10 +16,10 @@ class NoticiaListItem extends StatefulWidget {
   final String texto;
 
   @override
-  _NoticiaListItemState createState() => _NoticiaListItemState();
+  _AdminNoticiaListItemState createState() => _AdminNoticiaListItemState();
 }
 
-class _NoticiaListItemState extends State<NoticiaListItem> {
+class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
   bool _isPressed = false;
 
   void _OnPressed() {
@@ -62,29 +62,45 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Container(
-                        height: 95,
-                        width: 500,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/noticiaImg.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Stack(
-                          children: const [
-                            Positioned(
-                              top: 5,
-                              right: 5,
-                              child: Icon(
-                                Icons.bookmark,
-                                size: 15,
-                                color: Colors.white,
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 95,
+                            width: 500,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                image:
+                                    AssetImage('assets/images/noticiaImg.png'),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Positioned(
+                            top: 5,
+                            right: 5,
+                            child: GestureDetector(
+                              onTap: () {
+                                //BASE DE DADOS - Remover container
+                              },
+                              child: Container(
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 0, 0),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.remove,
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const Padding(

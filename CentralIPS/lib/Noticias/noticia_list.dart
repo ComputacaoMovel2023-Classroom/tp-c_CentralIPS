@@ -41,6 +41,7 @@ class NoticiasList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return NoticiaListItem(
                     titulo: titulo[index],
+                    subtitulo: "Descubra mais ao clicar aqui",
                     imagem: "assets/images/noticiaImg.png",
                     texto: textos[index],
                   );
