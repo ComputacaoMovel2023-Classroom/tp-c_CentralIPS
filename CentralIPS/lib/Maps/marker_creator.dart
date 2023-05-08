@@ -40,14 +40,14 @@ class MarkerCreator {
       ),
       anchor: const Offset(0.5, 0.5),
       //make the mark blue
-      icon: getMarkerIcon(name),
+      icon: getMarkerIcon("Serviços"),
     );
   }
 
   static BitmapDescriptor getMarkerIcon(String color) {
     if (color.contains("Biblioteca")) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
-    } else if (color.contains("Bares")) {
+    } else if (color.contains("Bar")) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue);
     } else if (color.contains("Cantina")) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
