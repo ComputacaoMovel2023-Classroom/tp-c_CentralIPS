@@ -45,8 +45,8 @@ class MarkersList {
           //create a marker
           '4',
           'Presidência',
-          38.523291014865336,
-          -8.840683012325519),
+          38.523246,
+          -8.840708),
     };
   }
 
@@ -88,6 +88,14 @@ class MarkersList {
     return {
       MarkerCreator.createMarkerRedirectService("8", "Admin", 38.52175457085821,
           -8.839865325375564, "Administração", context),
+      MarkerCreator.createMarkerRedirectService("10", "GAAL", 38.521486,
+          -8.838958, "Gabinete de Apoio à Atividade Letiva", context),
+      MarkerCreator.createMarkerRedirectService("11", "Divisão Académica",
+          38.522836, -8.841216, "Divisão Académica", context),
+      MarkerCreator.createMarkerRedirectService(
+          "12", "IPStartup", 38.520591, -8.837441, "IPStartup", context),
+      MarkerCreator.createMarkerRedirectService("12", "Clube Desportivo",
+          38.519745, -8.835978, "Clube Desportivo", context),
     };
   }
 
