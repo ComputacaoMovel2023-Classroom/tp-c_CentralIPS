@@ -1,3 +1,4 @@
+import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
     if (_isPressed) {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => NoticiasListDetails(
-            titulo: widget.titulo, imagem: widget.imagem, texto: widget.texto),
+            noticiaItem: NoticiaItem(titulo: widget.titulo, subtitulo: widget.subtitulo, imagem: widget.imagem, texto: widget.texto),),
       ));
     }
   }
