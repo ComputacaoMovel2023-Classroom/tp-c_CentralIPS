@@ -1,5 +1,6 @@
 import '../Departamentos/school.dart';
 import 'book.dart';
+import 'bookCategory.dart';
 
 /**
  * Data structure with is a list of Book s

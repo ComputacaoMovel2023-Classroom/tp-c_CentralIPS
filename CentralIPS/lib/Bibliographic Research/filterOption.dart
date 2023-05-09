@@ -35,7 +35,7 @@ class FilterWidgetState extends State<FilterWidget> {
                 ),
               ),
             ),
-            Expanded(child: const CheckBoxTheme())
+            const Positioned(right: 20, child: CheckBoxTheme()),
           ],
         ),
       );

@@ -67,8 +67,6 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
               ),
             ),
           ),
-          const Positioned(
-              left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,
             right: 0,
@@ -88,7 +86,7 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
       ),
       resizeToAvoidBottomInset: false,
       drawer: const NavBar(),
-      backgroundColor: Colors.transparent,
+      bottomNavigationBar: BottomNavigationExample(),
     );
   }
 }
