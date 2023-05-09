@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
         ),*/
         resizeToAvoidBottomInset: false,
         drawer: const NavBar(),
-        bottomNavigationBar: const BottomNavigationExample(),
+        bottomNavigationBar: BottomNavigationExample(),
         appBar: AppBar(
           leading: Builder(builder: (BuildContext context) {
             return IconButton(

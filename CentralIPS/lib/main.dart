@@ -1,6 +1,8 @@
-import 'package:centralips/SplashScreen/splashscreen.dart';
+import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Sidebar/NavBar.dart';
+import 'Cubit/index_cubit.dart';
 
 void main() {
   runApp(const MyAppDemo());
@@ -17,7 +19,10 @@ class MyAppDemo extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: BlocProvider(
+          create: (_) => FooterMenuCubit(),
+          child: const HomePage() //const SplashScreen(),
+          ),
     );
   }
 }
