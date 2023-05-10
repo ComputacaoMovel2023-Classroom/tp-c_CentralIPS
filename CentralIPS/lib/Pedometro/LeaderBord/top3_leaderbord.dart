@@ -8,34 +8,224 @@ class Top3LeaderBord extends StatelessWidget {
       required this.nameThird,
       required this.stepsFirst,
       required this.stepsSecond,
-      required this.stepsThrid});
+      required this.stepsThird,
+      required this.urlFirst,
+      required this.urlSecond,
+      required this.urlThird});
 
   final String nameFirst;
   final String nameSecond;
   final String nameThird;
 
+  final String urlFirst;
+  final String urlSecond;
+  final String urlThird;
+
   final String stepsFirst;
   final String stepsSecond;
-  final String stepsThrid;
+  final String stepsThird;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        CircleAvatar(
-          radius: 40, // Tamanho do primeiro círculo
-          backgroundColor: Colors.blue,
+      children: [
+        Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 6,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      urlSecond,
+                      fit: BoxFit.cover,
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: Container(
+                    width: 80,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.all(4),
+                      width: 80,
+                      height: 20,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '2',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              nameSecond,
+              style: const TextStyle(fontSize: 16),
+            ),
+            Text(
+              '$stepsSecond passos',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
         ),
-        SizedBox(width: 16), // Espaço entre os círculos
-        CircleAvatar(
-          radius: 60, // Tamanho do círculo do meio (maior)
-          backgroundColor: Colors.red,
+        const SizedBox(width: 16), // Espaço entre os círculos
+        Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 8,
+                      color: Colors.yellow,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      urlFirst,
+                      fit: BoxFit.cover,
+                      width: 120,
+                      height: 120,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Container(
+                    width: 120,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.all(4),
+                      width: 120,
+                      height: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.yellow,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '1',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              nameFirst,
+              style: const TextStyle(fontSize: 16),
+            ),
+            Text(
+              '$stepsFirst passos',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
         ),
-        SizedBox(width: 16), // Espaço entre os círculos
-        CircleAvatar(
-          radius: 40, // Tamanho do último círculo
-          backgroundColor: Colors.green,
+        const SizedBox(width: 16), // Espaço entre os círculos
+        Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 6,
+                      color: Colors.orange,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      urlThird,
+                      fit: BoxFit.cover,
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: Container(
+                    width: 80,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.all(4),
+                      width: 80,
+                      height: 20,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.orange,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '3',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              nameThird,
+              style: const TextStyle(fontSize: 16),
+            ),
+            Text(
+              '$stepsThird passos',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
         ),
       ],
     );

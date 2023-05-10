@@ -1,4 +1,5 @@
-import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord.dart';
+import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_list.dart';
+import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../Sidebar/NavBar.dart';
@@ -34,41 +35,66 @@ class LeaderBord extends StatelessWidget {
           ),
           backgroundColor: Colors.transparent,
           body: Container(
+              height: double.infinity,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30),
                   )),
-              child: Column(children: [
-                SizedBox(
-                  width: 400,
-                  child: Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Row(
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child:
-                                Icon(Icons.arrow_back_ios, color: Colors.black),
+              child: SizedBox(
+                height: 500,
+                child: ListView(children: [
+                  Column(children: [
+                    SizedBox(
+                      width: 400,
+                      child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: TextButton.icon(
+                                  label: const SizedBox.shrink(),
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                  ),
+                                  onPressed: () {
+                                    //get back to the previous screen
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.black,
+                                  ),
+                                  // color: Colors.black
+                                ),
+                              ),
+                              const SizedBox(width: 40),
+                              const Center(
+                                child: Text('LeaderBord',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold)),
+                              )
+                            ],
                           ),
-                          SizedBox(width: 69),
-                          Center(
-                            child: Text('LeaderBord',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold)),
-                          )
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Top3LeaderBord(),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 50),
+                          child: Top3LeaderBordList(),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 50),
+                          child: LeaderBordCenterList(),
+                        ),
+                      ]),
                     )
                   ]),
-                )
-              ])))
+                ]),
+              )))
     ]);
   }
 }
