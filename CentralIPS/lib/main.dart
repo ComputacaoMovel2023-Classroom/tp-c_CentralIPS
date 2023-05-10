@@ -21,7 +21,7 @@ class MyAppDemo extends StatelessWidget {
       ),
       home: BlocProvider(
           create: (_) => FooterMenuCubit(),
-          child: const HomePage() //const SplashScreen(),
+          child: const HomePage() //co z<nst SplashScreen(),
           ),
     );
   }

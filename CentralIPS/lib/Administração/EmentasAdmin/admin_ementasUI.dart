@@ -29,7 +29,7 @@ class AdminEmentasUI extends StatelessWidget {
                 top: Radius.circular(30),
               ),
             ),
-            margin: EdgeInsets.only(top: 100),
+            margin: const EdgeInsets.only(top: 100),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -57,7 +57,7 @@ class AdminEmentasUI extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,
