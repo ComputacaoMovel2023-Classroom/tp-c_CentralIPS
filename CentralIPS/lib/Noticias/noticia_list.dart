@@ -1,22 +1,21 @@
 import 'package:centralips/Noticias/noticia_list_item.dart';
+import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';
 
 class NoticiasList extends StatelessWidget {
   NoticiasList({
     Key? key,
-    required this.titulo,
-    required this.textos,
+    required this.noticiaItemArr,
   }) : super(key: key);
 
-  final List<String> titulo;
-  final List<String> textos;
+  List<NoticiaItem> noticiaItemArr;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0),
       child: SizedBox(
-        height: 500,
+        height: 550,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
@@ -37,17 +36,12 @@ class NoticiasList extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: 3,
+                itemCount: noticiaItemArr.length,
                 itemBuilder: (context, index) {
-                  return NoticiaListItem(
-                    titulo: titulo[index],
-                    subtitulo: "Descubra mais ao clicar aqui",
-                    imagem: "assets/images/noticiaImg.png",
-                    texto: textos[index],
-                  );
+                  return NoticiaListItem(noticiaItem: noticiaItemArr[index]);
                 },
               ),
-              SizedBox(height: 80),
+              SizedBox(height: 10),
             ],
           ),
         ),

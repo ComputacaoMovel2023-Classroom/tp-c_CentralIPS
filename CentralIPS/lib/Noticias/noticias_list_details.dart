@@ -1,19 +1,16 @@
 import 'package:centralips/Noticias/noticia_list.dart';
+import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 
 import 'package:flutter/material.dart';
 
 class NoticiasListDetails extends StatelessWidget {
-  final String titulo;
-  final String imagem;
-  final String texto;
+  final NoticiaItem noticiaItem;
 
   const NoticiasListDetails({
     Key? key,
-    required this.titulo,
-    required this.imagem,
-    required this.texto,
+    required this.noticiaItem,
   }) : super(key: key);
 
   @override
@@ -47,7 +44,7 @@ class NoticiasListDetails extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                          titulo,
+                          noticiaItem.titulo,
                           style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -94,11 +91,11 @@ class NoticiasListDetails extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(30),
-                    child: Image(image: AssetImage(imagem)),
+                    child: Image(image: AssetImage(noticiaItem.imagem)),
                   ),
                   Center(
                     child: Text(
-                      texto,
+                      noticiaItem.texto,
                       style: const TextStyle(
                         fontSize: 15,
                       ),
@@ -109,7 +106,7 @@ class NoticiasListDetails extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,

@@ -10,7 +10,7 @@ class EmentasList extends StatelessWidget {
     required this.vegetarianos,
   }) : super(key: key);
 
-  final List<String> diassemana = [
+  final List<String> diasSemana = [
     'segunda-feira',
     'terça-feira',
     'quarta-feira',
@@ -48,7 +48,7 @@ class EmentasList extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: diassemana.length,
+                itemCount: diasSemana.length,
                 itemBuilder: (context, index) {
                   String sopa = sopas[index];
                   String peixe = peixes[index];
@@ -57,7 +57,7 @@ class EmentasList extends StatelessWidget {
 
                   return EmentasListItem(
                     icon: Icons.restaurant,
-                    name: diassemana[index],
+                    name: diasSemana[index],
                     date: '12/3',
                     sopa: sopa,
                     peixe: peixe,

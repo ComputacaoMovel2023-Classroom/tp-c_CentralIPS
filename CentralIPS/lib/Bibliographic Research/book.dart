@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
+import 'bookCategory.dart';
 
-/**
- * Book category
- */
-enum Category { accao, aventura, biografias, conto, drama, romances, terror }
+
 
 /**
  * Book data-structure

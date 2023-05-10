@@ -59,7 +59,7 @@ class SearchBarState extends State<SearchBar> {
             ),
             Container(
               width: 300,
-              height: 500,
+              height: 480,
               child: Expanded(
                   child: ListView.builder(
                 shrinkWrap: true,

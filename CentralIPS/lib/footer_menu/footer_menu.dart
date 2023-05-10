@@ -1,8 +1,4 @@
-import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/admin_ementasUI.dart';
-import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin.dart';
-import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
-import 'package:centralips/Noticias/noticia_list_empty.dart';
 import 'package:centralips/Noticias/noticiasUI.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 import 'package:centralips/Ementas/ementasUI.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomNavigationExample extends StatefulWidget {
-  const BottomNavigationExample({Key? key}) : super(key: key);
+import '../Cubit/index_cubit.dart';
 
-  @override
+class BottomNavigationExample extends StatelessWidget {
+  BottomNavigationExample({Key? key}) : super(key: key);
+
+  /* @override
   _BottomNavigationExampleState createState() =>
       _BottomNavigationExampleState();
-}
+}pushReplacementNamed
 
 class _BottomNavigationExampleState extends State {
-  int _selectedTab = 0;
+  //cubit
+*/
+  final int _selectedTab = 0;
 
   final List _pages = [
     const Center(
@@ -40,34 +41,49 @@ class _BottomNavigationExampleState extends State {
     ),
   ];
 
-  _changeTab(int index) {
-    setState(() {
+  _changeTab(int index, BuildContext context) {
+    /* setState(() {
       _selectedTab = index;
-    });
+    });*/
     switch (index) {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const EmentasUI()),
+          MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                    value: context.read<FooterMenuCubit>(),
+                    child: const EmentasUI(),
+                  )),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NoticiasUI()),
+          MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                    value: context.read<FooterMenuCubit>(),
+                    child: NoticiasUI(),
+                  )),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                    value: context.read<FooterMenuCubit>(),
+                    child: const HomePage(),
+                  )),
         );
         break;
       case 3:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const BibliographicResearch()),
+              builder: (_) => BlocProvider.value(
+                    value: context.read<FooterMenuCubit>(),
+                    child: const BibliographicResearch(),
+                  )),
         );
         break;
       default:
@@ -140,26 +156,34 @@ class _BottomNavigationExampleState extends State {
   }*/
   @override
   Widget build(BuildContext context) {
+    final footerMenuCubit = context.watch<FooterMenuCubit>();
+
     return ConvexAppBar(
-      height: 70,
-      style: TabStyle.fixedCircle,
-      activeColor: const Color.fromARGB(255, 85, 152, 233),
-      color: const Color.fromRGBO(169, 188, 212, 1),
-      backgroundColor: Colors.white70,
-      items: [
-        TabItem(
-            icon: Image.asset("assets/images/refeitorio.png"),
-            title: 'Ementas'),
-        TabItem(
-            icon: Image.asset("assets/images/noticias.png"), title: 'Notícias'),
-        TabItem(
-            icon: Image.asset("assets/images/homebutton.png"), title: 'Home'),
-        TabItem(
-            icon: Image.asset("assets/images/biblioteca.png"),
-            title: 'Biblioteca'),
-        TabItem(icon: Image.asset("assets/images/perfil.png"), title: 'Perfil'),
-      ],
-      onTap: (index) => _changeTab(index),
-    );
+        height: 70,
+        style: TabStyle.fixedCircle,
+        activeColor: const Color.fromARGB(255, 85, 152, 233),
+        color: const Color.fromRGBO(169, 188, 212, 1),
+        backgroundColor: Colors.white70,
+        items: [
+          TabItem(
+              icon: Image.asset("assets/images/refeitorio.png"),
+              title: 'Ementas'),
+          TabItem(
+              icon: Image.asset("assets/images/noticias.png"),
+              title: 'Notícias'),
+          TabItem(
+              icon: Image.asset("assets/images/homebutton.png"), title: 'Home'),
+          TabItem(
+              icon: Image.asset("assets/images/biblioteca.png"),
+              title: 'Biblioteca'),
+          TabItem(
+              icon: Image.asset("assets/images/perfil.png"), title: 'Perfil'),
+        ],
+        initialActiveIndex: footerMenuCubit.state,
+        onTap: (index) {
+          context.read<FooterMenuCubit>().selectItem(index);
+          _changeTab(index, context);
+        } //_changeTab(index)},
+        );
   }
 }
