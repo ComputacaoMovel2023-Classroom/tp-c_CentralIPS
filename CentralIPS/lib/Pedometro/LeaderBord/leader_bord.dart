@@ -1,4 +1,3 @@
-import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord.dart';
 import 'package:flutter/material.dart';
 
 import '../../Sidebar/NavBar.dart';
@@ -64,7 +63,7 @@ class LeaderBord extends StatelessWidget {
                     ),
                     const Padding(
                       padding: EdgeInsets.only(top: 50),
-                      child: Top3LeaderBord(),
+                      // child: Top3LeaderBord(),
                     )
                   ]),
                 )
