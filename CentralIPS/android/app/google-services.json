@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "129794755303",
+    "firebase_url": "https://central-ips-7213b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "central-ips-7213b",
+    "storage_bucket": "central-ips-7213b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129794755303:android:76fa46594920fd66037042",
+        "android_client_info": {
+          "package_name": "pt.ips.cm.centralips.centralips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129794755303-mob6ipjj769iscmu0mn1krk87m301qqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQzyRVjoBoEffzsvAwR5vdMeNNSDL3yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129794755303-mob6ipjj769iscmu0mn1krk87m301qqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

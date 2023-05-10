@@ -61,6 +61,7 @@ dependencies:
   image_card: ^0.0.4
   firebase_database: ^10.1.2
   flutter_bloc: ^8.1.2
+  firebase_core: ^2.11.0
 
 dev_dependencies:
   flutter_test:
