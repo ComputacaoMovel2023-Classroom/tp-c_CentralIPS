@@ -91,6 +91,19 @@ class LeaderBord extends StatelessWidget {
                           child: LeaderBordCenterList(),
                         ),
                       ]),
+                          const SizedBox(width: 69),
+                          const Center(
+                            child: Text('LeaderBord',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold)),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      // child: Top3LeaderBord(),
                     )
                   ]),
                 ]),

@@ -18,9 +18,9 @@ class HomePage extends StatelessWidget {
     CentralDB centralDB = CentralDB();
     DatabaseReference? databaseReference = centralDB.databaseReference;
 
-    databaseReference?.child('users').child('userId').set({
-      'name': 'teste',
-      'email': 'teste@teste.com',
+//TESTE FUNCIONA
+    databaseReference?.child('teste').set({
+      'teste': 'teste',
     });
 
     return Scaffold(

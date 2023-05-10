@@ -1,10 +1,16 @@
 import 'package:centralips/homePage/home_page_ui.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Sidebar/NavBar.dart';
 import 'Cubit/index_cubit.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyAppDemo());
 }
 
@@ -14,7 +20,7 @@ class MyAppDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CentralIPS',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
