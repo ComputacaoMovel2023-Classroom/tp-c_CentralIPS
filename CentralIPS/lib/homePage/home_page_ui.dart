@@ -1,3 +1,5 @@
+import 'package:centralips/Database/CentralDB.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../Sidebar/NavBar.dart';
@@ -13,6 +15,14 @@ class HomePage extends StatelessWidget {
 //add a image to superior side of the screen
   @override
   Widget build(BuildContext context) {
+    CentralDB centralDB = CentralDB();
+    DatabaseReference? databaseReference = centralDB.databaseReference;
+
+    databaseReference?.child('users').child('userId').set({
+      'name': 'teste',
+      'email': 'teste@teste.com',
+    });
+
     return Scaffold(
         //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         /*floatingActionButton: FloatingActionButton(

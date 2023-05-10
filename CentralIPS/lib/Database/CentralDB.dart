@@ -10,6 +10,7 @@ class CentralDB {
 
   CentralDB._internal() {
     // Initialize Firebase database instance
+    //Firebase.initializeApp();
     _databaseReference ??= FirebaseDatabase.instance.ref();
   }
 
