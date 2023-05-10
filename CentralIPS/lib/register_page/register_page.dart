@@ -203,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
     FirebaseAuth auth = FirebaseAuth.instance;
     auth
         .createUserWithEmailAndPassword(
-            email: "testeemail", password: "testepassword")
+            email: "testeemail@email.com", password: "testepassword")
         .then((firebaseUser) {});
 
     return Scaffold(
