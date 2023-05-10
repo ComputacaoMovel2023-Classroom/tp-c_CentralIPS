@@ -1,5 +1,6 @@
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
+import 'package:centralips/register_page/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -156,6 +157,18 @@ class NavBar extends StatelessWidget {
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
                           child: const SobreNos(),
+                        )));
+              }),
+          ListTile(
+              title: const Text('TESTE Registo'),
+              leading: const Icon(Icons.people),
+              onTap: () {
+                context.read<FooterMenuCubit>().selectItem(-1);
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const RegisterPage(),
                         )));
               })
         ],

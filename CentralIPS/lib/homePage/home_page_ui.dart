@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
     CentralDB centralDB = CentralDB();
     DatabaseReference? databaseReference = centralDB.databaseReference;
 
+//TESTE FUNCIONA
     databaseReference?.child('teste').set({
       'teste': 'teste',
     });

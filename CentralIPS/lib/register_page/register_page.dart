@@ -1,11 +1,11 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../loginPage/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -14,23 +14,23 @@ Widget buildName() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Nome Completo',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.name,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -48,23 +48,23 @@ Widget buildEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Email',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -82,23 +82,23 @@ Widget buildNumber() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Número de Estudante',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.number,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -116,23 +116,23 @@ Widget buildPassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Password',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           obscureText: true,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -148,14 +148,14 @@ Widget buildPassword() {
 
 Widget buildRegisterBtn() {
   return Container(
-    padding: EdgeInsets.symmetric(vertical: 25),
+    padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () => print('Conta Registada!'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, 60),
+          const Size(double.infinity, 60),
         ),
       ),
       child: const Text(
@@ -175,12 +175,12 @@ Widget buildLoginBtn(BuildContext context) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     },
     child: RichText(
       text: TextSpan(children: [
-        TextSpan(
+        const TextSpan(
             text: 'Já tem uma conta? ',
             style: TextStyle(
                 color: Colors.black,
@@ -200,6 +200,12 @@ Widget buildLoginBtn(BuildContext context) {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth
+        .createUserWithEmailAndPassword(
+            email: "testeemail", password: "testepassword")
+        .then((firebaseUser) {});
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
@@ -209,15 +215,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Colors.white),
+                  decoration: const BoxDecoration(color: Colors.white),
                   child: SingleChildScrollView(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 120),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 5),
-                        Text(
+                        const SizedBox(height: 5),
+                        const Text(
                           'Registar',
                           style: TextStyle(
                             color: Colors.black87,
@@ -225,25 +231,25 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 25),
-                        Text(
+                        const SizedBox(height: 25),
+                        const Text(
                           'Registe-se na nossa aplicação',
                           style: TextStyle(
                               color: Colors.black87,
                               fontSize: 17,
                               fontWeight: FontWeight.normal),
                         ),
-                        SizedBox(height: 60),
+                        const SizedBox(height: 60),
                         buildName(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildEmail(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildNumber(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildPassword(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildRegisterBtn(),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         buildLoginBtn(context),
                       ],
                     ),

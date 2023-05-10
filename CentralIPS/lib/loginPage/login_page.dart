@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../register_page/register_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 Widget buildEmail() {
+  FirebaseAuth auth = FirebaseAuth.instance;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Email',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -46,23 +49,23 @@ Widget buildPassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Password',
         style: TextStyle(
             color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           obscureText: true,
           style: TextStyle(color: Colors.black87),
           decoration: InputDecoration(
@@ -78,14 +81,14 @@ Widget buildPassword() {
 
 Widget buildLoginBtn() {
   return Container(
-    padding: EdgeInsets.symmetric(vertical: 25),
+    padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () => print('Sessão Iniciada'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, 60),
+          const Size(double.infinity, 60),
         ),
       ),
       child: const Text(
@@ -110,7 +113,7 @@ Widget buildRegisterBtn(BuildContext context) {
     },
     child: RichText(
       text: TextSpan(children: [
-        TextSpan(
+        const TextSpan(
             text: 'Novo por aqui? ',
             style: TextStyle(
                 color: Colors.black,
@@ -139,15 +142,15 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: BoxDecoration(color: Colors.white),
+                  decoration: const BoxDecoration(color: Colors.white),
                   child: SingleChildScrollView(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 120),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 5),
-                        Text(
+                        const SizedBox(height: 5),
+                        const Text(
                           'Iniciar Sessão',
                           style: TextStyle(
                             color: Colors.black87,
@@ -155,21 +158,21 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 25),
-                        Text(
+                        const SizedBox(height: 25),
+                        const Text(
                           'Entre na maior comunidade do IPS',
                           style: TextStyle(
                               color: Colors.black87,
                               fontSize: 17,
                               fontWeight: FontWeight.normal),
                         ),
-                        SizedBox(height: 100),
+                        const SizedBox(height: 100),
                         buildEmail(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildPassword(),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         buildLoginBtn(),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         buildRegisterBtn(context),
                       ],
                     ),
