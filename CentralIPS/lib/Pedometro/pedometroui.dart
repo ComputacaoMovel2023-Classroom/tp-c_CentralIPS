@@ -1,4 +1,6 @@
+import 'package:centralips/Pedometro/LeaderBord/leader_bord.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
@@ -6,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
 import 'data.dart';
 import 'day.dart';
@@ -336,7 +339,20 @@ class _PedometroState extends State<Pedometro> {
                             ),
                           ],
                           animate: true,
-                        ))
+                        )),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.read<FooterMenuCubit>().selectItem(2);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => BlocProvider.value(
+                                    value: context.read<FooterMenuCubit>(),
+                                    child: const LeaderBord(),
+                                  )));
+                        },
+                        child: const Text('LeaderBord'),
+                      ),
+                    )
                   ],
                 ),
               ),
