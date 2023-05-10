@@ -1,13 +1,14 @@
 import 'package:centralips/Bibliographic%20Research/book.dart';
 import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
 import 'package:centralips/Bibliographic%20Research/searchBar.dart';
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:searchable_listview/searchable_listview.dart';
-
 
 class BibliographicResearch extends StatefulWidget {
   const BibliographicResearch({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class BibliographicResearch extends StatefulWidget {
 }
 
 class BibliographicResearchUI extends State<BibliographicResearch> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,11 +57,16 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const FilterResearch()),
+                                  builder: (_) => BlocProvider.value(
+                                          value: context.read<FooterMenuCubit>(),
+                                        child: const FilterResearch(),
+                                      )),
                             )
                           },
                       child: Text("Filtros")),
-                  Divider(color: Colors.black,),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   const SearchBar(),
                 ],
               ),
