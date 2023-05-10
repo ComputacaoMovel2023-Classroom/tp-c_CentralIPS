@@ -2,7 +2,6 @@ import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
 import 'package:centralips/Departamentos/departmentFilter.dart';
 import 'package:centralips/Departamentos/departmentListView.dart';
 import 'package:centralips/Departamentos/departmentStatic.dart';
-import 'package:centralips/Ementas/ButtonsUI.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,7 @@ class DepartamentosUI extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children:[
+                children: [
                   const Text(
                     "Departamentos",
                     style: TextStyle(
@@ -48,16 +47,18 @@ class DepartamentosUI extends StatelessWidget {
                     '${DepartmentStaticExample().openDepartments()} Departamentos Disponíveis',
                     style: const TextStyle(fontSize: 10),
                   ),
-                  DepartmentExpandedList(icon: Icons.filter_alt_outlined, departmentFilter: DepartmentFilter.open),
+                  DepartmentExpandedList(
+                      icon: Icons.filter_alt_outlined,
+                      departmentFilter: DepartmentFilter.open),
                   DepartmentsListView(),
-                  const SizedBox(width: 400,)
-
-
+                  const SizedBox(
+                    width: 400,
+                  )
                 ],
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,

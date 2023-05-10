@@ -58,7 +58,7 @@ class nfcUI extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,

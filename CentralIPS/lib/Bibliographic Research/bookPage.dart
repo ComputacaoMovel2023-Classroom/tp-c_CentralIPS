@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +47,12 @@ class BookPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Image.network(book.urlImage, fit: BoxFit.cover, width: double.infinity, height: 300,),
+                  Image.network(
+                    book.urlImage,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 300,
+                  ),
                   SizedBox(height: 10),
                   Text(
                     "Horário de Funcionamento",
@@ -64,7 +68,7 @@ class BookPage extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,

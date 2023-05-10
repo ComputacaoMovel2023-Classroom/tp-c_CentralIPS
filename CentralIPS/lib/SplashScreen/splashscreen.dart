@@ -1,5 +1,8 @@
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../Cubit/index_cubit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,8 +24,11 @@ class _SplashScreen extends State<SplashScreen> {
           //pushReplacement = replacing the route so that
           //splash screen won't show on back button press
           //navigation to Home page.
-          builder: (context) {
-        return const HomePage();
+          builder: (_) {
+        return BlocProvider.value(
+          value: context.read<FooterMenuCubit>(),
+          child: const HomePage(),
+        );
       }));
     });
 
