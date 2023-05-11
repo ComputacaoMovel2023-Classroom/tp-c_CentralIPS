@@ -1,4 +1,5 @@
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -170,12 +171,19 @@ Widget buildRegisterBtn(BuildContext context) {
             email: _emailController.text,
             password: _passwordController.text,
           );
+          final userRef = FirebaseDatabase.instance
+              .ref()
+              .child('users')
+              .child(userCredential.user!.uid);
+
+          await userRef.set({
+            'name': _nameController.text,
+            'number': _numberController.text,
+          });
+
           // Imprima o UID do usuário recém-criado
           print(userCredential.user?.uid);
-          await auth.signInWithEmailAndPassword(
-            email: _emailController.text,
-            password: _passwordController.text,
-          );
+
           context.read<FooterMenuCubit>().selectItem(2);
           Navigator.push(
             context,
