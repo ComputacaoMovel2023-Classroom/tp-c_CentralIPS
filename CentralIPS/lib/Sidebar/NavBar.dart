@@ -12,6 +12,7 @@ import '../Departamentos/departamentsUI.dart';
 import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
 import '../Maps/teste.dart';
+import '../Profile/profile.dart';
 import '../homePage/home_page_ui.dart';
 import '../Bibliographic Research/bibliographicResearch.dart';
 
@@ -93,7 +94,16 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Perfil'),
-            onTap: () => null,
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const Profile(),
+                        )),
+              )
+            },
           ),
           ListTile(
               leading: const Icon(Icons.credit_card),
