@@ -5,7 +5,9 @@ import 'package:centralips/Bibliographic%20Research/filterOption.dart';
 import 'package:centralips/Bibliographic%20Research/searchBar.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
 
@@ -59,13 +61,15 @@ class FilterResearchState extends State<FilterResearch> {
                           children: [
                             IconButton(
                                 onPressed: () => {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                BibliographicResearch()),
-                                      )
-                                    },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocProvider.value(
+                                          value: context.read<FooterMenuCubit>(),
+                                        child: const BibliographicResearch(),
+                                      )),
+                            )
+                          },
                                 icon: const Icon(Icons.arrow_back_ios)),
                             const Padding(padding: EdgeInsets.only(left: 90)),
                             const Text(
@@ -173,12 +177,15 @@ class FilterResearchState extends State<FilterResearch> {
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   backgroundColor: const Color.fromRGBO(107, 78, 255, 1),
                   onPressed: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BibliographicResearch()),
-                        )
-                      },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocProvider.value(
+                                          value: context.read<FooterMenuCubit>(),
+                                        child: const BibliographicResearch(),
+                                      )),
+                            )
+                          },
                   child: Text(
                     'Resultados ($numberOfResults)',
                     style: const TextStyle(

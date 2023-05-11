@@ -40,32 +40,22 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
               ),
             ),
             margin: const EdgeInsets.only(top: 100),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
+            child: Container(
+              padding: const EdgeInsets.only(
+                  top: 35, left: 20, right: 20, bottom: 20),
               child: Column(
                 children: [
-                  const Text(
-                    "Biblioteca",
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const SizedBox(height: 10, width: 400),
-                  ElevatedButton(
-                      onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                          value: context.read<FooterMenuCubit>(),
-                                        child: const FilterResearch(),
-                                      )),
-                            )
-                          },
-                      child: Text("Filtros")),
-                  Divider(
-                    color: Colors.black,
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(left: 10)),
+                      const Text(
+                        "Biblioteca",
+                        style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
                   ),
                   const SearchBar(),
                 ],
@@ -87,6 +77,35 @@ class BibliographicResearchUI extends State<BibliographicResearch> {
               }),
             ),
           ),
+          Positioned(
+            //Butão Filtos
+            top: 270,
+            right: 30,
+            child: SizedBox(
+              width: 150,
+              height: 30,
+              child: ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                  onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => BlocProvider.value(
+                                    value: context.read<FooterMenuCubit>(),
+                                    child: const BibliographicResearch(),
+                                  )),
+                        )
+                      },
+                  child: const Text(
+                    'Filtros',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15,
+                        color: Color.fromRGBO(241, 237, 237, 1)),
+                  )),
+            ),
+          )
         ],
       ),
       resizeToAvoidBottomInset: false,
