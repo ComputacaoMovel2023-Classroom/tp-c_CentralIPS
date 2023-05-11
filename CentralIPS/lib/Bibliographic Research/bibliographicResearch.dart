@@ -93,7 +93,7 @@ class BibliographicResearchState extends State<BibliographicResearch> {
                           MaterialPageRoute(
                               builder: (_) => BlocProvider.value(
                                     value: context.read<FooterMenuCubit>(),
-                                    child: const BibliographicResearch(),
+                                    child: const FilterResearch(),
                                   )),
                         )
                       },
