@@ -1,6 +1,8 @@
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:centralips/register_page/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,19 +15,51 @@ import '../Maps/teste.dart';
 import '../homePage/home_page_ui.dart';
 import '../Bibliographic Research/bibliographicResearch.dart';
 
-class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({Key? key}) : super(key: key);
+
+  @override
+  _NavBarState createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  String? _userName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final user = FirebaseAuth.instance.currentUser;
+    FirebaseDatabase.instance
+        .ref()
+        .child('users')
+        .child(user!.uid)
+        .onValue
+        .listen((event) {
+      // Get the snapshot of the data
+      DataSnapshot snapshot = event.snapshot;
+
+      var userData = snapshot.value as Map;
+      // Get the user's name and number
+      setState(() {
+        _userName = userData['name'];
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
       child: ListView(
         // Remove padding
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text('Pedro Moura'),
-            accountEmail: const Text('exemplo@gmail.com'),
+            accountName:
+                _userName != null ? Text(_userName!) : const Text('Loading...'),
+            accountEmail: Text(user?.email ?? ''),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(

@@ -1,6 +1,9 @@
+import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../loginPage/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -9,6 +12,12 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _numberController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 Widget buildName() {
   return Column(
@@ -30,10 +39,11 @@ Widget buildName() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _nameController,
           keyboardType: TextInputType.name,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu nome',
@@ -64,10 +74,11 @@ Widget buildEmail() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _emailController,
           keyboardType: TextInputType.emailAddress,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu email',
@@ -98,10 +109,11 @@ Widget buildNumber() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _numberController,
           keyboardType: TextInputType.number,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu número',
@@ -132,10 +144,11 @@ Widget buildPassword() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _passwordController,
           obscureText: true,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza a sua password',
@@ -146,12 +159,46 @@ Widget buildPassword() {
   );
 }
 
-Widget buildRegisterBtn() {
+Widget buildRegisterBtn(BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print('Conta Registada!'),
+      onPressed: () async {
+        try {
+          final UserCredential userCredential =
+              await auth.createUserWithEmailAndPassword(
+            email: _emailController.text,
+            password: _passwordController.text,
+          );
+          final userRef = FirebaseDatabase.instance
+              .ref()
+              .child('users')
+              .child(userCredential.user!.uid);
+
+          await userRef.set({
+            'name': _nameController.text,
+            'number': _numberController.text,
+          });
+
+          // Imprima o UID do usuário recém-criado
+          print(userCredential.user?.uid);
+
+          context.read<FooterMenuCubit>().selectItem(2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'weak-password') {
+            print('A senha fornecida é muito fraca.');
+          } else if (e.code == 'email-already-in-use') {
+            print('O e-mail fornecido já está em uso por outra conta.');
+          }
+        } catch (e) {
+          print(e);
+        }
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         minimumSize: MaterialStateProperty.all<Size>(
@@ -200,12 +247,6 @@ Widget buildLoginBtn(BuildContext context) {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    auth
-        .createUserWithEmailAndPassword(
-            email: "testeemail@email.com", password: "testepassword")
-        .then((firebaseUser) {});
-
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
@@ -248,7 +289,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(height: 15),
                         buildPassword(),
                         const SizedBox(height: 15),
-                        buildRegisterBtn(),
+                        buildRegisterBtn(context),
                         const SizedBox(height: 5),
                         buildLoginBtn(context),
                       ],
