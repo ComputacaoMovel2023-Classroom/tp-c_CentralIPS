@@ -1,4 +1,5 @@
 import 'package:centralips/homePage/home_page_ui.dart';
+import 'package:centralips/register_page/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +26,7 @@ class MyAppDemo extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: BlocProvider(
-          create: (_) => FooterMenuCubit(),
-          child: const HomePage() //co z<nst SplashScreen(),
-          ),
+      home: const RegisterPage(),
     );
   }
 }
