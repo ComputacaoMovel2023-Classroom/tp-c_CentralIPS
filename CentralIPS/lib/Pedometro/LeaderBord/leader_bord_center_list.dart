@@ -9,21 +9,21 @@ class LeaderBordCenterList extends StatelessWidget {
     return Column(
       children: const [
         LeaderBordCenter(
-          placeNumber: "1º",
+          placeNumber: "4º",
           urlImage:
               "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
           name: "Rui",
           steps: "100",
         ),
         LeaderBordCenter(
-          placeNumber: "1º",
+          placeNumber: "5º",
           urlImage:
               "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
           name: "Rui",
           steps: "100",
         ),
         LeaderBordCenter(
-          placeNumber: "1º",
+          placeNumber: "6º",
           urlImage:
               "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
           name: "Rui",

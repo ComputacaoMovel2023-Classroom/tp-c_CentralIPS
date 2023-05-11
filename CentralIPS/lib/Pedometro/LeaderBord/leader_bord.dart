@@ -1,4 +1,6 @@
+import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_fisrt_three.dart';
 import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_list.dart';
+import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_user.dart';
 import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord_list.dart';
 import 'package:flutter/material.dart';
 
@@ -87,8 +89,31 @@ class LeaderBord extends StatelessWidget {
                           child: Top3LeaderBordList(),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(top: 50),
-                          child: LeaderBordCenterList(),
+                          padding: EdgeInsets.only(top: 50, bottom: 16),
+                          child: Divider(
+                            color: Colors.black,
+                            height: 0,
+                            thickness: 1,
+                            indent: 15,
+                            endIndent: 15,
+                          ),
+                        ),
+                        const LeaderBordCenterUser(),
+                        const Divider(
+                          color: Colors.black,
+                          height: 0,
+                          thickness: 1,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Column(
+                            children: const [
+                              LeaderBordCenterFisrtThree(),
+                              LeaderBordCenterList(),
+                            ],
+                          ),
                         ),
                       ]),
                     )
