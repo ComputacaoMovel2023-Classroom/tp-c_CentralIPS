@@ -39,7 +39,7 @@ class _NavBarState extends State<NavBar> {
       // Get the snapshot of the data
       DataSnapshot snapshot = event.snapshot;
 
-      var userData = snapshot.value as Map<String, dynamic>;
+      var userData = snapshot.value as Map;
       // Get the user's name and number
       setState(() {
         _userName = userData['name'];
