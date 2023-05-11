@@ -1,6 +1,9 @@
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../homePage/home_page_ui.dart';
 import '../register_page/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +12,9 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
+
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
 
 Widget buildEmail() {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -31,10 +37,11 @@ Widget buildEmail() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _emailController,
           keyboardType: TextInputType.emailAddress,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu email',
@@ -65,10 +72,11 @@ Widget buildPassword() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: const TextField(
+        child: TextField(
+          controller: _passwordController,
           obscureText: true,
-          style: TextStyle(color: Colors.black87),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza a sua password',
@@ -79,12 +87,43 @@ Widget buildPassword() {
   );
 }
 
-Widget buildLoginBtn() {
+Widget buildLoginBtn(BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () => print('Sessão Iniciada'),
+      onPressed: () async {
+        try {
+          final userCredential = await auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
+          // Navigate to the home page
+          BlocProvider(
+              create: (_) => FooterMenuCubit(),
+              child: const HomePage() //co z<nst SplashScreen(),
+              );
+        } catch (e) {
+          print(e);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Erro'),
+                content: const Text('Login Inválido'),
+                actions: [
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         minimumSize: MaterialStateProperty.all<Size>(
@@ -108,7 +147,7 @@ Widget buildRegisterBtn(BuildContext context) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RegisterPage()),
+        MaterialPageRoute(builder: (context) => const RegisterPage()),
       );
     },
     child: RichText(
@@ -171,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 15),
                         buildPassword(),
                         const SizedBox(height: 15),
-                        buildLoginBtn(),
+                        buildLoginBtn(context),
                         const SizedBox(height: 5),
                         buildRegisterBtn(context),
                       ],
