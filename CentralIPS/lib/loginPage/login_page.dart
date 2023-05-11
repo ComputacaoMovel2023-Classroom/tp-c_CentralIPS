@@ -99,10 +99,13 @@ Widget buildLoginBtn(BuildContext context) {
             password: _passwordController.text.trim(),
           );
           // Navigate to the home page
-          BlocProvider(
-              create: (_) => FooterMenuCubit(),
-              child: const HomePage() //co z<nst SplashScreen(),
-              );
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                      create: (_) => FooterMenuCubit(),
+                      child: const HomePage() //co z<nst SplashScreen(),
+                      )));
         } catch (e) {
           print(e);
           showDialog(

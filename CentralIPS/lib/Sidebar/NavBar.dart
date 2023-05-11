@@ -1,6 +1,7 @@
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:centralips/register_page/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,7 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Drawer(
       child: ListView(
         // Remove padding
@@ -25,7 +27,7 @@ class NavBar extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: const Text('Pedro Moura'),
-            accountEmail: const Text('exemplo@gmail.com'),
+            accountEmail: Text(user?.email ?? ''),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(
