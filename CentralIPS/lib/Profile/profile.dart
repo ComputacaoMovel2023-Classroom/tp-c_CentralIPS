@@ -80,7 +80,7 @@ class ProfileState extends State<Profile> {
                             ],
                           )),
                     ),
-                    const Divider(),
+                    const Divider(indent: 15, endIndent: 15,),
                     /**
                      * Opções de Perfil
                      */
