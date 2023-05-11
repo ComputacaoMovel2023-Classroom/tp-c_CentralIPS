@@ -1,5 +1,6 @@
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
 import 'package:centralips/Noticias/noticiasUI.dart';
+import 'package:centralips/Profile/profile.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -83,6 +84,16 @@ class _BottomNavigationExampleState extends State {
               builder: (_) => BlocProvider.value(
                     value: context.read<FooterMenuCubit>(),
                     child: const BibliographicResearch(),
+                  )),
+        );
+        break;
+      case 4:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                    value: context.read<FooterMenuCubit>(),
+                    child: const Profile(),
                   )),
         );
         break;

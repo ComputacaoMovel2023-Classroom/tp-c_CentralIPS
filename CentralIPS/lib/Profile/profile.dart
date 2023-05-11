@@ -10,14 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:searchable_listview/searchable_listview.dart';
 
-class BibliographicResearch extends StatefulWidget {
-  const BibliographicResearch({Key? key}) : super(key: key);
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<BibliographicResearch> createState() => BibliographicResearchState();
+  State<Profile> createState() => ProfileState();
 }
 
-class BibliographicResearchState extends State<BibliographicResearch> {
+class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,35 +77,7 @@ class BibliographicResearchState extends State<BibliographicResearch> {
               }),
             ),
           ),
-          Positioned(
-            //Butão Filtos
-            top: 270,
-            right: 30,
-            child: SizedBox(
-              width: 150,
-              height: 30,
-              child: ElevatedButton(
-                  style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
-                  onPressed: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => BlocProvider.value(
-                                    value: context.read<FooterMenuCubit>(),
-                                    child: const BibliographicResearch(),
-                                  )),
-                        )
-                      },
-                  child: const Text(
-                    'Filtros',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 15,
-                        color: Color.fromRGBO(241, 237, 237, 1)),
-                  )),
-            ),
-          )
+          
         ],
       ),
       resizeToAvoidBottomInset: false,
