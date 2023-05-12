@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../loginPage/login_page.dart';
+import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -17,6 +18,10 @@ final TextEditingController _nameController = TextEditingController();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _numberController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _birthdateController = TextEditingController();
+final TextEditingController _genderController = TextEditingController();
+final TextEditingController _roleController = TextEditingController();
+
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 Widget buildName() {
@@ -54,6 +59,58 @@ Widget buildName() {
   );
 }
 
+Widget buildBirthdate(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      const Text(
+        'Data de Nascimento',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: GestureDetector(
+          onTap: () async {
+            final DateTime? picked = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            );
+            if (picked != null) {
+              // Format the date to show only the date part
+              final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+              _birthdateController.text = formattedDate;
+            }
+          },
+          child: AbsorbPointer(
+            child: TextField(
+              controller: _birthdateController,
+              keyboardType: TextInputType.datetime,
+              style: const TextStyle(color: Colors.black87),
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 6, left: 10),
+                  hintText: 'Introduza a sua data de nascimento',
+                  hintStyle: TextStyle(color: Colors.black38)),
+            ),
+          ),
+        ),
+      )
+    ],
+  );
+}
+
 Widget buildEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,6 +139,76 @@ Widget buildEmail() {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu email',
+              hintStyle: TextStyle(color: Colors.black38)),
+        ),
+      )
+    ],
+  );
+}
+
+Widget buildGender() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      const Text(
+        'Género',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: TextField(
+          controller: _genderController,
+          keyboardType: TextInputType.name,
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 6, left: 10),
+              hintText: 'Escolha o género',
+              hintStyle: TextStyle(color: Colors.black38)),
+        ),
+      )
+    ],
+  );
+}
+
+Widget buildRole() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      const Text(
+        'Função',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: TextField(
+          controller: _roleController,
+          keyboardType: TextInputType.name,
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 6, left: 10),
+              hintText: 'A sua função',
               hintStyle: TextStyle(color: Colors.black38)),
         ),
       )
@@ -179,6 +306,9 @@ Widget buildRegisterBtn(BuildContext context) {
           await userRef.set({
             'name': _nameController.text,
             'number': _numberController.text,
+            'birthdate': _birthdateController.text,
+            'gender': _genderController.text,
+            'role': _roleController.text,
           });
 
           // Imprima o UID do usuário recém-criado
@@ -247,6 +377,7 @@ Widget buildLoginBtn(BuildContext context) {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    DateTime birthdate;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
@@ -284,6 +415,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         buildName(),
                         const SizedBox(height: 15),
                         buildEmail(),
+                        const SizedBox(height: 15),
+                        buildBirthdate(context),
+                        const SizedBox(height: 15),
+                        buildGender(),
+                        const SizedBox(height: 15),
+                        buildRole(),
                         const SizedBox(height: 15),
                         buildNumber(),
                         const SizedBox(height: 15),

@@ -1,19 +1,11 @@
-import 'package:centralips/Bibliographic%20Research/book.dart';
-import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
-import 'package:centralips/Bibliographic%20Research/searchBar.dart';
-import 'package:centralips/Cubit/index_cubit.dart';
-import 'package:centralips/Departamentos/school.dart';
 import 'package:centralips/Profile/profileOptionWidget.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:searchable_listview/searchable_listview.dart';
 
 class Profile extends StatefulWidget {
-  
-
   const Profile({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +15,41 @@ class Profile extends StatefulWidget {
 class ProfileState extends State<Profile> {
   bool editable = false;
   String editableText = "Editar Perfil";
-  String userName = "André Caetano";
+  @override
+  void initState() {
+    super.initState();
+
+    final user = FirebaseAuth.instance.currentUser;
+    FirebaseDatabase.instance
+        .ref()
+        .child('users')
+        .child(user!.uid)
+        .onValue
+        .listen((event) {
+      // Get the snapshot of the data
+      DataSnapshot snapshot = event.snapshot;
+
+      var userData = snapshot.value as Map;
+      // Get the user's name and number
+      setState(() {
+        mail = user.email!;
+        userName = userData['name'];
+        birthDate = userData['birthdate'];
+        number = userData['number'];
+        role = userData['role'];
+        gender = userData['gender'];
+        debugPrint(userData['birthdate']);
+      });
+    });
+  }
+
+  String mail = "A carregar...";
+  String userName = "A carregar...";
+  String birthDate = "A carregar...";
+  String number = "A carregar...";
+  String role = "A carregar...";
+  String gender = "A carregar...";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,15 +85,15 @@ class ProfileState extends State<Profile> {
                   ),
                   padding: const EdgeInsets.only(top: 140),
                   child: Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     width: 600,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: ElevatedButton(
                               onPressed: () => {
-                                    setState(() { 
+                                    setState(() {
                                       editable = !editable;
                                       if (editable) {
                                         editableText = "Salvar Perfil";
@@ -81,14 +107,14 @@ class ProfileState extends State<Profile> {
                                       MaterialStatePropertyAll(Colors.black)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
+                                children:  [
                                   const Icon(Icons.settings,
                                       color: Color.fromRGBO(241, 237, 237, 1)),
                                   const SizedBox(
                                     width: 22,
                                   ),
                                   Text(editableText,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15,
                                           color: Color.fromRGBO(
@@ -104,23 +130,30 @@ class ProfileState extends State<Profile> {
                          * Opções de Perfil
                          */
                         ProfileOptionWidget(
-                            option: "Email", value: "202100007@gmail.com",editable: editable,),
+                          option: "Email",
+                          value: mail,
+                          editable: editable,
+                        ),
                         ProfileOptionWidget(
-                            option: "Número", value: "202100007",editable: editable,),
+                            option: "Número",
+                            value: number,
+                            editable: editable),
                         ProfileOptionWidget(
-                            option: "Função", value: "Estudante",editable: editable,),
+                            option: "Função", value: role, editable: editable),
                         ProfileOptionWidget(
-                            option: "Primeiro Nome", value: "André",editable: editable,),
+                          option: "Nome de Utilizador",
+                          value: userName,
+                          editable: editable,
+                        ),
                         ProfileOptionWidget(
-                            option: "Sobrenome", value: "Caetano",editable: editable,),
+                            option: "Data de Nascimento",
+                            value: birthDate.toString(),
+                            editable: editable),
                         ProfileOptionWidget(
-                            option: "Data de Nascimento", value: "17/12/2021",editable: editable,),
-                        ProfileOptionWidget(
-                            option: "Género", value: "Masculino",editable: editable,),
-                        ProfileOptionWidget(
-                            option: "Nacionalidade", value: "Portuguesa",editable: editable,),
-                        ProfileOptionWidget(
-                            option: "Curso", value: "Engenharia Informática",editable: editable,),
+                          option: "Género",
+                          value: gender,
+                          editable: editable,
+                        )
                       ],
                     ),
                   ),
@@ -134,7 +167,7 @@ class ProfileState extends State<Profile> {
               top: 100,
               left: 0,
               right: 0,
-              child: Container(
+              child: SizedBox(
                 width: 400,
                 child: Column(
                   children: [
