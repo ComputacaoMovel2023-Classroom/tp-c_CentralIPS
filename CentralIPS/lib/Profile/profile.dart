@@ -1,15 +1,9 @@
-import 'package:centralips/Bibliographic%20Research/book.dart';
-import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
-import 'package:centralips/Bibliographic%20Research/searchBar.dart';
-import 'package:centralips/Cubit/index_cubit.dart';
-import 'package:centralips/Departamentos/school.dart';
 import 'package:centralips/Profile/profileOptionWidget.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:searchable_listview/searchable_listview.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -19,7 +13,41 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
-  String userName = "André Caetano";
+  @override
+  void initState() {
+    super.initState();
+
+    final user = FirebaseAuth.instance.currentUser;
+    FirebaseDatabase.instance
+        .ref()
+        .child('users')
+        .child(user!.uid)
+        .onValue
+        .listen((event) {
+      // Get the snapshot of the data
+      DataSnapshot snapshot = event.snapshot;
+
+      var userData = snapshot.value as Map;
+      // Get the user's name and number
+      setState(() {
+        mail = user.email!;
+        userName = userData['name'];
+        birthDate = userData['birthdate'];
+        number = userData['number'];
+        role = userData['role'];
+        gender = userData['gender'];
+        debugPrint(userData['birthdate']);
+      });
+    });
+  }
+
+  String mail = "A carregar...";
+  String userName = "A carregar...";
+  String birthDate = "A carregar...";
+  String number = "A carregar...";
+  String role = "A carregar...";
+  String gender = "A carregar...";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +59,8 @@ class ProfileState extends State<Profile> {
         ),
         child: Stack(
           children: [
-            Column( 
-            mainAxisAlignment: MainAxisAlignment.center,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: 200,
@@ -55,11 +83,11 @@ class ProfileState extends State<Profile> {
                   ),
                   padding: const EdgeInsets.only(top: 140),
                   child: Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     width: 600,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: ElevatedButton(
                               onPressed: () => {},
@@ -68,38 +96,37 @@ class ProfileState extends State<Profile> {
                                       MaterialStatePropertyAll(Colors.black)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.settings,
+                                children: const [
+                                  Icon(Icons.settings,
                                       color: Color.fromRGBO(241, 237, 237, 1)),
-                                  const SizedBox(
+                                  SizedBox(
                                     width: 22,
                                   ),
-                                  const Text("Editar Perfil",
+                                  Text("Editar Perfil",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15,
-                                          color: Color.fromRGBO(241, 237, 237, 1))),
+                                          color: Color.fromRGBO(
+                                              241, 237, 237, 1))),
                                 ],
                               )),
                         ),
-                        const Divider(indent: 15, endIndent: 15,),
+                        const Divider(
+                          indent: 15,
+                          endIndent: 15,
+                        ),
                         /**
                          * Opções de Perfil
                          */
+                        ProfileOptionWidget(option: "Email", value: mail),
+                        ProfileOptionWidget(option: "Número", value: number),
+                        ProfileOptionWidget(option: "Função", value: role),
                         ProfileOptionWidget(
-                            option: "Email", value: "202100007@gmail.com"),
-                        ProfileOptionWidget(option: "Número", value: "202100007"),
-                        ProfileOptionWidget(option: "Função", value: "Estudante"),
+                            option: "Nome de Utilizador", value: userName),
                         ProfileOptionWidget(
-                            option: "Primeiro Nome", value: "André"),
-                        ProfileOptionWidget(option: "Sobrenome", value: "Caetano"),
-                        ProfileOptionWidget(
-                            option: "Data de Nascimento", value: "17/12/2021"),
-                        ProfileOptionWidget(option: "Género", value: "Masculino"),
-                        ProfileOptionWidget(
-                            option: "Nacionalidade", value: "Portuguesa"),
-                        ProfileOptionWidget(
-                            option: "Curso", value: "Engenharia Informática"),
+                            option: "Data de Nascimento",
+                            value: birthDate.toString()),
+                        ProfileOptionWidget(option: "Género", value: gender)
                       ],
                     ),
                   ),
@@ -113,7 +140,7 @@ class ProfileState extends State<Profile> {
               top: 100,
               left: 0,
               right: 0,
-              child: Container(
+              child: SizedBox(
                 width: 400,
                 child: Column(
                   children: [
