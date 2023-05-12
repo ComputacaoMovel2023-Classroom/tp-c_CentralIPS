@@ -12,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
 class Profile extends StatefulWidget {
+  
+
   const Profile({Key? key}) : super(key: key);
 
   @override
@@ -19,6 +21,8 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
+  bool editable = false;
+  String editableText = "Editar Perfil";
   String userName = "André Caetano";
   @override
   Widget build(BuildContext context) {
@@ -31,8 +35,8 @@ class ProfileState extends State<Profile> {
         ),
         child: Stack(
           children: [
-            Column( 
-            mainAxisAlignment: MainAxisAlignment.center,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: 200,
@@ -55,14 +59,23 @@ class ProfileState extends State<Profile> {
                   ),
                   padding: const EdgeInsets.only(top: 140),
                   child: Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 10, right: 10),
                     width: 600,
                     child: Column(
                       children: [
                         Container(
                           width: 200,
                           child: ElevatedButton(
-                              onPressed: () => {},
+                              onPressed: () => {
+                                    setState(() { 
+                                      editable = !editable;
+                                      if (editable) {
+                                        editableText = "Salvar Perfil";
+                                      } else {
+                                        editableText = "Editar Perfil";
+                                      }
+                                    })
+                                  },
                               style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(Colors.black)),
@@ -74,32 +87,40 @@ class ProfileState extends State<Profile> {
                                   const SizedBox(
                                     width: 22,
                                   ),
-                                  const Text("Editar Perfil",
+                                  Text(editableText,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15,
-                                          color: Color.fromRGBO(241, 237, 237, 1))),
+                                          color: Color.fromRGBO(
+                                              241, 237, 237, 1))),
                                 ],
                               )),
                         ),
-                        const Divider(indent: 15, endIndent: 15,),
+                        const Divider(
+                          indent: 15,
+                          endIndent: 15,
+                        ),
                         /**
                          * Opções de Perfil
                          */
                         ProfileOptionWidget(
-                            option: "Email", value: "202100007@gmail.com"),
-                        ProfileOptionWidget(option: "Número", value: "202100007"),
-                        ProfileOptionWidget(option: "Função", value: "Estudante"),
+                            option: "Email", value: "202100007@gmail.com",editable: editable,),
                         ProfileOptionWidget(
-                            option: "Primeiro Nome", value: "André"),
-                        ProfileOptionWidget(option: "Sobrenome", value: "Caetano"),
+                            option: "Número", value: "202100007",editable: editable,),
                         ProfileOptionWidget(
-                            option: "Data de Nascimento", value: "17/12/2021"),
-                        ProfileOptionWidget(option: "Género", value: "Masculino"),
+                            option: "Função", value: "Estudante",editable: editable,),
                         ProfileOptionWidget(
-                            option: "Nacionalidade", value: "Portuguesa"),
+                            option: "Primeiro Nome", value: "André",editable: editable,),
                         ProfileOptionWidget(
-                            option: "Curso", value: "Engenharia Informática"),
+                            option: "Sobrenome", value: "Caetano",editable: editable,),
+                        ProfileOptionWidget(
+                            option: "Data de Nascimento", value: "17/12/2021",editable: editable,),
+                        ProfileOptionWidget(
+                            option: "Género", value: "Masculino",editable: editable,),
+                        ProfileOptionWidget(
+                            option: "Nacionalidade", value: "Portuguesa",editable: editable,),
+                        ProfileOptionWidget(
+                            option: "Curso", value: "Engenharia Informática",editable: editable,),
                       ],
                     ),
                   ),

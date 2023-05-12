@@ -8,8 +8,13 @@ import 'package:flutter/material.dart';
 class ProfileOptionWidget extends StatefulWidget {
   final String option;
   String value;
+  bool editable;
 
-  ProfileOptionWidget({Key? key, required this.option, required this.value})
+  ProfileOptionWidget(
+      {Key? key,
+      required this.option,
+      required this.value,
+      required this.editable})
       : super(key: key);
 
   @override
@@ -17,6 +22,14 @@ class ProfileOptionWidget extends StatefulWidget {
 }
 
 class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
+  TextEditingController optionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    optionController.text = widget.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,8 +57,23 @@ class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
                   ),
                 ),
                 Expanded(
-                  child: Text(
-                    widget.value,
+                  child: TextField(
+                    enabled: widget.editable,
+                    controller: optionController,
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 45, 161, 255)),
+                      ),
+                      border: InputBorder.none,
+                      hintStyle: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
+                      ),
+                    ),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         fontWeight: FontWeight.w500, fontSize: 17),
