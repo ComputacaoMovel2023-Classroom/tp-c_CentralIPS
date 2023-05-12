@@ -41,11 +41,6 @@ class SearchBarState extends State<SearchBar> {
                     color: Colors.black,
                   ),
                   hintText: 'Livros, isbn, autor',
-                  // Add a clear button to the search bar
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () => searchController.clear(),
-                  ),
                   // Add a search icon or button to the search bar
                   prefixIcon: IconButton(
                     icon: const Icon(Icons.search),
@@ -53,6 +48,11 @@ class SearchBarState extends State<SearchBar> {
                       searchBook(searchController.text);
                       // TODO manter a pesquisa na caixa de pesquisa
                     },
+                  ),
+                  // Add a clear button to the search bar
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () => searchController.clear(),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -105,16 +105,18 @@ class SearchBarState extends State<SearchBar> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      book.name,
-                                      style: const TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w900,
-                                        backgroundColor: Colors.red,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        book.name,
+                                        style: const TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                        softWrap: true,
                                       ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
-                                      softWrap: true,
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),

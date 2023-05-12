@@ -13,6 +13,8 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
+  bool editable = false;
+  String editableText = "Editar Perfil";
   @override
   void initState() {
     super.initState();
@@ -90,20 +92,29 @@ class ProfileState extends State<Profile> {
                         SizedBox(
                           width: 200,
                           child: ElevatedButton(
-                              onPressed: () => {},
+                              onPressed: () => {
+                                    setState(() {
+                                      editable = !editable;
+                                      if (editable) {
+                                        editableText = "Salvar Perfil";
+                                      } else {
+                                        editableText = "Editar Perfil";
+                                      }
+                                    })
+                                  },
                               style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(Colors.black)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Icon(Icons.settings,
+                                children:  [
+                                  const Icon(Icons.settings,
                                       color: Color.fromRGBO(241, 237, 237, 1)),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 22,
                                   ),
-                                  Text("Editar Perfil",
-                                      style: TextStyle(
+                                  Text(editableText,
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15,
                                           color: Color.fromRGBO(
@@ -118,15 +129,31 @@ class ProfileState extends State<Profile> {
                         /**
                          * Opções de Perfil
                          */
-                        ProfileOptionWidget(option: "Email", value: mail),
-                        ProfileOptionWidget(option: "Número", value: number),
-                        ProfileOptionWidget(option: "Função", value: role),
                         ProfileOptionWidget(
-                            option: "Nome de Utilizador", value: userName),
+                          option: "Email",
+                          value: mail,
+                          editable: editable,
+                        ),
+                        ProfileOptionWidget(
+                            option: "Número",
+                            value: number,
+                            editable: editable),
+                        ProfileOptionWidget(
+                            option: "Função", value: role, editable: editable),
+                        ProfileOptionWidget(
+                          option: "Nome de Utilizador",
+                          value: userName,
+                          editable: editable,
+                        ),
                         ProfileOptionWidget(
                             option: "Data de Nascimento",
-                            value: birthDate.toString()),
-                        ProfileOptionWidget(option: "Género", value: gender)
+                            value: birthDate.toString(),
+                            editable: editable),
+                        ProfileOptionWidget(
+                          option: "Género",
+                          value: gender,
+                          editable: editable,
+                        )
                       ],
                     ),
                   ),
