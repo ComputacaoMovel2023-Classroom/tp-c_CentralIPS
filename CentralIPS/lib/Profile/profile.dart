@@ -31,83 +31,88 @@ class ProfileState extends State<Profile> {
         ),
         child: Stack(
           children: [
-            Container(
-              height: 200,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/header.jpg'),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-            /**
-             * Bloco Branco
-             */
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
-                ),
-              ),
-              margin: const EdgeInsets.only(top: 170),
-              padding: const EdgeInsets.only(top: 170),
-              child: Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                width: 600,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 200,
-                      child: ElevatedButton(
-                          onPressed: () => {},
-                          style: const ButtonStyle(
-                              backgroundColor:
-                                  MaterialStatePropertyAll(Colors.black)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.settings,
-                                  color: Color.fromRGBO(241, 237, 237, 1)),
-                              const SizedBox(
-                                width: 22,
-                              ),
-                              const Text("Editar Perfil",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(241, 237, 237, 1))),
-                            ],
-                          )),
+            Column( 
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 200,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/header.jpg'),
+                      fit: BoxFit.fitWidth,
                     ),
-                    const Divider(indent: 15, endIndent: 15,),
-                    /**
-                     * Opções de Perfil
-                     */
-                    ProfileOptionWidget(
-                        option: "Email", value: "202100007@gmail.com"),
-                    ProfileOptionWidget(option: "Número", value: "202100007"),
-                    ProfileOptionWidget(option: "Função", value: "Estudante"),
-                    ProfileOptionWidget(
-                        option: "Primeiro Nome", value: "André"),
-                    ProfileOptionWidget(option: "Sobrenome", value: "Caetano"),
-                    ProfileOptionWidget(
-                        option: "Data de Nascimento", value: "17/12/2021"),
-                    ProfileOptionWidget(option: "Género", value: "Masculino"),
-                    ProfileOptionWidget(
-                        option: "Nacionalidade", value: "Portuguesa"),
-                    ProfileOptionWidget(
-                        option: "Curso", value: "Engenharia Informática"),
-                  ],
+                  ),
                 ),
-              ),
+                /**
+                 * Bloco Branco
+                 */
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(30),
+                    ),
+                  ),
+                  padding: const EdgeInsets.only(top: 140),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    width: 600,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 200,
+                          child: ElevatedButton(
+                              onPressed: () => {},
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStatePropertyAll(Colors.black)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.settings,
+                                      color: Color.fromRGBO(241, 237, 237, 1)),
+                                  const SizedBox(
+                                    width: 22,
+                                  ),
+                                  const Text("Editar Perfil",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15,
+                                          color: Color.fromRGBO(241, 237, 237, 1))),
+                                ],
+                              )),
+                        ),
+                        const Divider(indent: 15, endIndent: 15,),
+                        /**
+                         * Opções de Perfil
+                         */
+                        ProfileOptionWidget(
+                            option: "Email", value: "202100007@gmail.com"),
+                        ProfileOptionWidget(option: "Número", value: "202100007"),
+                        ProfileOptionWidget(option: "Função", value: "Estudante"),
+                        ProfileOptionWidget(
+                            option: "Primeiro Nome", value: "André"),
+                        ProfileOptionWidget(option: "Sobrenome", value: "Caetano"),
+                        ProfileOptionWidget(
+                            option: "Data de Nascimento", value: "17/12/2021"),
+                        ProfileOptionWidget(option: "Género", value: "Masculino"),
+                        ProfileOptionWidget(
+                            option: "Nacionalidade", value: "Portuguesa"),
+                        ProfileOptionWidget(
+                            option: "Curso", value: "Engenharia Informática"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
             /**
              * Foto de Perfil
              */
             Positioned(
               top: 100,
-              left: 10,
+              left: 0,
+              right: 0,
               child: Container(
                 width: 400,
                 child: Column(

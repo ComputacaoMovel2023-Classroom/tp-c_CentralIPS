@@ -89,32 +89,32 @@ class SearchBarState extends State<SearchBar> {
                                     child: BookPage(book: book))),
                           )
                         },
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 150,
-                                  width: 100,
-                                  child: Image.network(
-                                    book.urlImage,
-                                    fit: BoxFit.cover,
-                                  ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 150,
+                                width: 100,
+                                child: Image.network(
+                                  book.urlImage,
+                                  fit: BoxFit.cover,
                                 ),
-                                Column(
+                              ),
+                              Expanded(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 10),
-                                      width: 221,
-                                      child: Text(
-                                        book.name,
-                                        style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w900,
-                                        ),
+                                    Text(
+                                      book.name,
+                                      style: const TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w900,
+                                        backgroundColor: Colors.red,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      softWrap: true,
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
@@ -129,10 +129,11 @@ class SearchBarState extends State<SearchBar> {
                                                   size: 18,
                                                 ),
                                                 const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 5)),
+                                                    padding:
+                                                        EdgeInsets.only(left: 5)),
                                                 Text(
-                                                    "${book.authors.elementAt(0)}"),
+                                                  "${book.authors.elementAt(0)}",
+                                                ),
                                               ],
                                             ),
                                             Row(
@@ -142,18 +143,17 @@ class SearchBarState extends State<SearchBar> {
                                                   size: 18,
                                                 ),
                                                 const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 5)),
-                                                Text(book.school
-                                                    .displayString()),
+                                                    padding:
+                                                        EdgeInsets.only(left: 5)),
+                                                Text(book.school.displayString()),
                                               ],
                                             ),
                                           ]),
                                     ),
                                   ],
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ));
