@@ -153,10 +153,10 @@ class ProfileState extends State<Profile> {
                       ),
                     ),
                     Container(
-                        child: const Text(
-                      "André Caetano",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        child: Text(
+                      userName,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     )),
                   ],
