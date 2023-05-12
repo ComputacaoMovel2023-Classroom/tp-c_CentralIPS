@@ -24,14 +24,13 @@ class ProfileOptionWidget extends StatefulWidget {
 class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
   TextEditingController optionController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
+  void updateText() {
     optionController.text = widget.value;
   }
 
   @override
   Widget build(BuildContext context) {
+    updateText();
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: Column(
