@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'noticias_lista_item.dart';
 
 class NoticiasLista extends StatefulWidget {
-  const NoticiasLista({super.key});
+  const NoticiasLista({Key? key}) : super(key: key);
 
   @override
   _NoticiasListaState createState() => _NoticiasListaState();
 }
 
 class _NoticiasListaState extends State<NoticiasLista> {
-  List<Map<String, dynamic>> _noticiasData = [];
+  List<Map> _noticiasData = [];
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _NoticiasListaState extends State<NoticiasLista> {
       var userData = snapshot.value as Map;
 
       setState(() {
-        _noticiasData = userData['noticias'] ?? [];
+        _noticiasData = (userData).values.cast<Map>().toList() ?? [];
       });
     });
   }
