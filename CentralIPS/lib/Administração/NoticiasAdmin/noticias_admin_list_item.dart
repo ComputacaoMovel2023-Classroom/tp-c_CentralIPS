@@ -1,6 +1,8 @@
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdminNoticiaListItem extends StatefulWidget {
   AdminNoticiaListItem({
@@ -22,15 +24,16 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
       _isPressed = !_isPressed;
     });
     if (_isPressed) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => NoticiasListDetails(
-          noticiaItem: NoticiaItem(
-              titulo: widget.noticiaItem.titulo,
-              subtitulo: widget.noticiaItem.subtitulo,
-              imagem: widget.noticiaItem.imagem,
-              texto: widget.noticiaItem.texto),
-        ),
-      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: context.read<FooterMenuCubit>(),
+                  child: NoticiasListDetails(
+                    noticiaItem: widget.noticiaItem,
+                  ),
+                )),
+      );
     }
   }
 

@@ -24,19 +24,21 @@ class AdminNoticiasUI extends StatelessWidget {
     NoticiaItem(
       titulo: "Noticia 1",
       subtitulo: "Subtitulo 1",
-      imagem: "imagem1.jpg",
-      texto: "Texto da noticia 1",
+      imagem: AssetImage('assets/images/noticia1.png'),
+      texto:
+          "Nos últimos anos, o campo da inteligência artificial (IA) tem experimentado avanços significativos e se tornou uma parte fundamental de várias indústrias. IA se refere ao desenvolvimento de sistemas computacionais capazes de realizar tarefas que normalmente exigem inteligência humana. Uma das áreas-chave em que a IA tem apresentado progresso notável é o processamento de linguagem natural (PLN). O PLN tem como foco capacitar os computadores a entender e processar a linguagem humana.Aplicações de PLN são amplamente utilizadas em várias áreas, como assistentes virtuais, tradução automática, análise de sentimentos em mídias sociais e chatbots. Essas aplicações dependem de algoritmos sofisticados que são treinados em grandes conjuntos de dados textuais para reconhecer padrões e aprender a tomar decisões com base nas informações fornecidas. Além disso, técnicas avançadas, como processamento de linguagem natural baseado em aprendizado de máquina e redes neurais, têm impulsionado ainda mais o campo do PLN.No entanto, apesar dos avanços, o processamento de linguagem natural ainda enfrenta desafios. A compreensão e interpretação precisas de nuances e ambiguidades da linguagem humana continuam sendo áreas de pesquisa em aberto. Além disso, a privacidade e a ética no processamento de grandes volumes de dados também são preocupações importantes.À medida que a inteligência artificial e o processamento de linguagem natural continuam a evoluir, espera-se que tenhamos sistemas ainda mais sofisticados capazes de entender e interagir com os seres humanos de forma cada vez mais natural e eficaz.",
     ),
     NoticiaItem(
       titulo: "Noticia 2",
       subtitulo: "Subtitulo 2",
-      imagem: "imagem2.jpg",
-      texto: "Texto da noticia 2",
+      imagem: AssetImage('assets/images/noticia1.png'),
+      texto:
+          "A tecnologia de blockchain tem sido um dos avanços mais disruptivos e promissores dos últimos anos. Originalmente desenvolvida para suportar criptomoedas como o Bitcoin, a tecnologia de blockchain é um sistema descentralizado que permite o registro seguro e imutável de transações.A principal característica do blockchain é a sua natureza distribuída, onde múltiplos participantes da rede mantêm cópias do registro de transações. Isso torna o blockchain altamente seguro e transparente, pois qualquer alteração no registro requer o consenso da maioria dos participantes.Além das criptomoedas, o blockchain tem o potencial de impactar várias indústrias. Por exemplo, na área de cadeia de suprimentos, o blockchain pode rastrear o histórico completo de um produto, desde a fabricação até a entrega ao consumidor, garantindo a autenticidade e a qualidade dos produtos.Outra aplicação promissora do blockchain é no setor financeiro, onde pode facilitar transferências de dinheiro rápidas e seguras, eliminando intermediários e reduzindo custos.No entanto, apesar de suas vantagens, o blockchain ainda enfrenta desafios, como a escalabilidade e a interoperabilidade entre diferentes redes. Além disso, questões regulatórias e de privacidade também precisam ser abordadas para a adoção em larga escala do blockchain.",
     ),
     NoticiaItem(
       titulo: "Noticia 3",
       subtitulo: "Subtitulo 3",
-      imagem: "imagem3.jpg",
+      imagem: AssetImage('assets/images/noticia1.png'),
       texto: "Texto da noticia 3",
     ),
   ];
