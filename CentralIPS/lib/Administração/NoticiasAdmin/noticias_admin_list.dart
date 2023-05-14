@@ -2,19 +2,14 @@ import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';
 
-class NoticiasList extends StatefulWidget {
-  NoticiasList({
+class AdminNoticiaList extends StatelessWidget {
+  AdminNoticiaList({
     Key? key,
     required this.noticiaItemArr,
   }) : super(key: key);
 
   List<NoticiaItem> noticiaItemArr;
 
-  @override
-  State<NoticiasList> createState() => _NoticiasListState();
-}
-
-class _NoticiasListState extends State<NoticiasList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,13 +36,12 @@ class _NoticiasListState extends State<NoticiasList> {
                     ),
                   );
                 },
-                itemCount: widget.noticiaItemArr.length,
+                itemCount: noticiaItemArr.length,
                 itemBuilder: (context, index) {
-                  return NoticiaListItem(
-                      noticiaItem: widget.noticiaItemArr[index]);
+                  return NoticiaListItem(noticiaItem: noticiaItemArr[index]);
                 },
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
             ],
           ),
         ),

@@ -3,18 +3,12 @@ import 'package:centralips/Noticias/noticias_list_details.dart';
 import 'package:flutter/material.dart';
 
 class AdminNoticiaListItem extends StatefulWidget {
-  const AdminNoticiaListItem({
+  AdminNoticiaListItem({
     Key? key,
-    required this.titulo,
-    required this.subtitulo,
-    required this.imagem,
-    required this.texto,
+    required this.noticiaItem,
   }) : super(key: key);
 
-  final String titulo;
-  final String subtitulo;
-  final String imagem;
-  final String texto;
+  NoticiaItem noticiaItem;
 
   @override
   _AdminNoticiaListItemState createState() => _AdminNoticiaListItemState();
@@ -30,7 +24,12 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
     if (_isPressed) {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => NoticiasListDetails(
-            noticiaItem: NoticiaItem(titulo: widget.titulo, subtitulo: widget.subtitulo, imagem: widget.imagem, texto: widget.texto),),
+          noticiaItem: NoticiaItem(
+              titulo: widget.noticiaItem.titulo,
+              subtitulo: widget.noticiaItem.subtitulo,
+              imagem: widget.noticiaItem.imagem,
+              texto: widget.noticiaItem.texto),
+        ),
       ));
     }
   }
@@ -121,7 +120,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                     Container(
                       width: 500,
                       margin: const EdgeInsets.only(left: 1, top: 6),
-                      child: Text(widget.titulo,
+                      child: Text(widget.noticiaItem.titulo,
                           maxLines: null,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
@@ -133,7 +132,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                     Container(
                       width: 500,
                       margin: const EdgeInsets.only(left: 1, top: 6),
-                      child: Text(widget.subtitulo,
+                      child: Text(widget.noticiaItem.subtitulo,
                           maxLines: null,
                           textAlign: TextAlign.left,
                           style: const TextStyle(

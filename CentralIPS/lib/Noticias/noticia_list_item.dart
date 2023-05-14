@@ -1,6 +1,8 @@
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoticiaListItem extends StatefulWidget {
   NoticiaListItem({Key? key, required this.noticiaItem}) : super(key: key);
@@ -13,18 +15,21 @@ class NoticiaListItem extends StatefulWidget {
 class _NoticiaListItemState extends State<NoticiaListItem> {
   bool _isPressed = false;
 
-  NoticiaItem get noticiaItem => widget.noticiaItem;
-
   void _OnPressed() {
     setState(() {
       _isPressed = !_isPressed;
     });
     if (_isPressed) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => NoticiasListDetails(
-          noticiaItem: noticiaItem,
-        ),
-      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: context.read<FooterMenuCubit>(),
+                  child: NoticiasListDetails(
+                    noticiaItem: widget.noticiaItem,
+                  ),
+                )),
+      );
     }
   }
 
@@ -98,7 +103,7 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                     Container(
                       width: 500,
                       margin: const EdgeInsets.only(left: 1, top: 6),
-                      child: Text(noticiaItem.titulo,
+                      child: Text(widget.noticiaItem.titulo,
                           maxLines: null,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
@@ -110,7 +115,7 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                     Container(
                       width: 500,
                       margin: const EdgeInsets.only(left: 1, top: 6),
-                      child: Text(noticiaItem.subtitulo,
+                      child: Text(widget.noticiaItem.subtitulo,
                           maxLines: null,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
