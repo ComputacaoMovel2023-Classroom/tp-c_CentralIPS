@@ -1,3 +1,4 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list.dart';
 import 'package:centralips/Noticias/noticia_list.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
@@ -5,14 +6,8 @@ import 'package:centralips/footer_menu/footer_menu.dart';
 
 import 'package:flutter/material.dart';
 
-class NoticiasUI extends StatefulWidget {
-  NoticiasUI({Key? key});
-
-  @override
-  State<NoticiasUI> createState() => _NoticiasUIState();
-}
-
-class _NoticiasUIState extends State<NoticiasUI> {
+class AdminNoticiasUI extends StatelessWidget {
+  AdminNoticiasUI({Key? key});
 /*
   List<NoticiaItem> title = [
     "To Kill a Mockingbird",
@@ -119,7 +114,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
                   ),
                   Expanded(
                     child: Column(children: [
-                      NoticiasList(noticiaItemArr: noticiaItemArr),
+                      AdminNoticiaList(noticiaItemArr: noticiaItemArr.toList()),
                     ]),
                   ),
                 ],

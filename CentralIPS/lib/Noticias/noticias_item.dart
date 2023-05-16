@@ -10,7 +10,7 @@ class NoticiaItem extends StatelessWidget {
   });
   final String titulo;
   final String subtitulo;
-  final String imagem;
+  final ImageProvider imagem;
   final String texto;
 
   @override

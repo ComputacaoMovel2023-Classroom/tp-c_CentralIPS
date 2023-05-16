@@ -2,8 +2,8 @@ import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';
 
-class NoticiasList extends StatefulWidget {
-  NoticiasList({
+class AdminNoticiaList extends StatefulWidget {
+  AdminNoticiaList({
     Key? key,
     required this.noticiaItemArr,
   }) : super(key: key);
@@ -11,10 +11,10 @@ class NoticiasList extends StatefulWidget {
   List<NoticiaItem> noticiaItemArr;
 
   @override
-  State<NoticiasList> createState() => _NoticiasListState();
+  State<AdminNoticiaList> createState() => _AdminNoticiaListState();
 }
 
-class _NoticiasListState extends State<NoticiasList> {
+class _AdminNoticiaListState extends State<AdminNoticiaList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
