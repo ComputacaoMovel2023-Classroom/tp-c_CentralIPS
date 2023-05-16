@@ -33,7 +33,8 @@ class ProfileState extends State<Profile> {
       // Get the user's name and number
       setState(() {
         mail = user.email!;
-        userName = userData['name'];
+        userName = user.displayName!;
+        photoURL = user.photoURL!;
         birthDate = userData['birthdate'];
         number = userData['number'];
         role = userData['role'];
@@ -49,6 +50,8 @@ class ProfileState extends State<Profile> {
   String number = "A carregar...";
   String role = "A carregar...";
   String gender = "A carregar...";
+  String photoURL =
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +110,7 @@ class ProfileState extends State<Profile> {
                                       MaterialStatePropertyAll(Colors.black)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children:  [
+                                children: [
                                   const Icon(Icons.settings,
                                       color: Color.fromRGBO(241, 237, 237, 1)),
                                   const SizedBox(
@@ -171,13 +174,10 @@ class ProfileState extends State<Profile> {
                 width: 400,
                 child: Column(
                   children: [
-                    ClipOval(
-                      child: Image.asset(
-                        'assets/images/moura.jpg',
-                        width: 190,
-                        height: 190,
-                        fit: BoxFit.cover,
-                      ),
+                    CircleAvatar(
+                      radius: 190.0,
+                      backgroundImage: NetworkImage(photoURL),
+                      backgroundColor: Colors.transparent,
                     ),
                     Container(
                         child: Text(

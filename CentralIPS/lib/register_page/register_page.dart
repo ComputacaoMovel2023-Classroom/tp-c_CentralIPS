@@ -21,6 +21,7 @@ final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _birthdateController = TextEditingController();
 final TextEditingController _genderController = TextEditingController();
 final TextEditingController _roleController = TextEditingController();
+final TextEditingController _photoController = TextEditingController();
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -52,6 +53,41 @@ Widget buildName() {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 6, left: 10),
               hintText: 'Introduza o seu nome',
+              hintStyle: TextStyle(color: Colors.black38)),
+        ),
+      )
+    ],
+  );
+}
+
+Widget buildPhoto() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      const Text(
+        'Url do Avatar',
+        style: TextStyle(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 10),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+            ]),
+        height: 60,
+        child: TextField(
+          controller: _photoController,
+          keyboardType: TextInputType.name,
+          style: const TextStyle(color: Colors.black87),
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 6, left: 10),
+              hintText: 'Introduza o url do seu avatar',
               hintStyle: TextStyle(color: Colors.black38)),
         ),
       )
@@ -303,8 +339,10 @@ Widget buildRegisterBtn(BuildContext context) {
               .child('users')
               .child(userCredential.user!.uid);
 
+          userCredential.user?.updatePhotoURL(_photoController.text);
+          userCredential.user?.updateDisplayName(_nameController.text);
+
           await userRef.set({
-            'name': _nameController.text,
             'number': _numberController.text,
             'birthdate': _birthdateController.text,
             'gender': _genderController.text,
@@ -425,6 +463,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         buildNumber(),
                         const SizedBox(height: 15),
                         buildPassword(),
+                        const SizedBox(height: 15),
+                        buildPhoto(),
                         const SizedBox(height: 15),
                         buildRegisterBtn(context),
                         const SizedBox(height: 5),

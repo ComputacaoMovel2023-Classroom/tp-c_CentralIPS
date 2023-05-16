@@ -24,8 +24,9 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  String? _userName;
-
+  String? _userName = "A carregar";
+  String? photoURL =
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
   @override
   void initState() {
     super.initState();
@@ -43,7 +44,7 @@ class _NavBarState extends State<NavBar> {
       var userData = snapshot.value as Map;
       // Get the user's name and number
       setState(() {
-        _userName = userData['name'];
+        _userName = user.displayName;
       });
     });
   }
@@ -62,14 +63,9 @@ class _NavBarState extends State<NavBar> {
                 _userName != null ? Text(_userName!) : const Text('Loading...'),
             accountEmail: Text(user?.email ?? ''),
             currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/images/moura.jpg',
-                  fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
-                ),
-              ),
+              radius: 30.0,
+              backgroundImage: NetworkImage(photoURL!),
+              backgroundColor: Colors.transparent,
             ),
             decoration: const BoxDecoration(
               color: Colors.blue,
