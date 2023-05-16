@@ -45,6 +45,9 @@ class _NavBarState extends State<NavBar> {
       // Get the user's name and number
       setState(() {
         _userName = user.displayName;
+        if (user.photoURL != null) {
+          photoURL = user.photoURL!;
+        }
       });
     });
   }

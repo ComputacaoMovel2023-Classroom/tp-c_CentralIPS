@@ -33,13 +33,29 @@ class ProfileState extends State<Profile> {
       // Get the user's name and number
       setState(() {
         mail = user.email!;
-        userName = user.displayName!;
-        photoURL = user.photoURL!;
-        birthDate = userData['birthdate'];
-        number = userData['number'];
-        role = userData['role'];
-        gender = userData['gender'];
-        debugPrint(userData['birthdate']);
+        if (user.displayName != null) {
+          userName = user.displayName!;
+        }
+
+        if (user.photoURL != null) {
+          photoURL = user.photoURL!;
+        }
+
+        if (userData['birthdate'] != null) {
+          birthDate = userData['birthdate'];
+        }
+
+        if (userData['number'] != null) {
+          number = userData['number'];
+        }
+
+        if (userData['role'] != null) {
+          role = userData['role'];
+        }
+
+        if (userData['gender'] != null) {
+          gender = userData['gender'];
+        }
       });
     });
   }
@@ -175,7 +191,7 @@ class ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     CircleAvatar(
-                      radius: 190.0,
+                      radius: 80.0,
                       backgroundImage: NetworkImage(photoURL),
                       backgroundColor: Colors.transparent,
                     ),
