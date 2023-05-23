@@ -29,6 +29,7 @@ class _NoticiasListaState extends State<NoticiasLista> {
 
       setState(() {
         _noticiasData = (userData).values.cast<Map>().toList() ?? [];
+        print('noticiasData: $_noticiasData');
       });
     });
   }

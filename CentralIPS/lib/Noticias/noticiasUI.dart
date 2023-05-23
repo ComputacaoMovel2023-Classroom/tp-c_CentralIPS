@@ -2,6 +2,9 @@ import 'package:centralips/Noticias/noticia_list.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 
@@ -25,28 +28,67 @@ class _NoticiasUIState extends State<NoticiasUI> {
     'Vivamus vitae eros quis arcu pharetra maximus. Donec mollis nisl sed dolor suscipit, eu sollicitudin tellus aliquet. Integer venenatis libero sit amet lectus volutpat, at suscipit nisi dictum. Quisque pellentesque felis sit amet augue commodo elementum. Etiam eget augue a nibh ultrices faucibus vel in sapien. Curabitur lacinia ante quis massa dictum, eu tristique neque tristique. Duis vel bibendum arcu. Proin iaculis ex mauris, vel convallis eros congue vitae. Donec ultricies nulla sed augue consequat aliquam. Fusce eget luctus eros, sit amet pulvinar urna. Aliquam erat volutpat. Suspendisse maximus sed enim sit amet posuere. Nam euismod ipsum vel ante pulvinar, et lobortis quam dignissim.',
     'Pellentesque eget fringilla nulla, in consequat velit. Suspendisse rutrum lectus a nibh sollicitudin, id hendrerit nulla dictum. Sed pharetra a mi in bibendum. Vestibulum quis neque id odio aliquet blandit. Integer vitae nulla eget magna pretium vehicula. Pellentesque in enim eget nisi malesuada varius sit amet euismod nibh. Sed rhoncus imperdiet ipsum, vel pulvinar eros hendrerit nec. Suspendisse at dolor sagittis, finibus nisi et, faucibus dolor. Suspendisse convallis nec dolor eget commodo. Maecenas euismod neque sed lacus posuere, vel varius quam semper. Vivamus eget mauris congue, luctus ex non, maximus ante. Suspendisse vitae quam fermentum, gravida massa sed, fringilla arcu.'
   ];*/
-  List<NoticiaItem> noticiaItemArr = [
+  List<NoticiaItem> noticiaItemArr = [];
+  /*List<NoticiaItem> noticiaItemArr = [
     NoticiaItem(
       titulo: "Noticia 1",
       subtitulo: "Subtitulo 1",
-      imagem: AssetImage('assets/images/noticia1.png'),
+      imagem: 'assets/images/noticia1.png',
       texto:
           "Nos últimos anos, o campo da inteligência artificial (IA) tem experimentado avanços significativos e se tornou uma parte fundamental de várias indústrias. IA se refere ao desenvolvimento de sistemas computacionais capazes de realizar tarefas que normalmente exigem inteligência humana. Uma das áreas-chave em que a IA tem apresentado progresso notável é o processamento de linguagem natural (PLN). O PLN tem como foco capacitar os computadores a entender e processar a linguagem humana.Aplicações de PLN são amplamente utilizadas em várias áreas, como assistentes virtuais, tradução automática, análise de sentimentos em mídias sociais e chatbots. Essas aplicações dependem de algoritmos sofisticados que são treinados em grandes conjuntos de dados textuais para reconhecer padrões e aprender a tomar decisões com base nas informações fornecidas. Além disso, técnicas avançadas, como processamento de linguagem natural baseado em aprendizado de máquina e redes neurais, têm impulsionado ainda mais o campo do PLN.No entanto, apesar dos avanços, o processamento de linguagem natural ainda enfrenta desafios. A compreensão e interpretação precisas de nuances e ambiguidades da linguagem humana continuam sendo áreas de pesquisa em aberto. Além disso, a privacidade e a ética no processamento de grandes volumes de dados também são preocupações importantes.À medida que a inteligência artificial e o processamento de linguagem natural continuam a evoluir, espera-se que tenhamos sistemas ainda mais sofisticados capazes de entender e interagir com os seres humanos de forma cada vez mais natural e eficaz.",
     ),
     NoticiaItem(
       titulo: "Noticia 2",
       subtitulo: "Subtitulo 2",
-      imagem: AssetImage('assets/images/noticia1.png'),
+      imagem: 'assets/images/noticia1.png',
       texto:
           "A tecnologia de blockchain tem sido um dos avanços mais disruptivos e promissores dos últimos anos. Originalmente desenvolvida para suportar criptomoedas como o Bitcoin, a tecnologia de blockchain é um sistema descentralizado que permite o registro seguro e imutável de transações.A principal característica do blockchain é a sua natureza distribuída, onde múltiplos participantes da rede mantêm cópias do registro de transações. Isso torna o blockchain altamente seguro e transparente, pois qualquer alteração no registro requer o consenso da maioria dos participantes.Além das criptomoedas, o blockchain tem o potencial de impactar várias indústrias. Por exemplo, na área de cadeia de suprimentos, o blockchain pode rastrear o histórico completo de um produto, desde a fabricação até a entrega ao consumidor, garantindo a autenticidade e a qualidade dos produtos.Outra aplicação promissora do blockchain é no setor financeiro, onde pode facilitar transferências de dinheiro rápidas e seguras, eliminando intermediários e reduzindo custos.No entanto, apesar de suas vantagens, o blockchain ainda enfrenta desafios, como a escalabilidade e a interoperabilidade entre diferentes redes. Além disso, questões regulatórias e de privacidade também precisam ser abordadas para a adoção em larga escala do blockchain.",
     ),
     NoticiaItem(
       titulo: "Noticia 3",
       subtitulo: "Subtitulo 3",
-      imagem: AssetImage('assets/images/noticia1.png'),
+      imagem: 'assets/images/noticia1.png',
       texto: "Texto da noticia 3",
     ),
-  ];
+  ];*/
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    DatabaseReference databaseRef =
+        FirebaseDatabase.instance.ref().child('noticias');
+    databaseRef.onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+      var noticiasData = snapshot.value as Map;
+      //print('noticiasData: $noticiasData');
+
+      List<NoticiaItem> updatedNoticiaItems = [];
+      noticiasData.forEach((key, value) {
+        NoticiaItem noticiaItem = NoticiaItem(
+          titulo: value['titulo'] ?? 'OLA',
+          subtitulo: value['subtitulo'] ?? 'OI',
+          imagem: value['assetName'] ?? 'assets/images/noticia3.png',
+          texto: value['texto'] ?? 'OI',
+        );
+        updatedNoticiaItems.add(noticiaItem);
+        // print('noticiaItemArr: ${noticiaItem.titulo}');
+        //print('noticiaItemArr: ${noticiaItem.subtitulo}');
+        //print('noticiaItemArr: ${noticiaItem.imagem}');
+        // print('noticiaItemArr: ${noticiaItem.texto}');
+      });
+
+      setState(() {
+        noticiaItemArr = updatedNoticiaItems;
+      });
+      //print('noticiaItemArr: $noticiaItemArr');
+      print('noticiaItemArr: ${noticiaItemArr[0].imagem}}');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

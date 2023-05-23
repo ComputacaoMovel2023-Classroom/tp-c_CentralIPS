@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class NoticiaItem extends StatelessWidget {
@@ -10,7 +11,7 @@ class NoticiaItem extends StatelessWidget {
   });
   final String titulo;
   final String subtitulo;
-  final ImageProvider imagem;
+  final String imagem;
   final String texto;
 
   @override

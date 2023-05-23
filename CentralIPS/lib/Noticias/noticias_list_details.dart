@@ -93,7 +93,7 @@ class NoticiasListDetails extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(30),
                       child: Image(
-                        image: noticiaItem.imagem,
+                        image: AssetImage(noticiaItem.imagem),
                       ),
                     ),
                     Center(
