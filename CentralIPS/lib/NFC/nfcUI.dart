@@ -59,18 +59,25 @@ class _nfcUIState extends State<nfcUI> {
   }
 
   void _tagRead() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Encoste o cartão à traseira do dispositivo")));
+
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      identifierlocal = tag.data['nfcA']['identifier'];
+      identifierlocal = tag.data['nfca']['identifier'].toString();
+
+      final user = FirebaseAuth.instance.currentUser;
+      DatabaseReference userRef = FirebaseDatabase.instance
+          .ref()
+          .child('users')
+          .child(user!.uid)
+          .child('identifier');
+      userRef.set(identifierlocal);
+      setState(() {
+        identifier = identifierlocal;
+      });
+
       NfcManager.instance.stopSession();
     });
-
-    final user = FirebaseAuth.instance.currentUser;
-    DatabaseReference userRef = FirebaseDatabase.instance
-        .ref()
-        .child('users')
-        .child(user!.uid)
-        .child('identifier');
-    userRef.set(identifierlocal);
   }
 
   @override
