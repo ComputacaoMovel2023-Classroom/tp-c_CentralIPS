@@ -6,7 +6,7 @@ class cardWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 200,
+        height: 210,
         width: double.infinity,
         padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(

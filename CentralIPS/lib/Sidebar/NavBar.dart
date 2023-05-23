@@ -1,3 +1,4 @@
+import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:centralips/register_page/register_page.dart';
@@ -11,7 +12,6 @@ import '../Cubit/index_cubit.dart';
 import '../Departamentos/departamentsUI.dart';
 import '../Ementas/ementasUI.dart';
 import '../Maps/maps.dart';
-import '../Maps/teste.dart';
 import '../Profile/profile.dart';
 import '../homePage/home_page_ui.dart';
 import '../Bibliographic Research/bibliographicResearch.dart';
@@ -112,7 +112,7 @@ class _NavBarState extends State<NavBar> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
-                          child: const teste(),
+                          child: const nfcUI(),
                         )));
               }),
           const Divider(),
