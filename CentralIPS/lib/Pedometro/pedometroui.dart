@@ -1,12 +1,16 @@
 import 'package:centralips/Pedometro/LeaderBord/leader_bord.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
+import 'package:intl/intl.dart';
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
@@ -35,11 +39,50 @@ class _PedometroState extends State<Pedometro> {
     initPlatformState();
   }
 
-  void onStepCount(StepCount event) {
-    print(event);
+  Future<void> updateSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int counter = (prefs.getInt('counter') ?? 0) + 1;
+    await prefs.setInt('counter', counter);
+  }
+
+  void onStepCount(StepCount event) async {
+    updateSteps();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? counter = prefs.getInt('counter');
+
     setState(() {
-      _steps = event.steps.toString();
+      _steps = counter.toString();
     });
+  }
+
+  Future<int> getSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? counter = prefs.getInt('counter');
+    return counter!;
+  }
+
+  void counterToZero() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('counter', 0);
+  }
+
+  void resetCounter() async {
+    int steps = await getSteps();
+    setState(() {
+      final user = FirebaseAuth.instance.currentUser;
+      var now = DateTime.now();
+      var formatter = DateFormat('yyyy-MM-dd');
+      String formattedDate = formatter.format(now);
+      print(formattedDate);
+      DatabaseReference userRef = FirebaseDatabase.instance
+          .ref()
+          .child('ipshealth')
+          .child(user!.uid)
+          .child(formattedDate);
+      userRef.set(steps);
+    });
+    counterToZero();
+    _steps = '0';
   }
 
   void onPedestrianStatusChanged(PedestrianStatus event) {
@@ -351,6 +394,14 @@ class _PedometroState extends State<Pedometro> {
                                   )));
                         },
                         child: const Text('LeaderBord'),
+                      ),
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          resetCounter();
+                        },
+                        child: const Text('Reset'),
                       ),
                     )
                   ],
