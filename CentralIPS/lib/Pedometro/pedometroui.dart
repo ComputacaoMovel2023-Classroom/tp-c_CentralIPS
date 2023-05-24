@@ -32,6 +32,7 @@ class _PedometroState extends State<Pedometro> {
   late Stream<StepCount> _stepCountStream;
   late Stream<PedestrianStatus> _pedestrianStatusStream;
   String _status = '?', _steps = '?';
+  List<DayAgo> data = [];
 
   @override
   void initState() {
@@ -41,7 +42,15 @@ class _PedometroState extends State<Pedometro> {
     getGoalSteps().then((value) => stepsGoal = value);
     getGoalCalories().then((value) => calorieGoal = value);
 
-    setState(() {});
+    //wait for the data to be loaded
+    loadData();
+  }
+
+  void loadData() {
+    DataStepsDay.getSteps(data, () {
+      setState(() {});
+    });
+    //when data is loaded, update the UI
   }
 
   Future<void> updateSteps() async {
