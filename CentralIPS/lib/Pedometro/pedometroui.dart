@@ -37,6 +37,11 @@ class _PedometroState extends State<Pedometro> {
   void initState() {
     super.initState();
     initPlatformState();
+
+    getGoalSteps().then((value) => stepsGoal = value);
+    getGoalCalories().then((value) => calorieGoal = value);
+
+    setState(() {});
   }
 
   Future<void> updateSteps() async {
@@ -59,6 +64,32 @@ class _PedometroState extends State<Pedometro> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? counter = prefs.getInt('counter');
     return counter!;
+  }
+
+  // shared preferences to save the goal
+  Future<void> saveGoalSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('goalSteps', stepsGoal);
+  }
+
+  Future<void> saveGoalCalories() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('goalCalories', calorieGoal);
+  }
+
+  //get the goals
+  Future<int> getGoalSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? goal = (prefs.getInt('goalSteps')) ?? 100;
+
+    return goal;
+  }
+
+  Future<int> getGoalCalories() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? goal = (prefs.getInt('goalCalories')) ?? 50;
+
+    return goal;
   }
 
   void counterToZero() async {
@@ -298,29 +329,31 @@ class _PedometroState extends State<Pedometro> {
                               child: TextButton.icon(
                                 onPressed: () {
                                   showMaterialNumberPicker(
-                                    headerColor: Colors
-                                        .blue, // background color of the header area
-                                    headerTextColor: const Color(
-                                        0xFFFFFFFF), // text fcolor of the header
-                                    backgroundColor: const Color.fromARGB(
-                                        255,
-                                        255,
-                                        255,
-                                        255), // background color of the entire dialog
-                                    buttonTextColor: const Color.fromARGB(
-                                        255,
-                                        0,
-                                        0,
-                                        0), // text color of the action bar buttons
-                                    context: context,
-                                    title: 'Objetivo diário de passos?',
-                                    maxNumber: 30000,
-                                    minNumber: 1000,
-                                    step: 500,
-                                    selectedNumber: stepsGoal,
-                                    onChanged: (value) =>
-                                        setState(() => stepsGoal = value),
-                                  );
+                                      headerColor: Colors
+                                          .blue, // background color of the header area
+                                      headerTextColor: const Color(
+                                          0xFFFFFFFF), // text fcolor of the header
+                                      backgroundColor: const Color.fromARGB(
+                                          255,
+                                          255,
+                                          255,
+                                          255), // background color of the entire dialog
+                                      buttonTextColor: const Color.fromARGB(
+                                          255,
+                                          0,
+                                          0,
+                                          0), // text color of the action bar buttons
+                                      context: context,
+                                      title: 'Objetivo diário de passos?',
+                                      maxNumber: 30000,
+                                      minNumber: 1000,
+                                      step: 500,
+                                      selectedNumber: stepsGoal,
+                                      onChanged: (value) {
+                                        //colocar aqui a instancia da shared preferences
+                                        saveGoalSteps();
+                                        setState(() => stepsGoal = value);
+                                      });
                                 },
                                 icon: const Icon(Icons.add, size: 18),
                                 label: const Text("Objetivo de Passos"),
@@ -330,29 +363,30 @@ class _PedometroState extends State<Pedometro> {
                               child: TextButton.icon(
                                 onPressed: () {
                                   showMaterialNumberPicker(
-                                    headerColor: Colors
-                                        .blue, // background color of the header area
-                                    headerTextColor: const Color(
-                                        0xFFFFFFFF), // text fcolor of the header
-                                    backgroundColor: const Color.fromARGB(
-                                        255,
-                                        255,
-                                        255,
-                                        255), // background color of the entire dialog
-                                    buttonTextColor: const Color.fromARGB(
-                                        255,
-                                        0,
-                                        0,
-                                        0), // text color of the action bar buttons
-                                    context: context,
-                                    title: 'Objetivo diário de calorias?',
-                                    maxNumber: 2000,
-                                    minNumber: 200,
-                                    step: 100,
-                                    selectedNumber: calorieGoal,
-                                    onChanged: (value) =>
-                                        setState(() => calorieGoal = value),
-                                  );
+                                      headerColor: Colors
+                                          .blue, // background color of the header area
+                                      headerTextColor: const Color(
+                                          0xFFFFFFFF), // text fcolor of the header
+                                      backgroundColor: const Color.fromARGB(
+                                          255,
+                                          255,
+                                          255,
+                                          255), // background color of the entire dialog
+                                      buttonTextColor: const Color.fromARGB(
+                                          255,
+                                          0,
+                                          0,
+                                          0), // text color of the action bar buttons
+                                      context: context,
+                                      title: 'Objetivo diário de calorias?',
+                                      maxNumber: 2000,
+                                      minNumber: 200,
+                                      step: 100,
+                                      selectedNumber: calorieGoal,
+                                      onChanged: (value) {
+                                        saveGoalCalories();
+                                        setState(() => calorieGoal = value);
+                                      });
                                 },
                                 icon: const Icon(Icons.add, size: 18),
                                 label: const Text("Objetivo de Calorias"),
