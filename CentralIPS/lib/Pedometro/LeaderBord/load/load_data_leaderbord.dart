@@ -70,6 +70,11 @@ class LoadDataLeaderbord {
         String photo = data['photo'] ??
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
         //listOfUsersData.add(
+        //check if the name is more than one, and if so cut the name until the first space
+        final spaceIndex = name.indexOf(' ');
+        if (spaceIndex != -1) {
+          name = name.substring(0, spaceIndex);
+        }
 
         listOfUsersSteps[user.key]!.insertNameAndUrlImage(name, photo);
         //sort the list by the steps

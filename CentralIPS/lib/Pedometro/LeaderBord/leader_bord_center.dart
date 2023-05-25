@@ -50,11 +50,15 @@ class LeaderBordCenter extends StatelessWidget {
                           urlImage), // Substitua pelo caminho correto da imagem
                     ),
                     const SizedBox(width: 16),
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                    LimitedBox(
+                      maxWidth: 100,
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    )
                   ],
                 ),
                 Text(
@@ -106,11 +110,14 @@ class LeaderBordCenter extends StatelessWidget {
                           urlImage), // Substitua pelo caminho correto da imagem
                     ),
                     const SizedBox(width: 16),
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                    LimitedBox(
+                        maxWidth: 100,
+                        child: Text(
+                          name,
+                          maxLines: 1,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        )),
                   ],
                 ),
                 Text(

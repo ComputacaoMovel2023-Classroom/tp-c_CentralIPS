@@ -85,9 +85,15 @@ class Top3LeaderBord extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(
-              nameSecond,
-              style: const TextStyle(fontSize: 16),
+            LimitedBox(
+              maxWidth: 80,
+              maxHeight: 40,
+              child: Text(
+                nameSecond,
+                
+                maxLines: 1,
+                style: const TextStyle(fontSize: 16),
+              ),
             ),
             Text(
               '$stepsSecond passos',
@@ -151,10 +157,14 @@ class Top3LeaderBord extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(
-              nameFirst,
-              style: const TextStyle(fontSize: 16),
-            ),
+            LimitedBox(
+                maxWidth: 120,
+                maxHeight: 40,
+                child: Text(
+                  nameFirst,
+                  maxLines: 1,
+                  style: const TextStyle(fontSize: 16),
+                )),
             Text(
               '$stepsFirst passos',
               style: const TextStyle(fontSize: 12),
@@ -217,10 +227,13 @@ class Top3LeaderBord extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(
-              nameThird,
-              style: const TextStyle(fontSize: 16),
-            ),
+            LimitedBox(
+                maxWidth: 80,
+                child: Text(
+                  nameThird,
+                  maxLines: 1,
+                  style: const TextStyle(fontSize: 16),
+                )),
             Text(
               '$stepsThird passos',
               style: const TextStyle(fontSize: 12),
