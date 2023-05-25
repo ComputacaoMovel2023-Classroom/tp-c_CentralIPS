@@ -85,7 +85,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 455),
+                        SizedBox(height: 100),
+                        Container(
+                          child: SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: Image.asset("assets/images/512x512.png")),
+                        ),
                         Text(
                           'Bem Vindo!',
                           style: TextStyle(
