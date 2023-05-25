@@ -18,18 +18,16 @@ class DataStepsDay {
 
   static Future<void> getSteps(
       List<DayAgo> dataSteps, Function onUpdateUI) async {
-    dataSteps.clear();
     final user = FirebaseAuth.instance.currentUser;
     DatabaseReference userRef =
         FirebaseDatabase.instance.ref('ipshealth/${user!.uid}');
 
     userRef.onValue.listen((DatabaseEvent event) {
+      dataSteps.clear();
       final data = event.snapshot.value as Map;
 
-      // list of DayAgo
-
       //cicle for 5 times
-      for (int i = 4; i > 0; i--) {
+      for (int i = 5; i > 0; i--) {
         // get date
         var now = DateTime.now();
         var formatter = DateFormat('yyyy-MM-dd');
@@ -51,12 +49,12 @@ class DataStepsDay {
       String formattedDate = formatter.format(now);
 
       //if the day is not in the database, add it
-      if (data[formattedDate] == null) {
-        userRef.child(formattedDate).set(0);
+      if (data[formattedDate] != null) {
+        //remove the first element
+        dataSteps.removeAt(0);
+        dataSteps.add(DayAgo(formattedDate.substring(5), data[formattedDate]));
       }
-
-      dataSteps
-          .add(DayAgo(formattedDate.substring(5), data[formattedDate] ?? 0));
+      print(dataSteps);
 
       //update UI
       onUpdateUI();
