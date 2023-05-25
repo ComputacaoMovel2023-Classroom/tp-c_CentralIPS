@@ -1,9 +1,9 @@
+import 'package:centralips/Noticias/noticias_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:centralips/Noticias/noticia_list_item.dart';
-import 'package:centralips/Noticias/noticiasUI.dart';
-import 'package:centralips/Ementas/ementasUI.dart';
 
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AdminNoticiasAdd extends StatefulWidget {
   @override
@@ -18,10 +18,27 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
   String subtitle = '';
   String text = '';
   String imageUrl = '';
+  String date = '';
 
   void _submitForm() {
     //BASE DE DADOS - ADICIONAR NOTICIA
+    final db = FirebaseDatabase.instance.ref();
+    final user = FirebaseAuth.instance.currentUser;
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    date = formatter.format(now);
+    NoticiaItem noticiaItem = NoticiaItem(
+      titulo: title,
+      subtitulo: subtitle,
+      imagem: imageUrl,
+      texto: text,
+      author: author,
+      date: date,
+      type: isNews,
+    );
+    db.child('noticias').push().set(noticiaItem.toJson());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

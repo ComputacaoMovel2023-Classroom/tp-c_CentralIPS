@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NoticiasUI extends StatefulWidget {
   NoticiasUI({Key? key});
@@ -70,10 +71,13 @@ class _NoticiasUIState extends State<NoticiasUI> {
       List<NoticiaItem> updatedNoticiaItems = [];
       noticiasData.forEach((key, value) {
         NoticiaItem noticiaItem = NoticiaItem(
-          titulo: value['titulo'] ?? 'OLA',
-          subtitulo: value['subtitulo'] ?? 'OI',
+          titulo: value['titulo'] ?? 'Titulo da noticia',
+          subtitulo: value['subtitulo'] ?? 'Subtitulo da noticia',
           imagem: value['assetName'] ?? 'assets/images/noticia3.png',
-          texto: value['texto'] ?? 'OI',
+          texto: value['texto'] ?? 'O texto da noticia',
+          author: value['author'] ?? 'Ana Matos',
+          date: value['date'] ?? '01/01/2021',
+          type: value['type'] ?? true,
         );
         updatedNoticiaItems.add(noticiaItem);
         // print('noticiaItemArr: ${noticiaItem.titulo}');

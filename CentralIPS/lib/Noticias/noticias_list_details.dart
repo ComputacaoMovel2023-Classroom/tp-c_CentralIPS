@@ -15,26 +15,27 @@ class NoticiasListDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: 200,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/chairsips.png'),
-                  fit: BoxFit.fitWidth,
-                ),
+      body: Stack(
+        children: [
+          Container(
+            height: 200,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/chairsips.png'),
+                fit: BoxFit.fitWidth,
               ),
             ),
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
-                ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30),
               ),
-              margin: const EdgeInsets.only(top: 100),
+            ),
+            margin: const EdgeInsets.only(top: 100),
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 20, left: 20, right: 20, bottom: 0),
@@ -69,65 +70,80 @@ class NoticiasListDetails extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      children: const [
-                        Text(
-                          'Autor: Maria josé',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color.fromARGB(255, 183, 183, 183),
-                          ),
-                          textAlign: TextAlign.start,
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              noticiaItem.author,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 183, 183, 183),
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            Spacer(),
+                            Text(
+                              noticiaItem.date,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 183, 183, 183),
+                              ),
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
                         ),
-                        Spacer(),
-                        Text(
-                          '12/03/2021',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color.fromARGB(255, 183, 183, 183),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            noticiaItem.subtitulo,
+                            style: const TextStyle(
+                              fontSize: 25,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.end,
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: Image(
+                            image: AssetImage(noticiaItem.imagem),
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            noticiaItem.texto,
+                            style: const TextStyle(
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        SizedBox(height: 230),
                       ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(30),
-                      child: Image(
-                        image: AssetImage(noticiaItem.imagem),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        noticiaItem.texto,
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            Positioned(
-                left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: Builder(builder: (BuildContext context) {
-                  return IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  );
-                }),
-              ),
+          ),
+          Positioned(
+              left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: Builder(builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.white),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                );
+              }),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       resizeToAvoidBottomInset: false,
       drawer: const NavBar(),

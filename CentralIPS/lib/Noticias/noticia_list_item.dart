@@ -1,8 +1,12 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class NoticiaListItem extends StatefulWidget {
   NoticiaListItem({Key? key, required this.noticiaItem}) : super(key: key);
@@ -14,6 +18,37 @@ class NoticiaListItem extends StatefulWidget {
 
 class _NoticiaListItemState extends State<NoticiaListItem> {
   bool _isPressed = false;
+  void _submitForm() {
+    //BASE DE DADOS - ADICIONAR NOTICIA
+    /*final db = FirebaseDatabase.instance.ref();
+    final user = FirebaseAuth.instance.currentUser;
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    var date = formatter.format(now);
+    var title = 'title';
+    var subtitle = 'subtitle';
+    var imageUrl = 'title';
+    var text = 'texto';
+    var author = 'author';
+    NoticiaItem noticiaItem = NoticiaItem(
+      titulo: title,
+      subtitulo: subtitle,
+      imagem: 'assets/images/noticiaImg.png',
+      texto: text,
+      author: author,
+      date: date,
+    );
+    db.child('noticias').push().set(noticiaItem.toJson());
+    */
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+                value: context.read<FooterMenuCubit>(),
+                child: AdminNoticiasAdd(),
+              )),
+    );
+  }
 
   void _OnPressed() {
     setState(() {
@@ -86,13 +121,13 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                         ),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 6, top: 13),
                       child: Text(
-                        "Notícia",
+                        widget.noticiaItem.type ? 'Noticia' : 'Evento',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 9,
                           fontWeight: FontWeight.w500,
@@ -130,7 +165,7 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Jun 12, 2021",
+                            widget.noticiaItem.date,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: TextStyle(
@@ -149,6 +184,9 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
+                          TextButton(
+                              onPressed: _submitForm,
+                              child: const Text('Adicionar Noticia')),
                         ],
                       ),
                     ),

@@ -3,12 +3,22 @@ import 'package:centralips/Noticias/noticia_list.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 
-class AdminNoticiasUI extends StatelessWidget {
+class AdminNoticiasUI extends StatefulWidget {
   AdminNoticiasUI({Key? key});
+
+  @override
+  State<AdminNoticiasUI> createState() => _AdminNoticiasUIState();
+}
+
+class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
+  List<NoticiaItem> noticiaItemArr = [];
 /*
+
   List<NoticiaItem> title = [
     "To Kill a Mockingbird",
     "1984",
@@ -20,6 +30,7 @@ class AdminNoticiasUI extends StatelessWidget {
     'Vivamus vitae eros quis arcu pharetra maximus. Donec mollis nisl sed dolor suscipit, eu sollicitudin tellus aliquet. Integer venenatis libero sit amet lectus volutpat, at suscipit nisi dictum. Quisque pellentesque felis sit amet augue commodo elementum. Etiam eget augue a nibh ultrices faucibus vel in sapien. Curabitur lacinia ante quis massa dictum, eu tristique neque tristique. Duis vel bibendum arcu. Proin iaculis ex mauris, vel convallis eros congue vitae. Donec ultricies nulla sed augue consequat aliquam. Fusce eget luctus eros, sit amet pulvinar urna. Aliquam erat volutpat. Suspendisse maximus sed enim sit amet posuere. Nam euismod ipsum vel ante pulvinar, et lobortis quam dignissim.',
     'Pellentesque eget fringilla nulla, in consequat velit. Suspendisse rutrum lectus a nibh sollicitudin, id hendrerit nulla dictum. Sed pharetra a mi in bibendum. Vestibulum quis neque id odio aliquet blandit. Integer vitae nulla eget magna pretium vehicula. Pellentesque in enim eget nisi malesuada varius sit amet euismod nibh. Sed rhoncus imperdiet ipsum, vel pulvinar eros hendrerit nec. Suspendisse at dolor sagittis, finibus nisi et, faucibus dolor. Suspendisse convallis nec dolor eget commodo. Maecenas euismod neque sed lacus posuere, vel varius quam semper. Vivamus eget mauris congue, luctus ex non, maximus ante. Suspendisse vitae quam fermentum, gravida massa sed, fringilla arcu.'
   ];*/
+  /*
   List<NoticiaItem> noticiaItemArr = [
     NoticiaItem(
       titulo: "Noticia 1",
@@ -41,7 +52,48 @@ class AdminNoticiasUI extends StatelessWidget {
       imagem: AssetImage('assets/images/noticia1.png'),
       texto: "Texto da noticia 3",
     ),
-  ];
+  ];*/
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    DatabaseReference databaseRef =
+        FirebaseDatabase.instance.ref().child('noticias');
+    databaseRef.onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+      var noticiasData = snapshot.value as Map;
+      //print('noticiasData: $noticiasData');
+
+      List<NoticiaItem> updatedNoticiaItems = [];
+      noticiasData.forEach((key, value) {
+        NoticiaItem noticiaItem = NoticiaItem(
+          titulo: value['titulo'] ?? 'Titulo da noticia',
+          subtitulo: value['subtitulo'] ?? 'Subtitulo da noticia',
+          imagem: value['assetName'] ?? 'assets/images/noticia3.png',
+          texto: value['texto'] ?? 'texto da noticia',
+          author: value['author'] ?? 'Ana Matos',
+          date: value['date'] ?? '12/12/2021',
+          type: value['type'] ?? true,
+        );
+        updatedNoticiaItems.add(noticiaItem);
+        // print('noticiaItemArr: ${noticiaItem.titulo}');
+        //print('noticiaItemArr: ${noticiaItem.subtitulo}');
+        //print('noticiaItemArr: ${noticiaItem.imagem}');
+        // print('noticiaItemArr: ${noticiaItem.texto}');
+      });
+
+      setState(() {
+        noticiaItemArr = updatedNoticiaItems;
+      });
+      //print('noticiaItemArr: $noticiaItemArr');
+      print('noticiaItemArr: ${noticiaItemArr[0].imagem}}');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +166,7 @@ class AdminNoticiasUI extends StatelessWidget {
                   ),
                   Expanded(
                     child: Column(children: [
-                      AdminNoticiaList(noticiaItemArr: noticiaItemArr.toList()),
+                      AdminNoticiaList(noticiaItemArr: noticiaItemArr),
                     ]),
                   ),
                 ],

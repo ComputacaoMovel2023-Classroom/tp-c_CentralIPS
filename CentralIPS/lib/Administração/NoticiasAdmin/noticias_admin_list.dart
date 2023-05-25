@@ -1,3 +1,4 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list_item.dart';
 import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
                 },
                 itemCount: widget.noticiaItemArr.length,
                 itemBuilder: (context, index) {
-                  return NoticiaListItem(
-                      noticiaItem: widget.noticiaItemArr[index]);
+                  NoticiaItem noticiaItem = widget.noticiaItemArr[index];
+                  return AdminNoticiaListItem(noticiaItem: noticiaItem);
                 },
               ),
               const SizedBox(height: 10),

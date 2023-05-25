@@ -1,7 +1,5 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:flutter/material.dart';
-import 'package:centralips/Noticias/noticia_list_item.dart';
-import 'package:centralips/Noticias/noticiasUI.dart';
 
 class AdminNoticias extends StatelessWidget {
   AdminNoticias({
