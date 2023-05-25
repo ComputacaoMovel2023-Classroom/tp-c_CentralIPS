@@ -8,6 +8,8 @@ class LeaderBordCenterList extends StatelessWidget {
 
   //construct the list of users
   List<LeaderBordCenter> _listOfUsers() {
+    //sort the listOfUsersSteps by steps
+
     List<LeaderBordCenter> list = [];
     for (int i = 3; i < listOfUsersSteps.length; i++) {
       list.add(LeaderBordCenter(

@@ -13,6 +13,8 @@ class LeaderBordCenterFisrtThree extends StatelessWidget {
   UserDataLeaderbord? thirdplace;
 
   void _setPlaces() {
+    //sort the listOfUsersSteps by steps
+
     if (listOfUsersSteps.length >= 3) {
       firstplace = listOfUsersSteps[0];
       secondplace = listOfUsersSteps[1];
@@ -20,35 +22,35 @@ class LeaderBordCenterFisrtThree extends StatelessWidget {
     } else if (listOfUsersSteps.length == 2) {
       firstplace = listOfUsersSteps[0];
       secondplace = listOfUsersSteps[1];
-      thirdplace = UserDataLeaderbord(
+      thirdplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
     } else if (listOfUsersSteps.length == 1) {
       firstplace = listOfUsersSteps[0];
-      secondplace = UserDataLeaderbord(
+      secondplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      thirdplace = UserDataLeaderbord(
+      thirdplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
     } else {
-      firstplace = UserDataLeaderbord(
+      firstplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      secondplace = UserDataLeaderbord(
+      secondplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      thirdplace = UserDataLeaderbord(
+      thirdplace = UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:

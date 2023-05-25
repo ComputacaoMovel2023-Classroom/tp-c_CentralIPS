@@ -4,15 +4,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LeaderBordCenterUser extends StatelessWidget {
-  LeaderBordCenterUser(
-      {super.key,
-      required this.listOfUsersByID,
-      required this.listOfUsersSteps});
+  LeaderBordCenterUser({Key? key, required this.listOfUsersByID})
+      : super(key: key);
 
-  Map<String, int> listOfUsersByID = {};
-  List<UserDataLeaderbord> listOfUsersSteps;
+  Map<String, UserDataLeaderbord> listOfUsersByID;
 
-  List<LeaderBordCenter> _setUser() {
+  LeaderBordCenter _user = const LeaderBordCenter(
+    placeNumber: "---",
+    urlImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
+    name: "Eu",
+    steps: "0",
+  );
+
+  void _setUserCard() {
     //get the user id with firabae auth
 
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -20,31 +25,31 @@ class LeaderBordCenterUser extends StatelessWidget {
     final uid = user!.uid;
 
     //search the user in the list
-    int place = listOfUsersByID[uid] ?? 0;
+    UserDataLeaderbord? userInfo = listOfUsersByID[uid];
 
-    //search the user in the list
-    List<LeaderBordCenter> list = [];
-    for (int i = 0; i < listOfUsersSteps.length; i++) {
-      if (i == place) {
-        list.add(LeaderBordCenter(
-          placeNumber: "${i + 1}º",
-          urlImage: listOfUsersSteps[i].urlImage,
-          name: listOfUsersSteps[i].name,
-          steps: listOfUsersSteps[i].steps.toString(),
-          //exit the loop
-        ));
-        break;
-      }
+    if (userInfo != null) {
+      //get the place number that correpondes of the index of the list
+      // sort the list by steps
+
+      List<UserDataLeaderbord> tempList = listOfUsersByID.values.toList();
+      tempList.sort((a, b) => b.steps.compareTo(a.steps));
+
+      int placeNumber = tempList.indexOf(userInfo) + 1;
+
+      _user = LeaderBordCenter(
+        placeNumber: "$placeNumberº",
+        urlImage: userInfo.urlImage,
+        name: "Eu",
+        steps: userInfo.steps.toString(),
+      );
     }
-
-    return list;
   }
 
   @override
   Widget build(BuildContext context) {
-    _setUser();
+    _setUserCard();
     return Column(
-      children: _setUser(),
+      children: [_user],
     );
   }
 }

@@ -3,8 +3,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
 class LoadDataLeaderbord {
-  static void loadData(List<UserDataLeaderbord> listOfUsersData,
-      Map<String, int> listOfUsersSteps, Function onUpdateUI) {
+  static void loadData(
+      //List<UserDataLeaderbord> listOfUsersData,
+      Map<String, UserDataLeaderbord> listOfUsersSteps,
+      Function onUpdateUI) {
     //firebase
     DatabaseReference userRef = FirebaseDatabase.instance.ref('ipshealth');
 
@@ -33,24 +35,24 @@ class LoadDataLeaderbord {
             steps += day.value as int;
           }
         }
+
         //add to the map
-        listOfUsersSteps[user.key] = steps;
+        listOfUsersSteps[user.key] = UserDataLeaderbord(steps: steps);
       }
 
       //sort the map by the steps
       listOfUsersSteps = Map.fromEntries(listOfUsersSteps.entries.toList()
-        ..sort((e1, e2) => e2.value - e1.value));
+        ..sort((e1, e2) => e2.value.steps - e1.value.steps));
 
-      print(listOfUsersSteps);
-
-      saveData(listOfUsersData, listOfUsersSteps, onUpdateUI);
+      saveData(listOfUsersSteps, onUpdateUI);
     });
   }
 
   //method to save in a list the name, steps and foto of the user by the map listOfUsersSteps
-  static void saveData(List<UserDataLeaderbord> listOfUsersData,
-      Map<String, int> listOfUsersSteps, Function onUpdateUI) {
-    listOfUsersData.clear();
+  static void saveData(
+      //ist<UserDataLeaderbord> listOfUsersData,
+      Map<String, UserDataLeaderbord> listOfUsersSteps,
+      Function onUpdateUI) {
     //for each user in the map
     //get the name, steps and foto
     //add to the list
@@ -67,11 +69,11 @@ class LoadDataLeaderbord {
         String name = data['name'] ?? 'User';
         String photo = data['photo'] ??
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
-        listOfUsersData.add(
-            UserDataLeaderbord(name: name, steps: user.value, urlImage: photo));
+        //listOfUsersData.add(
 
+        listOfUsersSteps[user.key]!.insertNameAndUrlImage(name, photo);
         //sort the list by the steps
-        listOfUsersData.sort((a, b) => b.steps.compareTo(a.steps));
+        // listOfUsersData.sort((a, b) => b.steps.compareTo(a.steps));
 
         onUpdateUI();
       });

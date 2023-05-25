@@ -17,13 +17,14 @@ class LeaderBord extends StatefulWidget {
 
 class _LeaderBordState extends State<LeaderBord> {
   //define the map
+
+  Map<String, UserDataLeaderbord> listOfUsersByID = {};
   List<UserDataLeaderbord> listOfUsersSteps = [];
-  Map<String, int> listOfUsersByID = {};
 
   void initialList() {
     //insert the list with default data
     for (int i = 0; i < 10; i++) {
-      listOfUsersSteps.add(UserDataLeaderbord(
+      listOfUsersSteps.add(UserDataLeaderbord.all(
           name: "User",
           steps: 0,
           urlImage:
@@ -35,13 +36,15 @@ class _LeaderBordState extends State<LeaderBord> {
   void initState() {
     super.initState();
     initialList();
-    List<UserDataLeaderbord> temslist = [];
-    Map<String, int> tempById = {};
+    Map<String, UserDataLeaderbord> tempById = {};
 
-    LoadDataLeaderbord.loadData(temslist, tempById, () {
+    LoadDataLeaderbord.loadData(tempById, () {
       setState(() {
-        listOfUsersSteps = temslist;
         listOfUsersByID = tempById;
+
+        //get the list of the users steps sorted
+        listOfUsersSteps = listOfUsersByID.values.toList();
+        listOfUsersSteps.sort((a, b) => b.steps.compareTo(a.steps));
       });
     });
   }
@@ -126,7 +129,8 @@ class _LeaderBordState extends State<LeaderBord> {
                         Padding(
                           padding: const EdgeInsets.only(top: 50),
                           child: Top3LeaderBordList(
-                              listOfUsersSteps: listOfUsersSteps),
+                            listOfUsersSteps: listOfUsersSteps,
+                          ),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 50, bottom: 16),
@@ -139,8 +143,8 @@ class _LeaderBordState extends State<LeaderBord> {
                           ),
                         ),
                         LeaderBordCenterUser(
-                            listOfUsersByID: listOfUsersByID,
-                            listOfUsersSteps: listOfUsersSteps),
+                          listOfUsersByID: listOfUsersByID,
+                        ),
                         const Divider(
                           color: Colors.black,
                           height: 0,
