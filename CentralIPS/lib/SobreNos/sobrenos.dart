@@ -190,7 +190,7 @@ class SobreNos extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20),
                                   image: const DecorationImage(
                                     image:
-                                        AssetImage("assets/images/tomas.png"),
+                                        AssetImage("assets/images/tomasbg.png"),
                                     fit: BoxFit.cover,
                                   )),
                               child: Column(

@@ -1,6 +1,7 @@
 import 'package:centralips/Profile/profileOptionWidget.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class Profile extends StatefulWidget {
 class ProfileState extends State<Profile> {
   bool editable = false;
   String editableText = "Editar Perfil";
+  bool loadedData = false;
   @override
   void initState() {
     super.initState();
@@ -58,6 +60,7 @@ class ProfileState extends State<Profile> {
         }
       });
     });
+    loadedData = true;
   }
 
   String mail = "A carregar...";
@@ -152,26 +155,43 @@ class ProfileState extends State<Profile> {
                           option: "Email",
                           value: mail,
                           editable: editable,
+                          validator: emailValidator,
+                          textInputType: TextInputType.emailAddress,
                         ),
                         ProfileOptionWidget(
-                            option: "Número",
-                            value: number,
-                            editable: editable),
+                          option: "Número",
+                          value: number,
+                          editable: editable,
+                          validator: numberValidator,
+                          textInputType: TextInputType.number,
+                        ),
                         ProfileOptionWidget(
-                            option: "Função", value: role, editable: editable),
+                          option: "Função",
+                          value: role,
+                          editable: false,
+                          validator: userNameValidator,
+                        ),
                         ProfileOptionWidget(
                           option: "Nome de Utilizador",
                           value: userName,
                           editable: editable,
+                          validator: userNameValidator,
+                          textInputType: TextInputType.name,
                         ),
                         ProfileOptionWidget(
-                            option: "Data de Nascimento",
-                            value: birthDate.toString(),
-                            editable: editable),
+                          option: "Data de Nascimento",
+                          value: birthDate.toString(),
+                          editable: editable,
+                          validator: birthDateValidator,
+                          textInputType: TextInputType.datetime,
+                          isDate: true,
+                        ),
                         ProfileOptionWidget(
                           option: "Género",
                           value: gender,
                           editable: editable,
+                          validator: userNameValidator,
+                          textInputType: TextInputType.name,
                         )
                       ],
                     ),
@@ -226,9 +246,50 @@ class ProfileState extends State<Profile> {
           ],
         ),
       )),
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationExample(),
     );
   }
+
+  String? emailValidator(value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    } else if (!EmailValidator.validate(value)) {
+      return 'Please enter a valid email address';
+    }
+    return null; // Return null if the validation passes
+  }
+
+  String? numberValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your number';
+    } else if (value.length == 9) {
+      return 'O seu número deve ter 9 dígitos';
+    }
+    return null; // Return null if the validation passes
+  }
+
+  String? userNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null; // Return null if the validation passes
+  }
+
+  String? birthDateValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a date';
+    }
+    final currentDate = DateTime.now();
+    final enteredDate = DateTime.parse(value);
+    if (enteredDate.isBefore(currentDate)) {
+      return 'Date cannot be in the future';
+    }
+    return null;
+  }
+
+  void verifyProfileValues() {}
+
+  void submitChangesToDatabase() {}
 }
