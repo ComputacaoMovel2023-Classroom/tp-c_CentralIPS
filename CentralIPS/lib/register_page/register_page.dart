@@ -349,6 +349,17 @@ Widget buildRegisterBtn(BuildContext context) {
             'role': _roleController.text,
           });
 
+          //create ipshealth user
+          final ipshealthUserRef = FirebaseDatabase.instance
+              .ref('ipshealth/${userCredential.user?.uid}');
+
+          //set a data of today
+          final DateTime now = DateTime.now();
+          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+          final String formatted = formatter.format(now);
+
+          await ipshealthUserRef.set({formatted: 0});
+
           // Imprima o UID do usuário recém-criado
           print(userCredential.user?.uid);
 
