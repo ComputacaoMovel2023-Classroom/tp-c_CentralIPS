@@ -8,11 +8,29 @@ class NoticiaItem extends StatelessWidget {
     required this.subtitulo,
     required this.imagem,
     required this.texto,
+    required this.author,
+    required this.date,
+    required this.type,
   });
   final String titulo;
   final String subtitulo;
   final String imagem;
   final String texto;
+  final String author;
+  final String date;
+  final bool type;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'titulo': titulo,
+      'subtitulo': subtitulo,
+      'imagem': imagem,
+      'texto': texto,
+      'autor': author,
+      'date': date,
+      'type': type,
+    };
+  }
 
   @override
   Widget build(BuildContext context) {

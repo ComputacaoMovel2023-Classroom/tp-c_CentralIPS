@@ -3,6 +3,7 @@ import 'package:centralips/register_page/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:centralips/WelcomeScreen/welcome_screen.dart';
 import 'Sidebar/NavBar.dart';
 import 'Cubit/index_cubit.dart';
 import 'firebase_options.dart';
@@ -26,7 +27,7 @@ class MyAppDemo extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const RegisterPage(),
+      home: WelcomeScreen(),
     );
   }
 }
