@@ -343,6 +343,8 @@ Widget buildRegisterBtn(BuildContext context) {
           userCredential.user?.updateDisplayName(_nameController.text);
 
           await userRef.set({
+            'name': _nameController.text,
+            'photo': _photoController.text,
             'number': _numberController.text,
             'birthdate': _birthdateController.text,
             'gender': _genderController.text,

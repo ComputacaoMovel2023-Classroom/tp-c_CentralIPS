@@ -1,13 +1,52 @@
 import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_fisrt_three.dart';
 import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_list.dart';
 import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_user.dart';
+import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
 import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../Sidebar/NavBar.dart';
+import 'load/load_data_leaderbord.dart';
 
-class LeaderBord extends StatelessWidget {
+class LeaderBord extends StatefulWidget {
   const LeaderBord({super.key});
+
+  @override
+  _LeaderBordState createState() => _LeaderBordState();
+}
+
+class _LeaderBordState extends State<LeaderBord> {
+  //define the map
+  List<UserDataLeaderbord> listOfUsersSteps = [];
+  Map<String, int> listOfUsersByID = {};
+
+  void initialList() {
+    //insert the list with default data
+    for (int i = 0; i < 10; i++) {
+      listOfUsersSteps.add(UserDataLeaderbord(
+          name: "User",
+          steps: 0,
+          urlImage:
+              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw"));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialList();
+    List<UserDataLeaderbord> temslist = [];
+    Map<String, int> tempById = {};
+
+    LoadDataLeaderbord.loadData(temslist, tempById, () {
+      setState(() {
+        listOfUsersSteps = temslist;
+        listOfUsersByID = tempById;
+      });
+    });
+  }
+
+  //mehtod to construct the list of the users
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +123,10 @@ class LeaderBord extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 50),
-                          child: Top3LeaderBordList(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Top3LeaderBordList(
+                              listOfUsersSteps: listOfUsersSteps),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 50, bottom: 16),
@@ -98,7 +138,9 @@ class LeaderBord extends StatelessWidget {
                             endIndent: 15,
                           ),
                         ),
-                        const LeaderBordCenterUser(),
+                        LeaderBordCenterUser(
+                            listOfUsersByID: listOfUsersByID,
+                            listOfUsersSteps: listOfUsersSteps),
                         const Divider(
                           color: Colors.black,
                           height: 0,
@@ -109,9 +151,12 @@ class LeaderBord extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 50),
                           child: Column(
-                            children: const [
-                              LeaderBordCenterFisrtThree(),
-                              LeaderBordCenterList(),
+                            children: [
+                              LeaderBordCenterFisrtThree(
+                                  listOfUsersSteps: listOfUsersSteps),
+                              LeaderBordCenterList(
+                                listOfUsersSteps: listOfUsersSteps,
+                              ),
                             ],
                           ),
                         ),

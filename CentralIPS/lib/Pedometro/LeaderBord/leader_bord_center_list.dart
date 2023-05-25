@@ -1,63 +1,29 @@
 import 'package:centralips/Pedometro/LeaderBord/leader_bord_center.dart';
+import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
 import 'package:flutter/material.dart';
 
 class LeaderBordCenterList extends StatelessWidget {
-  const LeaderBordCenterList({super.key});
+  LeaderBordCenterList({super.key, required this.listOfUsersSteps});
+  List<UserDataLeaderbord> listOfUsersSteps;
+
+  //construct the list of users
+  List<LeaderBordCenter> _listOfUsers() {
+    List<LeaderBordCenter> list = [];
+    for (int i = 3; i < listOfUsersSteps.length; i++) {
+      list.add(LeaderBordCenter(
+        placeNumber: "${i + 1}º",
+        urlImage: listOfUsersSteps[i].urlImage,
+        name: listOfUsersSteps[i].name,
+        steps: listOfUsersSteps[i].steps.toString(),
+      ));
+    }
+    return list;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        LeaderBordCenter(
-          placeNumber: "4º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "5º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "6º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "1º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "1º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "1º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-        LeaderBordCenter(
-          placeNumber: "1º",
-          urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw",
-          name: "Rui",
-          steps: "100",
-        ),
-      ],
+      children: _listOfUsers(),
     );
   }
 }
