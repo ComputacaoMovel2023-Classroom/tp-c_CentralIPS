@@ -472,8 +472,6 @@ Widget buildRegisterBtn(BuildContext context, GlobalKey<FormState> formKey) {
 
             //if is all valid send a verification email
             await userCredential.user?.sendEmailVerification();
-
-            //show a dialog to confirm the email
           } on FirebaseAuthException catch (e) {
             if (e.code == 'weak-password') {
               showDialog(
@@ -493,6 +491,7 @@ Widget buildRegisterBtn(BuildContext context, GlobalKey<FormState> formKey) {
                   );
                 },
               );
+              return;
             } else if (e.code == 'email-already-in-use') {
               showDialog(
                 context: context,
@@ -512,10 +511,13 @@ Widget buildRegisterBtn(BuildContext context, GlobalKey<FormState> formKey) {
                   );
                 },
               );
+              return;
             }
           } catch (e) {
             print(e);
           }
+//wait for check if the email is not being use
+
           // If the form is valid, display a Snackbar.
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Email De verificação enviado!')),
