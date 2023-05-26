@@ -13,6 +13,7 @@ class ProfileOptionWidget extends StatefulWidget {
   bool isDate;
   TextInputType textInputType;
   String? Function(String?)? validator;
+  TextEditingController controller;
 
   ProfileOptionWidget(
       {Key? key,
@@ -20,6 +21,7 @@ class ProfileOptionWidget extends StatefulWidget {
       required this.value,
       required this.editable,
       required this.validator,
+      required this.controller,
       this.textInputType = TextInputType.text,
       this.isDate = false})
       : super(key: key);
@@ -29,14 +31,6 @@ class ProfileOptionWidget extends StatefulWidget {
 }
 
 class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
-  TextEditingController optionController = TextEditingController();
-
-  @override
-  void dispose() {
-    optionController.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +67,7 @@ class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
                           keyboardType: widget.textInputType,
                           validator: widget.validator,
                           enabled: widget.editable,
-                          controller: optionController,
+                          controller: widget.controller,
                           decoration: InputDecoration(
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(),
@@ -105,14 +99,14 @@ class ProfileOptionWidgetState extends State<ProfileOptionWidget> {
                               // Format the date to show only the date part
                               final formattedDate =
                                   DateFormat('yyyy-MM-dd').format(picked);
-                              optionController.text = formattedDate;
+                              widget.controller.text = formattedDate;
                             }
                           },
                           child: AbsorbPointer(
                             child: TextField(
                               enabled: widget.editable,
                               textAlign: TextAlign.center,
-                              controller: optionController,
+                              controller: widget.controller,
                               keyboardType: TextInputType.datetime,
                               style: const TextStyle(color: Colors.black87),
                               decoration: InputDecoration(
