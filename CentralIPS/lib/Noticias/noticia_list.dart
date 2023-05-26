@@ -46,7 +46,7 @@ class _NoticiasListState extends State<NoticiasList> {
                 itemCount: widget.noticiaItemArr.length,
                 itemBuilder: (context, index) {
                   NoticiaItem noticiaItem = widget.noticiaItemArr[index];
-                  print('AOAO: ${noticiaItem.titulo}');
+                  //print('AOAO: ${noticiaItem.titulo}');
                   return NoticiaListItem(
                     noticiaItem: noticiaItem,
                   );

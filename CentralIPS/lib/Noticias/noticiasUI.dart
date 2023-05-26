@@ -3,7 +3,7 @@ import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
         noticiaItemArr = updatedNoticiaItems;
       });
       //print('noticiaItemArr: $noticiaItemArr');
-      print('noticiaItemArr: ${noticiaItemArr[0].imagem}}');
+      //print('noticiaItemArr: ${noticiaItemArr[0].imagem}}');
     });
   }
 

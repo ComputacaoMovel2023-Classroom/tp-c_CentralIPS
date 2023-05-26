@@ -1,3 +1,4 @@
+import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';

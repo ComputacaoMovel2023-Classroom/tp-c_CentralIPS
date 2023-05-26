@@ -1,11 +1,19 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_list.dart';
+import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class RefeitorioClass extends StatelessWidget {
+class RefeitorioClass extends StatefulWidget {
   RefeitorioClass({super.key});
+  @override
+  State<RefeitorioClass> createState() => _RefeitorioClassState();
+}
 
-  final List<String> sopas = [
+class _RefeitorioClassState extends State<RefeitorioClass> {
+  List<DailyEmenta> weekdayMeals = [];
+  /*final List<String> sopas = [
     'Sopa de legumes',
     'Creme de abóbora',
     'Caldo verde',
@@ -32,13 +40,12 @@ class RefeitorioClass extends StatelessWidget {
     'Quiche de tofu',
     'Hambúrguer de grão-de-bico',
     'Arroz de legumes'
-  ];
+  ];*/
+
   @override
   Widget build(BuildContext context) {
     return EmentasList(
-        sopas: sopas,
-        peixes: peixes,
-        carnes: carnes,
-        vegetarianos: vegetarianos);
+      type: "Refeitorio",
+    );
   }
 }

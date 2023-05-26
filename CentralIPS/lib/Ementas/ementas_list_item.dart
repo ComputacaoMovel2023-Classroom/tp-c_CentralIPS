@@ -1,23 +1,16 @@
+import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:flutter/material.dart';
 
 class EmentasListItem extends StatefulWidget {
   final IconData icon;
-  final String name;
-  final String date;
-  final String sopa;
-  final String peixe;
-  final String carne;
-  final String vegetariano;
+  final String weekday;
+  final DailyEmenta weekdayMeals;
 
   const EmentasListItem({
     Key? key,
     required this.icon,
-    required this.name,
-    required this.date,
-    required this.sopa,
-    required this.peixe,
-    required this.carne,
-    required this.vegetariano,
+    required this.weekday,
+    required this.weekdayMeals,
   }) : super(key: key);
 
   @override
@@ -50,7 +43,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return ListTile(
                     leading: Icon(widget.icon),
-                    title: Text(widget.name),
+                    title: Text(widget.weekday),
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -58,7 +51,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                         Column(
                           children: [
                             Icon(Icons.calendar_month_outlined),
-                            Text(widget.date),
+                            Text(widget.weekdayMeals.date),
                           ],
                         ),
                       ],
@@ -81,7 +74,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Sopa: ${widget.sopa}',
+                              'Sopa: ${widget.weekdayMeals.sopa}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -94,7 +87,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Peixe: ${widget.peixe}',
+                              'Peixe: ${widget.weekdayMeals.peixe}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -107,7 +100,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Prato Carne: ${widget.carne}',
+                              'Prato Carne: ${widget.weekdayMeals.carne}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -120,7 +113,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Vegan: ${widget.vegetariano}',
+                              'Vegan: ${widget.weekdayMeals.vegetariano}',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
