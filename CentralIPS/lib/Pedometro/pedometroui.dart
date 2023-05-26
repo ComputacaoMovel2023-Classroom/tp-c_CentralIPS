@@ -38,12 +38,18 @@ class _PedometroState extends State<Pedometro> {
   void initState() {
     super.initState();
     initPlatformState();
+    _setImageAndName();
 
     getGoalSteps().then((value) => stepsGoal = value);
     getGoalCalories().then((value) => calorieGoal = value);
 
     //wait for the data to be loaded
     loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void loadData() {
@@ -161,6 +167,22 @@ class _PedometroState extends State<Pedometro> {
 
   int stepsGoal = 1;
   int calorieGoal = 1;
+
+  String _name = 'A carregar...';
+  String _photoUrl =
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png';
+
+  //set the image and photo of the user
+  void _setImageAndName() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        _name = user.displayName!;
+        _photoUrl = user.photoURL!;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     PermissionStatus result;
@@ -211,15 +233,15 @@ class _PedometroState extends State<Pedometro> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(children: const <Widget>[
+                    Row(children: <Widget>[
                       CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage('assets/images/moura.jpg'),
+                        backgroundImage: NetworkImage(_photoUrl),
                       ),
-                      Padding(padding: EdgeInsets.all(10)),
+                      const Padding(padding: EdgeInsets.all(10)),
                       Text(
-                        "Pedro Moura",
-                        style: TextStyle(
+                        _name,
+                        style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),

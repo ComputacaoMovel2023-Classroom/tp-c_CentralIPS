@@ -185,6 +185,14 @@ class MapSampleState extends State<MapSample> {
                           //make the edges round
                           height: MediaQuery.of(context).size.height,
                           child: GoogleMap(
+                            cameraTargetBounds: CameraTargetBounds(LatLngBounds(
+                              southwest: const LatLng(
+                                  38.51678399913649, -8.843643482054912),
+                              northeast: const LatLng(
+                                  38.524325550909595, -8.836951830113582),
+                            )),
+                            minMaxZoomPreference:
+                                const MinMaxZoomPreference(15, 20),
                             myLocationButtonEnabled: true,
                             padding: const EdgeInsets.only(
                               top: 80.0,

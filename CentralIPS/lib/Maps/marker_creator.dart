@@ -1,7 +1,9 @@
 //class to create a marker
 
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerCreator {
@@ -64,9 +66,14 @@ class MarkerCreator {
   static void redirectPage(String service, BuildContext context) {
     //in hear will be a switch case to redirect to the correct page
     if (service.contains("Admin")) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+      context.read<FooterMenuCubit>().selectItem(2);
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: context.read<FooterMenuCubit>(),
+                  child: const HomePage(),
+                )),
       );
     }
   }

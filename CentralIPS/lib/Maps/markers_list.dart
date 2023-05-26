@@ -94,7 +94,7 @@ class MarkersList {
           38.522836, -8.841216, "Divisão Académica", context),
       MarkerCreator.createMarkerRedirectService(
           "12", "IPStartup", 38.520591, -8.837441, "IPStartup", context),
-      MarkerCreator.createMarkerRedirectService("12", "Clube Desportivo",
+      MarkerCreator.createMarkerRedirectService("13", "Clube Desportivo",
           38.519745, -8.835978, "Clube Desportivo", context),
     };
   }

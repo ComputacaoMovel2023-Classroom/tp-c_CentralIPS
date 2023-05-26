@@ -28,7 +28,7 @@ class _LeaderBordState extends State<LeaderBord> {
           name: "User",
           steps: 0,
           urlImage:
-              "https://media.licdn.com/dms/image/C4E03AQEMpP3u9yXiLw/profile-displayphoto-shrink_800_800/0/1618735950494?e=2147483647&v=beta&t=OKKrkGxfU6BtEgN7hcjCL3uSdYQtpEFMBhqcY3yTRhw"));
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"));
     }
   }
 
