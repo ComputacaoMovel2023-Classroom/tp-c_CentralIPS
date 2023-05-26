@@ -17,6 +17,12 @@ class ProfileState extends State<Profile> {
   bool editable = false;
   String editableText = "Editar Perfil";
   bool loadedData = false;
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _numberController = TextEditingController();
+  final _birthdateController = TextEditingController();
+  final _genderController = TextEditingController();
+  final _roleController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -114,16 +120,34 @@ class ProfileState extends State<Profile> {
                         SizedBox(
                           width: 200,
                           child: ElevatedButton(
-                              onPressed: () => {
-                                    setState(() {
-                                      editable = !editable;
-                                      if (editable) {
-                                        editableText = "Salvar Perfil";
-                                      } else {
-                                        editableText = "Editar Perfil";
+                              onPressed: () {
+                                setState(() {
+                                  editable = !editable;
+                                  if (editable) {
+                                    editableText = "Salvar Perfil";
+                                  } else {
+                                    editableText = "Editar Perfil";
+                                    try {
+                                      final user =
+                                          FirebaseAuth.instance.currentUser;
+                                      final userRef = FirebaseDatabase.instance
+                                          .ref()
+                                          .child('users')
+                                          .child(user!.uid);
+
+                                      setTextControllerValuesToDatabase(
+                                          user, userRef);
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'email-already-in-use') {
+                                        print(
+                                            'O e-mail fornecido já está em uso por outra conta.');
                                       }
-                                    })
-                                  },
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  }
+                                });
+                              },
                               style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(Colors.black)),
@@ -152,31 +176,33 @@ class ProfileState extends State<Profile> {
                          * Opções de Perfil
                          */
                         ProfileOptionWidget(
+                          option: "Nome de Utilizador",
+                          value: userName,
+                          editable: editable,
+                          validator: userNameValidator,
+                          controller: _nameController,
+                          textInputType: TextInputType.name,
+                        ),
+                        ProfileOptionWidget(
                           option: "Email",
                           value: mail,
-                          editable: editable,
+                          editable: false,
                           validator: emailValidator,
-                          textInputType: TextInputType.emailAddress,
+                          controller: _emailController,
                         ),
                         ProfileOptionWidget(
                           option: "Número",
                           value: number,
-                          editable: editable,
+                          editable: false,
                           validator: numberValidator,
-                          textInputType: TextInputType.number,
+                          controller: _numberController,
                         ),
                         ProfileOptionWidget(
                           option: "Função",
                           value: role,
                           editable: false,
                           validator: userNameValidator,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Nome de Utilizador",
-                          value: userName,
-                          editable: editable,
-                          validator: userNameValidator,
-                          textInputType: TextInputType.name,
+                          controller: _roleController,
                         ),
                         ProfileOptionWidget(
                           option: "Data de Nascimento",
@@ -184,6 +210,7 @@ class ProfileState extends State<Profile> {
                           editable: editable,
                           validator: birthDateValidator,
                           textInputType: TextInputType.datetime,
+                          controller: _birthdateController,
                           isDate: true,
                         ),
                         ProfileOptionWidget(
@@ -191,6 +218,7 @@ class ProfileState extends State<Profile> {
                           value: gender,
                           editable: editable,
                           validator: userNameValidator,
+                          controller: _genderController,
                           textInputType: TextInputType.name,
                         )
                       ],
@@ -252,6 +280,22 @@ class ProfileState extends State<Profile> {
     );
   }
 
+  void setTextControllerValuesToDatabase(
+      User user, DatabaseReference userRef) async {
+    if (_nameController.text.isNotEmpty) {
+      await userRef.update({'name': _nameController.text});
+      await user.updateDisplayName(_nameController.text);
+    }
+
+    if (_birthdateController.text.isNotEmpty) {
+      await userRef.update({'birthdate': _birthdateController.text});
+    }
+
+    if (_genderController.text.isNotEmpty) {
+      await userRef.update({'gender': _genderController.text});
+    }
+  }
+
   String? emailValidator(value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
@@ -288,8 +332,4 @@ class ProfileState extends State<Profile> {
     }
     return null;
   }
-
-  void verifyProfileValues() {}
-
-  void submitChangesToDatabase() {}
 }
