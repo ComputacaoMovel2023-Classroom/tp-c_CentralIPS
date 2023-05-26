@@ -27,9 +27,10 @@ extension CategoryExtension on Category {
     }
   }
 
-  String displayString() => name;
-  
+
 }
+
+
 List<String> getCategoryNames() {
   return Category.values.map((category) => category.name).toList();
 }
