@@ -1,14 +1,54 @@
+import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class EmentasList extends StatelessWidget {
+class EmentasList extends StatefulWidget {
   EmentasList({
+    required this.type,
     Key? key,
-    required this.sopas,
-    required this.peixes,
-    required this.carnes,
-    required this.vegetarianos,
   }) : super(key: key);
+
+  final String type;
+  @override
+  State<EmentasList> createState() => _EmentasListState();
+}
+
+class _EmentasListState extends State<EmentasList> {
+  List<DailyEmenta> weekdayMeals = [
+    DailyEmenta(
+        date: '01/01/2021',
+        sopa: 'A carregar...',
+        peixe: 'A carregar...',
+        carne: 'A carregar...',
+        vegetariano: 'A carregar...'),
+    DailyEmenta(
+        date: '01/01/2021',
+        sopa: 'A carregar...',
+        peixe: 'A carregar...',
+        carne: 'A carregar...',
+        vegetariano: 'A carregar...'),
+    DailyEmenta(
+        date: '01/01/2021',
+        sopa: 'A carregar...',
+        peixe: 'A carregar...',
+        carne: 'A carregar...',
+        vegetariano: 'A carregar...'),
+    DailyEmenta(
+        date: '01/01/2021',
+        sopa: 'A carregar...',
+        peixe: 'A carregar...',
+        carne: 'A carregar...',
+        vegetariano: 'A carregar...'),
+    DailyEmenta(
+        date: '01/01/2021',
+        sopa: 'A carregar...',
+        peixe: 'A carregar...',
+        carne: 'A carregar...',
+        vegetariano: 'A carregar...'),
+  ];
 
   final List<String> diasSemana = [
     'segunda-feira',
@@ -17,10 +57,41 @@ class EmentasList extends StatelessWidget {
     'quinta-feira',
     'sexta-feira'
   ];
-  final List<String> sopas;
-  final List<String> peixes;
-  final List<String> carnes;
-  final List<String> vegetarianos;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() {
+    final user = FirebaseAuth.instance.currentUser;
+    DatabaseReference databaseRef =
+        FirebaseDatabase.instance.ref().child(widget.type);
+    databaseRef.onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+      var barmeals = snapshot.value as Map;
+      //print('noticiasData: $noticiasData');
+
+      List<DailyEmenta> updatedDailyEmenta = [];
+      barmeals.forEach((key, value) {
+        DailyEmenta dailyEmenta = DailyEmenta(
+          date: value['date'] ?? '01/01/2021',
+          sopa: value['sopa'] ?? 'Sopa',
+          peixe: value['peixe'] ?? 'Peixe',
+          carne: value['carne'] ?? 'Carne',
+          vegetariano: value['vegetariano'] ?? 'Vegetariano',
+        );
+        updatedDailyEmenta.add(dailyEmenta);
+      });
+
+      setState(() {
+        weekdayMeals = updatedDailyEmenta;
+      });
+    });
+    //print('TAMANHO ARRAY: ${weekdayMeals.length}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,19 +121,12 @@ class EmentasList extends StatelessWidget {
                 },
                 itemCount: diasSemana.length,
                 itemBuilder: (context, index) {
-                  String sopa = sopas[index];
-                  String peixe = peixes[index];
-                  String carne = carnes[index];
-                  String vegetariano = vegetarianos[index];
+                  // print('weekdayMeals: ${weekdayMeals.length}}');
 
                   return EmentasListItem(
                     icon: Icons.restaurant,
-                    name: diasSemana[index],
-                    date: '12/3',
-                    sopa: sopa,
-                    peixe: peixe,
-                    carne: carne,
-                    vegetariano: vegetariano,
+                    weekday: diasSemana[index],
+                    weekdayMeals: weekdayMeals[index],
                   );
                 },
               ),

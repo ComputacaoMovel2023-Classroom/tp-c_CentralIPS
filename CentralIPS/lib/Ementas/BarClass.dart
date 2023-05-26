@@ -1,9 +1,18 @@
+import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class BarClass extends StatelessWidget {
+class BarClass extends StatefulWidget {
   BarClass({Key? key}) : super(key: key);
+  @override
+  State<BarClass> createState() => _BarClassState();
+}
 
+class _BarClassState extends State<BarClass> {
+  List<DailyEmenta> weekdayMeals = [];
+  /*
   final List<String> sopas = [
     'Sopa de legumes',
     'Creme de abóbora',
@@ -31,7 +40,8 @@ class BarClass extends StatelessWidget {
     'Quiche de tofu',
     'Hambúrguer de grão-de-bico',
     'Arroz de legumes'
-  ];
+  ];*/
+
   @override
   Widget build(BuildContext context) {
     return
@@ -49,10 +59,9 @@ class BarClass extends StatelessWidget {
           ),
         ],
       ),*/
+
         EmentasList(
-            sopas: sopas,
-            peixes: peixes,
-            carnes: carnes,
-            vegetarianos: vegetarianos);
+      type: "Bar",
+    );
   }
 }

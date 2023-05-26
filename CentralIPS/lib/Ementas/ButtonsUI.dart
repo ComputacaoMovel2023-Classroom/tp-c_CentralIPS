@@ -31,8 +31,8 @@ class ButtonsUIState extends State<ButtonUI> {
                 icon: Icon(Icons.food_bank),
               ),
             ],
-            labelColor: const Color.fromARGB(255, 99, 254, 104),
-            indicatorColor: const Color.fromARGB(255, 77, 247, 165),
+            labelColor: Color.fromARGB(255, 26, 165, 31),
+            indicatorColor: Color.fromARGB(255, 16, 242, 84),
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;

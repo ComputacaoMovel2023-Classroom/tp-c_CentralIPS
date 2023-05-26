@@ -1,9 +1,9 @@
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../homePage/home_page_ui.dart';
 import '../register_page/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -98,14 +98,6 @@ Widget buildLoginBtn(BuildContext context) {
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
           );
-          // Navigate to the home page
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                      create: (_) => FooterMenuCubit(),
-                      child: const HomePage() //co z<nst SplashScreen(),
-                      )));
         } catch (e) {
           print(e);
           showDialog(
@@ -125,7 +117,53 @@ Widget buildLoginBtn(BuildContext context) {
               );
             },
           );
+          return;
         }
+
+        if (_emailController.text.trim().isNotEmpty &&
+            _passwordController.text.trim().isNotEmpty) {
+          final user = auth.currentUser;
+
+          if (user != null) {
+            if (user.email!.contains("admincm")) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                          create: (_) => FooterMenuCubit(),
+                          child: const HomePage() //co z<nst SplashScreen(),
+                          )));
+            } else if (user.emailVerified) {
+              // Navigate to the home page
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                          create: (_) => FooterMenuCubit(),
+                          child: const HomePage() //co z<nst SplashScreen(),
+                          )));
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Erro'),
+                    content: const Text('Email não confirmado'),
+                    actions: [
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          }
+        }
+        //get user is trying to login
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
