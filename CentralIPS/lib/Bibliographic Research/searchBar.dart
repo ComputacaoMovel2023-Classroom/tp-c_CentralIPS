@@ -71,94 +71,129 @@ class SearchBarState extends State<SearchBar> {
                 itemCount: library.size(),
                 itemBuilder: (context, index) {
                   final book = library.getBook(index);
-                  return Card(
-                      elevation: 4, // Controls the shadow depth
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            8), // Sets the shape of corners
-                      ),
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      surfaceTintColor: Colors.white,
-                      child: InkWell(
-                        onTap: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => BlocProvider.value(
-                                    value: context.read<FooterMenuCubit>(),
-                                    child: BookPage(book: book))),
-                          )
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 150,
-                                width: 100,
-                                child: Image.network(
-                                  book.urlImage,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        book.name,
-                                        style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        softWrap: true,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.account_circle_rounded,
-                                                  size: 18,
-                                                ),
-                                                const Padding(
-                                                    padding:
-                                                        EdgeInsets.only(left: 5)),
-                                                Text(
-                                                  "${book.authors.elementAt(0)}",
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.location_on,
-                                                  size: 18,
-                                                ),
-                                                const Padding(
-                                                    padding:
-                                                        EdgeInsets.only(left: 5)),
-                                                Text(book.school.displayString()),
-                                              ],
-                                            ),
-                                          ]),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                  return Stack(
+                    children: [
+                      Card(
+                          elevation: 4, // Controls the shadow depth
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                8), // Sets the shape of corners
                           ),
-                        ),
-                      ));
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          surfaceTintColor: Colors.white,
+                          child: InkWell(
+                            onTap: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BlocProvider.value(
+                                        value: context.read<FooterMenuCubit>(),
+                                        child: BookPage(book: book))),
+                              )
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 150,
+                                    width: 100,
+                                    child: Image.network(
+                                      book.urlImage,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            book.name,
+                                            style: const TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            softWrap: true,
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 10),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons
+                                                          .account_circle_rounded,
+                                                      size: 18,
+                                                    ),
+                                                    const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 5)),
+                                                    Text(
+                                                      book.authors.elementAt(0),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.location_on,
+                                                      size: 18,
+                                                    ),
+                                                    const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 5)),
+                                                    Text(book.school
+                                                        .displayString()),
+                                                  ],
+                                                ),
+                                              ]),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                      Positioned(
+                          top: 15,
+                          right: 10,
+                          child: Container(
+                            width: 15,
+                            height: 15,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: book.isAvailable
+                                  ? Color.fromRGBO(9, 131, 72, 1)
+                                  : Color.fromRGBO(216, 30, 41,
+                                      1), // Replace with your custom color
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                // Handle button tap
+                              },
+                              borderRadius: BorderRadius.circular(30),
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.white,
+                                size: 8,
+                              ),
+                            ),
+                          ))
+                    ],
+                  );
                 },
               ),
             )

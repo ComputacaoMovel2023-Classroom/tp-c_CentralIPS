@@ -5,19 +5,18 @@ import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
 import 'bookCategory.dart';
 
-
-
 /**
  * Book data-structure
  */
 class Book {
   String name = 'Sem título';
   final String urlImage;
-  final List authors;
+  final List<String> authors;
   final School school;
   final String edition;
   final String isbn;
-  final Category category;
+  final List<Category> categories;
+  final bool isAvailable;
 
   Book(
       {required this.name,
@@ -26,5 +25,14 @@ class Book {
       required this.school,
       required this.edition,
       required this.isbn,
-      required this.category});
+      required this.categories,
+      this.isAvailable = true});
+
+  String showAuthors() {
+    String toReturn = '';
+    for (String author in authors) {
+      toReturn += "$author\n";
+    }
+    return toReturn;
+  }
 }
