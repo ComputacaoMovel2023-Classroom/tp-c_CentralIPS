@@ -1,6 +1,7 @@
 import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
+import 'package:centralips/WelcomeScreen/welcome_screen.dart';
 import 'package:centralips/register_page/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,6 +25,12 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  //dispose
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   String? _userName = "A carregar";
   String? photoURL =
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
@@ -212,6 +219,18 @@ class _NavBarState extends State<NavBar> {
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
                           child: const RegisterPage(),
+                        )));
+              }),
+          ListTile(
+              title: const Text('Sair'),
+              leading: const Icon(Icons.logout),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: WelcomeScreen(),
                         )));
               })
         ],

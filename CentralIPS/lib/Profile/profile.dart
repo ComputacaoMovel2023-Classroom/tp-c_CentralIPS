@@ -14,6 +14,12 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
+  //dispose
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   bool editable = false;
   String editableText = "Editar Perfil";
   bool loadedData = false;
