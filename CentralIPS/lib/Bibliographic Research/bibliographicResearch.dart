@@ -8,7 +8,6 @@ import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:searchable_listview/searchable_listview.dart';
 
 class BibliographicResearch extends StatefulWidget {
   const BibliographicResearch({Key? key}) : super(key: key);
@@ -46,9 +45,9 @@ class BibliographicResearchState extends State<BibliographicResearch> {
               child: Column(
                 children: [
                   Row(
-                    children: [
-                      Padding(padding: EdgeInsets.only(left: 10)),
-                      const Text(
+                    children: const[
+                       Padding(padding: EdgeInsets.only(left: 10)),
+                       Text(
                         "Biblioteca",
                         style: TextStyle(
                           fontSize: 35,

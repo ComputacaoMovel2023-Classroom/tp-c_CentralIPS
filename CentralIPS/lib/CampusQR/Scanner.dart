@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -56,16 +57,30 @@ class Scanner extends StatelessWidget {
           final List<Barcode> barcodes = capture.barcodes;
           final Uint8List? image = capture.image;
           for (final barcode in barcodes) {
-            debugPrint('Barcode found! ${barcode.rawValue}');
-            if (barcode.rawValue == 'Redireciona para a home page') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-              );
-            }
+            debugPrint('Encontrado! ${barcode.rawValue}');
+            routeQR(barcode, context);
           }
         },
       ),
     );
+  }
+
+  routeQR(Barcode barcode, BuildContext context) {
+    switch (barcode.rawValue) {
+      case 'Redireciona para a home page':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 'Redireciona para o IPSHealth':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Pedometro()),
+        );
+        break;
+      default:
+        break;
+    }
   }
 }

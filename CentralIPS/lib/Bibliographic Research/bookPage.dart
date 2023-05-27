@@ -76,7 +76,7 @@ class BookPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(15),
                             alignment: AlignmentDirectional.topStart,
                             child: Column(
                               children: [
@@ -100,12 +100,13 @@ class BookPage extends StatelessWidget {
                                   itemCount: book.authors.length,
                                   itemBuilder: (context, index) {
                                     String text = book.authors[index];
-                                    return textWithDotLeader(text, 1);
+                                    return TextWithDotLeader(text, 1);
                                   },
                                 ),
+                                Padding(padding: EdgeInsets.only(top: 10)),
                                 Row(
                                   children: const [
-                                     Icon(
+                                    Icon(
                                       Icons.location_on,
                                       size: 18,
                                     ),
@@ -119,7 +120,8 @@ class BookPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Padding(padding: EdgeInsets.only(left: 20)),
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 20)),
                                     Text(
                                       book.school.displayString(),
                                       style: const TextStyle(
@@ -134,10 +136,41 @@ class BookPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Text(
-                      "Info Adicional",
-                      style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                    Container(
+                      padding: EdgeInsets.only(top: 15),
+                      child: const Text(
+                        "Sinopse",
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Card(
+                      elevation: 4, // Controls the shadow depth
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            8), // Sets the shape of corners
+                      ),
+                      color: const Color.fromRGBO(239, 239, 239, 1),
+                      surfaceTintColor: Colors.white,
+                      child: Container(
+                          padding: const EdgeInsets.all(15),
+                          alignment: AlignmentDirectional.topStart,
+                          child: Wrap(
+                            children: [
+                              Text(
+                                book.synopsis,
+                                style: const TextStyle(fontSize: 17),
+                              )
+                            ],
+                          )),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 15),
+                      child: const Text(
+                        "Info Adicional",
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Card(
                       elevation: 4, // Controls the shadow depth
@@ -150,7 +183,7 @@ class BookPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(15),
                             alignment: AlignmentDirectional.topStart,
                             child: Column(
                               children: [
@@ -162,13 +195,15 @@ class BookPage extends StatelessWidget {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w700),
                                     ),
-                                    const Padding(padding: EdgeInsets.only(left: 10)),
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 10)),
                                     Text(
                                       '${book.edition}ª edição',
                                       style: const TextStyle(fontSize: 17),
                                     )
                                   ],
                                 ),
+                                Padding(padding: EdgeInsets.only(top: 10)),
                                 Row(
                                   children: [
                                     const Text(
@@ -177,28 +212,83 @@ class BookPage extends StatelessWidget {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w700),
                                     ),
-                                    const Padding(padding: EdgeInsets.only(left: 10)),
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 10)),
                                     Text(
                                       book.isbn,
                                       style: const TextStyle(fontSize: 17),
                                     )
                                   ],
                                 ),
+                                Padding(padding: EdgeInsets.only(top: 10)),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: const Text(
+                                        "Categorias:",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Wrap(
+                                        alignment: WrapAlignment.start,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              book.categories
+                                                  .map((category) => category
+                                                      .name
+                                                      .split('.')
+                                                      .last)
+                                                  .join(', '),
+                                              style:
+                                                  const TextStyle(fontSize: 17),
+                                              maxLines: 2,
+                                              softWrap: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.only(top: 10)),
                                 Row(
                                   children: [
                                     const Text(
-                                      "Categorias:",
+                                      "Idioma:",
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w700),
                                     ),
-                                    const Padding(padding: EdgeInsets.only(left: 10)),
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 10)),
                                     Text(
-                                        book.categories
-                                            .map((category) =>
-                                                category.name.split('.').last)
-                                            .join(', '),
-                                        style: const TextStyle(fontSize: 17))
+                                      book.language,
+                                      style: const TextStyle(fontSize: 17),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.only(top: 10)),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Páginas:",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    const Padding(
+                                        padding: EdgeInsets.only(left: 10)),
+                                    Text(
+                                      "${book.numberOfPages}",
+                                      style: const TextStyle(fontSize: 17),
+                                    )
                                   ],
                                 ),
                               ],
@@ -211,26 +301,26 @@ class BookPage extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
+            Positioned( // Book Cover Image
               top: 80,
-              left: screenWidth * 0.325,
-              child: Container(
-                width: 150,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
-                child: Image.network(
-                  book.urlImage,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: ClipRRect( borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    book.urlImage,
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            Positioned(
+            Positioned( // Availability
                 top: 130,
                 right: -20,
                 child: Container(
-                  padding:
-                      const EdgeInsets.only(top: 10, left: 10, right: 30, bottom: 10),
+                  padding: const EdgeInsets.only(
+                      top: 10, left: 10, right: 30, bottom: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: book.isAvailable
@@ -289,12 +379,15 @@ class BookPage extends StatelessWidget {
     );
   }
 
-  String buildDotLeader(int length) {
+  
+}
+
+String buildDotLeader(int length) {
     const dot = '    •';
     return List<String>.filled(length, dot).join();
   }
 
-  Text textWithDotLeader(String text, int dotLeaderLength) {
+  Text TextWithDotLeader(String text, int dotLeaderLength) {
     return Text.rich(
       TextSpan(
         text: buildDotLeader(dotLeaderLength),
@@ -305,4 +398,3 @@ class BookPage extends StatelessWidget {
       ),
     );
   }
-}
