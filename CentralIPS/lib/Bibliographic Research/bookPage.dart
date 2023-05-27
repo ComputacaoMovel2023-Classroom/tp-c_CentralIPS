@@ -123,7 +123,7 @@ class BookPage extends StatelessWidget {
                                     const Padding(
                                         padding: EdgeInsets.only(left: 20)),
                                     Text(
-                                      book.school.displayString(),
+                                      book.school.name,
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400),

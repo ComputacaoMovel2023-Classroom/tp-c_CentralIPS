@@ -34,3 +34,18 @@ extension CategoryExtension on Category {
 List<String> getCategoryNames() {
   return Category.values.map((category) => category.name).toList();
 }
+
+Category getCategory(String string){
+
+  switch(string){
+    case "Category.accao" : return Category.accao;
+case "Category.aventura" : return Category.aventura;
+    case "Category.biografias" : return Category.biografias;
+    case "Category.conto" : return Category.conto;
+    case "Category.drama" : return Category.drama;
+    case "Category.romances" : return Category.romances;
+    case "Category.terror" : return Category.terror;
+    default: return Category.na;
+  }
+
+}
