@@ -50,6 +50,9 @@ class _NavBarState extends State<NavBar> {
 
       var userData = snapshot.value as Map;
       // Get the user's name and number
+
+      if (!mounted) return;
+
       setState(() {
         _userName = user.displayName;
         if (user.photoURL != null) {
