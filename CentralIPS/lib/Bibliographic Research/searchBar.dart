@@ -1,8 +1,12 @@
 import 'package:centralips/Departamentos/school.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Cubit/index_cubit.dart';
+import 'book.dart';
+import 'bookCategory.dart';
 import 'bookPage.dart';
 import 'library.dart';
 
@@ -16,7 +20,32 @@ class SearchBar extends StatefulWidget {
 class SearchBarState extends State<SearchBar> {
   Library library = Library();
   String result = "";
+  bool loadedData = false;
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    /* final user = FirebaseAuth.instance.currentUser;
+    FirebaseDatabase.instance
+        .ref()
+        .child('library')
+        .child(user!.uid)
+        .onValue
+        .listen((event) {
+      // Get the snapshot of the data
+      DataSnapshot snapshot = event.snapshot;
+
+      var userData = snapshot.value as Map;
+     
+      setState(() {
+        loadedData = true;
+        
+      });
+    }); */
+  }
+
   @override
   Widget build(BuildContext context) {
     // This controller will store the value of the search bar
@@ -283,7 +312,7 @@ class SearchBarState extends State<SearchBar> {
   }
 
   void searchBook(String query) {
-    final suggestions = allBooksTest.where((book) {
+    final suggestions = library.books.where((book) {
       final bookName = book.name.toLowerCase();
       final input = query.toLowerCase();
       return bookName.contains(input);

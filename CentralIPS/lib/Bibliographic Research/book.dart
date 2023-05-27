@@ -41,4 +41,20 @@ class Book {
     }
     return toReturn;
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nome': name,
+      'urlImage': urlImage,
+      'authors': authors,
+      'school': school,
+      'synopsis': synopsis,
+      'edition': edition,
+      'isbn': isbn,
+      'language': language,
+      'numberOfPages': numberOfPages,
+      'categories': categories,
+      'isAvailable' : isAvailable,
+    };
+  }
 }
