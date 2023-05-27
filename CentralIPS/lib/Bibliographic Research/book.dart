@@ -13,8 +13,11 @@ class Book {
   final String urlImage;
   final List<String> authors;
   final School school;
+  final String synopsis;
   final String edition;
   final String isbn;
+  final String language;
+  final int numberOfPages;
   final List<Category> categories;
   final bool isAvailable;
 
@@ -23,8 +26,11 @@ class Book {
       required this.urlImage,
       required this.authors,
       required this.school,
+      required this.synopsis,
       required this.edition,
       required this.isbn,
+      required this.language,
+      required this.numberOfPages,
       required this.categories,
       this.isAvailable = true});
 
