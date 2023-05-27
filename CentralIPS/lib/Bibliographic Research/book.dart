@@ -23,7 +23,8 @@ class Book {
 
   Book(
       {required this.name,
-      this.urlImage = "https://bookcart.azurewebsites.net/Upload/Default_image.jpg",
+      this.urlImage =
+          "https://bookcart.azurewebsites.net/Upload/Default_image.jpg",
       required this.authors,
       required this.school,
       required this.synopsis,
@@ -44,17 +45,17 @@ class Book {
 
   Map<String, dynamic> toJson() {
     return {
-      'nome': name,
+      'name': name,
       'urlImage': urlImage,
       'authors': authors,
-      'school': school,
+      'school': school.toString(),
       'synopsis': synopsis,
       'edition': edition,
       'isbn': isbn,
       'language': language,
       'numberOfPages': numberOfPages,
-      'categories': categories,
-      'isAvailable' : isAvailable,
+      'categories': categories.map((category) => category.toString()).toList(),
+      'isAvailable': isAvailable,
     };
   }
 }

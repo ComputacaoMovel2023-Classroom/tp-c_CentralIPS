@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
 import '../Departamentos/school.dart';
 import 'book.dart';
 import 'bookCategory.dart';
@@ -11,7 +10,7 @@ import 'bookCategory.dart';
  * Data structure with is a list of Books
  */
 class Library {
-  late List<Book> books = List.empty(growable: true);
+  List<Book> books = [];
   final DatabaseReference libraryDb = FirebaseDatabase.instance.ref("library");
 
   Library();
@@ -33,7 +32,80 @@ class Library {
   }
 
   void fetchData() {
-    libraryDb.limitToFirst(10).once().then((DataSnapshot snapshot) {
+    libraryDb.onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+
+      var bookData = snapshot.value as Map;
+
+      bookData.forEach(
+        (key, value) {
+          var bookMap = value as Map;
+          String name = '';
+          String urlImage = '';
+          List<String> authors = [];
+          School school = School.na;
+          String synopsis = '';
+          String edition = '';
+          String isbn = '';
+          String language = '';
+          int numberOfPages = 0;
+          List<Category> categories = [];
+          bool isAvailable = false;
+
+          bookMap.forEach((key, value) {
+            if (key == 'isAvailable') {
+              isAvailable = value;
+              print(isAvailable);
+            } else if (key == 'numberOfPages') {
+              numberOfPages = value;
+              print(numberOfPages);
+            } else if (key == 'school') {
+              school = getSchool(value);
+              print(school);
+            } else if (key == 'edition') {
+              edition = value;
+              print(edition);
+            } else if (key == 'language') {
+              language = value;
+              print(language);
+            } else if (key == 'name') {
+              name = value;
+              print(name);
+            } else if (key == 'categories') {
+              List aux = value;
+              aux.forEach((element) {
+                categories.add(getCategory(element.toString()));
+              });
+              print(categories); 
+            } else if (key == 'synopsis') {
+              synopsis = value;
+              print(synopsis);
+            } else if (key == 'authors') {
+              List aux = value;
+              aux.forEach((element) {
+                authors.add(element.toString());
+              });
+              print(authors);
+            } else if (key == 'urlImage') {
+              urlImage = value;
+              print(urlImage);
+            }
+            Book book = Book(
+                name: name,
+                authors: authors,
+                school: school,
+                synopsis: synopsis,
+                edition: edition,
+                isbn: isbn,
+                language: language,
+                numberOfPages: numberOfPages,
+                categories: categories);
+            books.add(book);
+          });
+        },
+      );
+    });
+    /* libraryDb.limitToFirst(10).once().then((DataSnapshot snapshot) {
           Map<dynamic, dynamic> data = snapshot.value as Map<dynamic, dynamic>;
 
           data.forEach((key, value) {
@@ -63,9 +135,8 @@ class Library {
                 isAvailable: isAvailable);
 
             books.add(book);
-            print("opa");
           });
-        } as FutureOr Function(DatabaseEvent value));
+        } as FutureOr Function(DatabaseEvent value)); */
   }
 
   void teste() {

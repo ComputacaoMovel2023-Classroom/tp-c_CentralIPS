@@ -48,6 +48,7 @@ class SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    library.fetchData();
     // This controller will store the value of the search bar
     return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -189,8 +190,7 @@ class SearchBarState extends State<SearchBar> {
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       left: 5)),
-                                                          Text(book.school
-                                                              .displayString()),
+                                                          Text(book.school.name),
                                                         ],
                                                       ),
                                                     ]),
