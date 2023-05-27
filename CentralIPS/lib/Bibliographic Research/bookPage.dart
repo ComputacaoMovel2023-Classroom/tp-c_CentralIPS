@@ -100,7 +100,7 @@ class BookPage extends StatelessWidget {
                                   itemCount: book.authors.length,
                                   itemBuilder: (context, index) {
                                     String text = book.authors[index];
-                                    return textWithDotLeader(text, 1);
+                                    return TextWithDotLeader(text, 1);
                                   },
                                 ),
                                 Padding(padding: EdgeInsets.only(top: 10)),
@@ -301,21 +301,21 @@ class BookPage extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
+            Positioned( // Book Cover Image
               top: 80,
-              left: screenWidth * 0.325,
-              child: Container(
-                width: 150,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
-                child: Image.network(
-                  book.urlImage,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: ClipRRect( borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    book.urlImage,
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            Positioned(
+            Positioned( // Availability
                 top: 130,
                 right: -20,
                 child: Container(
@@ -379,12 +379,15 @@ class BookPage extends StatelessWidget {
     );
   }
 
-  String buildDotLeader(int length) {
+  
+}
+
+String buildDotLeader(int length) {
     const dot = '    •';
     return List<String>.filled(length, dot).join();
   }
 
-  Text textWithDotLeader(String text, int dotLeaderLength) {
+  Text TextWithDotLeader(String text, int dotLeaderLength) {
     return Text.rich(
       TextSpan(
         text: buildDotLeader(dotLeaderLength),
@@ -395,4 +398,3 @@ class BookPage extends StatelessWidget {
       ),
     );
   }
-}

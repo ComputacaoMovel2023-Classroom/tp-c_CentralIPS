@@ -23,7 +23,7 @@ class Book {
 
   Book(
       {required this.name,
-      required this.urlImage,
+      this.urlImage = "https://bookcart.azurewebsites.net/Upload/Default_image.jpg",
       required this.authors,
       required this.school,
       required this.synopsis,
