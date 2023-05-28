@@ -1,10 +1,14 @@
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
+import 'package:centralips/register_page/register_page_provider.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../register_page/register_page.dart';
+import 'package:sign_button/sign_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -94,6 +98,13 @@ Widget buildLoginBtn(BuildContext context) {
     child: ElevatedButton(
       onPressed: () async {
         try {
+          //sing out from google
+          await GoogleSignIn().signOut();
+          //sing out from firebase
+          await FirebaseAuth.instance.signOut();
+          print(_emailController.text.trim());
+          print(_passwordController.text.trim());
+
           final userCredential = await auth.signInWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
@@ -210,6 +221,90 @@ Widget buildRegisterBtn(BuildContext context) {
   );
 }
 
+Future<User?> signInWithGoogle({required BuildContext context}) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  //if user is already signed in, sign out
+  await auth.signOut();
+  await googleSignIn.signOut();
+
+  final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+  if (googleSignInAccount != null) {
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    try {
+      final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+
+      user = userCredential.user;
+
+      //catch error sign_in_canceled
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        const SnackBar(
+          backgroundColor: Colors.black,
+          content: Text(
+            'The account already exists with a different credential.',
+            style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
+          ),
+        );
+        // handle the error here
+
+        // show fedback to user
+      } else if (e.code == 'invalid-credential') {
+        return null;
+        // handle the error here
+      } else if (e.code == 'email-already-in-use') {
+        return null;
+      }
+    } catch (e) {
+      // handle the error here
+      return null;
+    }
+
+    //check if the user exists in the database
+    final userRef =
+        await FirebaseDatabase.instance.ref().child('users/${user!.uid}').get();
+//check if the user is in the database
+
+    //  userRef.onValue.listen((DatabaseEvent event) {
+    if (!userRef.exists) {
+      print("ele nao existe");
+      //send to the page to complete the profile
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                  create: (_) => FooterMenuCubit(),
+                  child: const RegisterPageProvider() //co z<nst SplashScreen(),
+                  )));
+    } else {
+      //check if the user is in the database
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                  create: (_) => FooterMenuCubit(),
+                  child: const HomePage() //co z<nst SplashScreen(),
+                  )));
+    }
+    //});
+  }
+
+  return user;
+}
+
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
@@ -254,6 +349,17 @@ class _LoginPageState extends State<LoginPage> {
                         buildLoginBtn(context),
                         const SizedBox(height: 5),
                         buildRegisterBtn(context),
+                        const Divider(
+                          height: 50,
+                          thickness: 1,
+                          indent: 20,
+                          endIndent: 20,
+                        ),
+                        SignInButton(
+                            buttonType: ButtonType.google,
+                            onPressed: () {
+                              signInWithGoogle(context: context);
+                            })
                       ],
                     ),
                   ),
