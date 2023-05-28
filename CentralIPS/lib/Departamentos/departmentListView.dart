@@ -61,35 +61,69 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Row(
-
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-        SizedBox(
-          height: 40,
-          width: 150,
-          child: Text('${departments.openDepartments()} Departamentos dísponiveis'),
-        ),
-        SizedBox(
-          height: 60,
-          width: 150,
-          child: DepartmentExpansionPanel()
-        ),
+            SizedBox(
+              height: 40,
+              width: 150,
+              child: Text(
+                  '${departments.openDepartments()} Departamentos dísponiveis'),
+            ),
+            SizedBox(height: 60, width: 150, child: DepartmentExpansionPanel()),
           ],
         ),
         Flexible(
             fit: FlexFit.loose,
             child: SizedBox(
-                height: 400.0,
+                height: 450.0,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: departments.getDepartments().length,
                   itemBuilder: (context, index) {
                     return Container(
-                      height: 50,
-                      color: Colors.amber,
-                      child: Center(
-                          child: Text(
-                              '${departments.getDepartments()[index].acronym}-${departments.getDepartments()[index].name}')),
-                    );
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(255, 255, 255, 255)),
+                        margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                        height: 80,
+                        child: Row(children: [
+                          Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(left: 6),
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(90),
+                                color: Color.fromRGBO(186, 186, 186, 0.576),
+                              ),
+                              child: Text(
+                                departments.getDepartments()[index].acronym,
+                              )),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                child: Expanded(
+                                  child: Text(
+
+                                    departments.getDepartments()[index].name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                departments.getDepartments()[index].acronym,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w100, fontSize: 12),
+                              ),
+                            ],
+                          )
+                        ]));
                   },
                 )))
       ],

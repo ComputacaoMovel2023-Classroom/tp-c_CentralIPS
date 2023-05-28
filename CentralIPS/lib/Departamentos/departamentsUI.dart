@@ -7,12 +7,10 @@ import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 
 class DepartamentosUI extends StatelessWidget {
-
   DepartmentsListView departmentsListView = DepartmentsListView();
   Departments departments = Departments();
 
   DepartamentosUI({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +28,16 @@ class DepartamentosUI extends StatelessWidget {
           ),
           Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 249, 249, 249),
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(30),
               ),
             ),
             margin: const EdgeInsets.only(top: 100),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "Departamentos",

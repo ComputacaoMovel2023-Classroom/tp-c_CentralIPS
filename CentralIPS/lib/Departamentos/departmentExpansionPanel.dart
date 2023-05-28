@@ -26,25 +26,22 @@ class DepartmentExpansionPanelState extends State<DepartmentExpansionPanel> {
   List<DropdownMenuItem<FilterModel>> _dropdownMenuItems = [];
   FilterModel selectedFilter = filters[0];
 
-
-  DepartmentExpansionPanelState(){
+  DepartmentExpansionPanelState() {
     _dropdownMenuItems = buildDropDownMenuItems(filters);
   }
 
-  List<DropdownMenuItem<FilterModel>> buildDropDownMenuItems(List listItems) {  
-    List<DropdownMenuItem<FilterModel>> items = List.empty(growable: true);  
-    for (FilterModel listItem in listItems) {  
-      items.add(  
-        DropdownMenuItem(  
-          value: listItem,  
-          child: Text(DepartmentFilter.getStringFromFilter(listItem.filter)),  
-        ),  
-      );  
-    }  
-    return items;  
-  }  
-
-  
+  List<DropdownMenuItem<FilterModel>> buildDropDownMenuItems(List listItems) {
+    List<DropdownMenuItem<FilterModel>> items = List.empty(growable: true);
+    for (FilterModel listItem in listItems) {
+      items.add(
+        DropdownMenuItem(
+          value: listItem,
+          child: Text(DepartmentFilter.getStringFromFilter(listItem.filter)),
+        ),
+      );
+    }
+    return items;
+  }
 
   @override
   void initState() {
@@ -58,18 +55,34 @@ class DepartmentExpansionPanelState extends State<DepartmentExpansionPanel> {
     return Container(
       padding: const EdgeInsets.all(5.0),
       child: DropdownButtonHideUnderline(
+          child: ButtonTheme(
+        alignedDropdown: true,
         child: DropdownButton(
-          style: TextStyle(color: selectedFilter == filters[2] ? Colors.pink[200] : 
-          selectedFilter == filters[0] ? Colors.green[300] : Colors.red),
+            iconSize: 18,
+            icon: Icon(
+                // Add this
+                Icons.arrow_drop_down, // Add this
+                color: selectedFilter == filters[2]
+                    ? Colors.pink[200]
+                    : selectedFilter == filters[0]
+                        ? Colors.green[300]
+                        : Colors.red // Add this
+                ),
+            style: TextStyle(
+                fontSize: 12,
+                color: selectedFilter == filters[2]
+                    ? Colors.pink[200]
+                    : selectedFilter == filters[0]
+                        ? Colors.green[300]
+                        : Colors.red),
             value: selectedFilter,
             items: _dropdownMenuItems,
             onChanged: (value) {
               setState(() {
                 selectedFilter = value!;
-
               });
             }),
-      ),
+      )),
     );
   }
 }
