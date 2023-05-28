@@ -7,7 +7,7 @@ class Department extends StatefulWidget{
   String name = "Sem Nome";
   String acronym = "N/A";
   bool open = true;
-  bool favorite = false;
+  var usersId = [];
   School school = School.na;
 
   Department({
@@ -15,9 +15,25 @@ class Department extends StatefulWidget{
     required this.name,
     required this.acronym,
     required this.open,
-    required this.favorite,
+    required this.usersId,
     required this.school
   }) : super(key: key);
+
+  @override
+  String toString({DiagnosticLevel? minLevel}){
+    return '[$name, $acronym, $open, $school, $usersId]';
+  }
+
+  Map<String, dynamic> toJson() {
+    usersId.add("teste");
+    return {
+      'nome': name,
+      'acronym': acronym,
+      'open': open,
+      'school': school.toString(),
+      'usersId': usersId,
+    };
+  }
 
   @override
   DepartmentState createState() => DepartmentState();
@@ -35,4 +51,6 @@ class DepartmentState extends State<Department>{
   }
 
 }
+
+
 

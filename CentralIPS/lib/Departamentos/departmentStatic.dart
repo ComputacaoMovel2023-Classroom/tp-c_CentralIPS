@@ -1,10 +1,13 @@
 
 import 'package:centralips/Departamentos/department.dart';
 import 'package:centralips/Departamentos/school.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class DepartmentStaticExample{
   
+  final DatabaseReference departmentDb = FirebaseDatabase.instance.ref("Departamentos");
   List<Department> departments = [];
+
 
   DepartmentStaticExample(){
 
@@ -13,7 +16,6 @@ class DepartmentStaticExample{
     departments.addAll(estbDepartments());
     departments.addAll(eseDepartments());
     departments.addAll(esceDepartments());
-
   }
 
   List<Department> getDepartments(){
@@ -34,11 +36,11 @@ class DepartmentStaticExample{
 
   List<Department> essDepartments(){
     List<Department> essDepartments = [
-      Department(name: "Departamento de Ciências Biomédicas", acronym: "DCB", open: true, favorite: false, school: School.ess),
-      Department(name: "Departamento de Ciências da Comunicação e Linguagem", acronym: "DCCL", open: false, favorite: false, school: School.ess),
-      Department(name: "Departamento de Ciências Sociais e Humanas", acronym: "DCSH", open: true, favorite: false, school: School.ess),
-      Department(name: "Departamento de Enfermagem", acronym: "DE", open: true, favorite: false, school: School.ess),
-      Department(name: "Departamento de Fisioterapia", acronym: "DF", open: true, favorite: false, school: School.ess)
+      Department(name: "Departamento de Ciências Biomédicas", acronym: "DCB", open: true, school: School.ess, usersId: List.empty()),
+      Department(name: "Departamento de Ciências da Comunicação e Linguagem", acronym: "DCCL", open: false, school: School.ess, usersId: List.empty()),
+      Department(name: "Departamento de Ciências Sociais e Humanas", acronym: "DCSH", open: true, school: School.ess, usersId: List.empty()),
+      Department(name: "Departamento de Enfermagem", acronym: "DE", open: true, school: School.ess, usersId: List.empty()),
+      Department(name: "Departamento de Fisioterapia", acronym: "DF", open: true, school: School.ess, usersId: List.empty())
     ];
 
     return essDepartments;
@@ -46,9 +48,9 @@ class DepartmentStaticExample{
 
   List<Department> estbDepartments(){
     List<Department> estbDepartments = [
-      Department(name: "Departamento de Economia Civil", acronym: "DEC", open: true, favorite: false, school: School.estb),
-      Department(name: "Departamento de Engenharia Química e Biológica", acronym: "DEQB", open: false, favorite: false, school: School.estb),
-      Department(name: "Departamento de Matemática e Informática", acronym: "DMI", open: true, favorite: true, school: School.estb)
+      Department(name: "Departamento de Economia Civil", acronym: "DEC", open: true, school: School.estb, usersId: List.empty()),
+      Department(name: "Departamento de Engenharia Química e Biológica", acronym: "DEQB", open: false, school: School.estb, usersId: List.empty()),
+      Department(name: "Departamento de Matemática e Informática", acronym: "DMI", open: true, school: School.estb, usersId: List.empty())
     ];
 
     return estbDepartments;
@@ -56,11 +58,11 @@ class DepartmentStaticExample{
 
   List<Department> esceDepartments(){
     List<Department> esceDepartments = [
-      Department(name: "Departamento de Economia e Gestão", acronym: "DEG", open: true, favorite: false, school: School.esce),
-      Department(name: "Departamento de Comportamento Organizacional e Gestão de Recursos Humanos", acronym: "DRH", open: false, favorite: false, school: School.esce),
-      Department(name: "Departamento de Contabilidade e Finanças", acronym: "DCF", open: true, favorite: true, school: School.esce),
-      Department(name: "Departamento de Marketing e Logística", acronym: "DML", open: true, favorite: false, school: School.esce),
-      Department(name: "Departamento de Sistemas de Informação", acronym: "DSI", open: false, favorite: true, school: School.esce)
+      Department(name: "Departamento de Economia e Gestão", acronym: "DEG", open: true, school: School.esce, usersId: List.empty()),
+      Department(name: "Departamento de Comportamento Organizacional e Gestão de Recursos Humanos", acronym: "DRH", open: false, school: School.esce, usersId: List.empty()),
+      Department(name: "Departamento de Contabilidade e Finanças", acronym: "DCF", open: true, school: School.esce, usersId: List.empty()),
+      Department(name: "Departamento de Marketing e Logística", acronym: "DML", open: true, school: School.esce, usersId: List.empty()),
+      Department(name: "Departamento de Sistemas de Informação", acronym: "DSI", open: false, school: School.esce, usersId: List.empty())
     ];
 
     return esceDepartments;
@@ -68,11 +70,11 @@ class DepartmentStaticExample{
 
   List<Department> estsDepartments(){
     List<Department> estsDepartments = [
-      Department(name: "Departamento de Matemática", acronym: "DMAT", open: true, favorite: false, school: School.ests),
-      Department(name: "Departamento de Engenharia Mecânica", acronym: "DEM", open: false, favorite: false, school: School.ests),
-      Department(name: "Departamento de Engenharia Eletrotécnica", acronym: "DEE", open: true, favorite: true, school: School.ests),
-      Department(name: "Departamento de Sistemas e Informática", acronym: "DSI", open: true, favorite: false, school: School.ests),
-      Department(name: "Secção de Ciências Empresariais e Comunicação", acronym: "SeCEC", open: false, favorite: true, school: School.ests)
+      Department(name: "Departamento de Matemática", acronym: "DMAT", open: true, school: School.ests, usersId: List.empty()),
+      Department(name: "Departamento de Engenharia Mecânica", acronym: "DEM", open: false, school: School.ests, usersId: List.empty()),
+      Department(name: "Departamento de Engenharia Eletrotécnica", acronym: "DEE", open: true, school: School.ests, usersId: List.empty()),
+      Department(name: "Departamento de Sistemas e Informática", acronym: "DSI", open: true, school: School.ests, usersId: List.empty()),
+      Department(name: "Secção de Ciências Empresariais e Comunicação", acronym: "SeCEC", open: false, school: School.ests, usersId: List.empty())
     ];
 
     return estsDepartments;
@@ -80,19 +82,23 @@ class DepartmentStaticExample{
 
   List<Department> eseDepartments(){
     List<Department> eseDepartments = [
-      Department(name: "Departamento de Artes", acronym: "DA", open: true, favorite: false, school: School.ese),
-      Department(name: "Departamento de Ciências da Educação e Supervisão", acronym: "DCES", open: false, favorite: false, school: School.ese),
-      Department(name: "Departamento de Ciências da Natureza", acronym: "DCN", open: true, favorite: true, school: School.ese),
-      Department(name: "Departamento de Ciências do Desporto e Educação Física", acronym: "DCDEF", open: true, favorite: false, school: School.ese),
-      Department(name: "Departamento de Ciências Sociais", acronym: "DCS", open: false, favorite: true, school: School.ese),
-      Department(name: "Departamento de Línguas Estrangeiras", acronym: "DLE", open: true, favorite: true, school: School.ese),
-      Department(name: "Departamento de Matemática", acronym: "DM", open: false, favorite: false, school: School.ese),
-      Department(name: "Departamento de Português", acronym: "DP", open: true, favorite: false, school: School.ese),
-      Department(name: "Departamento de Psicologia", acronym: "DPsi", open: false, favorite: false, school: School.ese),
-      Department(name: "Departamento de Tecnologia Educativa e Gestão de Informação", acronym: "DTEGI", open: false, favorite: false, school: School.ese)
+      Department(name: "Departamento de Artes", acronym: "DA", open: true, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Ciências da Educação e Supervisão", acronym: "DCES", open: false, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Ciências da Natureza", acronym: "DCN", open: true, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Ciências do Desporto e Educação Física", acronym: "DCDEF", open: true, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Ciências Sociais", acronym: "DCS", open: false, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Línguas Estrangeiras", acronym: "DLE", open: true, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Matemática", acronym: "DM", open: false, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Português", acronym: "DP", open: true, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Psicologia", acronym: "DPsi", open: false, school: School.ese, usersId: List.empty()),
+      Department(name: "Departamento de Tecnologia Educativa e Gestão de Informação", acronym: "DTEGI", open: false, school: School.ese, usersId: List.empty())
     ];
 
     return eseDepartments;
+  }
+
+  void addDepartment(Department department) {
+    departmentDb.push().set(department.toJson());
   }
 
 }

@@ -1,17 +1,18 @@
 
 
-import 'package:centralips/Departamentos/departmentStatic.dart';
+import 'package:centralips/Departamentos/departments.dart';
 import 'package:flutter/material.dart';
 
 
 class DepartmentsListView extends StatelessWidget{
 
-  final DepartmentStaticExample departments = DepartmentStaticExample();
+  final Departments departments = Departments();
 
   DepartmentsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print(departments.getDepartments());
     return Row(children: <Widget>[
       Expanded(child: SizedBox(
       height: 400.0,
