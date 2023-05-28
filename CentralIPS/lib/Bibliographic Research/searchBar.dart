@@ -27,7 +27,7 @@ class SearchBarState extends State<SearchBar> {
   @override
   void initState() {
     super.initState();
-    _fetchData(10,'');
+    _fetchData(10, '');
   }
 
   @override
@@ -298,24 +298,22 @@ class SearchBarState extends State<SearchBar> {
   }
 
   void searchBook(String query) {
-    final suggestions = library.books.where((book) {
-      final bookName = book.name.toLowerCase();
-      final input = query.toLowerCase();
-      return bookName.contains(input);
-    }).toList();
-
     setState(() {
-      library.books = suggestions;
+      loadedData = false;
+    });
+    _fetchData(10, query);
+    setState(() {
+      loadedData = true;
     });
   }
 
   Future<void> _fetchData(int limit, String nameContains) async {
-
     libraryDb.limitToFirst(limit).onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
 
       var bookData = snapshot.value as Map;
 
+      Library auxLibrary = Library();
       //for each book
       bookData.forEach(
         (key, value) {
@@ -332,61 +330,67 @@ class SearchBarState extends State<SearchBar> {
           List<Category> categories = [];
           bool isAvailable = false;
 
-          //for each book atributes
-          bookMap.forEach((key, value) {
-            if (key == 'isAvailable') {
-              isAvailable = value;
-              //print(isAvailable);
-            } else if (key == 'numberOfPages') {
-              numberOfPages = value;
-              //print(numberOfPages);
-            } else if (key == 'school') {
-              school = getSchool(value);
-              //print(school);
-            } else if (key == 'edition') {
-              edition = value;
-              //print(edition);
-            } else if (key == 'language') {
-              language = value;
-              //print(language);
-            } else if (key == 'name') {
-              name = value;
-              //print(name);
-            } else if (key == 'categories') {
-              List aux = value;
-              for (var element in aux) {
-                categories.add(getCategory(element.toString()));
+          if (value['name']
+              .toString()
+              .toUpperCase()
+              .contains(nameContains.toUpperCase())) {
+            //for each book atributes
+            bookMap.forEach((key, value) {
+              if (key == 'isAvailable') {
+                isAvailable = value;
+                //print(isAvailable);
+              } else if (key == 'numberOfPages') {
+                numberOfPages = value;
+                //print(numberOfPages);
+              } else if (key == 'school') {
+                school = getSchool(value);
+                //print(school);
+              } else if (key == 'edition') {
+                edition = value;
+                //print(edition);
+              } else if (key == 'language') {
+                language = value;
+                //print(language);
+              } else if (key == 'name') {
+                name = value;
+                //print(name);
+              } else if (key == 'categories') {
+                List aux = value;
+                for (var element in aux) {
+                  categories.add(getCategory(element.toString()));
+                }
+                //print(categories);
+              } else if (key == 'synopsis') {
+                synopsis = value;
+                //print(synopsis);
+              } else if (key == 'authors') {
+                List aux = value;
+                for (var element in aux) {
+                  authors.add(element.toString());
+                }
+                //print(authors);
+              } else if (key == 'urlImage') {
+                urlImage = value as String;
+                //print(urlImage);
               }
-              //print(categories);
-            } else if (key == 'synopsis') {
-              synopsis = value;
-              //print(synopsis);
-            } else if (key == 'authors') {
-              List aux = value;
-              for (var element in aux) {
-                authors.add(element.toString());
-              }
-              //print(authors);
-            } else if (key == 'urlImage') {
-              urlImage = value as String;
-              //print(urlImage);
-            }
-          });
-          Book book = Book(
-              name: name,
-              authors: authors,
-              urlImage: urlImage,
-              school: school,
-              synopsis: synopsis,
-              edition: edition,
-              isbn: isbn,
-              language: language,
-              numberOfPages: numberOfPages,
-              categories: categories);
-          library.books.add(book);
-          print("LIVRO ADICIONADO");
+            });
+            Book book = Book(
+                name: name,
+                authors: authors,
+                urlImage: urlImage,
+                school: school,
+                synopsis: synopsis,
+                edition: edition,
+                isbn: isbn,
+                language: language,
+                numberOfPages: numberOfPages,
+                categories: categories);
+            auxLibrary.books.add(book);
+            print("LIVRO ADICIONADO");
+          }
         },
       );
+      library = auxLibrary;
       setState(() {
         loadedData = true;
       });
