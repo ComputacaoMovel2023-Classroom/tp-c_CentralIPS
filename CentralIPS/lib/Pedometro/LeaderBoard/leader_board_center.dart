@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LeaderBordCenter extends StatelessWidget {
-  const LeaderBordCenter(
+class LeaderBoardCenter extends StatelessWidget {
+  const LeaderBoardCenter(
       {super.key,
       required this.placeNumber,
       required this.urlImage,

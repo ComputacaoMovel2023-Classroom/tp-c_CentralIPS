@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Top3LeaderBord extends StatelessWidget {
-  const Top3LeaderBord(
+class Top3LeaderBoard extends StatelessWidget {
+  const Top3LeaderBoard(
       {super.key,
       required this.nameFirst,
       required this.nameSecond,
@@ -90,7 +90,6 @@ class Top3LeaderBord extends StatelessWidget {
               maxHeight: 40,
               child: Text(
                 nameSecond,
-                
                 maxLines: 1,
                 style: const TextStyle(fontSize: 16),
               ),

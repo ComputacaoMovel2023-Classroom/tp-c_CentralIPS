@@ -1,30 +1,30 @@
-import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_fisrt_three.dart';
-import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_list.dart';
-import 'package:centralips/Pedometro/LeaderBord/leader_bord_center_user.dart';
-import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
-import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord_list.dart';
+import 'package:centralips/Pedometro/LeaderBoard/leader_board_center_first_three.dart';
+import 'package:centralips/Pedometro/LeaderBoard/leader_board_center_list.dart';
+import 'package:centralips/Pedometro/LeaderBoard/leader_board_center_user.dart';
+import 'package:centralips/Pedometro/LeaderBoard/load/user_data_leaderboard.dart';
+import 'package:centralips/Pedometro/LeaderBoard/load/load_data_leaderboard.dart';
+import 'package:centralips/Pedometro/LeaderBoard/top3_leaderboard_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../Sidebar/NavBar.dart';
-import 'load/load_data_leaderbord.dart';
 
-class LeaderBord extends StatefulWidget {
-  const LeaderBord({super.key});
+class LeaderBoard extends StatefulWidget {
+  const LeaderBoard({super.key});
 
   @override
   _LeaderBordState createState() => _LeaderBordState();
 }
 
-class _LeaderBordState extends State<LeaderBord> {
+class _LeaderBordState extends State<LeaderBoard> {
   //define the map
 
-  Map<String, UserDataLeaderbord> listOfUsersByID = {};
-  List<UserDataLeaderbord> listOfUsersSteps = [];
+  Map<String, UserDataLeaderboard> listOfUsersByID = {};
+  List<UserDataLeaderboard> listOfUsersSteps = [];
 
   void initialList() {
     //insert the list with default data
     for (int i = 0; i < 10; i++) {
-      listOfUsersSteps.add(UserDataLeaderbord.all(
+      listOfUsersSteps.add(UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
@@ -36,9 +36,9 @@ class _LeaderBordState extends State<LeaderBord> {
   void initState() {
     super.initState();
     initialList();
-    Map<String, UserDataLeaderbord> tempById = {};
+    Map<String, UserDataLeaderboard> tempById = {};
 
-    LoadDataLeaderbord.loadData(tempById, () {
+    LoadDataLeaderboard.loadData(tempById, () {
       setState(() {
         listOfUsersByID = tempById;
 
@@ -128,7 +128,7 @@ class _LeaderBordState extends State<LeaderBord> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 50),
-                          child: Top3LeaderBordList(
+                          child: Top3LeaderBoardList(
                             listOfUsersSteps: listOfUsersSteps,
                           ),
                         ),
@@ -156,7 +156,7 @@ class _LeaderBordState extends State<LeaderBord> {
                           padding: const EdgeInsets.only(top: 50),
                           child: Column(
                             children: [
-                              LeaderBordCenterFisrtThree(
+                              LeaderBoardCenterFirstThree(
                                   listOfUsersSteps: listOfUsersSteps),
                               LeaderBordCenterList(
                                 listOfUsersSteps: listOfUsersSteps,

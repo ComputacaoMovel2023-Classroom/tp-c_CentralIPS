@@ -1,13 +1,13 @@
-class UserDataLeaderbord {
+class UserDataLeaderboard {
   String name = '---';
   int steps = 0;
   String urlImage =
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 
-  UserDataLeaderbord({
+  UserDataLeaderboard({
     required this.steps,
   });
-  UserDataLeaderbord.all({
+  UserDataLeaderboard.all({
     required this.name,
     required this.steps,
     required this.urlImage,

@@ -1,11 +1,11 @@
-import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
+import 'package:centralips/Pedometro/LeaderBoard/load/user_data_leaderboard.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
-class LoadDataLeaderbord {
+class LoadDataLeaderboard {
   static void loadData(
       //List<UserDataLeaderbord> listOfUsersData,
-      Map<String, UserDataLeaderbord> listOfUsersSteps,
+      Map<String, UserDataLeaderboard> listOfUsersSteps,
       Function onUpdateUI) {
     //firebase
     DatabaseReference userRef = FirebaseDatabase.instance.ref('ipshealth');
@@ -37,7 +37,7 @@ class LoadDataLeaderbord {
         }
 
         //add to the map
-        listOfUsersSteps[user.key] = UserDataLeaderbord(steps: steps);
+        listOfUsersSteps[user.key] = UserDataLeaderboard(steps: steps);
       }
 
       //sort the map by the steps
@@ -51,7 +51,7 @@ class LoadDataLeaderbord {
   //method to save in a list the name, steps and foto of the user by the map listOfUsersSteps
   static void saveData(
       //ist<UserDataLeaderbord> listOfUsersData,
-      Map<String, UserDataLeaderbord> listOfUsersSteps,
+      Map<String, UserDataLeaderboard> listOfUsersSteps,
       Function onUpdateUI) {
     //for each user in the map
     //get the name, steps and foto

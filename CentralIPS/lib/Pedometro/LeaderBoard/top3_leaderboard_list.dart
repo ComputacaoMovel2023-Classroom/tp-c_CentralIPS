@@ -1,18 +1,18 @@
-import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
-import 'package:centralips/Pedometro/LeaderBord/top3_leaderbord.dart';
+import 'package:centralips/Pedometro/LeaderBoard/load/user_data_leaderboard.dart';
+import 'package:centralips/Pedometro/LeaderBoard/top3_leaderboard.dart';
 import 'package:flutter/cupertino.dart';
 
-class Top3LeaderBordList extends StatelessWidget {
-  Top3LeaderBordList({super.key, required this.listOfUsersSteps});
+class Top3LeaderBoardList extends StatelessWidget {
+  Top3LeaderBoardList({super.key, required this.listOfUsersSteps});
 
-  List<UserDataLeaderbord> listOfUsersSteps;
+  List<UserDataLeaderboard> listOfUsersSteps;
 
   @override
   Widget build(BuildContext context) {
     //returns the top 3 users
     //set default values when the list is empty
 
-    return Top3LeaderBord(
+    return Top3LeaderBoard(
         nameFirst:
             (listOfUsersSteps.isNotEmpty) ? listOfUsersSteps[0].name : "User",
         nameSecond:

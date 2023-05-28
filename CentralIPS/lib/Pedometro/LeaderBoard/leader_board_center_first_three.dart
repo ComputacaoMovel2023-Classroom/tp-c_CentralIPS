@@ -1,16 +1,16 @@
-import 'package:centralips/Pedometro/LeaderBord/leader_bord_center.dart';
-import 'package:centralips/Pedometro/LeaderBord/load/user_data_leaderbord.dart';
+import 'package:centralips/Pedometro/LeaderBoard/leader_board_center.dart';
+import 'package:centralips/Pedometro/LeaderBoard/load/user_data_leaderboard.dart';
 import 'package:flutter/material.dart';
 
-class LeaderBordCenterFisrtThree extends StatelessWidget {
-  LeaderBordCenterFisrtThree({super.key, required this.listOfUsersSteps});
+class LeaderBoardCenterFirstThree extends StatelessWidget {
+  LeaderBoardCenterFirstThree({super.key, required this.listOfUsersSteps});
 
-  List<UserDataLeaderbord> listOfUsersSteps;
+  List<UserDataLeaderboard> listOfUsersSteps;
 
   // 3 object of UserDataLeaderbord
-  UserDataLeaderbord? firstplace;
-  UserDataLeaderbord? secondplace;
-  UserDataLeaderbord? thirdplace;
+  UserDataLeaderboard? firstplace;
+  UserDataLeaderboard? secondplace;
+  UserDataLeaderboard? thirdplace;
 
   void _setPlaces() {
     //sort the listOfUsersSteps by steps
@@ -22,35 +22,35 @@ class LeaderBordCenterFisrtThree extends StatelessWidget {
     } else if (listOfUsersSteps.length == 2) {
       firstplace = listOfUsersSteps[0];
       secondplace = listOfUsersSteps[1];
-      thirdplace = UserDataLeaderbord.all(
+      thirdplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
     } else if (listOfUsersSteps.length == 1) {
       firstplace = listOfUsersSteps[0];
-      secondplace = UserDataLeaderbord.all(
+      secondplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      thirdplace = UserDataLeaderbord.all(
+      thirdplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
     } else {
-      firstplace = UserDataLeaderbord.all(
+      firstplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      secondplace = UserDataLeaderbord.all(
+      secondplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png");
-      thirdplace = UserDataLeaderbord.all(
+      thirdplace = UserDataLeaderboard.all(
           name: "User",
           steps: 0,
           urlImage:
@@ -65,20 +65,20 @@ class LeaderBordCenterFisrtThree extends StatelessWidget {
     print("joaquima");
     return Column(
       children: [
-        LeaderBordCenter.buildLeaderBordCenterChooseColor(
+        LeaderBoardCenter.buildLeaderBordCenterChooseColor(
             Colors.yellow[300]!,
             "1º",
             firstplace!.urlImage,
             firstplace!.steps.toString(),
             firstplace!.name),
-        LeaderBordCenter.buildLeaderBordCenterChooseColor(
+        LeaderBoardCenter.buildLeaderBordCenterChooseColor(
           Colors.grey[300]!,
           "2º",
           secondplace!.urlImage,
           secondplace!.steps.toString(),
           secondplace!.name,
         ),
-        LeaderBordCenter.buildLeaderBordCenterChooseColor(
+        LeaderBoardCenter.buildLeaderBordCenterChooseColor(
             Colors.orange,
             "3º",
             thirdplace!.urlImage,
