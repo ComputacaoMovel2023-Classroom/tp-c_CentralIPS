@@ -19,6 +19,7 @@ class SearchBar extends StatefulWidget {
 
 class SearchBarState extends State<SearchBar> {
   Library library = Library();
+  DatabaseReference libraryDb = FirebaseDatabase.instance.ref("library");
   String result = "";
   bool loadedData = false;
   final TextEditingController searchController = TextEditingController();
@@ -26,29 +27,11 @@ class SearchBarState extends State<SearchBar> {
   @override
   void initState() {
     super.initState();
-
-    /* final user = FirebaseAuth.instance.currentUser;
-    FirebaseDatabase.instance
-        .ref()
-        .child('library')
-        .child(user!.uid)
-        .onValue
-        .listen((event) {
-      // Get the snapshot of the data
-      DataSnapshot snapshot = event.snapshot;
-
-      var userData = snapshot.value as Map;
-     
-      setState(() {
-        loadedData = true;
-        
-      });
-    }); */
+    _fetchData(10,'');
   }
 
   @override
   Widget build(BuildContext context) {
-    library.fetchData();
     // This controller will store the value of the search bar
     return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -91,7 +74,7 @@ class SearchBarState extends State<SearchBar> {
             const Divider(
               color: Colors.black,
             ),
-            (library.size() > 0)
+            (library.size() > 0 && loadedData)
                 ? SizedBox(
                     height: 420,
                     child: ListView.builder(
@@ -129,10 +112,12 @@ class SearchBarState extends State<SearchBar> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            child: Image.network(
-                                              book.urlImage,
-                                              fit: BoxFit.cover,
-                                            ),
+                                            child: Image(
+                                                image: NetworkImage((book
+                                                            .urlImage ==
+                                                        '')
+                                                    ? "https://bookcart.azurewebsites.net/Upload/Default_image.jpg"
+                                                    : book.urlImage)),
                                           ),
                                         ),
                                         Expanded(
@@ -190,7 +175,8 @@ class SearchBarState extends State<SearchBar> {
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       left: 5)),
-                                                          Text(book.school.name),
+                                                          Text(
+                                                              book.school.name),
                                                         ],
                                                       ),
                                                     ]),
@@ -320,6 +306,90 @@ class SearchBarState extends State<SearchBar> {
 
     setState(() {
       library.books = suggestions;
+    });
+  }
+
+  Future<void> _fetchData(int limit, String nameContains) async {
+
+    libraryDb.limitToFirst(limit).onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+
+      var bookData = snapshot.value as Map;
+
+      //for each book
+      bookData.forEach(
+        (key, value) {
+          var bookMap = value as Map;
+          String name = '';
+          String urlImage = '';
+          List<String> authors = [];
+          School school = School.na;
+          String synopsis = '';
+          String edition = '';
+          String isbn = '';
+          String language = '';
+          int numberOfPages = 0;
+          List<Category> categories = [];
+          bool isAvailable = false;
+
+          //for each book atributes
+          bookMap.forEach((key, value) {
+            if (key == 'isAvailable') {
+              isAvailable = value;
+              //print(isAvailable);
+            } else if (key == 'numberOfPages') {
+              numberOfPages = value;
+              //print(numberOfPages);
+            } else if (key == 'school') {
+              school = getSchool(value);
+              //print(school);
+            } else if (key == 'edition') {
+              edition = value;
+              //print(edition);
+            } else if (key == 'language') {
+              language = value;
+              //print(language);
+            } else if (key == 'name') {
+              name = value;
+              //print(name);
+            } else if (key == 'categories') {
+              List aux = value;
+              for (var element in aux) {
+                categories.add(getCategory(element.toString()));
+              }
+              //print(categories);
+            } else if (key == 'synopsis') {
+              synopsis = value;
+              //print(synopsis);
+            } else if (key == 'authors') {
+              List aux = value;
+              for (var element in aux) {
+                authors.add(element.toString());
+              }
+              //print(authors);
+            } else if (key == 'urlImage') {
+              urlImage = value as String;
+              //print(urlImage);
+            }
+          });
+          Book book = Book(
+              name: name,
+              authors: authors,
+              urlImage: urlImage,
+              school: school,
+              synopsis: synopsis,
+              edition: edition,
+              isbn: isbn,
+              language: language,
+              numberOfPages: numberOfPages,
+              categories: categories);
+          library.books.add(book);
+          print("LIVRO ADICIONADO");
+        },
+      );
+      setState(() {
+        loadedData = true;
+      });
     });
   }
 }

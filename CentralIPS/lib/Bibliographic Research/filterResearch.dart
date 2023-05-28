@@ -2,7 +2,6 @@ import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
 import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
 import 'package:centralips/Bibliographic%20Research/documentType.dart';
 import 'package:centralips/Bibliographic%20Research/filterOption.dart';
-import 'package:centralips/Bibliographic%20Research/searchBar.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
