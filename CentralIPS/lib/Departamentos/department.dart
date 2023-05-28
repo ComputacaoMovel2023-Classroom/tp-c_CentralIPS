@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 
 class Department extends StatefulWidget{
 
+  int id;
   String name = "Sem Nome";
   String acronym = "N/A";
   bool open = true;
-  var usersId = [];
+  List<String> usersId = [];
   School school = School.na;
 
   Department({
     Key? key,
+    required this.id,
     required this.name,
     required this.acronym,
     required this.open,
@@ -25,8 +27,10 @@ class Department extends StatefulWidget{
   }
 
   Map<String, dynamic> toJson() {
-    usersId.add("teste");
+    usersId.add('na');
+
     return {
+      'id' : id,
       'nome': name,
       'acronym': acronym,
       'open': open,

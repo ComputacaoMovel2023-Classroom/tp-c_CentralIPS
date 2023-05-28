@@ -135,7 +135,7 @@ class _NavBarState extends State<NavBar> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
-                          child: const DepartamentosUI(),
+                          child: DepartamentosUI(),
                         )));
               }),
           ListTile(

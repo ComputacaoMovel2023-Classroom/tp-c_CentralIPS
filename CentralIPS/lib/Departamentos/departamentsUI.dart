@@ -1,13 +1,18 @@
 import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
 import 'package:centralips/Departamentos/departmentFilter.dart';
 import 'package:centralips/Departamentos/departmentListView.dart';
-import 'package:centralips/Departamentos/departmentStatic.dart';
+import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 
 class DepartamentosUI extends StatelessWidget {
-  const DepartamentosUI({super.key});
+
+  DepartmentsListView departmentsListView = DepartmentsListView();
+  Departments departments = Departments();
+
+  DepartamentosUI({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +48,7 @@ class DepartamentosUI extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    '${DepartmentStaticExample().openDepartments()} Departamentos Disponíveis',
-                    style: const TextStyle(fontSize: 10),
-                  ),
-                  DepartmentExpandedList(
-                      icon: Icons.filter_alt_outlined,
-                      departmentFilter: DepartmentFilter.open),
-                  DepartmentsListView(),
+                  departmentsListView,
                   const SizedBox(
                     width: 400,
                   )
