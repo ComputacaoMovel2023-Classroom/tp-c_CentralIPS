@@ -31,6 +31,7 @@ class _NavBarState extends State<NavBar> {
     super.dispose();
   }
 
+  var role = "Estudante";
   String? _userName = "A carregar";
   String? photoURL =
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
@@ -59,6 +60,7 @@ class _NavBarState extends State<NavBar> {
           photoURL = user.photoURL!;
         }
       });
+      role = userData['role'];
     });
   }
 
@@ -212,18 +214,22 @@ class _NavBarState extends State<NavBar> {
                           child: const SobreNos(),
                         )));
               }),
-          ListTile(
-              title: const Text('TESTE Registo'),
-              leading: const Icon(Icons.people),
-              onTap: () {
-                context.read<FooterMenuCubit>().selectItem(-1);
+          Visibility(
+            visible: role ==
+                "Administrador", // Set the visibility based on the condition
+            child: ListTile(
+                title: const Text('TESTE Registo'),
+                leading: const Icon(Icons.people),
+                onTap: () {
+                  context.read<FooterMenuCubit>().selectItem(-1);
 
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                          value: context.read<FooterMenuCubit>(),
-                          child: const RegisterPage(),
-                        )));
-              }),
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                            value: context.read<FooterMenuCubit>(),
+                            child: const RegisterPage(),
+                          )));
+                }),
+          ),
           ListTile(
               title: const Text('Sair'),
               leading: const Icon(Icons.logout),
