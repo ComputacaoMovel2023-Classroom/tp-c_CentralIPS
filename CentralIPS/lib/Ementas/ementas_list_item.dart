@@ -2,12 +2,14 @@ import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:flutter/material.dart';
 
 class EmentasListItem extends StatefulWidget {
+  final int index;
   final IconData icon;
   final String weekday;
   final DailyEmenta weekdayMeals;
 
   const EmentasListItem({
     Key? key,
+    required this.index,
     required this.icon,
     required this.weekday,
     required this.weekdayMeals,
