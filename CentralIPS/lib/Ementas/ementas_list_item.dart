@@ -40,6 +40,7 @@ class _EmentasListItemState extends State<EmentasListItem> {
             },
             children: [
               ExpansionPanel(
+                backgroundColor: Colors.white,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return ListTile(
                     leading: Icon(widget.icon),
