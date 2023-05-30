@@ -3,7 +3,6 @@ import 'package:centralips/Ementas/ementas_list_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class EmentasList extends StatefulWidget {
   EmentasList({
@@ -18,31 +17,31 @@ class EmentasList extends StatefulWidget {
 
 class _EmentasListState extends State<EmentasList> {
   List<DailyEmenta> weekdayMeals = [
-    DailyEmenta(
+    const DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    DailyEmenta(
+    const DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    DailyEmenta(
+    const DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    DailyEmenta(
+    const DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    DailyEmenta(
+    const DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
@@ -57,6 +56,12 @@ class _EmentasListState extends State<EmentasList> {
     'quinta-feira',
     'sexta-feira'
   ];
+  bool _isDisposed = false;
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -76,7 +81,7 @@ class _EmentasListState extends State<EmentasList> {
       List<DailyEmenta> updatedDailyEmenta = [];
       barmeals.forEach((key, value) {
         DailyEmenta dailyEmenta = DailyEmenta(
-          date: value['date'] ?? '01/01/2021',
+          date: value['date'] ?? '01/01',
           sopa: value['sopa'] ?? 'Sopa',
           peixe: value['peixe'] ?? 'Peixe',
           carne: value['carne'] ?? 'Carne',
@@ -84,10 +89,11 @@ class _EmentasListState extends State<EmentasList> {
         );
         updatedDailyEmenta.add(dailyEmenta);
       });
-
-      setState(() {
-        weekdayMeals = updatedDailyEmenta;
-      });
+      if (!_isDisposed) {
+        setState(() {
+          weekdayMeals = updatedDailyEmenta;
+        });
+      }
     });
     //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
@@ -124,6 +130,8 @@ class _EmentasListState extends State<EmentasList> {
                   // print('weekdayMeals: ${weekdayMeals.length}}');
 
                   return EmentasListItem(
+                    key: UniqueKey(),
+                    index: index,
                     icon: Icons.restaurant,
                     weekday: diasSemana[index],
                     weekdayMeals: weekdayMeals[index],

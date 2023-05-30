@@ -1,4 +1,4 @@
-import 'package:centralips/Pedometro/LeaderBord/leader_bord.dart';
+import 'package:centralips/Pedometro/LeaderBoard/leader_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -455,7 +455,7 @@ class _PedometroState extends State<Pedometro> {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => BlocProvider.value(
                                     value: context.read<FooterMenuCubit>(),
-                                    child: const LeaderBord(),
+                                    child: const LeaderBoard(),
                                   )));
                         },
                         child: const Text('LeaderBord'),

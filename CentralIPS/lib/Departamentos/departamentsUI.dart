@@ -1,13 +1,16 @@
 import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
 import 'package:centralips/Departamentos/departmentFilter.dart';
 import 'package:centralips/Departamentos/departmentListView.dart';
-import 'package:centralips/Departamentos/departmentStatic.dart';
+import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 
 class DepartamentosUI extends StatelessWidget {
-  const DepartamentosUI({super.key});
+  DepartmentsListView departmentsListView = DepartmentsListView();
+  Departments departments = Departments();
+
+  DepartamentosUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +28,16 @@ class DepartamentosUI extends StatelessWidget {
           ),
           Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 249, 249, 249),
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(30),
               ),
             ),
             margin: const EdgeInsets.only(top: 100),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "Departamentos",
@@ -43,14 +47,7 @@ class DepartamentosUI extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    '${DepartmentStaticExample().openDepartments()} Departamentos Disponíveis',
-                    style: const TextStyle(fontSize: 10),
-                  ),
-                  DepartmentExpandedList(
-                      icon: Icons.filter_alt_outlined,
-                      departmentFilter: DepartmentFilter.open),
-                  DepartmentsListView(),
+                  departmentsListView,
                   const SizedBox(
                     width: 400,
                   )

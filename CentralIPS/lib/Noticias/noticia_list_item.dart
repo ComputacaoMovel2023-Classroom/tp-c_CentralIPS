@@ -18,36 +18,25 @@ class NoticiaListItem extends StatefulWidget {
 
 class _NoticiaListItemState extends State<NoticiaListItem> {
   bool _isPressed = false;
-  void _submitForm() {
-    //BASE DE DADOS - ADICIONAR NOTICIA
-    /*final db = FirebaseDatabase.instance.ref();
+  String role = "Estudante";
+  void initState() {
+    super.initState();
+
     final user = FirebaseAuth.instance.currentUser;
-    var now = DateTime.now();
-    var formatter = DateFormat('yyyy-MM-dd');
-    var date = formatter.format(now);
-    var title = 'title';
-    var subtitle = 'subtitle';
-    var imageUrl = 'title';
-    var text = 'texto';
-    var author = 'author';
-    NoticiaItem noticiaItem = NoticiaItem(
-      titulo: title,
-      subtitulo: subtitle,
-      imagem: 'assets/images/noticiaImg.png',
-      texto: text,
-      author: author,
-      date: date,
-    );
-    db.child('noticias').push().set(noticiaItem.toJson());
-    */
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-                value: context.read<FooterMenuCubit>(),
-                child: AdminNoticiasAdd(),
-              )),
-    );
+    FirebaseDatabase.instance
+        .ref()
+        .child('users')
+        .child(user!.uid)
+        .onValue
+        .listen((event) {
+      // Get the snapshot of the data
+      DataSnapshot snapshot = event.snapshot;
+
+      var userData = snapshot.value as Map;
+      // Get the user's name and number
+
+      role = userData['role'];
+    });
   }
 
   void _OnPressed() {
@@ -184,9 +173,6 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
-                          TextButton(
-                              onPressed: _submitForm,
-                              child: const Text('Adicionar Noticia')),
                         ],
                       ),
                     ),

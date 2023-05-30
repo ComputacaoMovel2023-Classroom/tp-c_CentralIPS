@@ -1,23 +1,19 @@
+import 'package:centralips/Ementas/daily_ementa.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class AdminEmentasListItem extends StatefulWidget {
-  IconData icon;
-  String name;
-  String date;
-  String sopa;
-  String peixe;
-  String carne;
-  String vegetariano;
+  final IconData icon;
+  final String weekday;
+  final DailyEmenta weekdayMeals;
+  final String type;
 
   AdminEmentasListItem({
     Key? key,
     required this.icon,
-    required this.name,
-    required this.date,
-    required this.sopa,
-    required this.peixe,
-    required this.carne,
-    required this.vegetariano,
+    required this.weekday,
+    required this.weekdayMeals,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -25,6 +21,7 @@ class AdminEmentasListItem extends StatefulWidget {
 }
 
 class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
+  var db = FirebaseDatabase.instance.ref();
   bool _isExpanded = false;
   TextEditingController _sopaController = TextEditingController();
   TextEditingController _peixeController = TextEditingController();
@@ -34,10 +31,14 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
   @override
   void initState() {
     super.initState();
-    _sopaController.text = widget.sopa;
-    _peixeController.text = widget.peixe;
-    _carneController.text = widget.carne;
-    _vegetarianoController.text = widget.vegetariano;
+    _sopaController.text = widget.weekdayMeals.sopa;
+    _peixeController.text = widget.weekdayMeals.peixe;
+    _carneController.text = widget.weekdayMeals.carne;
+    _vegetarianoController.text = widget.weekdayMeals.vegetariano;
+  }
+
+  void _updateMenuItem(String field, String value) {
+    db.child("${widget.type}/${widget.weekday}").update({field: value});
   }
 
   @override
@@ -63,7 +64,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return ListTile(
                     leading: Icon(widget.icon),
-                    title: Text(widget.name),
+                    title: Text(widget.weekday),
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -71,7 +72,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                         Column(
                           children: [
                             Icon(Icons.calendar_month_outlined),
-                            Text(widget.date),
+                            Text(widget.weekdayMeals.date),
                           ],
                         ),
                       ],
@@ -104,7 +105,9 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                widget.sopa = _sopaController.text;
+                                //widget.weekdayMeals.sopa = _sopaController.text;
+                                _updateMenuItem(widget.weekdayMeals.sopa,
+                                    _sopaController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -128,7 +131,8 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                widget.peixe = _peixeController.text;
+                                _updateMenuItem(widget.weekdayMeals.peixe,
+                                    _peixeController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -152,7 +156,8 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                widget.carne = _carneController.text;
+                                _updateMenuItem(widget.weekdayMeals.carne,
+                                    _carneController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -176,8 +181,8 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                widget.vegetariano =
-                                    _vegetarianoController.text;
+                                _updateMenuItem(widget.weekdayMeals.vegetariano,
+                                    _vegetarianoController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),

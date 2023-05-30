@@ -37,9 +37,7 @@ class AdminBarClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdminEmentasList(
-        sopas: sopas,
-        peixes: peixes,
-        carnes: carnes,
-        vegetarianos: vegetarianos);
+      type: "Bar",
+    );
   }
 }
