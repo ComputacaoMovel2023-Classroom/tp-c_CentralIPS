@@ -201,6 +201,12 @@ class _nfcUIState extends State<nfcUI> {
                           title: const Text('Adicionar Saldo'),
                           trailing: const Icon(Icons.arrow_forward),
                           onTap: () {
+                            if (cardNumber == "---") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "Adicione um cartão para adicionar saldo")));
+                            }
                             showMaterialNumberPicker(
                               headerColor: Colors
                                   .blue, // background color of the header area
