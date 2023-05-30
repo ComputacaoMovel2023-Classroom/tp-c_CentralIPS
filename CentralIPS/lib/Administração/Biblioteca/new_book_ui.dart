@@ -166,6 +166,13 @@ Widget builCategories(BuildContext context) {
         child: GestureDetector(
           onTap: () async {
             showMaterialCheckboxPicker<String>(
+              headerColor: Colors.blue, // background color of the header area
+              headerTextColor:
+                  const Color(0xFFFFFFFF), // text fcolor of the header
+              backgroundColor: const Color.fromARGB(
+                  255, 255, 255, 255), // background color of the entire dialog
+              buttonTextColor: const Color.fromARGB(
+                  255, 0, 0, 0), // text color of the action bar buttons
               context: context,
               title: 'Escolha a/s categoria/s',
               items: //show the string of the categories
@@ -409,6 +416,13 @@ Widget buildSchool(BuildContext context) {
         child: GestureDetector(
           onTap: () async {
             showMaterialScrollPicker<String>(
+              headerColor: Colors.blue, // background color of the header area
+              headerTextColor:
+                  const Color(0xFFFFFFFF), // text fcolor of the header
+              backgroundColor: const Color.fromARGB(
+                  255, 255, 255, 255), // background color of the entire dialog
+              buttonTextColor: const Color.fromARGB(
+                  255, 0, 0, 0), // text color of the action bar buttons
               context: context,
               title: 'Escolha a escola',
               items: //show the string of the categories

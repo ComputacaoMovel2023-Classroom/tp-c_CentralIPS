@@ -89,12 +89,13 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                         child: Row(children: [
                           Container(
                               alignment: Alignment.center,
-                              margin: EdgeInsets.only(left: 6),
+                              margin: const EdgeInsets.only(left: 6),
                               height: 50,
                               width: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(90),
-                                color: Color.fromRGBO(186, 186, 186, 0.576),
+                                color:
+                                    const Color.fromRGBO(186, 186, 186, 0.576),
                               ),
                               child: Text(
                                 departments.getDepartments()[index].acronym,
@@ -106,7 +107,6 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                               SizedBox(
                                 child: Expanded(
                                   child: Text(
-
                                     departments.getDepartments()[index].name,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
@@ -118,7 +118,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                               ),
                               Text(
                                 departments.getDepartments()[index].acronym,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w100, fontSize: 12),
                               ),
                             ],

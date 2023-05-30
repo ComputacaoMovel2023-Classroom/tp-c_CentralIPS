@@ -1,4 +1,6 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/new_book_ui.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/Compra/compra.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/Menus/admin_menu.dart';
 import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
