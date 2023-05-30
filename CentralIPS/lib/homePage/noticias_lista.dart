@@ -28,7 +28,7 @@ class _NoticiasListaState extends State<NoticiasLista> {
       var userData = snapshot.value as Map;
 
       setState(() {
-        _noticiasData = (userData).values.cast<Map>().toList() ?? [];
+        _noticiasData = (userData).values.cast<Map>().toList();
         print('noticiasData: $_noticiasData');
       });
     });

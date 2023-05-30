@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:centralips/WelcomeScreen/welcome_screen.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -15,6 +16,11 @@ void main() async {
 
   Bloc.observer = AppBlocObserver();
 
+  WidgetsFlutterBinding.ensureInitialized();
+  // Step 3
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) => runApp(const MyAppDemo()));
   runApp(const MyAppDemo());
 }
 

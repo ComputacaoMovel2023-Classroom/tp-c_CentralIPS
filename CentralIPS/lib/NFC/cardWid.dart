@@ -18,8 +18,7 @@ class cardWid extends StatelessWidget {
                 Color.fromARGB(255, 68, 112, 147),
               ],
             ),
-            borderRadius: BorderRadius.circular(
-                10.0)), // Adds a gradient background and rounded corners to the container
+            borderRadius: BorderRadius.circular(10.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,29 +30,25 @@ class cardWid extends StatelessWidget {
                   children: [
                     Text('Pedro Moura',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: Colors.white,
-                            fontFamily:
-                                "monospace")), // Adds a title to the card
+                            color: Colors.white, fontFamily: "monospace")),
                     const Spacer(),
                     Stack(children: [
                       Image.asset(
                         'assets/images/logoips.png',
                         height: 60,
                       )
-                    ]) // Adds a stack of two circular containers to the right of the title
+                    ]) //
                   ],
                 ),
                 Text('202100110',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Colors.white,
-                        fontFamily: "monospace")) // Adds a subtitle to the card
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: Colors.white, fontFamily: "monospace"))
               ],
             ),
             const Text('€25',
-                style: TextStyle(
-                    fontSize: 24,
-                    color:
-                        Colors.white)) // Adds a price to the bottom of the card
+                style: TextStyle(fontSize: 24, color: Colors.white))
           ],
         ));
   }
