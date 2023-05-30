@@ -1,3 +1,4 @@
+import 'package:centralips/NFC/DialogCentralIPS.dart';
 import 'package:centralips/Pedometro/LeaderBoard/leader_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -465,6 +466,13 @@ class _PedometroState extends State<Pedometro> {
                       child: ElevatedButton(
                         onPressed: () {
                           resetCounter();
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CentralIPSDialog(
+                                    'Carregado para a\nBase de Dados com\nSucesso',
+                                    'assets/images/db.png');
+                              });
                         },
                         child: const Text('Reset'),
                       ),
