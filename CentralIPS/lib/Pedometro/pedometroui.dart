@@ -1,5 +1,5 @@
-import 'package:centralips/NFC/DialogCentralIPS.dart';
 import 'package:centralips/Pedometro/LeaderBoard/leader_board.dart';
+import 'package:centralips/UTILS/DialogCentralIPS.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';

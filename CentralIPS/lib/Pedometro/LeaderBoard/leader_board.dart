@@ -33,12 +33,27 @@ class _LeaderBordState extends State<LeaderBoard> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   void initState() {
+    //check if mounted
+    if (!mounted) {
+      return;
+    }
+
     super.initState();
+
     initialList();
     Map<String, UserDataLeaderboard> tempById = {};
 
     LoadDataLeaderboard.loadData(tempById, () {
+      if (!mounted) {
+        return;
+      }
+
       setState(() {
         listOfUsersByID = tempById;
 

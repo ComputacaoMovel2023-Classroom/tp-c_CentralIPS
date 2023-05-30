@@ -1,3 +1,5 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/library_manager_ui.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/new_book_ui.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/admin_ementasUI.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_ui.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
@@ -14,7 +16,7 @@ class AdminMenu extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       drawer: const NavBar(),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black38,
         elevation: 0,
         leading: Builder(builder: (BuildContext context) {
           return IconButton(
@@ -23,31 +25,103 @@ class AdminMenu extends StatelessWidget {
           );
         }),
       ),
-      body: Column(children: [
-        ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Ementas'),
-            onTap: () {
-              context.read<FooterMenuCubit>().selectItem(2);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                        value: context.read<FooterMenuCubit>(),
-                        child: const AdminEmentasUI(),
-                      )));
-            }),
-        const Divider(),
-        ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Noticias'),
-            onTap: () {
-              context.read<FooterMenuCubit>().selectItem(2);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                        value: context.read<FooterMenuCubit>(),
-                        child: AdminNoticiasUI(),
-                      )));
-            }),
-        const Divider(),
+      body: ListView(children: [
+        Column(children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          const Text(
+            "Menu\n de \nAdministração",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 10),
+                child: Text('Ementas',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ],
+          ),
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Ementas'),
+              onTap: () {
+                context.read<FooterMenuCubit>().selectItem(2);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const AdminEmentasUI(),
+                        )));
+              }),
+          const Divider(),
+
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 10),
+                child: Text('Noticias/Eventos',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ],
+          ),
+
+          const Divider(),
+
+          ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Noticias'),
+              onTap: () {
+                context.read<FooterMenuCubit>().selectItem(2);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: AdminNoticiasUI(),
+                        )));
+              }),
+          const Divider(),
+          //a text to separate the menu
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 10),
+                child: Text('Biblioteca',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ],
+          ),
+          const Divider(),
+          ListTile(
+              title: const Text('Criar livro'),
+              leading: const Icon(Icons.book),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const NewBookUI(),
+                        )));
+              }),
+          const Divider(),
+          ListTile(
+              title: const Text('Gerenciador de livros'),
+              leading: const Icon(Icons.library_add),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const LibraryManagerUI(),
+                        )));
+              }),
+          const Divider(),
+        ]),
       ]),
     );
   }
