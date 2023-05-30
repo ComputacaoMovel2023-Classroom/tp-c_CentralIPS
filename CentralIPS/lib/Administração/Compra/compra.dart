@@ -1,4 +1,4 @@
-import 'package:centralips/NFC/DialogCentralIPS.dart';
+import 'package:centralips/UTILS/DialogCentralIPS.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';

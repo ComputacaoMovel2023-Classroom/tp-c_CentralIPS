@@ -18,7 +18,7 @@ class CentralIPSDialog extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(10)),
             Image.asset(
               assetPath,
-              height: 50,
+              height: 80,
             ),
             Text(
               header,
