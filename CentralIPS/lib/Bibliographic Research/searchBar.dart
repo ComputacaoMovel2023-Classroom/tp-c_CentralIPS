@@ -27,7 +27,7 @@ class SearchBarState extends State<SearchBar> {
   @override
   void initState() {
     super.initState();
-    _fetchData(10, '');
+    _fetchData('');
   }
 
   @override
@@ -301,14 +301,14 @@ class SearchBarState extends State<SearchBar> {
     setState(() {
       loadedData = false;
     });
-    _fetchData(10, query);
+    _fetchData(query);
     setState(() {
       loadedData = true;
     });
   }
 
-  Future<void> _fetchData(int limit, String nameContains) async {
-    libraryDb.limitToFirst(limit).onValue.listen((event) {
+  Future<void> _fetchData(String nameContains) async {
+    libraryDb.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
 
       var bookData = snapshot.value as Map;

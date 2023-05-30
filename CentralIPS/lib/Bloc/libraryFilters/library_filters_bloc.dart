@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
 import 'package:centralips/Bibliographic%20Research/libraryFilterModel.dart';
@@ -9,39 +11,39 @@ part 'library_filters_state.dart';
 
 class LibraryFiltersBloc
     extends Bloc<LibraryFiltersEvent, LibraryFiltersState> {
-  LibraryFiltersBloc() : super(LibraryFiltersLoading());
-  
-  @override
-  Stream<LibraryFiltersState> mapEventToState(
-      LibraryFiltersEvent event) async* {
-    if (event is LibraryFilterLoad) {
-      yield* _mapFilterLoadToState();
-    }
-    if (event is BookCategoryFilterUpdate) {
-      yield* _mapBookCategoryFilterUpdatedToState(event, state);
-    }
+  LibraryFilter libraryFilter = LibraryFilter();
+
+  LibraryFiltersBloc() : super(LibraryFiltersLoading()) {
+    on<LibraryFilterLoad>(_mapFilterLoadToState);
+    on<BookCategoryFilterUpdate>(_mapBookCategoryFilterUpdatedToState);
   }
 
-  Stream<LibraryFiltersState> _mapFilterLoadToState() async* {
-    yield LibraryFiltersLoaded(
-        libraryFilter: LibraryFilter(
-            categoriesFilter:
-                BookCategory.values.map((e) => BookCategoryEntry(e)).toList()));
+  void _mapFilterLoadToState(event, emit) {
+    libraryFilter = LibraryFilter(
+        categoriesFilter:
+            BookCategory.values.map((e) => BookCategoryEntry(e)).toList());
+    emit(LibraryFiltersLoaded(
+      libraryFilter: libraryFilter,
+    ));
   }
 
-  Stream<LibraryFiltersState> _mapBookCategoryFilterUpdatedToState(
-      BookCategoryFilterUpdate event, LibraryFiltersState state) async* {
+  void _mapBookCategoryFilterUpdatedToState(
+      BookCategoryFilterUpdate event, emit) {
     if (state is LibraryFiltersLoaded) {
       final List<BookCategoryEntry> updatedBookCategoryFilters =
-          state.libraryFilter.categoriesFilter.map((bookCategory) {
-        return bookCategory.isEnabled == event.bookCategory.isEnabled
+          libraryFilter.categoriesFilter.map((bookCategory) {
+
+        return bookCategory.category == event.bookCategory.category
             ? event.bookCategory
             : bookCategory;
       }).toList();
 
-      yield LibraryFiltersLoaded(
+      emit(
+        LibraryFiltersLoaded(
           libraryFilter:
-              LibraryFilter(categoriesFilter: updatedBookCategoryFilters));
+              LibraryFilter(categoriesFilter: updatedBookCategoryFilters),
+        ),
+      );
     }
   }
 }

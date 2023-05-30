@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:centralips/Bloc/libraryFilters/library_filters_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +19,9 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryFiltersBloc, LibraryFiltersState>(
       builder: (context, state) {
-
         if (state is LibraryFiltersLoading) {
-          return Center(
+          return SizedBox(
+            width: double.infinity,
             child: CircularProgressIndicator(),
           );
         }
@@ -27,47 +29,69 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
         if (state is LibraryFiltersLoaded) {
           return Container(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Categorias",
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                  ),
-                  textAlign: TextAlign.start,
+                Row(
+                  children: const [
+                    Expanded(
+                      child: Text(
+                        "Categorias",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
                 ),
-                ListView.builder(
-                    itemCount: state.libraryFilter.categoriesFilter.length,
-                    itemBuilder: (context, index) {
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              state.libraryFilter.categoriesFilter[index].category.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                SizedBox(
+                  child: ListView.builder(
+                      padding: EdgeInsets.all(0),
+                      shrinkWrap: true,
+                      itemCount: state.libraryFilter.categoriesFilter.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  state.libraryFilter.categoriesFilter[index]
+                                      .category.name,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Checkbox(
+                                checkColor: Colors.white,
+                                activeColor:
+                                    const Color.fromRGBO(85, 56, 236, 100),
+                                value: state.libraryFilter
+                                    .categoriesFilter[index].isEnabled,
+                                onChanged: (bool? value) {
+                                  
+                                  BookCategoryEntry aux = BookCategoryEntry(
+                                    state.libraryFilter.categoriesFilter[index]
+                                        .category,
+                                    isEnabled: !state.libraryFilter
+                                        .categoriesFilter[index].isEnabled,
+                                  );
+
+                                  context.read<LibraryFiltersBloc>().add(
+                                        BookCategoryFilterUpdate(
+                                            bookCategory: aux),
+                                      );
+                                },
+                              )
+                            ],
                           ),
-                          Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: const Color.fromRGBO(85, 56, 236, 100),
-                            value: state.libraryFilter.categoriesFilter[index]
-                                .isEnabled,
-                            onChanged: (bool? value) {
-                              BookCategoryEntry aux = BookCategoryEntry(
-                                  state.libraryFilter.categoriesFilter[index].category,
-                                  isEnabled: !state.libraryFilter
-                                      .categoriesFilter[index].isEnabled);
-                              context.read<LibraryFiltersBloc>().add(
-                                  BookCategoryFilterUpdate(
-                                      bookCategory: aux));
-                            },
-                          )
-                        ],
-                      );
-                    })
+                        );
+                      }),
+                )
               ],
             ),
           );
