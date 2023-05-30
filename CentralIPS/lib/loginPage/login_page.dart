@@ -1,5 +1,7 @@
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:centralips/UTILS/progress.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
+
 import 'package:centralips/register_page/register_page_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';

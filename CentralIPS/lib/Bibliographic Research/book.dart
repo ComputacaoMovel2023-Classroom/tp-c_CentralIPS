@@ -16,6 +16,9 @@ class Book {
   final List<BookCategory> categories;
   final bool isAvailable;
 
+  // para a administração
+  String id;
+
   Book(
       {required this.name,
       this.urlImage =
@@ -28,7 +31,8 @@ class Book {
       required this.language,
       required this.numberOfPages,
       required this.categories,
-      this.isAvailable = true});
+      this.isAvailable = true,
+      this.id = ''});
 
   String showAuthors() {
     String toReturn = '';

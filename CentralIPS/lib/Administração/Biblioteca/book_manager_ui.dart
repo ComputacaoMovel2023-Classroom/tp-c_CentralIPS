@@ -1,24 +1,21 @@
-
+import 'package:centralips/Bibliographic%20Research/book.dart';
+import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
+import 'package:centralips/Bibliographic%20Research/bookPage.dart';
+import 'package:centralips/Bibliographic%20Research/library.dart';
+import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Departamentos/school.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../Cubit/index_cubit.dart';
-import 'book.dart';
-import 'bookCategory.dart';
-import 'bookPage.dart';
-import 'library.dart';
-
-class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+class BookManagerUI extends StatefulWidget {
+  const BookManagerUI({Key? key}) : super(key: key);
 
   @override
-  State<SearchBar> createState() => SearchBarState();
+  State<BookManagerUI> createState() => BookManagerUIState();
 }
 
-class SearchBarState extends State<SearchBar> {
+class BookManagerUIState extends State<BookManagerUI> {
   Library library = Library();
   DatabaseReference libraryDb = FirebaseDatabase.instance.ref("library");
   String result = "";
@@ -34,8 +31,7 @@ class SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     // This controller will store the value of the search bar
-    return  
-    Padding(
+    return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
@@ -191,13 +187,14 @@ class SearchBarState extends State<SearchBar> {
                                   ),
                                 )),
                             Positioned(
-                                top: 15,
+                                top: 6,
                                 right: 10,
                                 child: Container(
-                                  width: 15,
-                                  height: 15,
+                                  width: 40,
+                                  height: 40,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
+
                                     color: book.isAvailable
                                         ? const Color.fromRGBO(9, 131, 72, 1)
                                         : const Color.fromRGBO(216, 30, 41,
@@ -205,16 +202,35 @@ class SearchBarState extends State<SearchBar> {
                                   ),
                                   child: InkWell(
                                     onTap: () {
+                                      //change the book availability to the opposite
+
+                                      libraryDb
+                                          .child(book.id)
+                                          .child('isAvailable')
+                                          .set(!book.isAvailable);
+
                                       // Handle button tap
                                     },
                                     borderRadius: BorderRadius.circular(30),
                                     child: const Icon(
                                       Icons.circle,
                                       color: Colors.white,
-                                      size: 8,
+                                      size: 16,
                                     ),
                                   ),
-                                ))
+                                )),
+                            Positioned(
+                                top: 110,
+                                right: 0,
+                                child: // an icon button to delete the book
+                                    IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    //delete the book from the database
+                                    libraryDb.child(book.id).remove();
+                                  },
+                                )),
                           ],
                         );
                       },
@@ -332,6 +348,8 @@ class SearchBarState extends State<SearchBar> {
           List<BookCategory> categories = [];
           bool isAvailable = false;
 
+          String bookKey = key;
+
           if (value['name']
               .toString()
               .toUpperCase()
@@ -389,7 +407,8 @@ class SearchBarState extends State<SearchBar> {
                 isAvailable: isAvailable,
                 language: language,
                 numberOfPages: numberOfPages,
-                categories: categories);
+                categories: categories,
+                id: bookKey);
             auxLibrary.books.add(book);
             print("LIVRO ADICIONADO");
           }

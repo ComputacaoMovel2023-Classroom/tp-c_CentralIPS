@@ -3,12 +3,11 @@
 import 'package:centralips/Bibliographic%20Research/book.dart';
 import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
 import 'package:centralips/Bibliographic%20Research/library.dart';
-import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Departamentos/school.dart';
+import 'package:centralips/UTILS/DialogCentralIPS.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 class NewBookUI extends StatefulWidget {
@@ -596,19 +595,31 @@ Widget buildRegisterBtn(BuildContext context, GlobalKey<FormState> formKey) {
           }
 
           //show the success message
-          ScaffoldMessenger.of(context).showSnackBar(
+          /*ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Registo efetuado com sucesso'),
               backgroundColor: Colors.green,
             ),
-          );
+          );*/
 
-          context.read<FooterMenuCubit>().selectItem(2);
+          //show a dialog from utils
+
+          showDialog(
+              context: context,
+              builder: (_) {
+                return CentralIPSDialog.dialogRedirect(
+                    context,
+                    "Livro Criado Com Sucesso",
+                    "assets/images/happyBook.png",
+                    const HomePage());
+              });
+
+          /*  context.read<FooterMenuCubit>().selectItem(2);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => BlocProvider.value(
                     value: context.read<FooterMenuCubit>(),
                     child: const HomePage(),
-                  )));
+                  )));*/
         } else {
           print('not valid');
         }
