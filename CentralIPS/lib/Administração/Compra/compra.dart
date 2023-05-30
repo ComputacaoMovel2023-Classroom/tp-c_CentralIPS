@@ -65,14 +65,28 @@ class _CompraUI extends State<CompraUI> {
       identifierlocal = tag.data['nfca']['identifier'].toString();
 
       final user = FirebaseAuth.instance.currentUser;
-      DatabaseReference userRef = FirebaseDatabase.instance
+      String identifierFromDatabase = "";
+
+      FirebaseDatabase.instance
           .ref()
           .child('users')
           .child(user!.uid)
-          .child('identifier');
-      userRef.set(identifierlocal);
+          .child('identifier')
+          .onValue
+          .listen((event) {
+        // Get the snapshot of the data
+        DataSnapshot snapshot = event.snapshot;
+
+        var userData = snapshot.value;
+        // Get the user's name and number
+        setState(() {
+          if (userData != null) {
+            identifierFromDatabase = userData.toString();
+          }
+        });
+      });
+
       setState(() {
-        identifier = identifierlocal;
         showMaterialNumberPicker(
           headerColor: Colors.blue, // background color of the header area
           headerTextColor: const Color(0xFFFFFFFF), // text fcolor of the header
@@ -84,7 +98,7 @@ class _CompraUI extends State<CompraUI> {
           title: 'Valor da compra',
           maxNumber: 100,
           minNumber: 0,
-          step: 20,
+          step: 1,
           selectedNumber: toRemove,
           onChanged: (value) => setState(() {
             toRemove = value;
@@ -94,6 +108,19 @@ class _CompraUI extends State<CompraUI> {
                 .child('users')
                 .child(user!.uid)
                 .child('wallet');
+
+            if (identifierlocal != identifierFromDatabase) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Cartão inválido")));
+              return;
+            }
+
+            if (int.parse(wallet) - toRemove < 0) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Saldo insuficiente")));
+              return;
+            }
+
             int walletvalue = int.parse(wallet) - toRemove;
             userRef.set(walletvalue);
           }),
