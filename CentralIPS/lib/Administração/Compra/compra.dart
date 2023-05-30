@@ -1,3 +1,4 @@
+import 'package:centralips/NFC/DialogCentralIPS.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -110,15 +111,21 @@ class _CompraUI extends State<CompraUI> {
                 .child('wallet');
 
             if (identifierlocal != identifierFromDatabase) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Cartão inválido")));
-              return;
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CentralIPSDialog(
+                        'Cartão Inválido', 'assets/images/card.png');
+                  });
             }
 
             if (int.parse(wallet) - toRemove < 0) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Saldo insuficiente")));
-              return;
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CentralIPSDialog(
+                        'Saldo Insuficiente', 'assets/images/money.png');
+                  });
             }
 
             int walletvalue = int.parse(wallet) - toRemove;

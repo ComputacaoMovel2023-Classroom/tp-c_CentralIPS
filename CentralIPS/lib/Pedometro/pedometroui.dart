@@ -459,7 +459,7 @@ class _PedometroState extends State<Pedometro> {
                                     child: const LeaderBoard(),
                                   )));
                         },
-                        child: const Text('LeaderBord'),
+                        child: const Text('LeaderBoard'),
                       ),
                     ),
                     Center(
