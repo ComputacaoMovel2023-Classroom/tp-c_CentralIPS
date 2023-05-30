@@ -69,6 +69,7 @@ dependencies:
   email_validator: ^2.1.17
   sign_button: ^2.0.4
   google_sign_in: ^6.1.2
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

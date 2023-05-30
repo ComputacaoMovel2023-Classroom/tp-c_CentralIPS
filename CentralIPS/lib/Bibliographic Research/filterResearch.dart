@@ -60,14 +60,7 @@ class FilterResearchState extends State<FilterResearch> {
                           children: [
                             IconButton(
                                 onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                          value: context.read<FooterMenuCubit>(),
-                                        child: const BibliographicResearch(),
-                                      )),
-                            )
+                            Navigator.pop(context)
                           },
                                 icon: const Icon(Icons.arrow_back_ios)),
                             const Padding(padding: EdgeInsets.only(left: 90)),
@@ -115,16 +108,13 @@ class FilterResearchState extends State<FilterResearch> {
                                 indent: 0,
                                 color: Color.fromRGBO(215, 217, 217, 0.612),
                               ),
-                              FilterWidget(
-                                title: "Categoria",
-                                options: getCategoryNames(),
-                              ),
+                              FilterCategoryWidget(),
                               const Divider(
                                 height: 50,
                                 indent: 0,
                                 color: Color.fromRGBO(215, 217, 217, 0.612),
                               ),
-                              FilterWidget(
+                              /* FilterWidget(
                                 title: "Escola",
                                 options: getSchoolNames(),
                               ),
@@ -136,7 +126,7 @@ class FilterResearchState extends State<FilterResearch> {
                               FilterWidget(
                                 title: "Tipo de Documento",
                                 options: getDocumentTypeNames(),
-                              ),
+                              ), */
                               const Padding(
                                   padding: EdgeInsets.only(bottom: 90))
                             ],

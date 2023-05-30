@@ -5,6 +5,7 @@ import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
 import 'bookCategory.dart';
 
+
 /**
  * Book data-structure
  */
@@ -18,7 +19,7 @@ class Book {
   final String isbn;
   final String language;
   final int numberOfPages;
-  final List<Category> categories;
+  final List<BookCategory> categories;
   final bool isAvailable;
 
   Book(

@@ -25,7 +25,7 @@ class BookPage extends StatelessWidget {
     for (String author in book.authors) {
       authors.add(author);
     }
-    for (Category category in book.categories) {}
+    for (BookCategory category in book.categories) {}
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -354,14 +354,7 @@ class BookPage extends StatelessWidget {
                 leading: Builder(builder: (BuildContext context) {
                   return IconButton(
                       onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                        value: context.read<FooterMenuCubit>(),
-                                        child: const BibliographicResearch(),
-                                      )),
-                            )
+                            Navigator.pop(context)
                           },
                       icon: const Icon(
                         Icons.arrow_back_ios,

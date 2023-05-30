@@ -327,7 +327,7 @@ class SearchBarState extends State<SearchBar> {
           String isbn = '';
           String language = '';
           int numberOfPages = 0;
-          List<Category> categories = [];
+          List<BookCategory> categories = [];
           bool isAvailable = false;
 
           if (value['name']
@@ -382,6 +382,7 @@ class SearchBarState extends State<SearchBar> {
                 synopsis: synopsis,
                 edition: edition,
                 isbn: isbn,
+                isAvailable: isAvailable,
                 language: language,
                 numberOfPages: numberOfPages,
                 categories: categories);

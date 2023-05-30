@@ -1,26 +1,28 @@
+import 'package:equatable/equatable.dart';
+
 /**
  * Book category
  */
-enum Category { accao, aventura, biografias, conto, drama, romances, terror, na }
+enum BookCategory { accao, aventura, biografias, conto, drama, romances, terror, na }
 
-extension CategoryExtension on Category {
+extension CategoryExtension on BookCategory {
   String get name {
     switch (this) {
-      case Category.accao:
+      case BookCategory.accao:
         return 'Acção';
-      case Category.aventura:
+      case BookCategory.aventura:
         return 'Aventura';
-      case Category.biografias:
+      case BookCategory.biografias:
         return 'Biografias';
-      case Category.conto:
+      case BookCategory.conto:
         return 'Conto';
-      case Category.drama:
+      case BookCategory.drama:
         return 'Drama';
-      case Category.romances:
+      case BookCategory.romances:
         return 'Romances';
-      case Category.terror:
+      case BookCategory.terror:
         return 'Terror';
-      case Category.na:
+      case BookCategory.na:
         return 'NA';
       default:
         return '';
@@ -30,22 +32,32 @@ extension CategoryExtension on Category {
 
 }
 
+class BookCategoryEntry extends Equatable{
+  final BookCategory category;
+  bool isEnabled;
 
-List<String> getCategoryNames() {
-  return Category.values.map((category) => category.name).toList();
+  BookCategoryEntry(this.category, {this.isEnabled = false});
+  
+  @override
+  List<Object?> get props => [category,isEnabled];
 }
 
-Category getCategory(String string){
+
+List<String> getCategoryNames() {
+  return BookCategory.values.map((category) => category.name).toList();
+}
+
+BookCategory getCategory(String string){
 
   switch(string){
-    case "Category.accao" : return Category.accao;
-case "Category.aventura" : return Category.aventura;
-    case "Category.biografias" : return Category.biografias;
-    case "Category.conto" : return Category.conto;
-    case "Category.drama" : return Category.drama;
-    case "Category.romances" : return Category.romances;
-    case "Category.terror" : return Category.terror;
-    default: return Category.na;
+    case "Category.accao" : return BookCategory.accao;
+case "Category.aventura" : return BookCategory.aventura;
+    case "Category.biografias" : return BookCategory.biografias;
+    case "Category.conto" : return BookCategory.conto;
+    case "Category.drama" : return BookCategory.drama;
+    case "Category.romances" : return BookCategory.romances;
+    case "Category.terror" : return BookCategory.terror;
+    default: return BookCategory.na;
   }
 
 }

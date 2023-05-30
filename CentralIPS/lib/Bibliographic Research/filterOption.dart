@@ -1,63 +1,80 @@
-import 'package:centralips/Bibliographic%20Research/checkBoxTheme.dart';
+import 'package:centralips/Bloc/libraryFilters/library_filters_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FilterWidget extends StatefulWidget {
-  final String title;
-  List<String> options = List.empty();
+import 'bookCategory.dart';
 
-  FilterWidget({Key? key, required this.title, required this.options})
-      : super(key: key);
+class FilterCategoryWidget extends StatefulWidget {
+  FilterCategoryWidget({Key? key}) : super(key: key);
 
   @override
-  State<FilterWidget> createState() => FilterWidgetState();
+  State<FilterCategoryWidget> createState() => _FilterCategoryWidgetState();
 }
 
-class FilterWidgetState extends State<FilterWidget> {
+class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return generateOptions(widget.title, widget.options);
-  }
+    return BlocBuilder<LibraryFiltersBloc, LibraryFiltersState>(
+      builder: (context, state) {
 
-  Column generateOptions(String title, List<String> options) {
-    List<Widget> listOfOptions = [];
+        if (state is LibraryFiltersLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-    for (String option in options) {
-      listOfOptions.add(
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                option,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+        if (state is LibraryFiltersLoaded) {
+          return Container(
+            child: Column(
+              children: [
+                Text(
+                  "Categorias",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
-              ),
+                ListView.builder(
+                    itemCount: state.libraryFilter.categoriesFilter.length,
+                    itemBuilder: (context, index) {
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              state.libraryFilter.categoriesFilter[index].category.name,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          Checkbox(
+                            checkColor: Colors.white,
+                            activeColor: const Color.fromRGBO(85, 56, 236, 100),
+                            value: state.libraryFilter.categoriesFilter[index]
+                                .isEnabled,
+                            onChanged: (bool? value) {
+                              BookCategoryEntry aux = BookCategoryEntry(
+                                  state.libraryFilter.categoriesFilter[index].category,
+                                  isEnabled: !state.libraryFilter
+                                      .categoriesFilter[index].isEnabled);
+                              context.read<LibraryFiltersBloc>().add(
+                                  BookCategoryFilterUpdate(
+                                      bookCategory: aux));
+                            },
+                          )
+                        ],
+                      );
+                    })
+              ],
             ),
-            CheckBoxTheme(),
-          ],
-        ),
-      );
-    }
-
-    Column toReturn = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w900,
-          ),
-          textAlign: TextAlign.start,
-        ),
-        Column(
-          children: listOfOptions,
-        )
-      ],
+          );
+        } else {
+          return Text("Algo correu mal");
+        }
+      },
     );
-
-    return toReturn;
   }
 }

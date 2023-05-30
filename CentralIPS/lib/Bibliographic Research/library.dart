@@ -15,7 +15,7 @@ class Library {
 
   Library();
 
-  void addBook(Book book) {
+  void addBookToDatabase(Book book) {
     libraryDb.push().set(book.toJson());
   }
 
