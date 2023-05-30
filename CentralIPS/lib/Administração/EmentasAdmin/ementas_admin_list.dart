@@ -57,6 +57,13 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
     'quinta-feira',
     'sexta-feira'
   ];
+  bool _isDisposed = false;
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -85,10 +92,13 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
         //print('updatedDailyEmenta: ${dailyEmenta.sopa}]}');
       });
 
-      setState(() {
-        weekdayMeals = updatedDailyEmenta;
-        //for each to see what is inside
-      });
+      if (!_isDisposed) {
+        setState(() {
+          weekdayMeals = updatedDailyEmenta;
+          //for each to see what is inside
+        });
+      }
+      setState(() {});
     });
     //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
@@ -122,11 +132,12 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
                 },
                 itemCount: diasSemana.length,
                 itemBuilder: (_, index) {
-                  for (DailyEmenta dailyEmenta in weekdayMeals) {
+                  /* for (DailyEmenta dailyEmenta in weekdayMeals) {
                     print('weekdayMeals: ${dailyEmenta.sopa} no ndex');
                   }
                   print("index $index");
 
+                  print(weekdayMeals[index].sopa);*/
                   return AdminEmentasListItem(
                     icon: Icons.restaurant,
                     weekday: diasSemana[index],

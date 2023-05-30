@@ -21,8 +21,17 @@ class AdminEmentasListItem extends StatefulWidget {
 }
 
 class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
+  List<String> daysweek = [
+    'segunda-feira',
+    'terça-feira',
+    'quarta-feira',
+    'quinta-feira',
+    'sexta-feira'
+  ];
   var db = FirebaseDatabase.instance.ref();
+
   bool _isExpanded = false;
+
   TextEditingController _sopaController = TextEditingController();
   TextEditingController _peixeController = TextEditingController();
   TextEditingController _carneController = TextEditingController();
@@ -31,11 +40,14 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
   @override
   void initState() {
     super.initState();
-    _sopaController.text = widget.weekdayMeals.sopa;
-    _peixeController.text = widget.weekdayMeals.peixe;
-    _carneController.text = widget.weekdayMeals.carne;
-    _vegetarianoController.text = widget.weekdayMeals.vegetariano;
-    print('initState: ${_sopaController.text}');
+    _sopaController = TextEditingController();
+    _peixeController = TextEditingController();
+    _carneController = TextEditingController();
+    _vegetarianoController = TextEditingController();
+
+    // print('initState: ${_sopaController.text}');
+    setState(() {});
+    debugPrint('AIAI: ${widget.weekdayMeals.peixe}');
   }
 
   void _updateMenuItem(String field, String value) {
@@ -66,6 +78,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
             },
             children: [
               ExpansionPanel(
+                backgroundColor: Colors.white,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return ListTile(
                     leading: Icon(widget.icon),
@@ -102,7 +115,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             child: TextField(
                               controller: _sopaController,
                               decoration: InputDecoration(
-                                hintText: 'Peixe',
+                                hintText: widget.weekdayMeals.sopa,
                               ),
                               style: TextStyle(fontSize: 16),
                             ),
@@ -126,7 +139,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             child: TextField(
                               controller: _peixeController,
                               decoration: InputDecoration(
-                                hintText: 'Peixe',
+                                hintText: widget.weekdayMeals.peixe,
                               ),
                               style: TextStyle(fontSize: 16),
                             ),
@@ -150,7 +163,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             child: TextField(
                               controller: _carneController,
                               decoration: InputDecoration(
-                                hintText: 'Carne',
+                                hintText: widget.weekdayMeals.carne,
                               ),
                               style: TextStyle(fontSize: 16),
                             ),
@@ -174,7 +187,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             child: TextField(
                               controller: _vegetarianoController,
                               decoration: InputDecoration(
-                                hintText: 'Vegetariano',
+                                hintText: widget.weekdayMeals.vegetariano,
                               ),
                               style: TextStyle(fontSize: 16),
                             ),
