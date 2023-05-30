@@ -1,6 +1,5 @@
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
-import 'package:centralips/progress.dart';
 import 'package:centralips/register_page/register_page_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../UTILS/progress.dart';
 import '../register_page/register_page.dart';
 import 'package:sign_button/sign_button.dart';
 

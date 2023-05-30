@@ -73,7 +73,6 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                                 value: state.libraryFilter
                                     .categoriesFilter[index].isEnabled,
                                 onChanged: (bool? value) {
-                                  
                                   BookCategoryEntry aux = BookCategoryEntry(
                                     state.libraryFilter.categoriesFilter[index]
                                         .category,

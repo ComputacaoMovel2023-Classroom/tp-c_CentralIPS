@@ -1,4 +1,4 @@
-import 'package:centralips/NFC/DialogCentralIPS.dart';
+
 import 'package:centralips/Pedometro/LeaderBoard/leader_board.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
+import '../UTILS/DialogCentralIPS.dart';
 import 'data.dart';
 import 'day.dart';
 

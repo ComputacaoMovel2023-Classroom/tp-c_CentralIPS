@@ -30,20 +30,22 @@ class LibraryFiltersBloc
   void _mapBookCategoryFilterUpdatedToState(
       BookCategoryFilterUpdate event, emit) {
     if (state is LibraryFiltersLoaded) {
+      log(libraryFilter.toString());
       final List<BookCategoryEntry> updatedBookCategoryFilters =
           libraryFilter.categoriesFilter.map((bookCategory) {
-
         return bookCategory.category == event.bookCategory.category
             ? event.bookCategory
             : bookCategory;
       }).toList();
+      log(updatedBookCategoryFilters.toString());
 
+      libraryFilter = LibraryFilter(categoriesFilter: updatedBookCategoryFilters);
       emit(
         LibraryFiltersLoaded(
           libraryFilter:
-              LibraryFilter(categoriesFilter: updatedBookCategoryFilters),
-        ),
-      );
+              libraryFilter),
+        )
+      ;
     }
   }
 }

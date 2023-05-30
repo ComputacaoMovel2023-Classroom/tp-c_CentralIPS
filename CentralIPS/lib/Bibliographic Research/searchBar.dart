@@ -1,3 +1,4 @@
+
 import 'package:centralips/Departamentos/school.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -33,7 +34,8 @@ class SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     // This controller will store the value of the search bar
-    return Padding(
+    return  
+    Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [

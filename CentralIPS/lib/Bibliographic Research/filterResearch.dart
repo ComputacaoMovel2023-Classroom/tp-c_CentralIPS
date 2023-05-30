@@ -66,7 +66,7 @@ class FilterResearchState extends State<FilterResearch> {
                             const Padding(padding: EdgeInsets.only(left: 90)),
                             const Text(
                               "Filtros",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.w900,
                               ),
@@ -81,8 +81,8 @@ class FilterResearchState extends State<FilterResearch> {
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
-                                      child: const Text('Disponível',
+                                  const Expanded(
+                                      child: Text('Disponível',
                                           style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w900,
