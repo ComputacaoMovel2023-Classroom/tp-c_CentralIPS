@@ -1,14 +1,8 @@
 import 'package:centralips/Departamentos/school.dart';
-import 'package:flutter/material.dart';
 
-import '../Sidebar/NavBar.dart';
-import '../footer_menu/footer_menu.dart';
 import 'bookCategory.dart';
 
-
-/**
- * Book data-structure
- */
+/// Book data-structure
 class Book {
   String name = 'Sem título';
   final String urlImage;
@@ -58,5 +52,10 @@ class Book {
       'categories': categories.map((category) => category.toString()).toList(),
       'isAvailable': isAvailable,
     };
+  }
+
+  //to string
+  String infoBook() {
+    return "Book: $name\nAuthors: ${showAuthors()}\nSchool: ${school.name}\nSynopsis: $synopsis\nEdition: $edition\nISBN: $isbn\nLanguage: $language\nNumber of pages: $numberOfPages\nCategories: ${categories.toString()}\nIs available: $isAvailable";
   }
 }

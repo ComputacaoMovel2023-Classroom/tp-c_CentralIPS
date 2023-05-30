@@ -1,3 +1,4 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/new_book_ui.dart';
 import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
@@ -240,6 +241,16 @@ class _NavBarState extends State<NavBar> {
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
                           child: WelcomeScreen(),
+                        )));
+              }),
+          ListTile(
+              title: const Text('Cirar livro'),
+              leading: const Icon(Icons.book),
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const NewBookUI(),
                         )));
               })
         ],
