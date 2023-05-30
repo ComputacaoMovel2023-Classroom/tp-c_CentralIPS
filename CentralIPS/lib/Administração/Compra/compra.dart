@@ -16,7 +16,7 @@ class CompraUI extends StatefulWidget {
 class _CompraUI extends State<CompraUI> {
   String displayName = 'Não Carregado';
   String cardNumber = '---';
-  String wallet = '€--';
+  String wallet = '0';
   String identifierlocal = "Não Carregado";
   String identifier = "Não Carregado";
   int toRemove = 0;

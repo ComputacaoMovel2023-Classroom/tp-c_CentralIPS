@@ -17,7 +17,7 @@ class nfcUI extends StatefulWidget {
 class _nfcUIState extends State<nfcUI> {
   String displayName = 'Não Carregado';
   String cardNumber = '---';
-  String wallet = '€--';
+  String wallet = '0';
   String identifierlocal = "Não Carregado";
   String identifier = "Não Carregado";
   int toAdd = 0;
