@@ -79,7 +79,7 @@ class _nfcUIState extends State<nfcUI> {
             context: context,
             builder: (BuildContext context) {
               return CentralIPSDialog(
-                  "Cartão Lido com Sucesso", "assets/images/nfcicon.png");
+                  "Cartão Lido\ncom Sucesso", "assets/images/nfcicon.png");
             });
       });
 

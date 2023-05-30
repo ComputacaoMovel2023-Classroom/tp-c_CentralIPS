@@ -8,7 +8,7 @@ class CentralIPSDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: SizedBox(
         height: 300,
@@ -22,9 +22,19 @@ class CentralIPSDialog extends StatelessWidget {
             ),
             Text(
               header,
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20),
             ),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor:
+                      Colors.white, //change background color of button
+                  backgroundColor: Colors.black, //change text color of button
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 5.0,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
