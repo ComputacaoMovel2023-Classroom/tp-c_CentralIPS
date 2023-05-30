@@ -18,31 +18,31 @@ class AdminEmentasList extends StatefulWidget {
 
 class _AdminEmentasListState extends State<AdminEmentasList> {
   List<DailyEmenta> weekdayMeals = [
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
-        sopa: 'A carregar...',
+        sopa: 'AMDRE',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
@@ -57,7 +57,6 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
     'quinta-feira',
     'sexta-feira'
   ];
-
   @override
   void initState() {
     super.initState();
@@ -83,11 +82,12 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
           vegetariano: value['vegetariano'] ?? 'Vegetariano',
         );
         updatedDailyEmenta.add(dailyEmenta);
+        //print('updatedDailyEmenta: ${dailyEmenta.sopa}]}');
       });
 
       setState(() {
         weekdayMeals = updatedDailyEmenta;
-        print('updatedDailyEmenta: ${weekdayMeals[0].sopa}]}');
+        //for each to see what is inside
       });
     });
     //print('TAMANHO ARRAY: ${weekdayMeals.length}');
@@ -121,7 +121,12 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
                   );
                 },
                 itemCount: diasSemana.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
+                  for (DailyEmenta dailyEmenta in weekdayMeals) {
+                    print('weekdayMeals: ${dailyEmenta.sopa} no ndex');
+                  }
+                  print("index $index");
+
                   return AdminEmentasListItem(
                     icon: Icons.restaurant,
                     weekday: diasSemana[index],

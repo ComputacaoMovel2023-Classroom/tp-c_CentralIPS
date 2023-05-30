@@ -3,7 +3,6 @@ import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:centralips/WelcomeScreen/welcome_screen.dart';
-import 'package:centralips/register_page/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -219,7 +218,7 @@ class _NavBarState extends State<NavBar> {
             visible: role ==
                 "Administrador", // Set the visibility based on the condition
             child: ListTile(
-                title: const Text('TESTE Registo'),
+                title: const Text('Administração'),
                 leading: const Icon(Icons.people),
                 onTap: () {
                   context.read<FooterMenuCubit>().selectItem(-1);
@@ -227,7 +226,23 @@ class _NavBarState extends State<NavBar> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => BlocProvider.value(
                             value: context.read<FooterMenuCubit>(),
-                            child: const RegisterPage(),
+                            child: const AdminMenu(),
+                          )));
+                }),
+          ),
+          Visibility(
+            visible: role ==
+                "Administrador", // Set the visibility based on the condition
+            child: ListTile(
+                title: const Text('Teste de compra'),
+                leading: const Icon(Icons.card_membership),
+                onTap: () {
+                  context.read<FooterMenuCubit>().selectItem(-1);
+
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                            value: context.read<FooterMenuCubit>(),
+                            child: const CompraUI(),
                           )));
                 }),
           ),
@@ -240,7 +255,7 @@ class _NavBarState extends State<NavBar> {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
-                          child: WelcomeScreen(),
+                          child: const WelcomeScreen(),
                         )));
               }),
           ListTile(

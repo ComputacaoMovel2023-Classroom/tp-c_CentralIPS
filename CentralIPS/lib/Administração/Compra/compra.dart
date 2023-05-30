@@ -5,22 +5,21 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_pickers/helpers/show_number_picker.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class nfcUI extends StatefulWidget {
-  const nfcUI({Key? key}) : super(key: key);
+class CompraUI extends StatefulWidget {
+  const CompraUI({Key? key}) : super(key: key);
 
   @override
-  _nfcUIState createState() => _nfcUIState();
+  _CompraUI createState() => _CompraUI();
 }
 
-class _nfcUIState extends State<nfcUI> {
+class _CompraUI extends State<CompraUI> {
   String displayName = 'Não Carregado';
   String cardNumber = '---';
   String wallet = '0';
   String identifierlocal = "Não Carregado";
   String identifier = "Não Carregado";
-  int toAdd = 0;
+  int toRemove = 0;
 
   @override
   void initState() {
@@ -66,14 +65,66 @@ class _nfcUIState extends State<nfcUI> {
       identifierlocal = tag.data['nfca']['identifier'].toString();
 
       final user = FirebaseAuth.instance.currentUser;
-      DatabaseReference userRef = FirebaseDatabase.instance
+      String identifierFromDatabase = "";
+
+      FirebaseDatabase.instance
           .ref()
           .child('users')
           .child(user!.uid)
-          .child('identifier');
-      userRef.set(identifierlocal);
+          .child('identifier')
+          .onValue
+          .listen((event) {
+        // Get the snapshot of the data
+        DataSnapshot snapshot = event.snapshot;
+
+        var userData = snapshot.value;
+        // Get the user's name and number
+        setState(() {
+          if (userData != null) {
+            identifierFromDatabase = userData.toString();
+          }
+        });
+      });
+
       setState(() {
-        identifier = identifierlocal;
+        showMaterialNumberPicker(
+          headerColor: Colors.blue, // background color of the header area
+          headerTextColor: const Color(0xFFFFFFFF), // text fcolor of the header
+          backgroundColor: const Color.fromARGB(
+              255, 255, 255, 255), // background color of the entire dialog
+          buttonTextColor: const Color.fromARGB(
+              255, 0, 0, 0), // text color of the action bar buttons
+          context: context,
+          title: 'Valor da compra',
+          maxNumber: 100,
+          minNumber: 0,
+          step: 1,
+          selectedNumber: toRemove,
+          onChanged: (value) => setState(() {
+            toRemove = value;
+            final user = FirebaseAuth.instance.currentUser;
+            DatabaseReference userRef = FirebaseDatabase.instance
+                .ref()
+                .child('users')
+                .child(user!.uid)
+                .child('wallet');
+
+            if (identifierlocal != identifierFromDatabase) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Cartão inválido")));
+              return;
+            }
+
+            if (int.parse(wallet) - toRemove < 0) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Saldo insuficiente")));
+              return;
+            }
+
+            int walletvalue = int.parse(wallet) - toRemove;
+            userRef.set(walletvalue);
+          }),
+        );
       });
 
       NfcManager.instance.stopSession();
@@ -109,9 +160,9 @@ class _nfcUIState extends State<nfcUI> {
                 children: [
                   Row(children: <Widget>[
                     const Text(
-                      "Cartão Digital",
+                      "Simulação de Compra",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -188,87 +239,10 @@ class _nfcUIState extends State<nfcUI> {
                       children: <Widget>[
                         ListTile(
                           leading: const Icon(Icons.add),
-                          title: const Text('Adicionar Cartão por NFC'),
+                          title: const Text('Efetuar Compra'),
                           trailing: const Icon(Icons.arrow_forward),
                           onTap: () {
-                            // Ação a ser executada ao clicar em "Adicionar Cartão"
-                            // Exemplo: Navegar para uma nova tela ou executar uma função
                             _tagRead();
-                          },
-                        ),
-                        ListTile(
-                          leading: const Icon(Icons.attach_money),
-                          title: const Text('Adicionar Saldo'),
-                          trailing: const Icon(Icons.arrow_forward),
-                          onTap: () {
-                            if (cardNumber == "---") {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          "Adicione um cartão para adicionar saldo")));
-                            }
-                            showMaterialNumberPicker(
-                              headerColor: Colors
-                                  .blue, // background color of the header area
-                              headerTextColor: const Color(
-                                  0xFFFFFFFF), // text fcolor of the header
-                              backgroundColor: const Color.fromARGB(
-                                  255,
-                                  255,
-                                  255,
-                                  255), // background color of the entire dialog
-                              buttonTextColor: const Color.fromARGB(255, 0, 0,
-                                  0), // text color of the action bar buttons
-                              context: context,
-                              title: 'Saldo a adicionar',
-                              maxNumber: 50,
-                              minNumber: 0,
-                              step: 5,
-                              selectedNumber: toAdd,
-                              onChanged: (value) => setState(() {
-                                toAdd = value;
-                                final user = FirebaseAuth.instance.currentUser;
-                                DatabaseReference userRef = FirebaseDatabase
-                                    .instance
-                                    .ref()
-                                    .child('users')
-                                    .child(user!.uid)
-                                    .child('wallet');
-                                int walletvalue = int.parse(wallet) + toAdd;
-                                userRef.set(walletvalue);
-                              }),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        const Divider(),
-                        const SizedBox(height: 10),
-                        ListTile(
-                          leading: const Icon(Icons.credit_card),
-                          title: const Text('Pedir cartão'),
-                          trailing: const Icon(Icons.arrow_forward),
-                          onTap: () async {
-                            // Ação a ser executada ao clicar em "Adicionar Saldo"
-                            // Exemplo: Navegar para uma nova tela ou executar uma função
-                            final Uri url = Uri.parse(
-                                'https://www.di.ips.pt/pedir-renovar-reemitir-ou-cancelar-o-meu-cartao-ips');
-                            if (!await launchUrl(url)) {
-                              throw Exception('Could not launch $url');
-                            }
-                          },
-                        ),
-                        ListTile(
-                          leading: const Icon(Icons.question_answer),
-                          title: const Text('FAQ'),
-                          trailing: const Icon(Icons.arrow_forward),
-                          onTap: () async {
-                            // Ação a ser executada ao clicar em "Adicionar Saldo"
-                            // Exemplo: Navegar para uma nova tela ou executar uma função
-                            final Uri url = Uri.parse(
-                                'https://www.di.ips.pt/cartao-ips-faqs');
-                            if (!await launchUrl(url)) {
-                              throw Exception('Could not launch $url');
-                            }
                           },
                         ),
                       ],

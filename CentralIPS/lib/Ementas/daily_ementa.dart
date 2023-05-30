@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DailyEmenta extends StatelessWidget {
-  const DailyEmenta({
+  DailyEmenta({
     super.key,
     required this.date,
     required this.sopa,
@@ -10,11 +10,11 @@ class DailyEmenta extends StatelessWidget {
     required this.vegetariano,
   });
 
-  final String date;
-  final String sopa;
-  final String peixe;
-  final String carne;
-  final String vegetariano;
+  String date;
+  String sopa;
+  String peixe;
+  String carne;
+  String vegetariano;
 
   Map<String, dynamic> toJson() {
     return {

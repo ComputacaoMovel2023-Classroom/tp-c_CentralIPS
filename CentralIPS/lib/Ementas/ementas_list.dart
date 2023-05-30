@@ -17,31 +17,31 @@ class EmentasList extends StatefulWidget {
 
 class _EmentasListState extends State<EmentasList> {
   List<DailyEmenta> weekdayMeals = [
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
         vegetariano: 'A carregar...'),
-    const DailyEmenta(
+    DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
@@ -130,8 +130,6 @@ class _EmentasListState extends State<EmentasList> {
                   // print('weekdayMeals: ${weekdayMeals.length}}');
 
                   return EmentasListItem(
-                    key: UniqueKey(),
-                    index: index,
                     icon: Icons.restaurant,
                     weekday: diasSemana[index],
                     weekdayMeals: weekdayMeals[index],
