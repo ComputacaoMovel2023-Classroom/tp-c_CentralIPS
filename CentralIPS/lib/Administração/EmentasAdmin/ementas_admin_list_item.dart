@@ -35,10 +35,15 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
     _peixeController.text = widget.weekdayMeals.peixe;
     _carneController.text = widget.weekdayMeals.carne;
     _vegetarianoController.text = widget.weekdayMeals.vegetariano;
+    print('initState: ${_sopaController.text}');
   }
 
   void _updateMenuItem(String field, String value) {
-    db.child("${widget.type}/${widget.weekday}").update({field: value});
+    if (widget.weekday == 'terça-feira') {
+      db.child("${widget.type}/terca-feira").update({field: value});
+    } else {
+      db.child("${widget.type}/${widget.weekday}").update({field: value});
+    }
   }
 
   @override
@@ -97,7 +102,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             child: TextField(
                               controller: _sopaController,
                               decoration: InputDecoration(
-                                hintText: 'Sopa',
+                                hintText: 'Peixe',
                               ),
                               style: TextStyle(fontSize: 16),
                             ),
@@ -105,9 +110,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                //widget.weekdayMeals.sopa = _sopaController.text;
-                                _updateMenuItem(widget.weekdayMeals.sopa,
-                                    _sopaController.text);
+                                _updateMenuItem("sopa", _sopaController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -131,8 +134,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                _updateMenuItem(widget.weekdayMeals.peixe,
-                                    _peixeController.text);
+                                _updateMenuItem("peixe", _peixeController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -156,8 +158,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                _updateMenuItem(widget.weekdayMeals.carne,
-                                    _carneController.text);
+                                _updateMenuItem("carne", _carneController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
@@ -181,12 +182,13 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                _updateMenuItem(widget.weekdayMeals.vegetariano,
-                                    _vegetarianoController.text);
+                                _updateMenuItem(
+                                    "vegetariano", _vegetarianoController.text);
                               });
                             },
                             child: Icon(Icons.save_outlined),
                           ),
+                          //widget.setState(() => {}),
                         ],
                       ),
                       SizedBox(height: 10),

@@ -99,7 +99,7 @@ Widget buildLoginBtn(BuildContext context) {
       onPressed: () async {
         try {
           //sing out from google
-          await GoogleSignIn().signOut();
+          // await GoogleSignIn().signOut();
           //sing out from firebase
           await FirebaseAuth.instance.signOut();
           print(_emailController.text.trim());

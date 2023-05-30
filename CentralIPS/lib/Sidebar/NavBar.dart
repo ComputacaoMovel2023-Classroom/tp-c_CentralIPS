@@ -1,3 +1,4 @@
+import 'package:centralips/Administra%C3%A7%C3%A3o/Menus/admin_menu.dart';
 import 'package:centralips/NFC/nfcUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
@@ -218,7 +219,7 @@ class _NavBarState extends State<NavBar> {
             visible: role ==
                 "Administrador", // Set the visibility based on the condition
             child: ListTile(
-                title: const Text('TESTE Registo'),
+                title: const Text('Administração'),
                 leading: const Icon(Icons.people),
                 onTap: () {
                   context.read<FooterMenuCubit>().selectItem(-1);
@@ -226,7 +227,7 @@ class _NavBarState extends State<NavBar> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => BlocProvider.value(
                             value: context.read<FooterMenuCubit>(),
-                            child: const RegisterPage(),
+                            child: const AdminMenu(),
                           )));
                 }),
           ),
