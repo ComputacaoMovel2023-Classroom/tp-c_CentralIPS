@@ -261,7 +261,7 @@ class _NavBarState extends State<NavBar> {
                         )));
               }),
           ListTile(
-              title: const Text('Cirar livro'),
+              title: const Text('Criar livro'),
               leading: const Icon(Icons.book),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(

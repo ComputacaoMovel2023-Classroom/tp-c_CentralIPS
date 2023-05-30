@@ -1,3 +1,4 @@
+import 'package:centralips/NFC/DialogCentralIPS.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,6 +75,12 @@ class _nfcUIState extends State<nfcUI> {
       userRef.set(identifierlocal);
       setState(() {
         identifier = identifierlocal;
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CentralIPSDialog(
+                  "Cartão Lido com Sucesso", "assets/images/nfcicon.png");
+            });
       });
 
       NfcManager.instance.stopSession();

@@ -124,6 +124,7 @@ Widget buildLoginBtn(BuildContext context) {
                     child: const Text('OK'),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      LoadingIndicatorDialog().dismiss();
                     },
                   ),
                 ],
@@ -166,6 +167,7 @@ Widget buildLoginBtn(BuildContext context) {
                       TextButton(
                         child: const Text('OK'),
                         onPressed: () {
+                          LoadingIndicatorDialog().dismiss();
                           Navigator.of(context).pop();
                         },
                       ),
