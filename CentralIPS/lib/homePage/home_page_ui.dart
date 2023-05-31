@@ -57,11 +57,12 @@ class HomePage extends StatelessWidget {
         body: SizedBox(
           height: 2000,
           child: ListView(children: [
-            Column(children: const [
+            Column(children: [
               SizedBox(height: 300, child: HpSuperior()),
-              Padding(padding: EdgeInsets.only(top: 50), child: HpCentro()),
-              SizedBox(height: 300, child: NoticiasLista()),
-              Padding(
+              const Padding(
+                  padding: EdgeInsets.only(top: 50), child: HpCentro()),
+              const SizedBox(height: 300, child: NoticiasLista()),
+              const Padding(
                   padding: EdgeInsets.only(bottom: 100), child: HpInferior()),
             ])
           ]),
