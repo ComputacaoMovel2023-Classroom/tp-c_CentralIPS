@@ -20,3 +20,12 @@ class BookCategoryFilterUpdate extends LibraryFiltersEvent {
   @override
   List<Object?> get props => [bookCategory];
 }
+
+class IsAvailableFilterUpdate extends LibraryFiltersEvent {
+  final bool isAvailable;
+
+  const IsAvailableFilterUpdate({required this.isAvailable});
+  
+  @override
+  List<Object?> get props => [isAvailable];
+}

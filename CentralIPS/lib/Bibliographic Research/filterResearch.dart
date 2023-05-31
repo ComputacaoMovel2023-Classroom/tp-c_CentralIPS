@@ -1,8 +1,8 @@
+import 'dart:developer';
+
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
-import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
-import 'package:centralips/Bibliographic%20Research/documentType.dart';
 import 'package:centralips/Bibliographic%20Research/filterOption.dart';
-import 'package:centralips/Departamentos/school.dart';
+import 'package:centralips/Bloc/libraryFilters/library_filters_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +19,6 @@ class FilterResearch extends StatefulWidget {
 
 class FilterResearchState extends State<FilterResearch> {
   bool availability = false;
-  int numberOfResults = 0;
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
@@ -54,67 +53,88 @@ class FilterResearchState extends State<FilterResearch> {
                   ),
                   margin: const EdgeInsets.only(top: 100),
                   padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                                onPressed: () => {
-                            Navigator.pop(context)
-                          },
-                                icon: const Icon(Icons.arrow_back_ios)),
-                            const Padding(padding: EdgeInsets.only(left: 90)),
-                            const Text(
-                              "Filtros",
-                              style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.w900,
-                              ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () => {Navigator.pop(context)},
+                              icon: const Icon(Icons.arrow_back_ios)),
+                          const Padding(padding: EdgeInsets.only(left: 90)),
+                          const Text(
+                            "Filtros",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.w900,
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 10, width: 400),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, top: 10, bottom: 10, right: 10),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const Expanded(
-                                      child: Text('Disponível',
-                                          style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w900,
-                                          ))),
-                                  Switch.adaptive(
-                                    // thumb color (round icon)
-                                    activeColor: Colors.white,
-                                    activeTrackColor:
-                                        Color.fromRGBO(85, 56, 236, 100),
-                                    inactiveThumbColor: Colors.white,
-                                    inactiveTrackColor: Colors.grey.shade400,
-                                    splashRadius: 50.0,
-                                    // boolean variable value
-                                    value: availability,
-                                    // changes the state of the switch
-                                    onChanged: (value) =>
-                                        setState(() => availability = value),
-                                  ),
-                                ],
-                              ),
-                              const Divider(
-                                height: 50,
-                                indent: 0,
-                                color: Color.fromRGBO(215, 217, 217, 0.612),
-                              ),
-                              FilterCategoryWidget(),
-                              const Divider(
-                                height: 50,
-                                indent: 0,
-                                color: Color.fromRGBO(215, 217, 217, 0.612),
-                              ),
-                              /* FilterWidget(
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10, width: 400),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 10, top: 10, bottom: 10, right: 10),
+                        child: Column(
+                          children: [
+                            BlocBuilder<LibraryFiltersBloc,
+                                LibraryFiltersState>(
+                              builder: (context, state) {
+                                if (state is LibraryFiltersLoaded) {
+                                  return Row(
+                                    children: [
+                                      const Expanded(
+                                          child: Text('Disponível',
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w900,
+                                              ))),
+                                      Switch.adaptive(
+                                          // thumb color (round icon)
+                                          activeColor: Colors.white,
+                                          activeTrackColor:
+                                              Color.fromRGBO(85, 56, 236, 100),
+                                          inactiveThumbColor: Colors.white,
+                                          inactiveTrackColor:
+                                              Colors.grey.shade400,
+                                          splashRadius: 50.0,
+                                          // boolean variable value
+                                          value: availability,
+                                          // changes the state of the switch
+                                          onChanged: (value) {
+                                            setState(() {
+                                              availability = !availability;
+                                            });
+                                            bool updatedAvailability =
+                                                availability;
+                                            log("${updatedAvailability} valor do Value");
+                                            context
+                                                .read<LibraryFiltersBloc>()
+                                                .add(
+                                                  IsAvailableFilterUpdate(
+                                                    isAvailable:
+                                                        updatedAvailability,
+                                                  ),
+                                                );
+                                          }),
+                                    ],
+                                  );
+                                } else {
+                                  return const Text("Algo correu mal");
+                                }
+                              },
+                            ),
+                            const Divider(
+                              height: 50,
+                              indent: 0,
+                              color: Color.fromRGBO(215, 217, 217, 0.612),
+                            ),
+                            FilterCategoryWidget(),
+                            const Divider(
+                              height: 50,
+                              indent: 0,
+                              color: Color.fromRGBO(215, 217, 217, 0.612),
+                            ),
+                            /* FilterWidget(
                                 title: "Escola",
                                 options: getSchoolNames(),
                               ),
@@ -127,14 +147,12 @@ class FilterResearchState extends State<FilterResearch> {
                                 title: "Tipo de Documento",
                                 options: getDocumentTypeNames(),
                               ), */
-                              const Padding(
-                                  padding: EdgeInsets.only(bottom: 90))
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  
+                            const Padding(padding: EdgeInsets.only(bottom: 90))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -166,17 +184,17 @@ class FilterResearchState extends State<FilterResearch> {
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   backgroundColor: const Color.fromRGBO(107, 78, 255, 1),
                   onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                          value: context.read<FooterMenuCubit>(),
-                                        child: const BibliographicResearch(),
-                                      )),
-                            )
-                          },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => BlocProvider.value(
+                                    value: context.read<FooterMenuCubit>(),
+                                    child: const BibliographicResearch(),
+                                  )),
+                        )
+                      },
                   child: Text(
-                    'Resultados ($numberOfResults)',
+                    'Ver Resultados',
                     style: const TextStyle(
                         fontSize: 18, color: Color.fromRGBO(241, 237, 237, 1)),
                   )),
