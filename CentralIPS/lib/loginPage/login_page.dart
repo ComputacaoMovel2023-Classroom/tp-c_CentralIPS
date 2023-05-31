@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../UTILS/progress.dart';
 import '../register_page/register_page.dart';
 import 'package:sign_button/sign_button.dart';
 
@@ -247,6 +246,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
+    LoadingIndicatorDialog().show(context);
 
     try {
       final UserCredential userCredential =
@@ -257,6 +257,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
       //catch error sign_in_canceled
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
+        LoadingIndicatorDialog().dismiss();
         const SnackBar(
           backgroundColor: Colors.black,
           content: Text(
@@ -268,13 +269,15 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
 
         // show fedback to user
       } else if (e.code == 'invalid-credential') {
+        LoadingIndicatorDialog().dismiss();
         return null;
         // handle the error here
       } else if (e.code == 'email-already-in-use') {
+        LoadingIndicatorDialog().dismiss();
         return null;
       }
     } catch (e) {
-      // handle the error here
+      LoadingIndicatorDialog().dismiss();
       return null;
     }
 
@@ -296,7 +299,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
                   )));
     } else {
       //check if the user is in the database
-
+      LoadingIndicatorDialog().dismiss();
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(

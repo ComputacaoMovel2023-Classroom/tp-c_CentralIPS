@@ -243,6 +243,13 @@ class _nfcUIState extends State<nfcUI> {
                                     .child('wallet');
                                 int walletvalue = int.parse(wallet) + toAdd;
                                 userRef.set(walletvalue);
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CentralIPSDialog(
+                                          "Saldo adicionado\ncom Sucesso",
+                                          "assets/images/money.png");
+                                    });
                               }),
                             );
                           },
