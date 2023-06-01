@@ -90,8 +90,8 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                         width: 500,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/noticiaImg.png'),
+                          image: DecorationImage(
+                            image: AssetImage(widget.noticiaItem.imagem),
                             fit: BoxFit.cover,
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EmentasList extends StatefulWidget {
@@ -22,31 +23,36 @@ class _EmentasListState extends State<EmentasList> {
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 0),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 1),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 2),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 3),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 4),
   ];
 
   final List<String> diasSemana = [
@@ -86,15 +92,17 @@ class _EmentasListState extends State<EmentasList> {
           peixe: value['peixe'] ?? 'Peixe',
           carne: value['carne'] ?? 'Carne',
           vegetariano: value['vegetariano'] ?? 'Vegetariano',
+          index: value['index'] ?? 0,
         );
-        updatedDailyEmenta.add(dailyEmenta);
+        weekdayMeals[dailyEmenta.index] = (dailyEmenta);
       });
       if (!_isDisposed) {
         setState(() {
-          weekdayMeals = updatedDailyEmenta;
+          weekdayMeals;
         });
       }
     });
+
     //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
 

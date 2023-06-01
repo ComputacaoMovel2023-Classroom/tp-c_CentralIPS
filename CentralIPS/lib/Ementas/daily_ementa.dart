@@ -8,6 +8,7 @@ class DailyEmenta extends StatelessWidget {
     required this.peixe,
     required this.carne,
     required this.vegetariano,
+    required this.index,
   });
 
   String date;
@@ -15,6 +16,7 @@ class DailyEmenta extends StatelessWidget {
   String peixe;
   String carne;
   String vegetariano;
+  int index;
 
   Map<String, dynamic> toJson() {
     return {
