@@ -23,31 +23,36 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 0),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 1),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 2),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'AMDRE',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 3),
     DailyEmenta(
         date: '01/01/2021',
         sopa: 'A carregar...',
         peixe: 'A carregar...',
         carne: 'A carregar...',
-        vegetariano: 'A carregar...'),
+        vegetariano: 'A carregar...',
+        index: 4),
   ];
 
   final List<String> diasSemana = [
@@ -87,19 +92,17 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
           peixe: value['peixe'] ?? 'Peixe',
           carne: value['carne'] ?? 'Carne',
           vegetariano: value['vegetariano'] ?? 'Vegetariano',
+          index: value['index'] ?? 0,
         );
-        updatedDailyEmenta.add(dailyEmenta);
-        //print('updatedDailyEmenta: ${dailyEmenta.sopa}]}');
+        weekdayMeals[dailyEmenta.index] = (dailyEmenta);
       });
-
       if (!_isDisposed) {
         setState(() {
-          weekdayMeals = updatedDailyEmenta;
-          //for each to see what is inside
+          weekdayMeals;
         });
       }
-      setState(() {});
     });
+
     //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
 
@@ -132,16 +135,15 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
                 },
                 itemCount: diasSemana.length,
                 itemBuilder: (_, index) {
-                  /* for (DailyEmenta dailyEmenta in weekdayMeals) {
+                  for (DailyEmenta dailyEmenta in weekdayMeals) {
                     print('weekdayMeals: ${dailyEmenta.sopa} no ndex');
                   }
-                  print("index $index");
 
-                  print(weekdayMeals[index].sopa);*/
+                  int index2 = index % diasSemana.length;
                   return AdminEmentasListItem(
                     icon: Icons.restaurant,
-                    weekday: diasSemana[index],
-                    weekdayMeals: weekdayMeals[index],
+                    weekday: diasSemana[index2],
+                    weekdayMeals: weekdayMeals[index2],
                     type: widget.type,
                   );
                 },
