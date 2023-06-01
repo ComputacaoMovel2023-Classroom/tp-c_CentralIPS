@@ -16,6 +16,7 @@ class LibraryFiltersBloc
   LibraryFiltersBloc() : super(LibraryFiltersLoading()) {
     on<LibraryFilterLoad>(_mapFilterLoadToState);
     on<BookCategoryFilterUpdate>(_mapBookCategoryFilterUpdatedToState);
+    on<IsAvailableFilterUpdate>(_availabilityUpdatedToState);
   }
 
   void _mapFilterLoadToState(event, emit) {
@@ -39,13 +40,27 @@ class LibraryFiltersBloc
       }).toList();
       log(updatedBookCategoryFilters.toString());
 
-      libraryFilter = LibraryFilter(categoriesFilter: updatedBookCategoryFilters);
+      libraryFilter = LibraryFilter(
+          categoriesFilter: updatedBookCategoryFilters,
+          isAvailable: libraryFilter.isAvailable);
       emit(
-        LibraryFiltersLoaded(
-          libraryFilter:
-              libraryFilter),
-        )
-      ;
+        LibraryFiltersLoaded(libraryFilter: libraryFilter),
+      );
+    }
+  }
+
+  void _availabilityUpdatedToState(IsAvailableFilterUpdate event, emit) {
+    if (state is LibraryFiltersLoaded) {
+      log(libraryFilter.isAvailable.toString() + ": valor anterior");
+      libraryFilter = LibraryFilter(
+          categoriesFilter: libraryFilter.categoriesFilter,
+          isAvailable: event.isAvailable);
+
+      log(event.isAvailable.toString()+ ":valor para ser alterado");
+      log(libraryFilter.isAvailable.toString() + ": valor alterado");
+      emit(
+        LibraryFiltersLoaded(libraryFilter: libraryFilter),
+      );
     }
   }
 }

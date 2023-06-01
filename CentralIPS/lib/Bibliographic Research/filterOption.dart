@@ -25,7 +25,6 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
             child: CircularProgressIndicator(),
           );
         }
-
         if (state is LibraryFiltersLoaded) {
           return Container(
             child: Column(
@@ -73,6 +72,7 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                                 value: state.libraryFilter
                                     .categoriesFilter[index].isEnabled,
                                 onChanged: (bool? value) {
+                                 
                                   BookCategoryEntry aux = BookCategoryEntry(
                                     state.libraryFilter.categoriesFilter[index]
                                         .category,
@@ -82,7 +82,8 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
 
                                   context.read<LibraryFiltersBloc>().add(
                                         BookCategoryFilterUpdate(
-                                            bookCategory: aux),
+                                          bookCategory: aux,
+                                        ),
                                       );
                                 },
                               )
