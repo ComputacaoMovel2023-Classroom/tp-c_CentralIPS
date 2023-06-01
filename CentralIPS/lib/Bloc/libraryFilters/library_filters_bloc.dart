@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -17,6 +18,7 @@ class LibraryFiltersBloc
     on<LibraryFilterLoad>(_mapFilterLoadToState);
     on<BookCategoryFilterUpdate>(_mapBookCategoryFilterUpdatedToState);
     on<IsAvailableFilterUpdate>(_availabilityUpdatedToState);
+    on<SearchWithFilters>(_searchWithFiltersUpdatedToState);
   }
 
   void _mapFilterLoadToState(event, emit) {
@@ -31,7 +33,6 @@ class LibraryFiltersBloc
   void _mapBookCategoryFilterUpdatedToState(
       BookCategoryFilterUpdate event, emit) {
     if (state is LibraryFiltersLoaded) {
-      log(libraryFilter.toString());
       final List<BookCategoryEntry> updatedBookCategoryFilters =
           libraryFilter.categoriesFilter.map((bookCategory) {
         return bookCategory.category == event.bookCategory.category
@@ -51,16 +52,26 @@ class LibraryFiltersBloc
 
   void _availabilityUpdatedToState(IsAvailableFilterUpdate event, emit) {
     if (state is LibraryFiltersLoaded) {
-      log(libraryFilter.isAvailable.toString() + ": valor anterior");
+      //log("${libraryFilter.isAvailable}: valor anterior");
       libraryFilter = LibraryFilter(
           categoriesFilter: libraryFilter.categoriesFilter,
           isAvailable: event.isAvailable);
 
-      log(event.isAvailable.toString()+ ":valor para ser alterado");
-      log(libraryFilter.isAvailable.toString() + ": valor alterado");
+      //log("${libraryFilter.isAvailable}: valor alterado");
+
       emit(
         LibraryFiltersLoaded(libraryFilter: libraryFilter),
       );
+    }
+  }
+
+  void _searchWithFiltersUpdatedToState(SearchWithFilters event, emit) {
+    if (state is LibraryFiltersLoaded) {
+      libraryFilter = LibraryFilter(
+          categoriesFilter: libraryFilter.categoriesFilter,
+          isAvailable: libraryFilter.isAvailable,
+          performFilterSearch: true);
+      emit(LibraryFiltersLoaded(libraryFilter: libraryFilter));
     }
   }
 }

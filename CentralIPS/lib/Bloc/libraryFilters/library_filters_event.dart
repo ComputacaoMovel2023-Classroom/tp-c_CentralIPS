@@ -29,3 +29,12 @@ class IsAvailableFilterUpdate extends LibraryFiltersEvent {
   @override
   List<Object?> get props => [isAvailable];
 }
+
+class SearchWithFilters extends LibraryFiltersEvent {
+
+  const SearchWithFilters();
+  
+  @override
+  List<Object?> get props => [];
+}
+

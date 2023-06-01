@@ -1,4 +1,6 @@
+import 'dart:developer';
 
+import 'package:centralips/Bloc/libraryFilters/library_filters_bloc.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -34,8 +36,7 @@ class SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     // This controller will store the value of the search bar
-    return  
-    Padding(
+    return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
@@ -303,6 +304,7 @@ class SearchBarState extends State<SearchBar> {
     setState(() {
       loadedData = false;
     });
+
     _fetchData(query);
     setState(() {
       loadedData = true;
@@ -310,6 +312,9 @@ class SearchBarState extends State<SearchBar> {
   }
 
   Future<void> _fetchData(String nameContains) async {
+    LibraryFiltersBloc libraryFiltersBloc =
+        BlocProvider.of<LibraryFiltersBloc>(context);
+
     libraryDb.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
 
@@ -390,15 +395,47 @@ class SearchBarState extends State<SearchBar> {
                 language: language,
                 numberOfPages: numberOfPages,
                 categories: categories);
-            auxLibrary.books.add(book);
-            print("LIVRO ADICIONADO");
+
+            if (!libraryFiltersBloc.libraryFilter.performFilterSearch) {
+              log("LIVRO ADICIONADO");
+              auxLibrary.books.add(book);
+            } else {
+              searchWithCategories(libraryFiltersBloc, book, auxLibrary);
+            }
           }
         },
       );
+      libraryFiltersBloc.libraryFilter =
+          libraryFiltersBloc.libraryFilter.copyWith(performFilterSearch: false);
+
       library = auxLibrary;
       setState(() {
         loadedData = true;
       });
     });
+  }
+
+  void searchWithCategories(
+      LibraryFiltersBloc libraryFiltersBloc, Book book, Library library) {
+    final isAvailable = libraryFiltersBloc.libraryFilter.isAvailable;
+
+    if (book.isAvailable != isAvailable) return;
+
+    final categoriesFilter = libraryFiltersBloc.libraryFilter.categoriesFilter
+        .where((element) => element.isEnabled)
+        .map((e) => e.category)
+        .toList();
+
+    if (categoriesFilter.isEmpty) {
+      log("LIVRO FILTRADO");
+      library.books.add(book);
+      return;
+    }
+
+    if (!(book.categories.toSet().containsAll(categoriesFilter.toSet()) &&
+        categoriesFilter.toSet().containsAll(book.categories.toSet()))) return;
+
+    log("LIVRO FILTRADO");
+    library.books.add(book);
   }
 }

@@ -98,15 +98,18 @@ class FilterResearchState extends State<FilterResearch> {
                                               Colors.grey.shade400,
                                           splashRadius: 50.0,
                                           // boolean variable value
-                                          value: availability,
+                                          value:
+                                              state.libraryFilter.isAvailable,
                                           // changes the state of the switch
                                           onChanged: (value) {
                                             setState(() {
-                                              availability = !availability;
+                                              state.libraryFilter.isAvailable =
+                                                  !state.libraryFilter
+                                                      .isAvailable;
                                             });
                                             bool updatedAvailability =
-                                                availability;
-                                            log("${updatedAvailability} valor do Value");
+                                                state.libraryFilter.isAvailable;
+                                            //log("${updatedAvailability} valor do Value");
                                             context
                                                 .read<LibraryFiltersBloc>()
                                                 .add(
@@ -134,19 +137,6 @@ class FilterResearchState extends State<FilterResearch> {
                               indent: 0,
                               color: Color.fromRGBO(215, 217, 217, 0.612),
                             ),
-                            /* FilterWidget(
-                                title: "Escola",
-                                options: getSchoolNames(),
-                              ),
-                              const Divider(
-                                height: 50,
-                                indent: 0,
-                                color: Color.fromRGBO(215, 217, 217, 0.612),
-                              ),
-                              FilterWidget(
-                                title: "Tipo de Documento",
-                                options: getDocumentTypeNames(),
-                              ), */
                             const Padding(padding: EdgeInsets.only(bottom: 90))
                           ],
                         ),
@@ -183,16 +173,18 @@ class FilterResearchState extends State<FilterResearch> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   backgroundColor: const Color.fromRGBO(107, 78, 255, 1),
-                  onPressed: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => BlocProvider.value(
-                                    value: context.read<FooterMenuCubit>(),
-                                    child: const BibliographicResearch(),
-                                  )),
-                        )
-                      },
+                  onPressed: () {
+                    context.read<LibraryFiltersBloc>().add(SearchWithFilters());
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                                value: context.read<FooterMenuCubit>(),
+                                child: const BibliographicResearch(),
+                              )),
+                    );
+                  },
                   child: Text(
                     'Ver Resultados',
                     style: const TextStyle(

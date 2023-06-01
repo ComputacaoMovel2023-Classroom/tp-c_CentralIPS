@@ -10,7 +10,7 @@ class LibraryFiltersLoading extends LibraryFiltersState {}
 class LibraryFiltersLoaded extends LibraryFiltersState {
   LibraryFilter libraryFilter;
 
-  LibraryFiltersLoaded({this.libraryFilter = const LibraryFilter()});
+  LibraryFiltersLoaded({ required this.libraryFilter});
 
   @override
   List<Object?> get props => [libraryFilter];
