@@ -1,8 +1,8 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:flutter/material.dart';
 
-class AdminNoticias extends StatelessWidget {
-  AdminNoticias({
+class AdminNoticiasEmpty extends StatelessWidget {
+  const AdminNoticiasEmpty({
     Key? key,
   }) : super(key: key);
 
@@ -99,7 +99,9 @@ class AdminNoticias extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminNoticiasAdd()),
+                          builder: (context) => AdminNoticiasAdd(
+                                id: 0,
+                              )),
                     );
                   },
                   child: const Text(

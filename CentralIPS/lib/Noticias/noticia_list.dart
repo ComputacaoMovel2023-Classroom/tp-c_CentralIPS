@@ -1,3 +1,4 @@
+import 'package:centralips/Noticias/noticia_list_empty.dart';
 import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';

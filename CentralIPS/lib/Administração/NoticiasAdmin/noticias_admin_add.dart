@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdminNoticiasAdd extends StatefulWidget {
+  AdminNoticiasAdd({super.key, required this.id});
+  int id;
   @override
   _AdminNoticiasAdd createState() => _AdminNoticiasAdd();
 }
@@ -18,7 +20,7 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
   String author = '';
   String subtitle = '';
   String text = '';
-  String imageUrl = '';
+  String imageUrl = 'assets/images/noticia3.png';
   String date = '';
 
   void _submitForm() {
@@ -28,6 +30,7 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
     var now = DateTime.now();
     var formatter = DateFormat('yyyy-MM-dd');
     date = formatter.format(now);
+
     NoticiaItem noticiaItem = NoticiaItem(
       titulo: title,
       subtitulo: subtitle,
@@ -36,8 +39,11 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
       author: author,
       date: date,
       type: isNews,
+      //  id: widget.maxId + 1,
     );
-    db.child('noticias').push().set(noticiaItem.toJson());
+    db.child('noticias').child('${widget.id}').set(noticiaItem.toJson());
+    widget.id++;
+    Navigator.of(context).pop();
   }
 
   @override

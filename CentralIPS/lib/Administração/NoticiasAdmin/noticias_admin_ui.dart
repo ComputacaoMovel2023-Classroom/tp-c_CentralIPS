@@ -17,6 +17,7 @@ class AdminNoticiasUI extends StatefulWidget {
 
 class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
   List<NoticiaItem> noticiaItemArr = [];
+
 /*
 
   List<NoticiaItem> title = [
@@ -66,32 +67,32 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
         FirebaseDatabase.instance.ref().child('noticias');
     databaseRef.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
-      var noticiasData = snapshot.value as Map;
-      //print('noticiasData: $noticiasData');
+      var noticiasData = snapshot.value;
 
-      List<NoticiaItem> updatedNoticiaItems = [];
-      noticiasData.forEach((key, value) {
-        NoticiaItem noticiaItem = NoticiaItem(
-          titulo: value['titulo'] ?? 'Titulo da noticia',
-          subtitulo: value['subtitulo'] ?? 'Subtitulo da noticia',
-          imagem: value['assetName'] ?? 'assets/images/noticia3.png',
-          texto: value['texto'] ?? 'texto da noticia',
-          author: value['author'] ?? 'Ana Matos',
-          date: value['date'] ?? '12/12/2021',
-          type: value['type'] ?? true,
-        );
-        updatedNoticiaItems.add(noticiaItem);
-        // print('noticiaItemArr: ${noticiaItem.titulo}');
-        //print('noticiaItemArr: ${noticiaItem.subtitulo}');
-        //print('noticiaItemArr: ${noticiaItem.imagem}');
-        // print('noticiaItemArr: ${noticiaItem.texto}');
-      });
+      if (noticiasData != null) {
+        List<NoticiaItem> updatedNoticiaItems = [];
 
-      setState(() {
-        noticiaItemArr = updatedNoticiaItems;
-      });
-      //print('noticiaItemArr: $noticiaItemArr');
-      print('noticiaItemArr: ${noticiaItemArr[0].imagem}}');
+        if (noticiasData is List) {
+          noticiasData.forEach((noticiaData) {
+            if (noticiaData is Map) {
+              NoticiaItem noticiaItem = NoticiaItem(
+                titulo: noticiaData['titulo'] ?? 'Titulo da noticia',
+                subtitulo: noticiaData['subtitulo'] ?? 'Subtitulo da noticia',
+                imagem: noticiaData['imagem'] ?? 'assets/images/noticia3.png',
+                texto: noticiaData['texto'] ?? 'O texto da noticia',
+                author: noticiaData['autor'] ?? 'Autor desconhecido',
+                date: noticiaData['date'] ?? '01/01/2021',
+                type: noticiaData['type'] ?? true,
+              );
+              updatedNoticiaItems.add(noticiaItem);
+            }
+          });
+        }
+
+        setState(() {
+          noticiaItemArr = updatedNoticiaItems;
+        });
+      }
     });
   }
 
@@ -166,7 +167,9 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                   ),
                   Expanded(
                     child: Column(children: [
-                      AdminNoticiaList(noticiaItemArr: noticiaItemArr),
+                      AdminNoticiaList(
+                        noticiaItemArr: noticiaItemArr,
+                      ),
                     ]),
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,9 +9,11 @@ class AdminNoticiaListItem extends StatefulWidget {
   AdminNoticiaListItem({
     Key? key,
     required this.noticiaItem,
+    required this.id,
   }) : super(key: key);
 
   NoticiaItem noticiaItem;
+  final int id;
 
   @override
   _AdminNoticiaListItemState createState() => _AdminNoticiaListItemState();
@@ -35,6 +38,11 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                 )),
       );
     }
+  }
+
+  void removeNoticia(int id) {
+    final databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference.child('noticias/$id').remove();
   }
 
   @override
@@ -80,19 +88,13 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                             ),
                           ),
                           Positioned(
-                            top: 5,
-                            right: 5,
+                            top: -3,
+                            right: -10,
                             child: GestureDetector(
                               onTap: () {
                                 //BASE DE DADOS - Remover container
                               },
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 0, 0),
-                                  shape: BoxShape.circle,
-                                ),
+                              child: ElevatedButton(
                                 child: const Center(
                                   child: Icon(
                                     Icons.remove,
@@ -100,6 +102,18 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                                     size: 16,
                                   ),
                                 ),
+                                onPressed: () {
+                                  removeNoticia(widget.id);
+                                },
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color.fromARGB(255, 255, 0, 0)),
+                                    shape:
+                                        MaterialStateProperty.all<CircleBorder>(
+                                            CircleBorder(
+                                                side: BorderSide(
+                                                    color: Colors.red)))),
                               ),
                             ),
                           ),

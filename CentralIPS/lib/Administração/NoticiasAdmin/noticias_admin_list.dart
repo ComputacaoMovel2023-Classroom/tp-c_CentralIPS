@@ -1,4 +1,5 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_empty.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list_item.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticia_list_item.dart';
@@ -19,13 +20,14 @@ class AdminNoticiaList extends StatefulWidget {
 }
 
 class _AdminNoticiaListState extends State<AdminNoticiaList> {
+  int id = 0;
   void _submitForm() {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (_) => BlocProvider.value(
                 value: context.read<FooterMenuCubit>(),
-                child: AdminNoticiasAdd(),
+                child: AdminNoticiasAdd(id: widget.noticiaItemArr.length),
               )),
     );
   }
@@ -58,8 +60,13 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
                 },
                 itemCount: widget.noticiaItemArr.length,
                 itemBuilder: (context, index) {
+                  print('index: ${widget.noticiaItemArr.length}');
                   NoticiaItem noticiaItem = widget.noticiaItemArr[index];
-                  return AdminNoticiaListItem(noticiaItem: noticiaItem);
+                  id = widget.noticiaItemArr.length;
+                  return AdminNoticiaListItem(
+                    noticiaItem: noticiaItem,
+                    id: index,
+                  );
                 },
               ),
               TextButton(
