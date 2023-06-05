@@ -27,24 +27,27 @@ class _NoticiasListaState extends State<NoticiasLista> {
         FirebaseDatabase.instance.ref().child('noticias');
     databaseRef.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
-      if (snapshot.value != null && snapshot.value is Map) {
-        var noticiasData = snapshot.value as Map<dynamic, dynamic>;
+      var noticiasData = snapshot.value;
 
+      if (noticiasData != null) {
         List<NoticiaItem> updatedNoticiaItems = [];
-        noticiasData.forEach((key, value) {
-          if (value is Map) {
-            NoticiaItem noticiaItem = NoticiaItem(
-              titulo: value['titulo'] ?? 'Titulo da noticia',
-              subtitulo: value['subtitulo'] ?? 'Subtitulo da noticia',
-              imagem: value['assetName'] ?? 'assets/images/noticia3.png',
-              texto: value['texto'] ?? 'O texto da noticia',
-              author: value['author'] ?? 'Ana Matos',
-              date: value['date'] ?? '01/01/2021',
-              type: value['type'] ?? true,
-            );
-            updatedNoticiaItems.add(noticiaItem);
-          }
-        });
+
+        if (noticiasData is List) {
+          noticiasData.forEach((noticiaData) {
+            if (noticiaData is Map) {
+              NoticiaItem noticiaItem = NoticiaItem(
+                titulo: noticiaData['titulo'] ?? 'Titulo da noticia',
+                subtitulo: noticiaData['subtitulo'] ?? 'Subtitulo da noticia',
+                imagem: noticiaData['imagem'] ?? 'assets/images/noticia3.png',
+                texto: noticiaData['texto'] ?? 'O texto da noticia',
+                author: noticiaData['autor'] ?? 'Autor desconhecido',
+                date: noticiaData['date'] ?? '01/01/2021',
+                type: noticiaData['type'] ?? true,
+              );
+              updatedNoticiaItems.add(noticiaItem);
+            }
+          });
+        }
 
         setState(() {
           noticiaItemArr = updatedNoticiaItems;
