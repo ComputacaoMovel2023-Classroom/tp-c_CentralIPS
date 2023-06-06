@@ -87,7 +87,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
             }
           });
         }
-
+        if (!mounted) return;
         setState(() {
           noticiaItemArr = updatedNoticiaItems;
         });
@@ -97,9 +97,9 @@ class _NoticiasUIState extends State<NoticiasUI> {
 
   @override
   Widget build(BuildContext context) {
-    /* if (noticiaItemArr.isEmpty) {
-      return NoticiasListEmpty(); 
-    }*/
+    if (noticiaItemArr.isEmpty) {
+      return NoticiasListEmpty();
+    }
     return Scaffold(
       body: Stack(
         children: [

@@ -43,6 +43,13 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
   void removeNoticia(int id) {
     final databaseReference = FirebaseDatabase.instance.ref();
     databaseReference.child('noticias/$id').remove();
+    databaseReference
+        .child('noticia')
+        .startAt(id)
+        .onChildRemoved
+        .forEach((element) {
+      id = id - 1;
+    });
   }
 
   @override
@@ -104,6 +111,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                                 ),
                                 onPressed: () {
                                   removeNoticia(widget.id);
+                                  print(widget.id);
                                 },
                                 style: ButtonStyle(
                                     backgroundColor:

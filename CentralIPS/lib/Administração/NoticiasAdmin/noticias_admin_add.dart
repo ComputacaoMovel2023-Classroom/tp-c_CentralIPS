@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 class AdminNoticiasAdd extends StatefulWidget {
   AdminNoticiasAdd({super.key, required this.id});
-  int id;
+  int id = 0;
   @override
   _AdminNoticiasAdd createState() => _AdminNoticiasAdd();
 }

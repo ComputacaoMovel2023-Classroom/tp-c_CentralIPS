@@ -40,6 +40,7 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
   }
 
   void _OnPressed() {
+    if (!mounted) return;
     setState(() {
       _isPressed = !_isPressed;
     });
