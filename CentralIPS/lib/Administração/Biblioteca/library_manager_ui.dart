@@ -1,10 +1,7 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/book_manager_ui.dart';
-import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
-import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LibraryManagerUI extends StatefulWidget {
   const LibraryManagerUI({Key? key}) : super(key: key);
@@ -73,7 +70,7 @@ class LibraryManagerUIState extends State<LibraryManagerUI> {
               }),
             ),
           ),
-          Positioned(
+          /*  Positioned(
             //Butão Filtos
             top: 270,
             right: 30,
@@ -101,7 +98,7 @@ class LibraryManagerUIState extends State<LibraryManagerUI> {
                         color: Color.fromRGBO(241, 237, 237, 1)),
                   )),
             ),
-          )
+          )*/
         ],
       ),
       resizeToAvoidBottomInset: false,

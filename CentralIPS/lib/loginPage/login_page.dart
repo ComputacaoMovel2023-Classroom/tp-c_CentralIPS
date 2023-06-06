@@ -125,7 +125,7 @@ Widget buildLoginBtn(BuildContext context) {
                     child: const Text('OK'),
                     onPressed: () {
                       Navigator.of(context).pop();
-                      LoadingIndicatorDialog().dismiss();
+                      LoadingIndicatorDialog().dismiss(context);
                     },
                   ),
                 ],
@@ -168,7 +168,7 @@ Widget buildLoginBtn(BuildContext context) {
                       TextButton(
                         child: const Text('OK'),
                         onPressed: () {
-                          LoadingIndicatorDialog().dismiss();
+                          LoadingIndicatorDialog().dismiss(context);
                           Navigator.of(context).pop();
                         },
                       ),
@@ -246,6 +246,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
+
     LoadingIndicatorDialog().show(context);
 
     try {
@@ -257,7 +258,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
       //catch error sign_in_canceled
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
-        LoadingIndicatorDialog().dismiss();
+        LoadingIndicatorDialog().dismiss(context);
         const SnackBar(
           backgroundColor: Colors.black,
           content: Text(
@@ -269,15 +270,15 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
 
         // show fedback to user
       } else if (e.code == 'invalid-credential') {
-        LoadingIndicatorDialog().dismiss();
+        LoadingIndicatorDialog().dismiss(context);
         return null;
         // handle the error here
       } else if (e.code == 'email-already-in-use') {
-        LoadingIndicatorDialog().dismiss();
+        LoadingIndicatorDialog().dismiss(context);
         return null;
       }
     } catch (e) {
-      LoadingIndicatorDialog().dismiss();
+      LoadingIndicatorDialog().dismiss(context);
       return null;
     }
 
@@ -299,7 +300,7 @@ Future<User?> signInWithGoogle({required BuildContext context}) async {
                   )));
     } else {
       //check if the user is in the database
-      LoadingIndicatorDialog().dismiss();
+      LoadingIndicatorDialog().dismiss(context);
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(

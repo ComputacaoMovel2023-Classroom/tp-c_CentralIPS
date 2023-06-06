@@ -46,23 +46,16 @@ class HomePage extends StatelessWidget {
           }),
           title: const Text('Central IPS',
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 251))),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: Icon(Icons.notifications),
-            )
-          ],
           backgroundColor: Colors.black,
         ),
         body: SizedBox(
           height: 2000,
           child: ListView(children: [
-            Column(children: [
+            Column(children: const [
               SizedBox(height: 300, child: HpSuperior()),
-              const Padding(
-                  padding: EdgeInsets.only(top: 50), child: HpCentro()),
-              const SizedBox(height: 300, child: NoticiasLista()),
-              const Padding(
+              Padding(padding: EdgeInsets.only(top: 50), child: HpCentro()),
+              SizedBox(height: 300, child: NoticiasLista()),
+              Padding(
                   padding: EdgeInsets.only(bottom: 100), child: HpInferior()),
             ])
           ]),

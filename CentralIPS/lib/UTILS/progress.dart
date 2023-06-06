@@ -20,7 +20,7 @@ class LoadingIndicatorDialog {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          _context = context;
+          //  _context = context;
           isDisplayed = true;
           return WillPopScope(
             onWillPop: () async => false,
@@ -48,9 +48,9 @@ class LoadingIndicatorDialog {
         });
   }
 
-  dismiss() {
+  dismiss(context) {
     if (isDisplayed) {
-      Navigator.of(_context).pop();
+      Navigator.of(context).pop();
       isDisplayed = false;
     }
   }
