@@ -6,7 +6,7 @@ class HpInferior extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Image img = Image.asset(
-      'assets/images/aaa.png',
+      'assets/images/phonecarousel.jpg',
       width: double.infinity,
       height: double.infinity,
       fit: BoxFit.cover,
