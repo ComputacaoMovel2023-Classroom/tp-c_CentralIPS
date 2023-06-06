@@ -62,7 +62,7 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
                 itemBuilder: (context, index) {
                   print('index: ${widget.noticiaItemArr.length}');
                   NoticiaItem noticiaItem = widget.noticiaItemArr[index];
-                  id = widget.noticiaItemArr.length;
+                  //id = index;
                   return AdminNoticiaListItem(
                     noticiaItem: noticiaItem,
                     id: index,
