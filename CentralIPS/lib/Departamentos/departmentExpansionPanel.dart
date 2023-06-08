@@ -12,6 +12,12 @@ class FilterModel {
 }
 
 class DepartmentExpansionPanel extends StatefulWidget {
+
+  DepartmentFilter departmentFilter = DepartmentFilter.closed;
+  final Function onClick;
+
+  DepartmentExpansionPanel(this.onClick, {super.key});
+
   @override
   State<StatefulWidget> createState() => DepartmentExpansionPanelState();
 }
@@ -48,6 +54,11 @@ class DepartmentExpansionPanelState extends State<DepartmentExpansionPanel> {
     super.initState();
     _dropdownMenuItems = buildDropDownMenuItems(filters);
     selectedFilter = filters[0];
+    widget.departmentFilter = filters[0].filter;
+  }
+
+  DepartmentFilter getDepartmentFilter(){
+    return selectedFilter.filter;
   }
 
   @override
@@ -80,6 +91,8 @@ class DepartmentExpansionPanelState extends State<DepartmentExpansionPanel> {
             onChanged: (value) {
               setState(() {
                 selectedFilter = value!;
+                widget.departmentFilter = value.filter;
+                widget.onClick();
               });
             }),
       )),
