@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class DepartmentFavorite extends StatefulWidget {
   Department department;
+  double size = 26;
 
-  DepartmentFavorite(this.department, {super.key});
+  DepartmentFavorite(this.department, this.size, {super.key});
 
   @override
   State<DepartmentFavorite> createState() => DepartmentFavoriteState();
@@ -43,11 +44,11 @@ class DepartmentFavoriteState extends State<DepartmentFavorite> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 26,
-      width: 26,
+      height: widget.size,
+      width: widget.size,
       child: IconButton(
         padding: const EdgeInsets.all(0),
-        iconSize: 26,
+        iconSize: widget.size,
         icon: Icon(Icons.favorite,
             color: greyColor ? Colors.grey : Colors.red[300]),
         onPressed: () {

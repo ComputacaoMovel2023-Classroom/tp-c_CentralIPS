@@ -126,14 +126,17 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                   width: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(90),
-                                    color: const Color.fromRGBO(
-                                        186, 186, 186, 0.576),
+                                    color:
+                                        const Color.fromRGBO(240, 247, 255, 1),
                                   ),
                                   child: Text(
                                     departments
                                         .getDepartments(departmentExpansionPanel
                                             .departmentFilter)[index]
                                         .acronym,
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromRGBO(160, 164, 167, 1)),
                                   )),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -183,21 +186,28 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                                 .departmentFilter)[
                                                             index]
                                                         .open
-                                                    ? Colors.green
+                                                    ? Color.fromRGBO(
+                                                        7, 133, 76, 1)
                                                     : Colors.red,
                                                 borderRadius:
                                                     const BorderRadius.only(
                                                         topLeft:
-                                                            Radius.circular(10),
+                                                            Radius.circular(30),
                                                         bottomLeft:
                                                             Radius.circular(
-                                                                10))),
+                                                                30))),
                                             child: Row(
                                               children: [
+                                                const SizedBox(
+                                                  width: 7,
+                                                ),
                                                 const Icon(
                                                   Icons.timer_off_outlined,
                                                   color: Colors.white,
                                                   size: 17,
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
                                                 ),
                                                 Text(
                                                   departments
@@ -210,7 +220,9 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                       : 'Fechado',
                                                   style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 10),
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 )
                                               ],
                                             ),
@@ -220,7 +232,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           DepartmentFavorite(
                                               departments.getDepartments(
                                                   departmentExpansionPanel
-                                                      .departmentFilter)[index])
+                                                      .departmentFilter)[index],
+                                              26)
                                         ],
                                       ))),
                             ])));
