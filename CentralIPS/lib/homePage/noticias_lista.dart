@@ -43,6 +43,7 @@ class _NoticiasListaState extends State<NoticiasLista> {
                 author: noticiaData['autor'] ?? 'Autor desconhecido',
                 date: noticiaData['date'] ?? '01/01/2021',
                 type: noticiaData['type'] ?? true,
+                id: noticiaData['id'] ?? 0,
               );
               updatedNoticiaItems.add(noticiaItem);
             }

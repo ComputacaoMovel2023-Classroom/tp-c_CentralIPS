@@ -99,9 +99,7 @@ class AdminNoticiasEmpty extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminNoticiasAdd(
-                                id: 0,
-                              )),
+                          builder: (context) => AdminNoticiasAdd()),
                     );
                   },
                   child: const Text(

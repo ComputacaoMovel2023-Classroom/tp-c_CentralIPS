@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_empty.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list.dart';
 import 'package:centralips/Noticias/noticia_list.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
@@ -17,7 +20,7 @@ class AdminNoticiasUI extends StatefulWidget {
 
 class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
   List<NoticiaItem> noticiaItemArr = [];
-
+  bool isNoticia = true;
 /*
 
   List<NoticiaItem> title = [
@@ -65,15 +68,19 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
     final user = FirebaseAuth.instance.currentUser;
     DatabaseReference databaseRef =
         FirebaseDatabase.instance.ref().child('noticias');
-    databaseRef.onValue.listen((event) {
+    databaseRef.once().then((event) {
       DataSnapshot snapshot = event.snapshot;
-      var noticiasData = snapshot.value;
+      var noticiasData = snapshot.value; // Read the 'noticias' data
 
       if (noticiasData != null) {
         List<NoticiaItem> updatedNoticiaItems = [];
 
-        if (noticiasData is List) {
-          noticiasData.forEach((noticiaData) {
+        if (noticiasData is Map) {
+          // Check if noticiasData is a map
+          noticiasData.entries.forEach((entry) {
+            // Iterate over the entries of noticiasData
+            var noticiaData = entry.value;
+
             if (noticiaData is Map) {
               NoticiaItem noticiaItem = NoticiaItem(
                 titulo: noticiaData['titulo'] ?? 'Titulo da noticia',
@@ -83,12 +90,14 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                 author: noticiaData['autor'] ?? 'Autor desconhecido',
                 date: noticiaData['date'] ?? '01/01/2021',
                 type: noticiaData['type'] ?? true,
+                id: entry.key,
               );
               updatedNoticiaItems.add(noticiaItem);
             }
           });
         }
 
+        if (!mounted) return;
         setState(() {
           noticiaItemArr = updatedNoticiaItems;
         });
@@ -98,6 +107,14 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
 
   @override
   Widget build(BuildContext context) {
+    if (noticiaItemArr.isEmpty) {
+      return AdminNoticiasEmpty();
+    }
+
+    List<NoticiaItem> filteredNoticiaItems = isNoticia
+        ? noticiaItemArr.where((noticiaItem) => noticiaItem.type).toList()
+        : noticiaItemArr.where((noticiaItem) => !noticiaItem.type).toList();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -142,9 +159,13 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                                 elevation: 0,
                                 minimumSize: const Size(45, 35),
                               ),
-                              onPressed: () {},
-                              child: const Text(
-                                "Filtros",
+                              onPressed: () {
+                                setState(() {
+                                  isNoticia = !isNoticia;
+                                });
+                              },
+                              child: Text(
+                                isNoticia ? "Noticias" : "Eventos",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -168,7 +189,7 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                   Expanded(
                     child: Column(children: [
                       AdminNoticiaList(
-                        noticiaItemArr: noticiaItemArr,
+                        noticiaItemArr: filteredNoticiaItems,
                       ),
                     ]),
                   ),

@@ -6,14 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdminNoticiaListItem extends StatefulWidget {
-  AdminNoticiaListItem({
-    Key? key,
-    required this.noticiaItem,
-    required this.id,
-  }) : super(key: key);
+  AdminNoticiaListItem({Key? key, required this.noticiaItem}) : super(key: key);
 
   NoticiaItem noticiaItem;
-  final int id;
 
   @override
   _AdminNoticiaListItemState createState() => _AdminNoticiaListItemState();
@@ -40,16 +35,11 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
     }
   }
 
-  void removeNoticia(int id) {
+  void removeNoticia(String id) {
     final databaseReference = FirebaseDatabase.instance.ref();
-    databaseReference.child('noticias/$id').remove();
-    databaseReference
-        .child('noticia')
-        .startAt(id)
-        .onChildRemoved
-        .forEach((element) {
-      id = id - 1;
-    });
+
+    databaseReference.child('noticias/${widget.noticiaItem.id}').remove();
+    setState(() {});
   }
 
   @override
@@ -110,8 +100,8 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  removeNoticia(widget.id);
-                                  print(widget.id);
+                                  removeNoticia(widget.noticiaItem.id);
+                                  setState(() {});
                                 },
                                 style: ButtonStyle(
                                     backgroundColor:
@@ -172,7 +162,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Jun 12, 2021",
+                            widget.noticiaItem.date,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: TextStyle(

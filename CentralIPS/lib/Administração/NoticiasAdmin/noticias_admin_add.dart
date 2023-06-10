@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdminNoticiasAdd extends StatefulWidget {
-  AdminNoticiasAdd({super.key, required this.id});
-  int id = 0;
+  AdminNoticiasAdd({
+    super.key,
+  });
+
   @override
   _AdminNoticiasAdd createState() => _AdminNoticiasAdd();
 }
@@ -38,11 +40,11 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
       texto: text,
       author: author,
       date: date,
-      type: isNews,
+      type: isNews, id: '',
       //  id: widget.maxId + 1,
     );
-    db.child('noticias').child('${widget.id}').set(noticiaItem.toJson());
-    widget.id++;
+    db.child('noticias').push().set(noticiaItem.toJson());
+
     Navigator.of(context).pop();
   }
 

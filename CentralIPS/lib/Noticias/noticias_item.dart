@@ -11,7 +11,7 @@ class NoticiaItem extends StatelessWidget {
     required this.author,
     required this.date,
     required this.type,
-    //required this.id,
+    required this.id,
   });
   final String titulo;
   final String subtitulo;
@@ -20,7 +20,7 @@ class NoticiaItem extends StatelessWidget {
   final String author;
   final String date;
   final bool type;
-  //final int id;
+  final String id;
 
   Map<String, dynamic> toJson() {
     return {
@@ -31,7 +31,7 @@ class NoticiaItem extends StatelessWidget {
       'autor': author,
       'date': date,
       'type': type,
-      // 'id': id,
+      'id': id,
     };
   }
 
