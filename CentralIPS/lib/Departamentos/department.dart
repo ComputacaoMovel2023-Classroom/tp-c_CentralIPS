@@ -8,6 +8,7 @@ class Department extends StatefulWidget {
   bool open = true;
   List<String> usersId = [];
   School school = School.na;
+  bool isFavorite = false;
 
   Department(
       {Key? key,

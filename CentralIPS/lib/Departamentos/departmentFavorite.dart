@@ -19,12 +19,7 @@ class DepartmentFavoriteState extends State<DepartmentFavorite> {
   @override
   void initState(){
     super.initState();
-    getUserInfo();
-  }
-
-  Future<void> getUserInfo() async{
     final user = auth.currentUser;
-
     greyColor = !widget.department.usersId.contains(user!.uid);
   }
 
