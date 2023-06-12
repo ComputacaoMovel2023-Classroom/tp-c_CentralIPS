@@ -54,6 +54,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
               value['school'] != null ? getSchool(value['school']) : School.na,
           usersId:
               (value['usersId'] as List).map((item) => item as String).toList(),
+          email: value['email'] ?? 'Sem email',
+          schedule: value['horarios'] ?? 'Sem horários disponíveis',
         );
         final user = auth.currentUser;
         department.isFavorite = department.usersId.contains(user!.uid);
@@ -72,6 +74,9 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
 
   @override
   Widget build(BuildContext context) {
+    List<Department> d =
+        departments.getDepartments(departmentExpansionPanel.departmentFilter);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -93,9 +98,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                 height: 450.0,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: departments
-                      .getDepartments(departmentExpansionPanel.departmentFilter)
-                      .length,
+                  itemCount: d.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () {
@@ -104,10 +107,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider.value(
                                       value: context.read<FooterMenuCubit>(),
-                                      child: DepartamentProfile(
-                                          departments.getDepartments(
-                                              departmentExpansionPanel
-                                                  .departmentFilter)[index]),
+                                      child: DepartamentProfile(d[index]),
                                     )),
                           );
                         },
@@ -119,25 +119,27 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                             margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                             height: 80,
                             child: Row(children: [
-                              Container(
-                                  alignment: Alignment.center,
-                                  margin: const EdgeInsets.only(left: 6),
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(90),
-                                    color:
-                                        const Color.fromRGBO(240, 247, 255, 1),
-                                  ),
-                                  child: Text(
-                                    departments
-                                        .getDepartments(departmentExpansionPanel
-                                            .departmentFilter)[index]
-                                        .acronym,
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromRGBO(160, 164, 167, 1)),
-                                  )),
+                              Card(
+                                shape: const CircleBorder(),
+                                color: const Color.fromRGBO(240, 247, 255, 1),
+                                elevation: 6,
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    margin: const EdgeInsets.only(left: 6),
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(90),
+                                      color: const Color.fromRGBO(
+                                          240, 247, 255, 1),
+                                    ),
+                                    child: Text(
+                                      d[index].acronym,
+                                      style: const TextStyle(
+                                          color:
+                                              Color.fromRGBO(160, 164, 167, 1)),
+                                    )),
+                              ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,11 +147,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                   SizedBox(
                                     child: Expanded(
                                       child: Text(
-                                        departments
-                                            .getDepartments(
-                                                departmentExpansionPanel
-                                                    .departmentFilter)[index]
-                                            .getStretchedText(),
+                                        d[index].getStretchedText(),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 11,
@@ -158,10 +156,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                     ),
                                   ),
                                   Text(
-                                    departments
-                                        .getDepartments(departmentExpansionPanel
-                                            .departmentFilter)[index]
-                                        .acronym,
+                                    d[index].acronym,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w100,
                                         fontSize: 12),
@@ -170,7 +165,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                               ),
                               Expanded(
                                   child: Align(
-                                      alignment: Alignment(1, -1),
+                                      alignment: Alignment.topRight,
                                       child: Column(
                                         children: [
                                           const Padding(
@@ -180,13 +175,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                             width: 75,
                                             height: 25,
                                             decoration: BoxDecoration(
-                                                color: departments
-                                                        .getDepartments(
-                                                            departmentExpansionPanel
-                                                                .departmentFilter)[
-                                                            index]
-                                                        .open
-                                                    ? Color.fromRGBO(
+                                                color: d[index].open
+                                                    ? const Color.fromRGBO(
                                                         7, 133, 76, 1)
                                                     : Colors.red,
                                                 borderRadius:
@@ -201,8 +191,11 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                 const SizedBox(
                                                   width: 7,
                                                 ),
-                                                const Icon(
-                                                  Icons.timer_off_outlined,
+                                                Icon(
+                                                  d[index].open
+                                                      ? Icons.check_circle
+                                                      : Icons
+                                                          .timer_off_outlined,
                                                   color: Colors.white,
                                                   size: 17,
                                                 ),
@@ -210,12 +203,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                   width: 5,
                                                 ),
                                                 Text(
-                                                  departments
-                                                          .getDepartments(
-                                                              departmentExpansionPanel
-                                                                  .departmentFilter)[
-                                                              index]
-                                                          .open
+                                                  d[index].open
                                                       ? 'Aberto'
                                                       : 'Fechado',
                                                   style: const TextStyle(
@@ -229,11 +217,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
-                                          DepartmentFavorite(
-                                              departments.getDepartments(
-                                                  departmentExpansionPanel
-                                                      .departmentFilter)[index],
-                                              26)
+                                          DepartmentFavorite(d[index], 26)
                                         ],
                                       ))),
                             ])));

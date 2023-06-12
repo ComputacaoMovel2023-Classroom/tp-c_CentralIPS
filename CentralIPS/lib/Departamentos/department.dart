@@ -9,6 +9,8 @@ class Department extends StatefulWidget {
   List<String> usersId = [];
   School school = School.na;
   bool isFavorite = false;
+  String email = "";
+  String schedule = "";
 
   Department(
       {Key? key,
@@ -17,12 +19,14 @@ class Department extends StatefulWidget {
       required this.acronym,
       required this.open,
       required this.usersId,
-      required this.school})
+      required this.school,
+      required this.email,
+      required this.schedule})
       : super(key: key);
 
   @override
   String toString({DiagnosticLevel? minLevel}) {
-    return '[$name, $acronym, $open, $school, $usersId]';
+    return '[$name, $acronym, $open, $school, $usersId, $email]';
   }
 
   Map<String, dynamic> toJson() {
@@ -34,6 +38,8 @@ class Department extends StatefulWidget {
       'open': open,
       'school': school.toString(),
       'usersId': usersId,
+      'email' : email,
+      'horarios' : schedule
     };
   }
 
