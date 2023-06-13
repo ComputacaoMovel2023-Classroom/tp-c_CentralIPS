@@ -31,6 +31,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
     'Pellentesque eget fringilla nulla, in consequat velit. Suspendisse rutrum lectus a nibh sollicitudin, id hendrerit nulla dictum. Sed pharetra a mi in bibendum. Vestibulum quis neque id odio aliquet blandit. Integer vitae nulla eget magna pretium vehicula. Pellentesque in enim eget nisi malesuada varius sit amet euismod nibh. Sed rhoncus imperdiet ipsum, vel pulvinar eros hendrerit nec. Suspendisse at dolor sagittis, finibus nisi et, faucibus dolor. Suspendisse convallis nec dolor eget commodo. Maecenas euismod neque sed lacus posuere, vel varius quam semper. Vivamus eget mauris congue, luctus ex non, maximus ante. Suspendisse vitae quam fermentum, gravida massa sed, fringilla arcu.'
   ];*/
   List<NoticiaItem> noticiaItemArr = [];
+  bool isNoticia = true;
   /*List<NoticiaItem> noticiaItemArr = [
     NoticiaItem(
       titulo: "Noticia 1",
@@ -106,6 +107,10 @@ class _NoticiasUIState extends State<NoticiasUI> {
     if (noticiaItemArr.isEmpty) {
       return NoticiasListEmpty();
     }
+    List<NoticiaItem> filteredNoticiaItems = isNoticia
+        ? noticiaItemArr.where((noticiaItem) => noticiaItem.type).toList()
+        : noticiaItemArr.where((noticiaItem) => !noticiaItem.type).toList();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -150,9 +155,13 @@ class _NoticiasUIState extends State<NoticiasUI> {
                                 elevation: 0,
                                 minimumSize: const Size(45, 35),
                               ),
-                              onPressed: () {},
-                              child: const Text(
-                                "Filtros",
+                              onPressed: () {
+                                setState(() {
+                                  isNoticia = !isNoticia;
+                                });
+                              },
+                              child: Text(
+                                isNoticia ? "Noticias" : "Eventos",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -175,7 +184,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
                   ),
                   Expanded(
                     child: Column(children: [
-                      NoticiasList(noticiaItemArr: noticiaItemArr),
+                      NoticiasList(noticiaItemArr: filteredNoticiaItems),
                     ]),
                   ),
                 ],
