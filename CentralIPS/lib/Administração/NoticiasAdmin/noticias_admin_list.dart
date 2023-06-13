@@ -11,9 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AdminNoticiaList extends StatefulWidget {
   AdminNoticiaList({
     Key? key,
+    this.onUpdate,
     required this.noticiaItemArr,
   }) : super(key: key);
-
+  final VoidCallback? onUpdate;
   List<NoticiaItem> noticiaItemArr;
 
   @override
@@ -22,8 +23,8 @@ class AdminNoticiaList extends StatefulWidget {
 
 class _AdminNoticiaListState extends State<AdminNoticiaList> {
   int id = 0;
-  void _submitForm() {
-    Navigator.push(
+  void _submitForm() async {
+    await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (_) => BlocProvider.value(
@@ -31,6 +32,7 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
                 child: AdminNoticiasAdd(),
               )),
     );
+    widget.onUpdate?.call();
   }
 
   @override
@@ -66,6 +68,11 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
 
                   return AdminNoticiaListItem(
                     noticiaItem: noticiaItem,
+                    onUpdate: () {
+                      setState(() {
+                        widget.noticiaItemArr.remove(noticiaItem);
+                      });
+                    },
                   );
                   //update dps ids
                 },

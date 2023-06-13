@@ -25,15 +25,19 @@ class _NoticiasListaState extends State<NoticiasLista> {
     final user = FirebaseAuth.instance.currentUser;
     DatabaseReference databaseRef =
         FirebaseDatabase.instance.ref().child('noticias');
-    databaseRef.onValue.listen((event) {
+    databaseRef.once().then((event) {
       DataSnapshot snapshot = event.snapshot;
-      var noticiasData = snapshot.value;
+      var noticiasData = snapshot.value; // Read the 'noticias' data
 
       if (noticiasData != null) {
         List<NoticiaItem> updatedNoticiaItems = [];
 
-        if (noticiasData is List) {
-          noticiasData.forEach((noticiaData) {
+        if (noticiasData is Map) {
+          // Check if noticiasData is a map
+          noticiasData.entries.forEach((entry) {
+            // Iterate over the entries of noticiasData
+            var noticiaData = entry.value;
+
             if (noticiaData is Map) {
               NoticiaItem noticiaItem = NoticiaItem(
                 titulo: noticiaData['titulo'] ?? 'Titulo da noticia',
@@ -43,13 +47,14 @@ class _NoticiasListaState extends State<NoticiasLista> {
                 author: noticiaData['autor'] ?? 'Autor desconhecido',
                 date: noticiaData['date'] ?? '01/01/2021',
                 type: noticiaData['type'] ?? true,
-                id: noticiaData['id'] ?? 0,
+                id: entry.key,
               );
               updatedNoticiaItems.add(noticiaItem);
             }
           });
         }
 
+        if (!mounted) return;
         setState(() {
           noticiaItemArr = updatedNoticiaItems;
         });

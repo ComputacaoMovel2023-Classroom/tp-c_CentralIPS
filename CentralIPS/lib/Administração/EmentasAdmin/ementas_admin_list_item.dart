@@ -1,12 +1,15 @@
 import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/src/material/date_picker.dart';
 
 class AdminEmentasListItem extends StatefulWidget {
   final IconData icon;
   final String weekday;
   final DailyEmenta weekdayMeals;
   final String type;
+  final VoidCallback? onRefresh;
 
   AdminEmentasListItem({
     Key? key,
@@ -14,6 +17,7 @@ class AdminEmentasListItem extends StatefulWidget {
     required this.weekday,
     required this.weekdayMeals,
     required this.type,
+    this.onRefresh,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,25 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
   TextEditingController _peixeController = TextEditingController();
   TextEditingController _carneController = TextEditingController();
   TextEditingController _vegetarianoController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2050),
+    );
+    if (d != null) {
+      final DateFormat formatter = DateFormat('dd-MM');
+      final String formatted = formatter.format(d);
+      setState(() {
+        _dateController.text = formatted;
+        _updateMenuItem("date", _dateController.text);
+      });
+    }
+    widget.onRefresh?.call();
+  }
 
   @override
   void initState() {
@@ -44,13 +67,12 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
     _peixeController = TextEditingController();
     _carneController = TextEditingController();
     _vegetarianoController = TextEditingController();
-
+    _dateController = TextEditingController();
     // print('initState: ${_sopaController.text}');
     setState(() {});
-    debugPrint('AIAI: ${widget.weekdayMeals.peixe}');
   }
 
-  void _updateMenuItem(String field, String value) {
+  Future<void> _updateMenuItem(String field, String value) async {
     if (widget.weekday == 'terça-feira') {
       db.child("${widget.type}/terca-feira").update({field: value});
     } else {
@@ -89,7 +111,13 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                         Text('Ver ementa'),
                         Column(
                           children: [
-                            Icon(Icons.calendar_month_outlined),
+                            IconButton(
+                              icon: Icon(Icons.calendar_month_outlined),
+                              tooltip: 'Alterar a data',
+                              onPressed: () {
+                                _selectDate(context);
+                              },
+                            ),
                             Text(widget.weekdayMeals.date),
                           ],
                         ),

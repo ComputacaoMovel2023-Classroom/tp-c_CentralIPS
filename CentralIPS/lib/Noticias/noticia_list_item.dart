@@ -96,19 +96,6 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Stack(
-                          children: const [
-                            Positioned(
-                              top: 5,
-                              right: 5,
-                              child: Icon(
-                                Icons.bookmark,
-                                size: 15,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                     Padding(
