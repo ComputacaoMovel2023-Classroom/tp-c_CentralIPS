@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_empty.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list.dart';
-import 'package:centralips/Noticias/noticia_list.dart';
+
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
@@ -190,6 +190,9 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                     child: Column(children: [
                       AdminNoticiaList(
                         noticiaItemArr: filteredNoticiaItems,
+                        onUpdate: () {
+                          _fetchData();
+                        },
                       ),
                     ]),
                   ),

@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdminNoticiaListItem extends StatefulWidget {
-  AdminNoticiaListItem({Key? key, required this.noticiaItem}) : super(key: key);
+  AdminNoticiaListItem({Key? key, required this.noticiaItem, this.onUpdate})
+      : super(key: key);
 
-  NoticiaItem noticiaItem;
+  final VoidCallback? onUpdate;
+  final NoticiaItem noticiaItem;
 
   @override
   _AdminNoticiaListItemState createState() => _AdminNoticiaListItemState();
@@ -35,11 +37,11 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
     }
   }
 
-  void removeNoticia(String id) {
+  void removeNoticia(String id) async {
     final databaseReference = FirebaseDatabase.instance.ref();
 
-    databaseReference.child('noticias/${widget.noticiaItem.id}').remove();
-    setState(() {});
+    await databaseReference.child('noticias/${widget.noticiaItem.id}').remove();
+    widget.onUpdate?.call();
   }
 
   @override
@@ -77,9 +79,8 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                             width: 500,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/noticiaImg.png'),
+                              image: DecorationImage(
+                                image: AssetImage(widget.noticiaItem.imagem),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -118,10 +119,10 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                         ],
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 6, top: 13),
                       child: Text(
-                        "Notícia",
+                        widget.noticiaItem.type ? 'Noticia' : 'Evento',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(
