@@ -1,6 +1,7 @@
 //class to create a marker
 
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:centralips/Maps/get_departments/departments_list.dart';
 import 'package:centralips/homePage/home_page_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,6 +76,15 @@ class MarkerCreator {
                   child: const HomePage(),
                 )),
       );
+    } else if (service.contains("Divisão")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("DA", context);
+    } else if (service.contains("Clube Desportivo")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("CD", context);
+    } else if (service.contains("IPSartup")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("IPSUP", context);
     }
   }
 }
