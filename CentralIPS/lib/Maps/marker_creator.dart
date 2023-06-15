@@ -82,7 +82,7 @@ class MarkerCreator {
     } else if (service.contains("Clube Desportivo")) {
       DepartmentsList m = DepartmentsList();
       m.getDepartment("CD", context);
-    } else if (service.contains("IPSartup")) {
+    } else if (service.contains("IPStartup")) {
       DepartmentsList m = DepartmentsList();
       m.getDepartment("IPSUP", context);
     }
