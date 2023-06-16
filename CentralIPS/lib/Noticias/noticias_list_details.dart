@@ -21,7 +21,7 @@ class NoticiasListDetails extends StatelessWidget {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -53,9 +53,7 @@ class NoticiasListDetails extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        const SizedBox(
-                            width: double
-                                .infinity), // Add this to force the next child to the next line
+                        const SizedBox(width: double.infinity),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                         ),
@@ -77,16 +75,16 @@ class NoticiasListDetails extends StatelessWidget {
                           children: [
                             Text(
                               noticiaItem.author,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 183, 183, 183),
                               ),
                               textAlign: TextAlign.start,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               noticiaItem.date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 183, 183, 183),
                               ),
@@ -114,12 +112,12 @@ class NoticiasListDetails extends StatelessWidget {
                           child: Text(
                             noticiaItem.texto,
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
-                        SizedBox(height: 230),
+                        const SizedBox(height: 230),
                       ],
                     ),
                   ],
@@ -128,27 +126,31 @@ class NoticiasListDetails extends StatelessWidget {
             ),
           ),
           Positioned(
-              left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: Builder(builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                );
-              }),
-            ),
-          ),
+              left: 0,
+              right: 0,
+              top: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                elevation: 0,
+                leading: Builder(builder: (BuildContext context) {
+                  return IconButton(
+                      onPressed: () => {
+                            Navigator.pop(context)
+                          },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ));
+                }),
+              ),
+            )
         ],
       ),
       resizeToAvoidBottomInset: false,
       drawer: const NavBar(),
-      backgroundColor: Colors.transparent,
+      bottomNavigationBar: BottomNavigationExample(),
     );
   }
 }

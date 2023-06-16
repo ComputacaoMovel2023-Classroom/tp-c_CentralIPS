@@ -50,8 +50,6 @@ class EmentasUI extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   ButtonUI(),
-
-                  //EmentasList(),
                 ],
               ),
             ),

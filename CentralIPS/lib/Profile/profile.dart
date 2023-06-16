@@ -88,8 +88,7 @@ class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Container(
+      body: Container(
         constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height,
           minWidth: MediaQuery.of(context).size.width,
@@ -99,15 +98,6 @@ class ProfileState extends State<Profile> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/header.jpg'),
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ),
                 /**
                  * Bloco Branco
                  */
@@ -118,7 +108,7 @@ class ProfileState extends State<Profile> {
                       top: Radius.circular(30),
                     ),
                   ),
-                  padding: const EdgeInsets.only(top: 140),
+                  padding: const EdgeInsets.only(top: 270),
                   child: Container(
                     padding: const EdgeInsets.only(left: 10),
                     width: 600,
@@ -179,60 +169,78 @@ class ProfileState extends State<Profile> {
                           indent: 15,
                           endIndent: 15,
                         ),
-                        /**
+                        SizedBox(
+                          height: 400,
+                          child: ListView(
+                            children: [
+                              /**
                          * Opções de Perfil
                          */
-                        ProfileOptionWidget(
-                          option: "Nome de Utilizador",
-                          value: userName,
-                          editable: editable,
-                          validator: userNameValidator,
-                          controller: _nameController,
-                          textInputType: TextInputType.name,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Email",
-                          value: mail,
-                          editable: false,
-                          validator: emailValidator,
-                          controller: _emailController,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Número",
-                          value: number,
-                          editable: false,
-                          validator: numberValidator,
-                          controller: _numberController,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Função",
-                          value: role,
-                          editable: false,
-                          validator: userNameValidator,
-                          controller: _roleController,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Data de Nascimento",
-                          value: birthDate.toString(),
-                          editable: editable,
-                          validator: birthDateValidator,
-                          textInputType: TextInputType.datetime,
-                          controller: _birthdateController,
-                          isDate: true,
-                        ),
-                        ProfileOptionWidget(
-                          option: "Género",
-                          value: gender,
-                          editable: editable,
-                          validator: userNameValidator,
-                          controller: _genderController,
-                          textInputType: TextInputType.name,
+                              ProfileOptionWidget(
+                                option: "Nome de Utilizador",
+                                value: userName,
+                                editable: editable,
+                                validator: userNameValidator,
+                                controller: _nameController,
+                                textInputType: TextInputType.name,
+                              ),
+                              ProfileOptionWidget(
+                                option: "Email",
+                                value: mail,
+                                editable: false,
+                                validator: emailValidator,
+                                controller: _emailController,
+                              ),
+                              ProfileOptionWidget(
+                                option: "Número",
+                                value: number,
+                                editable: false,
+                                validator: numberValidator,
+                                controller: _numberController,
+                              ),
+                              ProfileOptionWidget(
+                                option: "Função",
+                                value: role,
+                                editable: false,
+                                validator: userNameValidator,
+                                controller: _roleController,
+                              ),
+                              ProfileOptionWidget(
+                                option: "Data de Nascimento",
+                                value: birthDate.toString(),
+                                editable: editable,
+                                validator: birthDateValidator,
+                                textInputType: TextInputType.datetime,
+                                controller: _birthdateController,
+                                isDate: true,
+                              ),
+                              ProfileOptionWidget(
+                                option: "Género",
+                                value: gender,
+                                editable: editable,
+                                validator: userNameValidator,
+                                controller: _genderController,
+                                textInputType: TextInputType.name,
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
                   ),
                 ),
               ],
+            ),
+            Positioned(
+              child: Container(
+                height: 200,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/header.jpg'),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ),
             ),
             /**
              * Foto de Perfil
@@ -280,7 +288,7 @@ class ProfileState extends State<Profile> {
             ),
           ],
         ),
-      )),
+      ),
       resizeToAvoidBottomInset: true,
       drawer: const NavBar(),
       bottomNavigationBar: BottomNavigationExample(),

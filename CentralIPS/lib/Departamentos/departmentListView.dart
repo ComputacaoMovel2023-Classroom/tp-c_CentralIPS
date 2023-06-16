@@ -1,4 +1,5 @@
 import 'package:centralips/Departamentos/department.dart';
+import 'package:centralips/Departamentos/departmentFavorite.dart';
 import 'package:centralips/Departamentos/departmentProfile.dart';
 import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Departamentos/school.dart';
@@ -74,15 +75,11 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
       department.usersId.add(user.uid);
     }
 
-    department.isFavorite = !department.isFavorite;
+    department.alterDepartmentFavorite(!department.isFavorite);
 
     DatabaseReference vlRef =
         FirebaseDatabase.instance.ref().child("Departamentos");
     vlRef.child(department.id).update({'usersId': department.usersId});
-
-    setState(() {
-      
-    });
   }
 
   void callSetState() {
@@ -91,7 +88,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Department> d =
+    List<Department> departmentsList =
         departments.getDepartments(departmentExpansionPanel.departmentFilter);
 
     return Column(
@@ -101,10 +98,10 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: 40,
               width: 150,
               child: Text(
-                  '${departments.openDepartments(departmentExpansionPanel.departmentFilter)} Departamentos dísponiveis'),
+                  '${departments.openDepartments(departmentExpansionPanel.departmentFilter)} Departamentos dísponiveis',
+                  style: const TextStyle(fontSize: 19),),
             ),
             SizedBox(height: 60, width: 150, child: departmentExpansionPanel),
           ],
@@ -115,7 +112,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                 height: 450.0,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: d.length,
+                  itemCount: departmentsList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () {
@@ -124,7 +121,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider.value(
                                       value: context.read<FooterMenuCubit>(),
-                                      child: DepartamentProfile(d[index]),
+                                      child: DepartamentProfile(departmentsList[index]),
                                     )),
                           );
                         },
@@ -151,7 +148,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           240, 247, 255, 1),
                                     ),
                                     child: Text(
-                                      d[index].acronym,
+                                      departmentsList[index].acronym,
                                       style: const TextStyle(
                                           color:
                                               Color.fromRGBO(160, 164, 167, 1)),
@@ -164,7 +161,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                   SizedBox(
                                     child: Expanded(
                                       child: Text(
-                                        d[index].getStretchedText(),
+                                        departmentsList[index].getStretchedText(),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 11,
@@ -173,7 +170,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                     ),
                                   ),
                                   Text(
-                                    d[index].acronym,
+                                    departmentsList[index].acronym,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w100,
                                         fontSize: 12),
@@ -192,7 +189,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                             width: 75,
                                             height: 25,
                                             decoration: BoxDecoration(
-                                                color: d[index].open
+                                                color: departmentsList[index].open
                                                     ? const Color.fromRGBO(
                                                         7, 133, 76, 1)
                                                     : Colors.red,
@@ -209,7 +206,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                   width: 7,
                                                 ),
                                                 Icon(
-                                                  d[index].open
+                                                  departmentsList[index].open
                                                       ? Icons.check_circle
                                                       : Icons
                                                           .timer_off_outlined,
@@ -220,7 +217,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                                   width: 5,
                                                 ),
                                                 Text(
-                                                  d[index].open
+                                                  departmentsList[index].open
                                                       ? 'Aberto'
                                                       : 'Fechado',
                                                   style: const TextStyle(
@@ -234,22 +231,10 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
-                                          SizedBox(
-                                            height: 26,
-                                            width: 26,
-                                            child: IconButton(
-                                              padding: const EdgeInsets.all(0),
-                                              iconSize: 26,
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: d[index].isFavorite
-                                                    ? Colors.red[300]
-                                                    : Colors.grey,
-                                              ),
-                                              onPressed: () =>
-                                                  inputData(d[index]),
-                                            ),
-                                          )
+                                          InkWell(
+                                            child: departmentsList[index].departmentFavorite,
+                                            onTap: () => inputData(departmentsList[index]),
+                                          ),
                                         ],
                                       ))),
                             ])));

@@ -7,7 +7,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 class Scanner extends StatelessWidget {
   Scanner({Key? key}) : super(key: key);
 
-  MobileScannerController cameraController = MobileScannerController();
+  MobileScannerController cameraController = MobileScannerController(
+      detectionTimeoutMs: 700, detectionSpeed: DetectionSpeed.noDuplicates);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +78,15 @@ class Scanner extends StatelessWidget {
         DepartmentsList m = DepartmentsList();
         m.getDepartment("IPSUP", context);
         break;
+      case 'gaal':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("GAAL", context);
+        break;
+      case 'cim':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("CIM", context);
+        break;
+
       default:
         break;
     }

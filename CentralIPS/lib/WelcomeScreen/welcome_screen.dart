@@ -95,7 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               child: Image.asset("assets/images/512x512.png")),
                         ),
                         const Text(
-                          'Bem Vindo!',
+                          'Bem-Vindo',
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 50,

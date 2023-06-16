@@ -27,15 +27,13 @@ class _NoticiasListaState extends State<NoticiasLista> {
         FirebaseDatabase.instance.ref().child('noticias');
     databaseRef.once().then((event) {
       DataSnapshot snapshot = event.snapshot;
-      var noticiasData = snapshot.value; // Read the 'noticias' data
+      var noticiasData = snapshot.value;
 
       if (noticiasData != null) {
         List<NoticiaItem> updatedNoticiaItems = [];
 
         if (noticiasData is Map) {
-          // Check if noticiasData is a map
           noticiasData.entries.forEach((entry) {
-            // Iterate over the entries of noticiasData
             var noticiaData = entry.value;
 
             if (noticiaData is Map) {

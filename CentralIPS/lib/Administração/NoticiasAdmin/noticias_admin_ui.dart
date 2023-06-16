@@ -122,7 +122,7 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -141,9 +141,9 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                 children: [
                   Row(
                     children: [
-                      const Text(
-                        "Noticias",
-                        style: TextStyle(
+                      Text(
+                        isNoticia ? "Notícias" : "Evento",
+                        style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
@@ -165,8 +165,10 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia ? "Noticias" : "Eventos",
-                                style: TextStyle(
+                                isNoticia
+                                    ? "Ver eventos"
+                                    : "Ver notícias",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
                                 ),
@@ -203,20 +205,26 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
           Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: Builder(builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                );
-              }),
-            ),
-          ),
+              left: 0,
+              right: 0,
+              top: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                elevation: 0,
+                leading: Builder(builder: (BuildContext context) {
+                  return IconButton(
+                      onPressed: () => {
+                            Navigator.pop(context)
+                          },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ));
+                }),
+              ),
+            )
         ],
       ),
       resizeToAvoidBottomInset: false,

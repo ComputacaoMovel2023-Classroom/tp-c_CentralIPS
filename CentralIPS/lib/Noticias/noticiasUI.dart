@@ -73,9 +73,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
         List<NoticiaItem> updatedNoticiaItems = [];
 
         if (noticiasData is Map) {
-          // Check if noticiasData is a map
           noticiasData.entries.forEach((entry) {
-            // Iterate over the entries of noticiasData
             var noticiaData = entry.value;
 
             if (noticiaData is Map) {
@@ -105,7 +103,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
   @override
   Widget build(BuildContext context) {
     if (noticiaItemArr.isEmpty) {
-      return NoticiasListEmpty();
+      return const NoticiasListEmpty();
     }
     List<NoticiaItem> filteredNoticiaItems = isNoticia
         ? noticiaItemArr.where((noticiaItem) => noticiaItem.type).toList()
@@ -118,7 +116,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -137,9 +135,9 @@ class _NoticiasUIState extends State<NoticiasUI> {
                 children: [
                   Row(
                     children: [
-                      const Text(
-                        "Noticias",
-                        style: TextStyle(
+                      Text(
+                        isNoticia ? "Notícias" : "Evento",
+                        style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
@@ -161,8 +159,10 @@ class _NoticiasUIState extends State<NoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia ? "Noticias" : "Eventos",
-                                style: TextStyle(
+                                isNoticia
+                                    ? "Mudar para eventos"
+                                    : "Mudar para notícias",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
                                 ),
@@ -202,7 +202,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
               elevation: 0,
               leading: Builder(builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
+                  icon: const Icon(Icons.menu, color: Colors.black),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 );
               }),
