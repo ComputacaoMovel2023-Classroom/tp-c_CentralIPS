@@ -3,6 +3,10 @@ import 'package:equatable/equatable.dart';
 
 export 'libraryFilterModel.dart';
 
+/// Is the model that stores the library filters the [categoriesFilter] 
+/// and availability [isAvailable].
+/// [performFilterSearch] - bool that triggers the filter search
+/// 
 class LibraryFilter extends Equatable {
   final List<BookCategoryEntry> categoriesFilter;
   bool isAvailable;

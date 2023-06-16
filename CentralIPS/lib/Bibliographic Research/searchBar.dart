@@ -13,6 +13,7 @@ import 'bookCategory.dart';
 import 'bookPage.dart';
 import 'library.dart';
 
+/// Widget that contains the search bar and the books that should be displayed
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
 
