@@ -24,6 +24,8 @@ class DepartamentProfile extends StatelessWidget {
       department.usersId.add(user.uid);
     }
 
+    department.alterDepartmentFavorite(!department.isFavorite);
+
     DatabaseReference vlRef =
         FirebaseDatabase.instance.ref().child("Departamentos");
     vlRef.child(department.id).update({'usersId': department.usersId});
@@ -103,8 +105,7 @@ class DepartamentProfile extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   InkWell(
-                                    child: DepartmentFavorite(
-                                        department.isFavorite, 36),
+                                    child: department.departmentFavorite,
                                     onTap: () => inputData(department),
                                   ),
                                   Container(
