@@ -15,6 +15,20 @@ class DepartamentProfile extends StatelessWidget {
 
   DepartamentProfile(this.department, {super.key});
 
+  void inputData(Department department) {
+    final user = auth.currentUser;
+
+    if (department.usersId.contains(user!.uid)) {
+      department.usersId.remove(user.uid);
+    } else {
+      department.usersId.add(user.uid);
+    }
+
+    DatabaseReference vlRef =
+        FirebaseDatabase.instance.ref().child("Departamentos");
+    vlRef.child(department.id).update({'usersId': department.usersId});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +72,8 @@ class DepartamentProfile extends StatelessWidget {
                               children: [
                                 Container(
                                   width: 140,
-                                  margin: EdgeInsets.only(left: 2, top: 50),
+                                  margin:
+                                      const EdgeInsets.only(left: 2, top: 50),
                                   child: Text(
                                     department.name,
                                     textAlign: TextAlign.center,
@@ -83,14 +98,14 @@ class DepartamentProfile extends StatelessWidget {
                             ),
                             Expanded(
                                 child: Align(
-                              alignment: Alignment(1, 1),
+                              alignment: const Alignment(1, 1),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Container(
-                                    width: 60,
-                                    height: 41,
-                                    child: DepartmentFavorite(department, 36),
+                                  InkWell(
+                                    child: DepartmentFavorite(
+                                        department.isFavorite, 36),
+                                    onTap: () => inputData(department),
                                   ),
                                   Container(
                                     width: 100,
@@ -131,7 +146,8 @@ class DepartamentProfile extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(right: 10, top: 25),
+                                    margin: const EdgeInsets.only(
+                                        right: 10, top: 25),
                                     height: 40,
                                     width: 145,
                                     child: TextButton(
@@ -173,7 +189,7 @@ class DepartamentProfile extends StatelessWidget {
                             width: double.maxFinite,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color.fromRGBO(239, 239, 239, 1)),
+                                color: const Color.fromRGBO(239, 239, 239, 1)),
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 10, top: 20, bottom: 20),
@@ -235,7 +251,7 @@ class DepartamentProfile extends StatelessWidget {
                             width: double.maxFinite,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color.fromRGBO(239, 239, 239, 1)),
+                                color: const Color.fromRGBO(239, 239, 239, 1)),
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 10, top: 20, bottom: 20),
