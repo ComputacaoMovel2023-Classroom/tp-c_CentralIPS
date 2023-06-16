@@ -1,5 +1,4 @@
 import 'package:centralips/Departamentos/department.dart';
-import 'package:centralips/Departamentos/departmentFavorite.dart';
 import 'package:centralips/Departamentos/departmentProfile.dart';
 import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Departamentos/school.dart';
@@ -75,7 +74,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
       department.usersId.add(user.uid);
     }
 
-    department.alterDepartmentFavorite(!department.isFavorite);
+    department.isFavorite = !department.isFavorite;
 
     DatabaseReference vlRef =
         FirebaseDatabase.instance.ref().child("Departamentos");
@@ -100,8 +99,9 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
             SizedBox(
               width: 150,
               child: Text(
-                  '${departments.openDepartments(departmentExpansionPanel.departmentFilter)} Departamentos dísponiveis',
-                  style: const TextStyle(fontSize: 19),),
+                '${departments.openDepartments(departmentExpansionPanel.departmentFilter)} Departamentos dísponiveis',
+                style: const TextStyle(fontSize: 17),
+              ),
             ),
             SizedBox(height: 60, width: 150, child: departmentExpansionPanel),
           ],
@@ -121,7 +121,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider.value(
                                       value: context.read<FooterMenuCubit>(),
-                                      child: DepartamentProfile(departmentsList[index]),
+                                      child: DepartamentProfile(
+                                          departmentsList[index]),
                                     )),
                           );
                         },
@@ -161,7 +162,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                   SizedBox(
                                     child: Expanded(
                                       child: Text(
-                                        departmentsList[index].getStretchedText(),
+                                        departmentsList[index]
+                                            .getStretchedText(),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 11,
@@ -189,7 +191,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                             width: 75,
                                             height: 25,
                                             decoration: BoxDecoration(
-                                                color: departmentsList[index].open
+                                                color: departmentsList[index]
+                                                        .open
                                                     ? const Color.fromRGBO(
                                                         7, 133, 76, 1)
                                                     : Colors.red,
@@ -231,10 +234,21 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
-                                          InkWell(
-                                            child: departmentsList[index].departmentFavorite,
-                                            onTap: () => inputData(departmentsList[index]),
-                                          ),
+                                          SizedBox(
+                                            height: 26,
+                                            width: 26,
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: departmentsList[index]
+                                                        .isFavorite
+                                                    ? Colors.red[300]
+                                                    : Colors.grey,
+                                              ),
+                                              onPressed: () => inputData(
+                                                  departmentsList[index]),
+                                            ),
+                                          )
                                         ],
                                       ))),
                             ])));
