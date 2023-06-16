@@ -1,9 +1,6 @@
-import 'package:centralips/Noticias/noticia_list_empty.dart';
 import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class NoticiasList extends StatefulWidget {
   NoticiasList({
@@ -47,7 +44,7 @@ class _NoticiasListState extends State<NoticiasList> {
                 itemCount: widget.noticiaItemArr.length,
                 itemBuilder: (context, index) {
                   NoticiaItem noticiaItem = widget.noticiaItemArr[index];
-                  //print('AOAO: ${noticiaItem.titulo}');
+
                   return NoticiaListItem(
                     noticiaItem: noticiaItem,
                   );

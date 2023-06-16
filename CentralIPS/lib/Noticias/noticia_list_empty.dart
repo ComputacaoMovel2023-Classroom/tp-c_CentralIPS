@@ -2,7 +2,7 @@ import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:flutter/material.dart';
 
 class NoticiasListEmpty extends StatelessWidget {
-  NoticiasListEmpty({
+  const NoticiasListEmpty({
     Key? key,
   }) : super(key: key);
 

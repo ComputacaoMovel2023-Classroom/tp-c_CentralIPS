@@ -2,7 +2,7 @@ import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class EmentasList extends StatefulWidget {
@@ -82,7 +82,6 @@ class _EmentasListState extends State<EmentasList> {
     databaseRef.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
       var barmeals = snapshot.value as Map;
-      //print('noticiasData: $noticiasData');
 
       List<DailyEmenta> updatedDailyEmenta = [];
       barmeals.forEach((key, value) {
@@ -102,14 +101,11 @@ class _EmentasListState extends State<EmentasList> {
         });
       }
     });
-
-    //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      //padding: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(0),
       child: SizedBox(
         height: 500,
@@ -135,8 +131,6 @@ class _EmentasListState extends State<EmentasList> {
                 },
                 itemCount: diasSemana.length,
                 itemBuilder: (context, index) {
-                  // print('weekdayMeals: ${weekdayMeals.length}}');
-
                   return EmentasListItem(
                     icon: Icons.restaurant,
                     weekday: diasSemana[index],

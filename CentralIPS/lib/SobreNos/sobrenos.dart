@@ -217,8 +217,8 @@ class SobreNos extends StatelessWidget {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   image: const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/carlosbg.png"),
+                                    image:
+                                        AssetImage("assets/images/davidbg.png"),
                                     fit: BoxFit.cover,
                                   )),
                               child: Column(
