@@ -1,7 +1,6 @@
 import 'package:centralips/Departamentos/department.dart';
 import 'package:centralips/Departamentos/departmentFavorite.dart';
 import 'package:centralips/Departamentos/departmentProfile.dart';
-import 'package:centralips/Departamentos/departmentStatic.dart';
 import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Cubit/index_cubit.dart';
 import 'departmentExpansionPanel.dart';
-import 'departmentFilter.dart';
 
 class DepartmentsListView extends StatefulWidget {
   const DepartmentsListView({super.key});
@@ -217,7 +215,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
-                                          DepartmentFavorite(d[index], 26)
+                                          DepartmentFavorite(
+                                              d[index], d[index].isFavorite, 26)
                                         ],
                                       ))),
                             ])));

@@ -63,19 +63,6 @@ class Scanner extends StatelessWidget {
     );
   }
 
-/*
-    } else if (service.contains("Divisão")) {
-      DepartmentsList m = DepartmentsList();
-      m.getDepartment("DA", context);
-    } else if (service.contains("Clube Desportivo")) {
-      DepartmentsList m = DepartmentsList();
-      m.getDepartment("CD", context);
-    } else if (service.contains("IPStartup")) {
-      DepartmentsList m = DepartmentsList();
-      m.getDepartment("IPSUP", context);
-    }
-  }
-      */
   routeQR(Barcode barcode, BuildContext context) {
     switch (barcode.rawValue) {
       case 'divisaoacademica':
