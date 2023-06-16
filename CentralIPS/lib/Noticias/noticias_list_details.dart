@@ -41,7 +41,7 @@ class NoticiasListDetails extends StatelessWidget {
                     top: 20, left: 20, right: 20, bottom: 0),
                 child: Column(
                   children: [
-                    Row(
+                    Wrap(
                       children: [
                         Center(
                           child: Text(
@@ -53,10 +53,11 @@ class NoticiasListDetails extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                          ),
+                        const SizedBox(
+                            width: double
+                                .infinity), // Add this to force the next child to the next line
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                         ),
                       ],
                     ),
@@ -106,7 +107,7 @@ class NoticiasListDetails extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(30),
                           child: Image(
-                            image: AssetImage(noticiaItem.imagem),
+                            image: NetworkImage(noticiaItem.imagem),
                           ),
                         ),
                         Center(
