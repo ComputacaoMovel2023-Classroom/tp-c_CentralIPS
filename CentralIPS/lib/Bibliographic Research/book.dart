@@ -2,7 +2,18 @@ import 'package:centralips/Departamentos/school.dart';
 
 import 'bookCategory.dart';
 
-/// Book data-structure
+/// Book data-structure that cointains
+/// - [name] - is the name of the book
+/// - [urlImage] - is the book image url
+/// - [authors] - is a list that contains all the authors
+/// - [school] - where the book reside
+/// - [synopsis] - the book's synopsis
+/// - [edition] - book's edition
+/// - [isbn] - book's isbn
+/// - [language] - book's language
+/// - [numberOfPages] - book's number of pages
+/// - [categories] - book's categories
+/// - [isAvailable] - book availability
 class Book {
   String name = 'Sem título';
   final String urlImage;

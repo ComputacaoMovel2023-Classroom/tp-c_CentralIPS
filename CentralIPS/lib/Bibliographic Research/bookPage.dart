@@ -10,6 +10,8 @@ import '../footer_menu/footer_menu.dart';
 import 'bibliographicResearch.dart';
 import 'book.dart';
 
+/// Widget that is a book profile page
+/// [book] - book to build the page
 class BookPage extends StatelessWidget {
   final Book book;
   BookPage({

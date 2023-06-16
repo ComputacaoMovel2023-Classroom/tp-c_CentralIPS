@@ -8,6 +8,7 @@ import 'bookCategory.dart';
 
 /**
  * Data structure with is a list of Books
+ * [books] - list of books
  */
 class Library {
   List<Book> books = [];

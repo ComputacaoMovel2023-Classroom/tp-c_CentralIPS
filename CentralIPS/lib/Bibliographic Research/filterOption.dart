@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bookCategory.dart';
 
+/// This widget represents a filter with a checkbox
 class FilterCategoryWidget extends StatefulWidget {
   FilterCategoryWidget({Key? key}) : super(key: key);
 

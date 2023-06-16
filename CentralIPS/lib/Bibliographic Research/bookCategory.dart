@@ -37,6 +37,8 @@ extension CategoryExtension on BookCategory {
   }
 }
 
+/// Data-structure that supports an [category] 
+/// and verifys if it [isEnabled]
 class BookCategoryEntry extends Equatable {
   final BookCategory category;
   bool isEnabled;

@@ -10,6 +10,7 @@ import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
 
+///This widget represents the filter page for the library
 class FilterResearch extends StatefulWidget {
   const FilterResearch({Key? key}) : super(key: key);
 

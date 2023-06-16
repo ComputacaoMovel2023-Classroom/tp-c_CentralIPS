@@ -8,7 +8,7 @@ import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
+/// Esta Widget é o widget mãe da biblioteca
 class BibliographicResearch extends StatefulWidget {
   const BibliographicResearch({Key? key}) : super(key: key);
 
