@@ -75,7 +75,7 @@ class _EmentasListState extends State<EmentasList> {
     _fetchData();
   }
 
-  void _fetchData() {
+  Future<void> _fetchData() async {
     final user = FirebaseAuth.instance.currentUser;
     DatabaseReference databaseRef =
         FirebaseDatabase.instance.ref().child(widget.type);

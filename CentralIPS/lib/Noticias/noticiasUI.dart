@@ -159,9 +159,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia
-                                    ? "Mudar para eventos"
-                                    : "Mudar para notícias",
+                                isNoticia ? "Ver Eventos" : "Ver Notícias",
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,

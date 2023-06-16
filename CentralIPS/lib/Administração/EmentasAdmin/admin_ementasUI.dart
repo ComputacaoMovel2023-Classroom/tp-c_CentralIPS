@@ -51,8 +51,6 @@ class AdminEmentasUI extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   AdminButtonUI(),
-
-                  //EmentasList(),
                 ],
               ),
             ),
@@ -60,26 +58,24 @@ class AdminEmentasUI extends StatelessWidget {
           Positioned(
               left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                surfaceTintColor: Colors.transparent,
-                elevation: 0,
-                leading: Builder(builder: (BuildContext context) {
-                  return IconButton(
-                      onPressed: () => {
-                            Navigator.pop(context)
-                          },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ));
-                }),
-              ),
-            )
+            left: 0,
+            right: 0,
+            top: 0,
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
+              elevation: 0,
+              leading: Builder(builder: (BuildContext context) {
+                return IconButton(
+                    onPressed: () => {Navigator.pop(context)},
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ));
+              }),
+            ),
+          )
         ],
       ),
       resizeToAvoidBottomInset: false,
