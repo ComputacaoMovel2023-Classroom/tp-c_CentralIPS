@@ -141,9 +141,9 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                 children: [
                   Row(
                     children: [
-                      const Text(
-                        "Noticias",
-                        style: TextStyle(
+                      Text(
+                        isNoticia ? "Notícias" : "Evento",
+                        style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
@@ -165,8 +165,10 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia ? "Noticias" : "Eventos",
-                                style: TextStyle(
+                                isNoticia
+                                    ? "Mudar para eventos"
+                                    : "Mudar para notícias",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
                                 ),

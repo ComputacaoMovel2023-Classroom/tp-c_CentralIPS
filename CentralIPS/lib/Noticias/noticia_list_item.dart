@@ -1,4 +1,3 @@
-import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
 import 'package:centralips/Noticias/noticias_list_details.dart';
@@ -6,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class NoticiaListItem extends StatefulWidget {
   NoticiaListItem({Key? key, required this.noticiaItem}) : super(key: key);
@@ -29,7 +27,6 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
         .child(user!.uid)
         .onValue
         .listen((event) {
-      // Get the snapshot of the data
       DataSnapshot snapshot = event.snapshot;
 
       var userData = snapshot.value as Map;
@@ -99,7 +96,7 @@ class _NoticiaListItemState extends State<NoticiaListItem> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 6, top: 13),
+                      padding: const EdgeInsets.only(left: 6, top: 13),
                       child: Text(
                         widget.noticiaItem.type ? 'Noticia' : 'Evento',
                         overflow: TextOverflow.ellipsis,

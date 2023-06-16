@@ -53,9 +53,7 @@ class NoticiasListDetails extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        const SizedBox(
-                            width: double
-                                .infinity), // Add this to force the next child to the next line
+                        const SizedBox(width: double.infinity),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                         ),
@@ -77,16 +75,16 @@ class NoticiasListDetails extends StatelessWidget {
                           children: [
                             Text(
                               noticiaItem.author,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 183, 183, 183),
                               ),
                               textAlign: TextAlign.start,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               noticiaItem.date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 183, 183, 183),
                               ),
@@ -119,7 +117,7 @@ class NoticiasListDetails extends StatelessWidget {
                             textAlign: TextAlign.left,
                           ),
                         ),
-                        SizedBox(height: 230),
+                        const SizedBox(height: 230),
                       ],
                     ),
                   ],

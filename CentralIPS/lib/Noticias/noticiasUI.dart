@@ -74,7 +74,6 @@ class _NoticiasUIState extends State<NoticiasUI> {
 
         if (noticiasData is Map) {
           noticiasData.entries.forEach((entry) {
-
             var noticiaData = entry.value;
 
             if (noticiaData is Map) {
@@ -104,7 +103,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
   @override
   Widget build(BuildContext context) {
     if (noticiaItemArr.isEmpty) {
-      return NoticiasListEmpty();
+      return const NoticiasListEmpty();
     }
     List<NoticiaItem> filteredNoticiaItems = isNoticia
         ? noticiaItemArr.where((noticiaItem) => noticiaItem.type).toList()
@@ -136,9 +135,9 @@ class _NoticiasUIState extends State<NoticiasUI> {
                 children: [
                   Row(
                     children: [
-                       Text(
+                      Text(
                         isNoticia ? "Notícias" : "Evento",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
@@ -160,8 +159,10 @@ class _NoticiasUIState extends State<NoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia ? "Mudar para eventos" : "Mudar para notícias",
-                                style: TextStyle(
+                                isNoticia
+                                    ? "Mudar para eventos"
+                                    : "Mudar para notícias",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
                                 ),
