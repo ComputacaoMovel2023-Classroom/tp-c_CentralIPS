@@ -11,21 +11,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../Cubit/index_cubit.dart';
 import 'departmentExpansionPanel.dart';
 
-class DepartmentsListView extends StatefulWidget {
-  const DepartmentsListView({super.key});
+class DepartmentsAdmin extends StatefulWidget {
+  const DepartmentsAdmin({super.key});
 
   @override
-  State<DepartmentsListView> createState() => DepartmentsListViewState();
+  State<DepartmentsAdmin> createState() => DepartmentsAdminState();
 }
 
-class DepartmentsListViewState extends State<DepartmentsListView> {
+class DepartmentsAdminState extends State<DepartmentsAdmin> {
   Departments departments = Departments();
-  late DepartmentExpansionPanel departmentExpansionPanel;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  DepartmentsListViewState() {
-    departmentExpansionPanel = DepartmentExpansionPanel(callSetState);
-  }
 
   @override
   void initState() {
@@ -66,23 +62,13 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
   }
 
   void inputData(Department department) {
-    final user = auth.currentUser;
-
-    if (department.usersId.contains(user!.uid)) {
-      department.usersId.remove(user.uid);
-    } else {
-      department.usersId.add(user.uid);
-    }
-
-    department.isFavorite = !department.isFavorite;
+    department.open = !department.open;
 
     DatabaseReference vlRef =
         FirebaseDatabase.instance.ref().child("Departamentos");
-    vlRef.child(department.id).update({'usersId': department.usersId});
+    vlRef.child(department.id).update({'open': department.open});
 
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   void callSetState() {
@@ -92,7 +78,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
   @override
   Widget build(BuildContext context) {
     List<Department> d =
-        departments.getDepartments(departmentExpansionPanel.departmentFilter);
+        departments.getDepartments();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -104,9 +90,9 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
               height: 40,
               width: 150,
               child: Text(
-                  '${departments.openDepartments(departmentExpansionPanel.departmentFilter)} Departamentos dísponiveis'),
+                  '${departments.openDepartments()} Departamentos dísponiveis'),
             ),
-            SizedBox(height: 60, width: 150, child: departmentExpansionPanel),
+            const Text('Administração', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
           ],
         ),
         Flexible(
@@ -235,21 +221,29 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
                                           SizedBox(
-                                            height: 26,
-                                            width: 26,
-                                            child: IconButton(
-                                              padding: const EdgeInsets.all(0),
-                                              iconSize: 26,
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: d[index].isFavorite
-                                                    ? Colors.red[300]
-                                                    : Colors.grey,
-                                              ),
-                                              onPressed: () =>
-                                                  inputData(d[index]),
-                                            ),
-                                          )
+                                            height: 30,
+                                            width: 80,
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  inputData(d[index]);
+                                                },
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll<
+                                                            Color>(
+                                                  !d[index].open
+                                                      ? const Color.fromRGBO(
+                                                          7, 133, 76, 1)
+                                                      : Colors.red,
+                                                )),
+                                                child: Text(
+                                                    d[index].open
+                                                        ? 'Fechar'
+                                                        : 'Abrir',
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12))),
+                                          ),
                                         ],
                                       ))),
                             ])));

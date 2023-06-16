@@ -3,6 +3,8 @@ import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/new_book_ui.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/admin_ementasUI.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_ui.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:centralips/Departamentos/departamentosAdmin.dart';
+import 'package:centralips/Departamentos/departamentsUI.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,6 +120,32 @@ class AdminMenu extends StatelessWidget {
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
                           child: const LibraryManagerUI(),
+                        )));
+              }),
+          const Divider(),
+
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 10),
+                child: Text('Departamentos',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ],
+          ),
+
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.lock_clock),
+              title: const Text('Gerir abertura departamentos'),
+              onTap: () {
+                context.read<FooterMenuCubit>().selectItem(2);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: DepartamentosUI(true),
                         )));
               }),
           const Divider(),
