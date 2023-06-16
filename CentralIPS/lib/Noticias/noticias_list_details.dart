@@ -21,7 +21,7 @@ class NoticiasListDetails extends StatelessWidget {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -114,7 +114,7 @@ class NoticiasListDetails extends StatelessWidget {
                           child: Text(
                             noticiaItem.texto,
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                             ),
                             textAlign: TextAlign.left,
                           ),
@@ -127,8 +127,6 @@ class NoticiasListDetails extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-              left: 0, bottom: 0, right: 0, child: BottomNavigationExample()),
           Positioned(
             left: 0,
             right: 0,
@@ -148,7 +146,7 @@ class NoticiasListDetails extends StatelessWidget {
       ),
       resizeToAvoidBottomInset: false,
       drawer: const NavBar(),
-      backgroundColor: Colors.transparent,
+      bottomNavigationBar: BottomNavigationExample(),
     );
   }
 }

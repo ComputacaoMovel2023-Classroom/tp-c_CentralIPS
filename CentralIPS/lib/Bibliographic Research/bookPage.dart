@@ -36,7 +36,7 @@ class BookPage extends StatelessWidget {
               height: 200,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/header.jpg'),
+                  image: AssetImage('assets/images/bibliotecaEstante.jpeg'),
                   fit: BoxFit.fitWidth,
                 ),
               ),

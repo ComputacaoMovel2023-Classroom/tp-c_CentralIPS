@@ -1,6 +1,7 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/Compra/compra.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/Menus/admin_menu.dart';
 import 'package:centralips/NFC/nfcUI.dart';
+import 'package:centralips/Noticias/noticiasUI.dart';
 import 'package:centralips/Pedometro/pedometroui.dart';
 import 'package:centralips/SobreNos/sobrenos.dart';
 import 'package:centralips/WelcomeScreen/welcome_screen.dart';
@@ -130,6 +131,18 @@ class _NavBarState extends State<NavBar> {
               }),
           const Divider(),
           ListTile(
+              leading: const Icon(Icons.auto_stories),
+              title: const Text('Biblioteca'),
+              onTap: () {
+                context.read<FooterMenuCubit>().selectItem(3);
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                          value: context.read<FooterMenuCubit>(),
+                          child: const BibliographicResearch(),
+                        )));
+              }),
+          ListTile(
               leading: const Icon(Icons.domain),
               title: const Text('Departamentos'),
               onTap: () {
@@ -153,15 +166,14 @@ class _NavBarState extends State<NavBar> {
                         )));
               }),
           ListTile(
-              leading: const Icon(Icons.auto_stories),
-              title: const Text('Biblioteca'),
+              leading: const Icon(Icons.newspaper),
+              title: const Text('Notícias'),
               onTap: () {
-                context.read<FooterMenuCubit>().selectItem(3);
-
+                context.read<FooterMenuCubit>().selectItem(0);
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                           value: context.read<FooterMenuCubit>(),
-                          child: const BibliographicResearch(),
+                          child: NoticiasUI(),
                         )));
               }),
           const Divider(),

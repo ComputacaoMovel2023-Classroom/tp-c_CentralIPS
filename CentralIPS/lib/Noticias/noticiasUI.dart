@@ -73,9 +73,8 @@ class _NoticiasUIState extends State<NoticiasUI> {
         List<NoticiaItem> updatedNoticiaItems = [];
 
         if (noticiasData is Map) {
-          // Check if noticiasData is a map
           noticiasData.entries.forEach((entry) {
-            // Iterate over the entries of noticiasData
+
             var noticiaData = entry.value;
 
             if (noticiaData is Map) {
@@ -118,7 +117,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -137,8 +136,8 @@ class _NoticiasUIState extends State<NoticiasUI> {
                 children: [
                   Row(
                     children: [
-                      const Text(
-                        "Noticias",
+                       Text(
+                        isNoticia ? "Notícias" : "Evento",
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
@@ -161,7 +160,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
                                 });
                               },
                               child: Text(
-                                isNoticia ? "Noticias" : "Eventos",
+                                isNoticia ? "Mudar para eventos" : "Mudar para notícias",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,

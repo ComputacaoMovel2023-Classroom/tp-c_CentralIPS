@@ -15,7 +15,7 @@ class NoticiasListEmpty extends StatelessWidget {
             height: 200,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/chairsips.png'),
+                image: AssetImage('assets/images/jornais.jpeg'),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -34,7 +34,7 @@ class NoticiasListEmpty extends StatelessWidget {
                 Row(
                   children: [
                     const Text(
-                      "Noticias",
+                      "Notícias",
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class NoticiasListEmpty extends StatelessWidget {
                             ),
                             onPressed: () {},
                             child: const Text(
-                              "Filtros",
+                              "Mudar para eventos",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white,
