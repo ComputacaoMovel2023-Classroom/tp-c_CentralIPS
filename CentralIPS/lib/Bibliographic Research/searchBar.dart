@@ -432,8 +432,7 @@ class SearchBarState extends State<SearchBar> {
       return;
     }
 
-    if (!(book.categories.toSet().containsAll(categoriesFilter.toSet()) &&
-        categoriesFilter.toSet().containsAll(book.categories.toSet()))) return;
+    if (book.categories.toSet().intersection(categoriesFilter.toSet()).isEmpty) return;
 
     log("LIVRO FILTRADO");
     library.books.add(book);

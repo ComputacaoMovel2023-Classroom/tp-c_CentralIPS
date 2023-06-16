@@ -86,8 +86,6 @@ class MarkersList {
 
   static Set<Marker> createMarkersServices(BuildContext context) {
     return {
-      MarkerCreator.createMarkerRedirectService("8", "Admin", 38.52175457085821,
-          -8.839865325375564, "Administração", context),
       MarkerCreator.createMarkerRedirectService(
           "10", "GAAL", 38.521486, -8.838958, "GAAL", context),
       MarkerCreator.createMarkerRedirectService("11", "Divisão Académica",
