@@ -3,6 +3,7 @@ import 'package:centralips/Administra%C3%A7%C3%A3o/Biblioteca/new_book_ui.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/admin_ementasUI.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_ui.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
+import 'package:centralips/Departamentos/departamentsUI.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -139,7 +140,7 @@ class AdminMenu extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => BlocProvider.value(
                                   value: context.read<FooterMenuCubit>(),
-                                  child: const NewBookUI(),
+                                  child: DepartamentosUI(true),
                                 )));
                       }),
                   const Divider(),
