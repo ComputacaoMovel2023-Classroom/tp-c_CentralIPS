@@ -18,16 +18,16 @@ class DepartmentFavoriteState extends State<DepartmentFavorite> {
   bool greyColor = true;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     final user = auth.currentUser;
-    greyColor = !widget.department.usersId.contains(user!.uid);
+    greyColor = !widget.inicialState;
   }
 
   void inputData() {
     final user = auth.currentUser;
 
-    if(widget.department.usersId.contains(user!.uid)) {
+    if (widget.department.usersId.contains(user!.uid)) {
       widget.department.usersId.remove(user.uid);
     } else {
       widget.department.usersId.add(user.uid);
@@ -38,7 +38,6 @@ class DepartmentFavoriteState extends State<DepartmentFavorite> {
     vlRef
         .child(widget.department.id)
         .update({'usersId': widget.department.usersId});
-
   }
 
   @override
