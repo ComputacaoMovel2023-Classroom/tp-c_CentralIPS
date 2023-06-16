@@ -67,8 +67,8 @@ class MarkersList {
           //create a marker
           '6',
           'Bar Est',
-          38.52243698802391,
-          -8.839528892221596),
+          38.52219580123302,
+          -8.839556785809457),
       MarkerCreator.createMarker(
           //create a marker
           '7',
@@ -88,14 +88,21 @@ class MarkersList {
     return {
       MarkerCreator.createMarkerRedirectService("8", "Admin", 38.52175457085821,
           -8.839865325375564, "Administração", context),
-      MarkerCreator.createMarkerRedirectService("10", "GAAL", 38.521486,
-          -8.838958, "Gabinete de Apoio à Atividade Letiva", context),
+      MarkerCreator.createMarkerRedirectService(
+          "10", "GAAL", 38.521486, -8.838958, "GAAL", context),
       MarkerCreator.createMarkerRedirectService("11", "Divisão Académica",
           38.522836, -8.841216, "Divisão Académica", context),
       MarkerCreator.createMarkerRedirectService(
           "12", "IPStartup", 38.520591, -8.837441, "IPStartup", context),
       MarkerCreator.createMarkerRedirectService("13", "Clube Desportivo",
           38.519745, -8.835978, "Clube Desportivo", context),
+      MarkerCreator.createMarkerRedirectService(
+          "14",
+          "Centro para a Internacionalização e Mobilidade",
+          38.52332248929603,
+          -8.840661517979807,
+          "CIM",
+          context),
     };
   }
 
