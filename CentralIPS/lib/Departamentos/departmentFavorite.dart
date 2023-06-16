@@ -6,8 +6,11 @@ class DepartmentFavorite extends StatelessWidget {
 
   DepartmentFavorite(this.greyColor, this.size, {super.key});
 
-  void changeGreyColor() {
-    greyColor = !greyColor;
+  void alterData(bool greyColor, [double? size]) {
+    this.greyColor = greyColor;
+    if (size != null) {
+      this.size = size;
+    }
   }
 
   @override

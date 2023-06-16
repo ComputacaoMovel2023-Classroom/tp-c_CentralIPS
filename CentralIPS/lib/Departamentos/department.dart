@@ -1,6 +1,8 @@
 import 'package:centralips/Departamentos/school.dart';
 import 'package:flutter/material.dart';
 
+import 'departmentFavorite.dart';
+
 class Department extends StatefulWidget {
   String id;
   String name = "Sem Nome";
@@ -11,6 +13,11 @@ class Department extends StatefulWidget {
   bool isFavorite = false;
   String email = "";
   String schedule = "";
+  DepartmentFavorite departmentFavorite = DepartmentFavorite(true, 26);
+
+  void alterDepartmentFavorite(bool greyColor, [double? size]) {
+    departmentFavorite.alterData(greyColor, size);
+  }
 
   Department(
       {Key? key,
@@ -38,8 +45,8 @@ class Department extends StatefulWidget {
       'open': open,
       'school': school.toString(),
       'usersId': usersId,
-      'email' : email,
-      'horarios' : schedule
+      'email': email,
+      'horarios': schedule
     };
   }
 

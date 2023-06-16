@@ -75,6 +75,8 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
       department.usersId.add(user.uid);
     }
 
+    department.alterDepartmentFavorite(!department.isFavorite);
+
     DatabaseReference vlRef =
         FirebaseDatabase.instance.ref().child("Departamentos");
     vlRef.child(department.id).update({'usersId': department.usersId});
@@ -230,8 +232,7 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
                                           InkWell(
-                                            child: DepartmentFavorite(
-                                                d[index].isFavorite, 26),
+                                            child: d[index].departmentFavorite,
                                             onTap: () => inputData(d[index]),
                                           ),
                                         ],
