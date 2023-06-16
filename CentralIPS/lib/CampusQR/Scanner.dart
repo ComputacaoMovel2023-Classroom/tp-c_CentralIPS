@@ -1,10 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:centralips/Pedometro/pedometroui.dart';
+import 'package:centralips/Maps/get_departments/departments_list.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-
-import '../homePage/home_page_ui.dart';
 
 class Scanner extends StatelessWidget {
   Scanner({Key? key}) : super(key: key);
@@ -65,19 +63,32 @@ class Scanner extends StatelessWidget {
     );
   }
 
+/*
+    } else if (service.contains("Divisão")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("DA", context);
+    } else if (service.contains("Clube Desportivo")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("CD", context);
+    } else if (service.contains("IPStartup")) {
+      DepartmentsList m = DepartmentsList();
+      m.getDepartment("IPSUP", context);
+    }
+  }
+      */
   routeQR(Barcode barcode, BuildContext context) {
     switch (barcode.rawValue) {
-      case 'Redireciona para a home page':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
+      case 'divisaoacademica':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("DA", context);
         break;
-      case 'Redireciona para o IPSHealth':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Pedometro()),
-        );
+      case 'clubedesportivo':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("CD", context);
+        break;
+      case 'ipstartup':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("IPSUP", context);
         break;
       default:
         break;
