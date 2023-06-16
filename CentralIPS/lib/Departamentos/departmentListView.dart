@@ -66,6 +66,20 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
     });
   }
 
+  void inputData(Department department) {
+    final user = auth.currentUser;
+
+    if (department.usersId.contains(user!.uid)) {
+      department.usersId.remove(user.uid);
+    } else {
+      department.usersId.add(user.uid);
+    }
+
+    DatabaseReference vlRef =
+        FirebaseDatabase.instance.ref().child("Departamentos");
+    vlRef.child(department.id).update({'usersId': department.usersId});
+  }
+
   void callSetState() {
     setState(() {});
   }
@@ -215,8 +229,11 @@ class DepartmentsListViewState extends State<DepartmentsListView> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.only(top: 5)),
-                                          DepartmentFavorite(
-                                              d[index], d[index].isFavorite, 26)
+                                          InkWell(
+                                            child: DepartmentFavorite(
+                                                d[index].isFavorite, 26),
+                                            onTap: () => inputData(d[index]),
+                                          ),
                                         ],
                                       ))),
                             ])));
