@@ -70,8 +70,7 @@ class _NoticiasListaState extends State<NoticiasLista> {
           scrollDirection: Axis.horizontal,
           children: noticiaItemArr.map((noticiaData) {
             return NoticiasListaItem(
-              assetName: noticiaData.imagem,
-              titletext: noticiaData.titulo,
+              noticiaItem: noticiaData,
             );
           }).toList(),
         );
