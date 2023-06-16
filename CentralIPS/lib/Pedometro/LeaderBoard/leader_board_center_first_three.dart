@@ -62,7 +62,7 @@ class LeaderBoardCenterFirstThree extends StatelessWidget {
   Widget build(BuildContext context) {
     _setPlaces();
 
-    print("joaquima");
+    //print("joaquima");
     return Column(
       children: [
         LeaderBoardCenter.buildLeaderBordCenterChooseColor(
