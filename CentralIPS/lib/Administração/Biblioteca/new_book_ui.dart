@@ -647,7 +647,7 @@ class _NewBookUIState extends State<NewBookUI> {
           value: SystemUiOverlayStyle.light,
           child: GestureDetector(
             child: Stack(
-              children: <Widget>[
+              children: [
                 Container(
                   height: double.infinity,
                   width: double.infinity,
@@ -715,6 +715,25 @@ class _NewBookUIState extends State<NewBookUI> {
                             ])),
                       ],
                     ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  child: AppBar(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    surfaceTintColor: Colors.transparent,
+                    elevation: 0,
+                    leading: Builder(builder: (BuildContext context) {
+                      return IconButton(
+                          onPressed: () => {Navigator.pop(context)},
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                          ));
+                    }),
                   ),
                 )
               ],

@@ -202,7 +202,7 @@ class _NoticiasUIState extends State<NoticiasUI> {
               elevation: 0,
               leading: Builder(builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
+                  icon: const Icon(Icons.menu, color: Colors.black),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 );
               }),
