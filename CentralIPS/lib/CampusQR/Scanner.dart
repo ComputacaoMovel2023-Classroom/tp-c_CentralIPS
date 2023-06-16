@@ -77,6 +77,16 @@ class Scanner extends StatelessWidget {
         DepartmentsList m = DepartmentsList();
         m.getDepartment("IPSUP", context);
         break;
+      case 'gaal':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("GAAL", context);
+        break;
+
+      case 'cim':
+        DepartmentsList m = DepartmentsList();
+        m.getDepartment("CIM", context);
+        break;
+
       default:
         break;
     }
