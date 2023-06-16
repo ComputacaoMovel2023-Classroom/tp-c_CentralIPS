@@ -80,7 +80,7 @@ class _AdminNoticiaListItemState extends State<AdminNoticiaListItem> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                image: AssetImage(widget.noticiaItem.imagem),
+                                image: NetworkImage(widget.noticiaItem.imagem),
                                 fit: BoxFit.cover,
                               ),
                             ),
