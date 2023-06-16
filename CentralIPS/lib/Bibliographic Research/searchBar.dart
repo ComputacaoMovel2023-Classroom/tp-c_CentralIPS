@@ -54,7 +54,7 @@ class SearchBarState extends State<SearchBar> {
                     fontWeight: FontWeight.w900,
                     color: Colors.black,
                   ),
-                  hintText: 'Livros, isbn, autor',
+                  hintText: 'Qual o nome do livro?',
                   // Add a search icon or button to the search bar
                   prefixIcon: IconButton(
                     icon: const Icon(Icons.search),
