@@ -79,10 +79,10 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
     final user = FirebaseAuth.instance.currentUser;
     DatabaseReference databaseRef =
         FirebaseDatabase.instance.ref().child(widget.type);
+
     databaseRef.onValue.listen((event) {
       DataSnapshot snapshot = event.snapshot;
       var barmeals = snapshot.value as Map;
-      //print('noticiasData: $noticiasData');
 
       List<DailyEmenta> updatedDailyEmenta = [];
       barmeals.forEach((key, value) {
@@ -94,6 +94,7 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
           vegetariano: value['vegetariano'] ?? 'Vegetariano',
           index: value['index'] ?? 0,
         );
+
         weekdayMeals[dailyEmenta.index] = (dailyEmenta);
       });
       if (!_isDisposed) {
@@ -102,14 +103,11 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
         });
       }
     });
-
-    //print('TAMANHO ARRAY: ${weekdayMeals.length}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      //padding: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(0),
       child: SizedBox(
         height: 500,
@@ -135,12 +133,10 @@ class _AdminEmentasListState extends State<AdminEmentasList> {
                 },
                 itemCount: diasSemana.length,
                 itemBuilder: (_, index) {
-                  /* for (DailyEmenta dailyEmenta in weekdayMeals) {
-                    print('weekdayMeals: ${dailyEmenta.sopa} no ndex');
-                  } */
-
                   int index2 = index % diasSemana.length;
+
                   return AdminEmentasListItem(
+                    onRefresh: () => _fetchData(),
                     icon: Icons.restaurant,
                     weekday: diasSemana[index2],
                     weekdayMeals: weekdayMeals[index2],

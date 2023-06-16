@@ -68,7 +68,7 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
     _carneController = TextEditingController();
     _vegetarianoController = TextEditingController();
     _dateController = TextEditingController();
-    // print('initState: ${_sopaController.text}');
+    widget.onRefresh?.call();
     setState(() {});
   }
 
@@ -229,7 +229,6 @@ class _AdminEmentasListItemState extends State<AdminEmentasListItem> {
                             },
                             child: Icon(Icons.save_outlined),
                           ),
-                          //widget.setState(() => {}),
                         ],
                       ),
                       SizedBox(height: 10),

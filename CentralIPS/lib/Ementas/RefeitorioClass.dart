@@ -1,10 +1,11 @@
 import 'package:centralips/Ementas/daily_ementa.dart';
 import 'package:centralips/Ementas/ementas_list.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class RefeitorioClass extends StatefulWidget {
-  const RefeitorioClass({super.key});
+  RefeitorioClass({super.key});
   @override
   State<RefeitorioClass> createState() => _RefeitorioClassState();
 }
