@@ -1,5 +1,4 @@
 import 'package:centralips/Departamentos/department.dart';
-import 'package:centralips/Departamentos/departmentFavorite.dart';
 import 'package:centralips/Departamentos/departmentStatic.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,22 +13,6 @@ class DepartamentProfile extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   DepartamentProfile(this.department, {super.key});
-
-  void inputData(Department department) {
-    final user = auth.currentUser;
-
-    if (department.usersId.contains(user!.uid)) {
-      department.usersId.remove(user.uid);
-    } else {
-      department.usersId.add(user.uid);
-    }
-
-    department.alterDepartmentFavorite(!department.isFavorite);
-
-    DatabaseReference vlRef =
-        FirebaseDatabase.instance.ref().child("Departamentos");
-    vlRef.child(department.id).update({'usersId': department.usersId});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +87,17 @@ class DepartamentProfile extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  InkWell(
-                                    child: department.departmentFavorite,
-                                    onTap: () => inputData(department),
+                                  Container(
+                                    margin: const EdgeInsets.only(right: 15, bottom: 5),
+                                    height: 36,
+                                    width: 36,
+                                    child: Icon(
+                                      Icons.favorite,
+                                      size: 36,
+                                      color: department.isFavorite
+                                          ? Colors.red[300]
+                                          : Colors.grey,
+                                    ),
                                   ),
                                   Container(
                                     width: 100,

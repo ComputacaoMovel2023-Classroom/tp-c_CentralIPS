@@ -6,11 +6,13 @@ import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';
 
+import 'departamentosAdmin.dart';
+
 class DepartamentosUI extends StatelessWidget {
-  DepartmentsListView departmentsListView = DepartmentsListView();
+  bool admin = false;
   Departments departments = Departments();
 
-  DepartamentosUI({super.key});
+  DepartamentosUI(this.admin, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class DepartamentosUI extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  departmentsListView,
+                  (admin ? DepartmentsAdmin() : DepartmentsListView()),
                   const SizedBox(
                     width: 400,
                   )

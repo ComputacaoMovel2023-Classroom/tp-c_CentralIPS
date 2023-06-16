@@ -648,6 +648,7 @@ class _NewBookUIState extends State<NewBookUI> {
           child: GestureDetector(
             child: Stack(
               children: [
+                
                 Container(
                   height: double.infinity,
                   width: double.infinity,
@@ -657,7 +658,7 @@ class _NewBookUIState extends State<NewBookUI> {
                         horizontal: 25, vertical: 120),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         const SizedBox(height: 5),
                         const Text(
                           'Novo Livro',

@@ -58,7 +58,7 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
               height: 200,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/chairsips.png'),
+                  image: AssetImage('assets/images/jornais.jpeg'),
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -157,18 +157,48 @@ class _AdminNoticiasAdd extends State<AdminNoticiasAdd> {
                           onChanged: (value) =>
                               setState(() => imageUrl = value),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                            elevation: 0,
+                            minimumSize: const Size(45, 35),
+                          ),
                           onPressed: _submitForm,
-                          child:
-                              Text('Salvar ${isNews ? 'Notícia' : 'Evento'}'),
+                          child: Text(
+                            'Salvar ${isNews ? 'Notícia' : 'Evento'}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
+                        
                       ],
                     ),
                   ),
                 ]),
               ),
             ),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                elevation: 0,
+                leading: Builder(builder: (BuildContext context) {
+                  return IconButton(
+                      onPressed: () => {Navigator.pop(context)},
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ));
+                }),
+              ),
+            )
           ],
         ),
       ),

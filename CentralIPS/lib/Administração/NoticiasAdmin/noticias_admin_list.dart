@@ -45,6 +45,22 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
+              Padding(padding: EdgeInsets.only(top: 30)),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                  elevation: 0,
+                  minimumSize: const Size(45, 35),
+                ),
+                onPressed: _submitForm,
+                child: const Text(
+                  'Adicionar Noticia',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
               ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -77,9 +93,6 @@ class _AdminNoticiaListState extends State<AdminNoticiaList> {
                   //update dps ids
                 },
               ),
-              TextButton(
-                  onPressed: _submitForm,
-                  child: const Text('Adicionar Noticia')),
               const SizedBox(height: 10),
             ],
           ),

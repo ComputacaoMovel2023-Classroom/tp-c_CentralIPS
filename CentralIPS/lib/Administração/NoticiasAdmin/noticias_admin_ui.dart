@@ -166,8 +166,8 @@ class _AdminNoticiasUIState extends State<AdminNoticiasUI> {
                               },
                               child: Text(
                                 isNoticia
-                                    ? "Mudar para eventos"
-                                    : "Mudar para notícias",
+                                    ? "Ver eventos"
+                                    : "Ver notícias",
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
