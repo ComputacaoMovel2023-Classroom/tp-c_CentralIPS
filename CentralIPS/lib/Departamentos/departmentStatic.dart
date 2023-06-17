@@ -1,6 +1,5 @@
 
 import 'package:centralips/Departamentos/department.dart';
-import 'package:centralips/Departamentos/school.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class DepartmentStaticExample{

@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:centralips/Bloc/libraryFilters/library_filters_bloc.dart';
 import 'package:centralips/Departamentos/school.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

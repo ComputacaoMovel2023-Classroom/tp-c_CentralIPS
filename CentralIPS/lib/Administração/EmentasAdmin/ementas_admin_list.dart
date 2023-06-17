@@ -1,6 +1,5 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_list_item.dart';
 import 'package:centralips/Ementas/daily_ementa.dart';
-import 'package:centralips/Ementas/ementas_list_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';

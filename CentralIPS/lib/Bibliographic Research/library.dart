@@ -1,10 +1,6 @@
-import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import '../Departamentos/school.dart';
 import 'book.dart';
-import 'bookCategory.dart';
 
 /**
  * Data structure with is a list of Books

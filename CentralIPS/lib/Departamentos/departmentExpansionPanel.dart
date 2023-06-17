@@ -1,6 +1,5 @@
 import 'package:centralips/Departamentos/departmentFilter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
 
 class FilterModel {
   const FilterModel(this.filter);

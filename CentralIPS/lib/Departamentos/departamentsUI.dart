@@ -1,5 +1,4 @@
-import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
-import 'package:centralips/Departamentos/departmentFilter.dart';
+
 import 'package:centralips/Departamentos/departmentListView.dart';
 import 'package:centralips/Departamentos/departments.dart';
 import 'package:centralips/Sidebar/NavBar.dart';

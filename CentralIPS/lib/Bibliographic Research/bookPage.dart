@@ -1,13 +1,8 @@
 import 'package:centralips/Bibliographic%20Research/bookCategory.dart';
 import 'package:centralips/Departamentos/school.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
 import '../footer_menu/footer_menu.dart';
-import 'bibliographicResearch.dart';
 import 'book.dart';
 
 /// Widget that is a book profile page

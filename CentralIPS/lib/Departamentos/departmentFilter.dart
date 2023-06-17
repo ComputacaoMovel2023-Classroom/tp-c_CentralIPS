@@ -1,8 +1,4 @@
 
-import 'package:centralips/Departamentos/departmentExpansionPanel.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-
 enum DepartmentFilter{
   open, closed, favorite, none;
 

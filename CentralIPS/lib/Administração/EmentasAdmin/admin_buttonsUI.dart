@@ -1,7 +1,6 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_bar.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/EmentasAdmin/ementas_admin_refeitorio.dart';
-import 'package:centralips/Ementas/BarClass.dart';
-import 'package:centralips/Ementas/RefeitorioClass.dart';
+
 
 import 'package:flutter/material.dart';
 

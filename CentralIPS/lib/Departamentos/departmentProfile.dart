@@ -1,8 +1,6 @@
 import 'package:centralips/Departamentos/department.dart';
-import 'package:centralips/Departamentos/departmentStatic.dart';
 import 'package:centralips/Departamentos/school.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../Sidebar/NavBar.dart';

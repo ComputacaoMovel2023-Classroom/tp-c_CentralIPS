@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Cubit/index_cubit.dart';
 import '../Sidebar/NavBar.dart';
-import '../UTILS/DialogCentralIPS.dart';
 import 'data.dart';
 import 'day.dart';
 

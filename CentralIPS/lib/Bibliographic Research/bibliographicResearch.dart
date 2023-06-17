@@ -1,8 +1,7 @@
-import 'package:centralips/Bibliographic%20Research/book.dart';
+
 import 'package:centralips/Bibliographic%20Research/filterResearch.dart';
 import 'package:centralips/Bibliographic%20Research/searchBar.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
-import 'package:centralips/Departamentos/school.dart';
 import 'package:centralips/Sidebar/NavBar.dart';
 import 'package:centralips/footer_menu/footer_menu.dart';
 import 'package:flutter/material.dart';

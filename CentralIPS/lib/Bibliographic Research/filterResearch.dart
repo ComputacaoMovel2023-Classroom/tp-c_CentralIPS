@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:centralips/Bibliographic%20Research/bibliographicResearch.dart';
 import 'package:centralips/Bibliographic%20Research/filterOption.dart';

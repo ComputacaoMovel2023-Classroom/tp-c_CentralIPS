@@ -1,10 +1,7 @@
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_add.dart';
-import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_empty.dart';
 import 'package:centralips/Administra%C3%A7%C3%A3o/NoticiasAdmin/noticias_admin_list_item.dart';
 import 'package:centralips/Cubit/index_cubit.dart';
-import 'package:centralips/Noticias/noticia_list_item.dart';
 import 'package:centralips/Noticias/noticias_item.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
