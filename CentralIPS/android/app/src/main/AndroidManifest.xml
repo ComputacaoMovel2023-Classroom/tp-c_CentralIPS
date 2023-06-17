@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.nfc" android:required="true" />
     <uses-permission android:name="android.permission.NFC" />
    <application
-        android:label="centralips"
+        android:label="Central IPS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
