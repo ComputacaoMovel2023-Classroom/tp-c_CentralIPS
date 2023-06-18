@@ -33,6 +33,7 @@ class MyAppDemo extends StatelessWidget {
         create: (context) => LibraryFiltersBloc()..add(LibraryFilterLoad()),
         child: MaterialApp(
           title: 'CentralIPS',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
             useMaterial3: true,
